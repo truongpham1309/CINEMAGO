@@ -19,26 +19,6 @@ const SignUpUserPage = () => {
                             <div className="option">
                                 Already have an account? <Link to="/login">Login</Link>
                             </div>
-                            {/* <div className="or">
-                                <span>Or</span>
-                            </div>
-                            <ul className="social-icons">
-                                <li>
-                                    <a href="#0">
-                                        <i className="fab fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0" className="active">
-                                        <i className="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#0">
-                                        <i className="fab fa-google"></i>
-                                    </a>
-                                </li>
-                            </ul> */}
                         </div>
                     </div>
                 </div>
