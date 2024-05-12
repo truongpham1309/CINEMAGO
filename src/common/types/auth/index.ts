@@ -27,3 +27,31 @@ export type TResponseLogin = {
         access_token: string,
     }
 }
+
+export type TOptionsSelect = {
+    value: string,
+    keysub: string,
+}
+
+export type TChildrenInputForm = {
+    id: number,
+    lable: string,
+    typeInput: "email" | "select" | "password" | "text" | "date",
+    keysub: string,
+    hasRequired: boolean,
+    options?: TOptionsSelect[],
+}
+
+export type TInputFormRegister = {
+    id: number,
+    lable: string,
+    typeInput: "email" | "select" | "password" | "text" | "date",
+    keysub: "email" | "phone" | "full_name" | "gender" | "password" | "confirm_password" | "birth_date";
+    hasRequired: boolean,
+    options?: TOptionsSelect[]
+}
+
+export type TInputChildren = {
+    children: TInputFormRegister[],
+}
+

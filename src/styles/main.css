@@ -7490,6 +7490,10 @@ input[type="submit"] {
   margin-bottom: 22px;
 }
 
+.account-area .account-form .form-group span {
+  font-size: 14px;
+}
+
 .account-area .account-form .form-group label {
   margin-bottom: 10px;
   text-transform: uppercase;

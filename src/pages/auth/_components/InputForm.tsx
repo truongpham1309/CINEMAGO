@@ -1,24 +1,17 @@
-import { toUppperCaseFirstString } from "@/common/libs/handleString";
+import { TInputFormRegister } from "@/common/types/auth";
+import InputNorman from "./InputNorman";
+import { TFormSignUpProps } from "@/common/types/form/methodUseForm";
 
-type inputProps = {
-    name: string,
-    typeInput: string,
-    errors?: boolean,
+type Props = {
+    item: TInputFormRegister,
+    form: TFormSignUpProps
 }
 
-const InputForm = ({ name, typeInput }: inputProps) => {
+const InputForm = ({ item, form }: Props) => {
     return (
-        <>
-            <label htmlFor={name}>
-                {name}<span>*</span>
-            </label>
-            <input
-                type={typeInput}
-                placeholder={`Enter Your ${toUppperCaseFirstString(name)}`}
-                id={name}
-            />
-            <span className="text-danger ">{toUppperCaseFirstString(name)} không được để trống!</span>
-        </>
+        <div className="form-group">
+            <InputNorman item={item} methodInput={form} />
+        </div>
     )
 }
 
