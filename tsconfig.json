@@ -49,6 +49,9 @@
       ],
       "@styles/*": [
         "src/styles/*"
+      ],
+      "@validations/*": [
+        "src/common/validations/*"
       ]
     }
   },

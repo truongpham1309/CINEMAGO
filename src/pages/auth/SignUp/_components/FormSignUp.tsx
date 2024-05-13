@@ -1,12 +1,10 @@
-import { TInputChildren, TInputFormRegister } from "@/common/types/auth"
-import InputForm from "../../_components/InputForm"
-import { SubmitHandler } from "react-hook-form";
-import { TFormInput, TFormSignUpProps } from "@/common/types/form/methodUseForm";
+import { TInputChildren, TInputFormRegister } from "@/common/types/auth";
+import { TFormSignUpProps } from "@/common/types/form/methodUseForm";
+import InputForm from "../../_components/InputForm";
 import SelectComponent from "./SelectComponent";
-import InputNorman from "../../_components/InputNorman";
 
-const FormSignUp = ({ register, handleSubmit, errors }: TFormSignUpProps) => {
-
+const FormSignUp = ({ register, handleSubmit, errors, onSubmit }: Required<TFormSignUpProps>) => {
+    
     const items: Array<TInputFormRegister | TInputChildren> = [
         { id: 1, lable: "Email", typeInput: "email", keysub: "email", hasRequired: true },
         {
@@ -27,15 +25,12 @@ const FormSignUp = ({ register, handleSubmit, errors }: TFormSignUpProps) => {
             ]
         },
         { id: 6, lable: "Password", typeInput: "password", keysub: "password", hasRequired: true },
-        { id: 7, lable: "Confirm Password", typeInput: "password", keysub: "confirm_password", hasRequired: true },
+        { id: 7, lable: "Confirm Password", typeInput: "password", keysub: "password_confirmation", hasRequired: true },
     ];
-
-    const handleSignUp: SubmitHandler<TFormInput> = (data) => {
-        console.log(data);
-    }
+    
     return (
         <>
-            <form className="account-form" onSubmit={handleSubmit(handleSignUp)}>
+            <form className="account-form" onSubmit={handleSubmit(onSubmit)}>
                 {items.map((item, index) => {
                     if ("children" in item) {
                         return (
@@ -56,7 +51,7 @@ const FormSignUp = ({ register, handleSubmit, errors }: TFormSignUpProps) => {
                                     }
                                     return (
                                         <div key={index} className="col-sm-12 col-md-6 my-2">
-                                            <InputNorman item={child as TInputFormRegister} methodInput={{ register, handleSubmit, errors }} />
+                                            <InputForm item={child as TInputFormRegister} form={{ register, handleSubmit, errors }} />
                                         </div>
                                     )
                                 }
@@ -64,23 +59,17 @@ const FormSignUp = ({ register, handleSubmit, errors }: TFormSignUpProps) => {
                             </div>
                         )
                     }
-                        return (
+                    return (
+                        <div key={index} className="form-group">
                             <InputForm
                                 item={item}
-                                key={index}
                                 form={{ register, errors, handleSubmit }}
                             />
-                        )
-                }
+                        </div>
 
+                    )
+                }
                 )}
-                {/* <div className="form-group checkgroup">
-                    <input type="checkbox" id="bal" defaultChecked={true} />
-                    <label htmlFor="bal">
-                        I agree to the <a href="#0">Terms, Privacy Policy</a> and{" "}
-                        <a href="#0">Fees</a>
-                    </label>
-                </div> */}
                 <div className="form-group text-center mt-5">
                     <input type="submit" value="Register" />
                 </div>

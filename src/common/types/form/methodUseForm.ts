@@ -1,17 +1,18 @@
 import { FieldErrors, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 
-export type TFormInput = {
+export type TFormInputRegister = {
     email: string;
     phone: string;
     full_name: string;
     gender: string;
     password: string;
-    confirm_password: string;
+    password_confirmation: string;
     birth_date: string;
 }
 
 export type TFormSignUpProps = {
-    register: UseFormRegister<TFormInput>;
-    handleSubmit: UseFormHandleSubmit<TFormInput>;
-    errors: FieldErrors<TFormInput>
+    register: UseFormRegister<TFormInputRegister>;
+    handleSubmit: UseFormHandleSubmit<TFormInputRegister>;
+    errors: FieldErrors<TFormInputRegister>;
+    onSubmit?: (data: TFormInputRegister) => void;
 }

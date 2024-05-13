@@ -46,7 +46,7 @@ export type TInputFormRegister = {
     id: number,
     lable: string,
     typeInput: "email" | "select" | "password" | "text" | "date",
-    keysub: "email" | "phone" | "full_name" | "gender" | "password" | "confirm_password" | "birth_date";
+    keysub: "email" | "phone" | "full_name" | "gender" | "password" | "password_confirmation" | "birth_date";
     hasRequired: boolean,
     options?: TOptionsSelect[]
 }

@@ -11,10 +11,16 @@ import "./styles/jquery.animatedheadline.css";
 import Router from "@/routes";
 import "./styles/main.css"
 import LoadingComponent from "@/components/ui/LoadingComponent";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+import { configAxiosUse } from "./configs/service";
+
+configAxiosUse();
 
 const App = () => {
   return (
     <>
+      <ToastContainer />
       <LoadingComponent />
       <Router />
     </>

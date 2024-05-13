@@ -783,8 +783,7 @@ ul li {
 
 select,
 input,
-textarea,
-button {
+textarea {
   width: 100%;
   background-color: #ffffff;
   border: 1px solid #2d4186;

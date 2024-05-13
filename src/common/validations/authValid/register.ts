@@ -30,8 +30,8 @@ export const registerSchema = Joi.object({
         "string.empty": "Mật khẩu không được để trống!",
         "string.min": "Mật khẩu tối thiểu {#limit} kí tự!",
     }),
-    confirm_password: Joi.string().required().valid(Joi.ref('password')).messages({
-        "string.empty": "Mời bạn nhập lại mật khẩu!",
+    password_confirmation: Joi.string().required().valid(Joi.ref('password')).messages({
+        "string.empty": "Mật khẩu không được để trống!",
         "any.only": "Mật khẩu không khớp!",
         "any.required": "Mời bạn nhập lại mật khẩu!",
     })
