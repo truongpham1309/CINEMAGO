@@ -7,10 +7,13 @@ import { toast } from "react-toastify"
 import { backgroundAccount } from "@/assets/images/account"
 import { loginUser } from "@/services/auth/authService"
 import { useLocalStorage } from "@/common/hooks/storeRange/useStoreRange"
+import { joiResolver } from '@hookform/resolvers/joi';
+import { LoginSchema } from "@/common/validations/authValid/login"
 
 const SignInPage = () => {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<TInputDataLogin>({
+    resolver: joiResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -37,7 +40,10 @@ const SignInPage = () => {
       });
     },
     onError: (err: any) => {
-      toast.error(err.message || "Thông tin không hợp lệ! Vui lòng thử lại");
+      console.log(err);
+      toast.error("Thông tin không hợp lệ! Vui lòng thử lại", {
+        position: "top-center"
+      });
       reset();
     }
   })
