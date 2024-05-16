@@ -1,9 +1,9 @@
 import { TInputChildren, TInputFormRegister } from "@/common/types/auth";
-import { TFormSignUpProps } from "@/common/types/form/methodUseForm";
+import { TFormSignUpMethodProps } from "@/common/types/form/methodUseForm";
 import InputForm from "../../_components/InputForm";
 import SelectComponent from "./SelectComponent";
 
-const FormSignUp = ({ register, handleSubmit, errors, onSubmit }: Required<TFormSignUpProps>) => {
+const FormSignUp = ({ register, handleSubmit, errors, onSubmit }: Required<TFormSignUpMethodProps>) => {
     
     const items: Array<TInputFormRegister | TInputChildren> = [
         { id: 1, lable: "Email", typeInput: "email", keysub: "email", hasRequired: true },

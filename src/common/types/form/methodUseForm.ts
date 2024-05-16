@@ -1,4 +1,5 @@
 import { FieldErrors, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+import { TInputDataLogin } from "../auth";
 
 export type TFormInputRegister = {
     email: string;
@@ -10,9 +11,16 @@ export type TFormInputRegister = {
     birth_date: string;
 }
 
-export type TFormSignUpProps = {
+export type TFormSignUpMethodProps = {
     register: UseFormRegister<TFormInputRegister>;
     handleSubmit: UseFormHandleSubmit<TFormInputRegister>;
     errors: FieldErrors<TFormInputRegister>;
     onSubmit?: (data: TFormInputRegister) => void;
+}
+
+export type TFormSignInMethodProps = {
+    register: UseFormRegister<TInputDataLogin>;
+    handleSubmit: UseFormHandleSubmit<TInputDataLogin>;
+    errors: FieldErrors<TInputDataLogin>;
+    onSubmit?: (data: TInputDataLogin) => void;
 }
