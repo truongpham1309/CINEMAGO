@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { registerUser } from "@/services/auth/authService";
 import { toast } from "react-toastify";
 import { formatDateToString } from "@/common/libs/formatDateToString";
+import LoadingComponent from "@/components/ui/LoadingComponent";
 
 const SignUpUserPage = () => {
 
@@ -27,7 +28,7 @@ const SignUpUserPage = () => {
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const { mutate } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: async (data) => {
             await registerUser(data);
         },
@@ -42,7 +43,7 @@ const SignUpUserPage = () => {
             toast.error("Đăng kí thất bại vui lòng thử lại!", {
                 position: "top-center"
             });
-            // reset();
+            reset();
         }
     })
 
@@ -50,6 +51,8 @@ const SignUpUserPage = () => {
         console.log({ ...data, birth_date: formatDateToString(data.birth_date) });
         mutate({ ...data, birth_date: formatDateToString(data.birth_date) });
     }
+
+    if (isPending) return <LoadingComponent />;
     return (
         <>
             <section
