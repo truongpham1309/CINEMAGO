@@ -2,13 +2,13 @@ import { Link, useNavigate } from "react-router-dom"
 import FormSignIn from "./_components/FormSignIn"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { TInputDataLogin, TResponseLogin } from "@/common/types/auth"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { toast } from "react-toastify"
 import { backgroundAccount } from "@/assets/images/account"
 import { loginUser } from "@/services/auth/authService"
-import { useLocalStorage } from "@/common/hooks/storeRange/useStoreRange"
 import { joiResolver } from '@hookform/resolvers/joi';
 import { LoginSchema } from "@/common/validations/authValid/login"
+import LoadingComponent from "@/components/ui/LoadingComponent"
 
 const SignInPage = () => {
 
@@ -19,21 +19,14 @@ const SignInPage = () => {
       password: "",
     }
   });
-  const [, setUser,] = useLocalStorage("user", {});
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { mutate: login } = useMutation({
+  const { mutate: login, isPending } = useMutation({
     mutationFn: async (user: TInputDataLogin) => {
       const data = await loginUser(user);
       return data;
     },
-    onSuccess: (data: TResponseLogin) => {
-      queryClient.invalidateQueries({
-        queryKey: ['AUTH'],
-      });
-
-      console.log(data);
-      setUser(data);
+    onSuccess: (login: TResponseLogin) => {
+      localStorage.setItem("user", JSON.stringify(login.data));
       navigate("/");
       toast.success("Đăng nhập thành công!", {
         position: "top-center"
@@ -41,7 +34,7 @@ const SignInPage = () => {
     },
     onError: (err: any) => {
       console.log(err);
-      toast.error("Thông tin không hợp lệ! Vui lòng thử lại", {
+      toast.error("Thông tin tài khoản hoặc mật khẩu không chính xác!", {
         position: "top-center"
       });
       reset();
@@ -51,7 +44,7 @@ const SignInPage = () => {
   const handleOnLogin: SubmitHandler<TInputDataLogin> = (data) => {
     login(data);
   }
-
+  if(isPending) return <LoadingComponent />;
   return (
     <section
       className="account-section bg_img"
