@@ -8,7 +8,6 @@ export type TUser = {
     role_id?: number;
 }
 
-
 export type TResponseLogin = {
     success: boolean,
     statusCode: number,
@@ -53,5 +52,10 @@ export type TInputFormRegister = {
 
 export type TInputChildren = {
     children: TInputFormRegister[],
+}
+
+export type TInputDataLogin = {
+    email: string;
+    password: string;
 }
 
