@@ -1,19 +1,25 @@
+import SignInPage from "@/pages/auth/SignIn/page"
 import SignUpUserPage from "@/pages/auth/SignUp/page"
 import LayoutDashBoard from "@/pages/dashboard/LayoutDashBoard"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import PrivateRouterLogin from "./PrivateRouterLogin"
 
 const Router = () => {
   return (
     <>
-        <BrowserRouter>
-            <Routes>
-                <Route path="admin" element={<LayoutDashBoard />}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="admin" element={<LayoutDashBoard />}>
 
-                </Route>
+          </Route>
 
-                <Route path="/signup" element={<SignUpUserPage />} />
-            </Routes>
-        </BrowserRouter>
+          <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
+          <Route path="/login" element={
+            <PrivateRouterLogin>
+              <SignInPage />
+            </PrivateRouterLogin>} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

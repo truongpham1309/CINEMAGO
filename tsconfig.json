@@ -52,6 +52,24 @@
       ],
       "@validations/*": [
         "src/common/validations/*"
+      ],
+      "@css/*": [
+        "src/assets/css/*"
+      ],
+      "@libs/*": [
+        "src/common/libs/*"
+      ],
+      "@types/*": [
+        "src/common/types/*"
+      ],
+      "@ui/*": [
+        "src/components/ui/*"
+      ],
+      "@auth/*": [
+        "src/services/auth/*"
+      ],
+      "@img/*": [
+        "src/styles/img/*"
       ]
     }
   },
