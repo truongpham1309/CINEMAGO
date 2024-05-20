@@ -70,6 +70,9 @@
       ],
       "@img/*": [
         "src/styles/img/*"
+      ],
+      "@vendor/*": [
+        "src/vendor/*"
       ]
     }
   },

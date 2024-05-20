@@ -13,11 +13,19 @@ const Router = () => {
 
           </Route>
 
-          <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
+          <Route path="/signup" element={
+            <PrivateRouterLogin>
+              <SignUpUserPage />
+            </PrivateRouterLogin>} />
+
           <Route path="/login" element={
             <PrivateRouterLogin>
               <SignInPage />
             </PrivateRouterLogin>} />
+
+          <Route path="dashboard" element={<LayoutDashBoard />}>
+            <Route index element={<>DashBoard Home</>} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
