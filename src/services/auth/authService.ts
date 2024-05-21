@@ -7,6 +7,7 @@ export const registerUser = async (user: any) => {
         const { data } = await axios.post("/account/register", user);
         return data;
     } catch (error: any) {
+        console.log(error);
         throw new Error(error || "Đăng kí thất bại!");
     }
 }
@@ -16,6 +17,7 @@ export const loginUser = async (user: TInputDataLogin): Promise<TResponseLogin> 
         const { data } = await axios.post("/account/login", user);
         return data
     } catch (error: any) {
+        console.log(error);
         throw new Error(error.message || "Đăng nhập không thành công!");
     }
 }
