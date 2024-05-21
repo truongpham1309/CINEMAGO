@@ -18,6 +18,11 @@ const Router = () => {
             <PrivateRouterLogin>
               <SignInPage />
             </PrivateRouterLogin>} />
+            <Route path="/dashboard" element={<LayoutDashBoard />}/>
+
+            <Route path="dashboard" element={<LayoutDashBoard />}>
+              <Route index element={<>DashBoard Home</>} />
+            </Route>
         </Routes>
       </BrowserRouter>
     </>
