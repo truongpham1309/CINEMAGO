@@ -73,6 +73,9 @@
       ],
       "@website/*": [
         "src/pages/website/*"
+      ],
+      "@movie/*": [
+        "src/services/movie/*"
       ]
     }
   },

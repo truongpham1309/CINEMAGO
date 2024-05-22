@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NotFoundPage: React.FC = () => {
   return (
@@ -11,9 +12,9 @@ const NotFoundPage: React.FC = () => {
 
           </div>
           
-          <a href="index.html" className="custom-button">
+          <Link to="/" className="custom-button">
             Back To Home <i className="flaticon-right"></i>
-          </a>
+          </Link>
         </div>
       </section>
      

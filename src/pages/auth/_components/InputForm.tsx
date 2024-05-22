@@ -1,10 +1,10 @@
 import { TInputFormRegister } from "@/common/types/auth";
-import { TFormSignUpProps } from "@/common/types/form/methodUseForm";
 import { toUppperCaseFirstString } from "@/common/libs/handleString";
+import { TFormSignUpMethodProps } from "@/common/types/form/methodUseForm";
 
 type Props = {
     item: TInputFormRegister,
-    form: TFormSignUpProps
+    form: TFormSignUpMethodProps
 }
 
 const InputForm = ({ item, form: { register, errors } }: Props) => {
