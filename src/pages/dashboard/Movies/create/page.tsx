@@ -1,7 +1,12 @@
 import { TMovieCreate } from "@/common/types/movie";
 import { MovieSchema } from "@/common/validations/movie/movieValid";
+import LoadingComponent from "@/components/ui/LoadingComponent";
+import { createMovieDashBoard } from "@/services/movie/movieService";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MovieCreatePage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<TMovieCreate>({
@@ -19,14 +24,34 @@ const MovieCreatePage = () => {
             description: "",
         }
     });
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const {mutate, isPending} = useMutation({
+        mutationFn: async (movie: TMovieCreate) => {
+            const data = await createMovieDashBoard(movie);
+            return data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['MOVIES']
+            });
+            toast.success("Thêm phim thành công!");
+            navigate("/dashboard/movies");
+        },
+        onError: (err: Error) => {
+            toast.error(err.message || "");
+            toast.error("Thêm phim thất bại!");
+        }
+    })
 
     const onSubmit: SubmitHandler<TMovieCreate> = (data) => {
-        console.log(data);
+        mutate(data);
     }
+    if(isPending) return <LoadingComponent />
     return (
         <div className="card shadow mb-4">
             <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">Tạo mới phim</h6>
+                <h6 className="m-0 font-weight-bold text-primary">TẠO MỚI PHIM</h6>
             </div>
             <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -77,8 +102,8 @@ const MovieCreatePage = () => {
                                 <label className="text-gray-800" htmlFor="">Trạng thái</label>
                                 <select {...register('status')} className="form-control">
                                     <option value="">Chọn trạng thái</option>
-                                    <option value="ComingSoon">Sắp chiếu</option>
-                                    <option value="CurrentlyShowing">Đang chiếu</option>
+                                    <option value="Coming Soon">Sắp chiếu</option>
+                                    <option value="Currently Showing">Đang chiếu</option>
                                 </select>
                                 {errors.status && <span className="text-danger">{errors.status.message}</span>}
                             </div>
@@ -139,7 +164,6 @@ const MovieCreatePage = () => {
                 </form>
             </div>
         </div>
-
     )
 }
 

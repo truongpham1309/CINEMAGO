@@ -5,11 +5,10 @@ export const configAxiosUse = () => {
     axios.defaults.timeout = 10000;
     axios.interceptors.request.use(
         (config) => {
-            const auth: any = sessionStorage.getItem('auth');
-            if(auth){
+            const auth: any = localStorage.getItem('auth');
+            if (auth) {
                 config.headers.Authorization = `Bearer ${auth.access_token}`;
             }
-
             return config;
         },
         (error) => Promise.reject(error)

@@ -8,6 +8,7 @@ type MyComponentProps = {
 
 const PrivateRouterLogin: React.FC<MyComponentProps> = ({ children }) => {
     const [user] = useLocalStorage("user", JSON.parse(localStorage.getItem("user")!));
+    console.log(user);
     if (user) {
         return <Navigate to={"/"} replace />
     }
