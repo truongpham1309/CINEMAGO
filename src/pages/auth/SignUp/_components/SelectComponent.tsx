@@ -1,5 +1,5 @@
 import { TOptionsSelect } from "@/common/types/auth"
-import { TFormInputRegister, TFormSignUpProps } from "@/common/types/form/methodUseForm"
+import { TFormInputRegister, TFormSignUpMethodProps } from "@/common/types/form/methodUseForm"
 
 type Props = {
     id?: number,
@@ -7,7 +7,7 @@ type Props = {
     keysub: string,
     options: TOptionsSelect[],
     hasRequired: boolean,
-    methodForm: TFormSignUpProps
+    methodForm: TFormSignUpMethodProps
 }
 
 const SelectComponent = ({ lable, keysub, options, methodForm: { errors, register } }: Props) => {
