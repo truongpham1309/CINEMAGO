@@ -70,6 +70,9 @@
       ],
       "@img/*": [
         "src/styles/img/*"
+      ],
+      "@website/*": [
+        "src/pages/website/*"
       ]
     }
   },
