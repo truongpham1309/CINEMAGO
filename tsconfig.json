@@ -76,6 +76,9 @@
       ],
       "@movie/*": [
         "src/services/movie/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
       ]
     }
   },

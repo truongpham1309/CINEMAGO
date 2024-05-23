@@ -5,9 +5,10 @@ export const configAxiosUse = () => {
     axios.defaults.timeout = 10000;
     axios.interceptors.request.use(
         (config) => {
-            const auth: any = localStorage.getItem('auth');
-            if (auth) {
-                config.headers.Authorization = `Bearer ${auth.access_token}`;
+            const auth: any = localStorage.getItem('user');
+            const user = JSON.parse(auth);
+            if (user) {
+                config.headers.Authorization = `Bearer ${user.access_token}`;
             }
             return config;
         },

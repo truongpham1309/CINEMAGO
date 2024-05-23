@@ -1,61 +1,75 @@
-import { formatDateToString } from "@/common/libs/formatDateToString";
-import { TMovieCreate } from "@/common/types/movie";
-import { MovieSchema } from "@/common/validations/movie/movieValid";
+import { TMovie } from "@/common/types/movie";
+import { MovieSchemaUpdate } from "@/common/validations/movie/movieValid";
 import LoadingComponent from "@/components/ui/LoadingComponent";
-import { createMovieDashBoard } from "@/services/movie/movieService";
-import { uploadImage } from "@/utils/uploadImage";
+import { updateMovieByID } from "@/services/movie/movieService";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { SubmitHandler, useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import ServerError from "../../_components/500";
+import { uploadImage } from "@/utils/uploadImage";
+import { formatDateToString } from "@/common/libs/formatDateToString";
+import { Button } from "antd";
 
-const MovieCreatePage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<TMovieCreate>({
-        resolver: joiResolver(MovieSchema),
-        defaultValues: {
-            title: "",
-            actor: "",
-            duration: 0,
-            director: "",
-            image: [],
-            trailer: "",
-            rated: "",
-            status: "",
-            release_date: "",
-            description: "",
+const MovieEditPage = () => {
+    const { id: idMovie } = useParams();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<TMovie>({
+        resolver: joiResolver(MovieSchemaUpdate),
+    });
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['MOVIES', idMovie],
+        queryFn: async () => {
+            try {
+                const { data } = await axios.get(`/dashboard/movie/${idMovie}`);
+                reset(data.data.movie);
+                console.log(MovieSchemaUpdate.validate(data.data.movie));
+                return data
+            } catch (error: any) {
+                console.log(error);
+                throw new Error(error);
+            }
         }
     });
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const { mutate, isPending } = useMutation({
-        mutationFn: async (movie: TMovieCreate) => {
-            const data = await createMovieDashBoard(movie);
+        mutationFn: async (movie: TMovie) => {
+            const data = await updateMovieByID(movie);
             return data;
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['MOVIES']
             });
-            toast.success("Thêm phim thành công!");
+            toast.success("Cập nhật phim thành công!");
             navigate("/dashboard/movie");
         },
         onError: (err: Error) => {
             toast.error(err.message || "");
-            toast.error("Thêm phim thất bại!");
-        }
+            toast.error("Cập nhật phim thất bại!");
+        },
     })
 
-    const onSubmit: SubmitHandler<TMovieCreate> = async (data) => {
-        const url_image = await uploadImage(data.image);
+    const onSubmit: SubmitHandler<TMovie> = async (data) => {
+        // Định dạng lại ngày
         const date_fomat = formatDateToString(data.release_date);
-        mutate({ ...data, image: url_image, release_date: date_fomat });
+        let image_URL = data.image;
+        // Kiểm tra Ảnh có được thêm mới hay không?
+        if (typeof image_URL === 'object') {
+            image_URL = await uploadImage(image_URL);
+        }
+        mutate({ ...data, image: image_URL, release_date: date_fomat });
+        console.log({ ...data, image: image_URL, release_date: date_fomat });
     }
-    if (isPending) return <LoadingComponent />
+
+    if (isPending || isLoading) return <LoadingComponent />
+    if (isError) return <ServerError />
     return (
         <div className="card shadow mb-4">
             <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">TẠO MỚI PHIM</h6>
+                <h6 className="m-0 font-weight-bold text-primary text-uppercase">Cập nhật PHIM {data.data.movie.title}</h6>
             </div>
             <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -160,9 +174,10 @@ const MovieCreatePage = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className="row mt-3">
                         <div className="col-sm-12 col-md-12">
-                            <button type="submit" className="btn btn-primary py-0">Thêm mới</button>
+                            <Button htmlType="submit" type="primary" >Cập nhật</Button>
                         </div>
                     </div>
                 </form>
@@ -171,4 +186,4 @@ const MovieCreatePage = () => {
     )
 }
 
-export default MovieCreatePage
+export default MovieEditPage
