@@ -10,6 +10,7 @@ import MovieEditPage from "@/pages/dashboard/Movies/edit/page"
 import SeatTypeCreatePage from "@/pages/dashboard/SeatType/create/page"
 import SeatTypeListPage from "@/pages/dashboard/SeatType/list/page"
 import SeatTypeEditPage from "@/pages/dashboard/SeatType/edit/page"
+import TicketTypeCreatePage from "@/pages/dashboard/TicketType/create/page"
 
 const Router = () => {
   return (
@@ -29,6 +30,8 @@ const Router = () => {
             <Route path="/dashboard/seattype" element={<SeatTypeListPage />} />
             <Route path="/dashboard/seattype/create" element={<SeatTypeCreatePage />} />
             <Route path="/dashboard/seattype/edit/:id" element={<SeatTypeEditPage />} />
+
+            <Route path="/dashboard/ticket-type/create" element={<TicketTypeCreatePage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
