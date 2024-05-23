@@ -1,4 +1,4 @@
-import { TMovieCreate } from "@/common/types/movie";
+import { TMovie, TMovieCreate } from "@/common/types/movie";
 import axios from "axios";
 
 export const createMovieDashBoard = async (movie: TMovieCreate) => {
@@ -25,6 +25,16 @@ export const deleteMovieByID = async (id: number) => {
     try {
         await axios.delete(`/dashboard/movie/delete/${id}`);
     } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const updateMovieByID = async (movie: TMovie) => {
+    try {
+        const { data } = await axios.put(`/dashboard/movie/update/${movie.id}`, movie);
+        return data;
+    } catch (error:any) {
         console.log(error);
         throw new Error(error);
     }

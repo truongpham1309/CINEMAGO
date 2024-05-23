@@ -16,7 +16,7 @@ const MovieListPage = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ["MOVIE"],
+                queryKey: ["MOVIES"],
             })
             toast.success("Xóa phim thành công!")
         },
@@ -26,7 +26,7 @@ const MovieListPage = () => {
     });
 
     const { data: movie, isLoading, isError } = useQuery({
-        queryKey: ["MOVIE"],
+        queryKey: ["MOVIES"],
         queryFn: async () => {
             const data = await getAllMovieList();
             return data;
