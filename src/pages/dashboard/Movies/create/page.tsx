@@ -1,7 +1,9 @@
+import { formatDateToString } from "@/common/libs/formatDateToString";
 import { TMovieCreate } from "@/common/types/movie";
 import { MovieSchema } from "@/common/validations/movie/movieValid";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { createMovieDashBoard } from "@/services/movie/movieService";
+import { uploadImage } from "@/utils/uploadImage";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -36,7 +38,7 @@ const MovieCreatePage = () => {
                 queryKey: ['MOVIES']
             });
             toast.success("Thêm phim thành công!");
-            navigate("/dashboard/movies");
+            navigate("/dashboard/movie");
         },
         onError: (err: Error) => {
             toast.error(err.message || "");
@@ -44,8 +46,11 @@ const MovieCreatePage = () => {
         }
     })
 
-    const onSubmit: SubmitHandler<TMovieCreate> = (data) => {
-        mutate(data);
+    const onSubmit: SubmitHandler<TMovieCreate> = async (data) => {
+        
+        const url_image = await uploadImage(data.image);
+        const date_fomat = formatDateToString(data.release_date);
+        mutate({...data, image: url_image, release_date: date_fomat});
     }
     if(isPending) return <LoadingComponent />
     return (
