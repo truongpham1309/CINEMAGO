@@ -3,11 +3,10 @@ import LoadingComponent from "@/components/ui/LoadingComponent";
 import { createSeatType } from "@/services/seats/seatTypeService";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "antd"
-import { SubmitHandler, useForm } from "react-hook-form"
+import { Button } from "antd";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ServerError from "../../_components/500";
 
 const SeatTypeCreatePage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
