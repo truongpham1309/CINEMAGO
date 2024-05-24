@@ -34,7 +34,7 @@ export const updateMovieByID = async (movie: TMovie) => {
     try {
         const { data } = await axios.put(`/dashboard/movie/update/${movie.id}`, movie);
         return data;
-    } catch (error:any) {
+    } catch (error: any) {
         console.log(error);
         throw new Error(error);
     }
