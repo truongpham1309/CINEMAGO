@@ -17,6 +17,7 @@ import CinemaCreatePage from "@/pages/dashboard/Cinema/create/page"
 import CinemaListPage from "@/pages/dashboard/Cinema/list/page"
 import CinemaEditPage from "@/pages/dashboard/Cinema/edit/page"
 import ScreenCreatePage from "@/pages/dashboard/Screen/create/page"
+import ScreenListDasdBoardPage from "@/pages/dashboard/Screen/list/page"
 
 const Router = () => {
   return (
@@ -45,7 +46,7 @@ const Router = () => {
             <Route path="/dashboard/cinema/create" element={<CinemaCreatePage />} />
             <Route path="/dashboard/cinema/edit/:id" element={<CinemaEditPage />} />
 
-            <Route path="/dashboard/screen" />
+            <Route path="/dashboard/screen" element={<ScreenListDasdBoardPage />}/>
             <Route path="/dashboard/screen/create" element={<ScreenCreatePage />} />
             <Route path="/dashboard/screen" />
           </Route>
