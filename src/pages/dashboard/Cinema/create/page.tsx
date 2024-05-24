@@ -25,7 +25,7 @@ const CinemaCreatePage = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['CINEMA'],
+                queryKey: ['CINEMAS'],
             });
             navigate('/dasboard/cinema');
             toast.success("Đã thêm rạp chiếu phim!");
