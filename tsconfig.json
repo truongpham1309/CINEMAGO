@@ -88,6 +88,9 @@
       ],
       "@cinema/*": [
         "src/services/cinema/*"
+      ],
+      "@screen/*": [
+        "src/services/screen/*"
       ]
     }
   },
