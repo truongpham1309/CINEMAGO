@@ -13,9 +13,11 @@ export const createTicketType = async (ticketType: TTicketType) => {
 
 export const getAllTickKetType = async () => {
     try {
-        
-    } catch (error) {
-        
+        const { data } = await axios.get(`dashboard/ticket-type`);
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error.message);
     }
 }
 
@@ -35,10 +37,11 @@ export const updateTicketTypeByID = async () => {
     }
 }
 
-export const deleteTicketTypeByID = async () => {
+export const deleteTicketTypeByID = async (id: number) => {
     try {
-        
-    } catch (error) {
-        
+        await axios.delete(`/dashboard/ticket-type/${id}`);
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error.message);
     }
 }
