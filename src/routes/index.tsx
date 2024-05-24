@@ -15,6 +15,7 @@ import TicketTypeListPage from "@/pages/dashboard/TicketType/list/page"
 import TicketTypeEditPage from "@/pages/dashboard/TicketType/edit/page"
 import CinemaCreatePage from "@/pages/dashboard/Cinema/create/page"
 import CinemaListPage from "@/pages/dashboard/Cinema/list/page"
+import CinemaEditPage from "@/pages/dashboard/Cinema/edit/page"
 
 const Router = () => {
   return (
@@ -41,7 +42,7 @@ const Router = () => {
 
             <Route path="/dashboard/cinema" element={<CinemaListPage />} />
             <Route path="/dashboard/cinema/create" element={<CinemaCreatePage />} />
-            <Route />
+            <Route path="/dashboard/cinema/edit/:id" element={<CinemaEditPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

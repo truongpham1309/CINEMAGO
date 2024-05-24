@@ -14,4 +14,4 @@ export const CinemaSchema = Joi.object({
         "string.min": "Tên thành phố ít nhất {#limit} kí tự!",
         "string.max": "Tên thành phố không quá {#limit} kí tự!",
     })
-})
+}).unknown(true);

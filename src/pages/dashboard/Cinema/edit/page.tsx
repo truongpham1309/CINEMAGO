@@ -1,26 +1,38 @@
+import { TCinema } from "@/common/types/cinema/cinemaType";
 import { CinemaSchema } from "@/common/validations/cinema/cinemaValid";
 import LoadingComponent from "@/components/ui/LoadingComponent";
-import { createCinema } from "@/services/cinema/cinemaService";
+import { getDetailCinemas, updateCinemaByID } from "@/services/cinema/cinemaService";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import ServerError from "../../_components/500";
 
-const CinemaCreatePage = () => {
+const CinemaEditPage = () => {
     const navigate = useNavigate();
+    const { id: idCinema } = useParams();
     const queryClient = useQueryClient();
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: joiResolver(CinemaSchema),
         defaultValues: {
             name: "",
             city: "",
         }
     });
+    const { isLoading, isError } = useQuery({
+        queryKey: ['CINEMAS', idCinema],
+        queryFn: async () => {
+            const data = await getDetailCinemas(+idCinema!);
+            reset(data.data.cinema)
+            return data
+        }
+    })
     const { mutate, isPending } = useMutation({
-        mutationFn: async (cinema: { name: string, city: string }) => {
-            const data = await createCinema(cinema);
+        mutationFn: async (cinema: TCinema) => {
+            const data = await updateCinemaByID(cinema);
+            
             return data;
         },
         onSuccess: () => {
@@ -28,24 +40,25 @@ const CinemaCreatePage = () => {
                 queryKey: ['CINEMAS'],
             });
             navigate('/dashboard/cinema');
-            toast.success("Đã thêm rạp chiếu phim!");
+            toast.success("Đã cập nhật rạp chiếu phim!");
         },
         onError: () => {
-            toast.error("Không thể thêm rạp phim, vui lòng kiểm tra lại!");
+            toast.error("Không thể cập nhật rạp phim, vui lòng kiểm tra lại thông tin!");
         }
     })
-    const onCreateCinema: SubmitHandler<any> = (data) => {
+    const onUpdateCinema: SubmitHandler<any> = (data) => {
         mutate(data);
     }
-    if (isPending) return <LoadingComponent />
+    if (isPending || isLoading) return <LoadingComponent />
+    if(isError) return <ServerError />
     return (
         <>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Tạo mới rạp chiếu phim</h6>
+                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Cập nhật rạp chiếu phim</h6>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={handleSubmit(onCreateCinema)}>
+                    <form onSubmit={handleSubmit(onUpdateCinema)}>
                         <div className="row mt-3">
                             <div className="col-sm-12 col-md-6">
                                 <div>
@@ -74,4 +87,4 @@ const CinemaCreatePage = () => {
     )
 }
 
-export default CinemaCreatePage
+export default CinemaEditPage

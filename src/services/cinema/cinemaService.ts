@@ -33,7 +33,7 @@ export const getDetailCinemas = async (id: number) => {
 
 export const updateCinemaByID = async (cinema: TCinema) => {
     try {
-        const { data } = await axios.put(`/dashboard/cinema/${cinema.id}`, cinema);
+        const { data } = await axios.put(`/dashboard/cinema/update/${cinema.id}`, cinema);
         return data;
     } catch (error: any) {
         console.log(error);
@@ -43,7 +43,7 @@ export const updateCinemaByID = async (cinema: TCinema) => {
 
 export const deleteCinemaByID = async (id: number) => {
     try {
-        await axios.delete(`dashboard/cinema/${id}`);
+        await axios.delete(`dashboard/cinema/delete/${id}`);
     } catch (error: any) {
         console.log(error);
         throw new Error(error);
