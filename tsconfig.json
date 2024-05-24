@@ -85,6 +85,9 @@
       ],
       "@ticket/*": [
         "src/services/ticket/*"
+      ],
+      "@cinema/*": [
+        "src/services/cinema/*"
       ]
     }
   },
