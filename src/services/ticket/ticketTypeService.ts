@@ -21,19 +21,23 @@ export const getAllTickKetType = async () => {
     }
 }
 
-export const getDetailTicketType = async () => {
+export const getDetailTicketType = async (id: number) => {
     try {
-        
-    } catch (error) {
-        
+        const { data } = await axios.get(`/dashboard/ticket-type/${id}`);
+        return data;
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
     }
 }
 
-export const updateTicketTypeByID = async () => {
+export const updateTicketTypeByID = async (ticketType: Required<TTicketType>) => {
     try {
-        
-    } catch (error) {
-        
+        const { data } = await axios.put(`/dashboard/ticket-type/update/${ticketType.id}`, ticketType); 
+        return data;
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error)
     }
 }
 
