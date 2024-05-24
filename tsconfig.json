@@ -82,6 +82,9 @@
       ],
       "@seats/*": [
         "src/services/seats/*"
+      ],
+      "@ticket/*": [
+        "src/services/ticket/*"
       ]
     }
   },
