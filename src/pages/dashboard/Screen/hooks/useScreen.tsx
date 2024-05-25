@@ -1,6 +1,6 @@
 import { TScreen } from "@/common/types/screen/screenType";
 import { ScreenSchema } from "@/common/validations/screen/screenValid";
-import { createScreenDashBoard, deleteScreenByID, getAllScreen } from "@/services/screen/screenService";
+import { createScreenDashBoard, deleteScreenByID, getAllScreen, updateScreenByID } from "@/services/screen/screenService";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -32,10 +32,13 @@ export const useScreenMutation = ({ action }: TActionScreen) => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const { mutate, ...rest } = useMutation({
-        mutationFn: async (screen: TScreen) => {
+        mutationFn: async (screen: Required<TScreen>) => {
             switch (action) {
                 case "CREATE":
                     await createScreenDashBoard(screen);
+                    break;
+                case "EDIT":
+                    await updateScreenByID(screen);
                     break;
                 case "DELETE":
                     await deleteScreenByID(screen.id!);
@@ -50,6 +53,10 @@ export const useScreenMutation = ({ action }: TActionScreen) => {
                 case "CREATE":
                     navigate('/dashboard/screen');
                     toast.success("Đã thêm mới màn hình!");
+                    break;
+                case "EDIT":
+                    navigate('/dashboard/screen');
+                    toast.success("Đã cập nhật màn hình!");
                     break;
                 case "DELETE":
                     toast.success("Đã xóa màn hình!");

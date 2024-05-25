@@ -4,6 +4,7 @@ import { Button, Table, TableProps } from "antd"
 import { Link } from "react-router-dom"
 import { useScreenMutation, useScreenQuery } from "../hooks/useScreen"
 import LoadingComponent from "@/components/ui/LoadingComponent"
+import ServerError from "../../_components/500"
 
 const ScreenListDasdBoardPage = () => {
     const { data, isLoading, isError } = useScreenQuery();
@@ -23,18 +24,18 @@ const ScreenListDasdBoardPage = () => {
             title: "",
             key: "action",
             render: (record) => <>
-                <Link className="mx-2" to={`/dasboard/screen/edit/${record.id}`}><Button><EditFilled /></Button></Link>
+                <Link className="mx-2" to={`/dashboard/screen/edit/${record.id}`}><Button><EditFilled /></Button></Link>
                 <Button onClick={() => onDeleteScreen(record)} danger><DeleteFilled /></Button>
             </>
         }
     ];
 
-    const onDeleteScreen = (record: TScreen) => {
+    const onDeleteScreen = (record: Required<TScreen>) => {
         if (!confirm("Bạn có chắc chắc muốn xóa màn hình này không?")) return;
-        console.log(record);
         mutate(record);
     }
     if (isLoading || isPending) return <LoadingComponent />
+    if (isError) return <ServerError />;
     return (
         <>
             <div className="card shadow mb-4">
