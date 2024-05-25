@@ -1,12 +1,23 @@
 import { TRoomsCinema } from "@/common/types/cinema/roomsCinema";
 import { RoomsCinemaSchema } from "@/common/validations/cinema/roomsCinemaValid";
-import { createRoomsCinema } from "@/services/cinema/cinemaRoomsCinema";
+import { createRoomsCinema, getAllRooms } from "@/services/cinema/cinemaRoomsCinema";
 import { getAllScreen } from "@/services/screen/screenService";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+
+export const useRoomCinemaQuery = () => {
+    const query = useQuery({
+        queryKey: ['CINEMA-SCREEN'],
+        queryFn: async () => {
+            const data = await getAllRooms();
+            return data;
+        }
+    });
+    return { ...query }
+}
 
 export const useRoomsCinemaMutation = ({ type }: { type: "CREATE" | "DELETE" | "UPDATE" }) => {
     const { idCinema } = useParams();
@@ -57,7 +68,7 @@ export const useRoomsCinemaMutation = ({ type }: { type: "CREATE" | "DELETE" | "
         }
     });
 
-    const onMutationRooms: SubmitHandler<any> = (data) => {
+    const onMutationRooms: SubmitHandler<TRoomsCinema> = (data) => {
         mutation.mutate(data);
         console.log(data);
     }

@@ -10,3 +10,22 @@ export const createRoomsCinema = async (room: TRoomsCinema) => {
         throw new Error(error);
     }
 }
+
+export const getAllRooms = async () => {
+    try {
+        const { data } = await axios.get(`/dashboard/cinema-screen`);
+        return data;
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const deleteRoomsByID = async (id: number) => {
+    try {
+        await axios.delete(`/dashboard/cinema-screen/delete/${id}`);
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
