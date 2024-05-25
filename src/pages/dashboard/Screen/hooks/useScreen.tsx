@@ -68,6 +68,9 @@ export const useScreenMutation = ({ action }: TActionScreen) => {
                 case "CREATE":
                     toast.error("Không thể thêm mới màn hình!");
                     break;
+                case "EDIT":
+                    toast.error("Không thể cập nhật màn hình!");
+                    break;
                 case "DELETE":
                     toast.error("Không thể xóa màn hình!");
                     break;

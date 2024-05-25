@@ -1,6 +1,6 @@
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { deleteCinemaByID, getAllCinemas } from "@/services/cinema/cinemaService";
-import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, InfoCircleOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Table, TableProps } from "antd";
 import { Link } from "react-router-dom";
@@ -31,6 +31,13 @@ const CinemaListPage = () => {
             render: (record) => <>
                 <Link className="mx-2" to={`/dashboard/cinema/edit/${record.id}`}><Button><EditFilled /></Button></Link>
                 <Button onClick={() => onDeleteCinema(record.id)} danger><DeleteFilled /></Button>
+            </>
+        },
+        {
+            title: "",
+            key: "detail",
+            render: (record) => <>
+                <Link className="mx-2" to={`/dashboard/cinema/${record.id}/room-cinema`}><InfoCircleOutlined /></Link>
             </>
         }
     ];
