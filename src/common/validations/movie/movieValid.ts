@@ -93,10 +93,11 @@ export const MovieSchemaUpdate = Joi.object({
         "any.required": "Trạng thái phim là bắt buộc",
         "string.empty": "Trạng thái không được để trống!",
     }),
-    trailer: Joi.string().required().max(255).messages({
+    trailer: Joi.string().required().uri().max(255).messages({
         "any.required": "Trailer phim là bắt buộc!",
         "string.empty": "Trailer phim không được để trống!",
-        "string.max": "Trailer phim không lớn hơn {#limit} kí tự!"
+        "string.max": "Trailer phim không lớn hơn {#limit} kí tự!",
+        "string.base": "Trailer phải là dạng URL!"
     }),
     image: Joi.optional(),
     rated: Joi.string().required().messages({

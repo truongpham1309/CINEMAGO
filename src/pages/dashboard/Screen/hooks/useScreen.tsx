@@ -74,6 +74,7 @@ export const useScreenMutation = ({ action }: TActionScreen) => {
                 case "DELETE":
                     toast.error("Không thể xóa màn hình!");
                     break;
+                default: toast.error("Thao tác không hợp lệ!");
             }
         }
     });

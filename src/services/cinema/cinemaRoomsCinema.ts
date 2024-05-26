@@ -29,3 +29,23 @@ export const deleteRoomsByID = async (id: number) => {
         throw new Error(error);
     }
 }
+
+export const getDetailCinemaScreen = async (idCinemaScreen: number) => {
+    try {
+        const { data } = await axios.get(`/dashboard/cinema-screen/${idCinemaScreen}`);
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const updateCinemaScreenByID = async (cinemaScreen: any) => {
+    try {
+        const { data } = await axios.put(`/dashboard/cinema-screen/update/${cinemaScreen.id}`, cinemaScreen);
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}

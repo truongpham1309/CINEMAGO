@@ -50,47 +50,8 @@
       "@styles/*": [
         "src/styles/*"
       ],
-      "@validations/*": [
-        "src/common/validations/*"
-      ],
-      "@css/*": [
-        "src/assets/css/*"
-      ],
-      "@libs/*": [
-        "src/common/libs/*"
-      ],
-      "@types/*": [
-        "src/common/types/*"
-      ],
-      "@ui/*": [
-        "src/components/ui/*"
-      ],
-      "@auth/*": [
-        "src/services/auth/*"
-      ],
-      "@img/*": [
-        "src/styles/img/*"
-      ],
-      "@website/*": [
-        "src/pages/website/*"
-      ],
-      "@movie/*": [
-        "src/services/movie/*"
-      ],
       "@utils/*": [
         "src/utils/*"
-      ],
-      "@seats/*": [
-        "src/services/seats/*"
-      ],
-      "@ticket/*": [
-        "src/services/ticket/*"
-      ],
-      "@cinema/*": [
-        "src/services/cinema/*"
-      ],
-      "@screen/*": [
-        "src/services/screen/*"
       ]
     }
   },

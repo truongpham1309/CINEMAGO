@@ -3,7 +3,7 @@ import { TMovieCreate } from "@/common/types/movie";
 import { MovieSchema } from "@/common/validations/movie/movieValid";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { createMovieDashBoard } from "@/services/movie/movieService";
-import { uploadImage } from "@/utils/uploadImage";
+import { uploadImage } from "@common/libs/uploadImage";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form"

@@ -1,6 +1,6 @@
 import { TRoomsCinema } from "@/common/types/cinema/roomsCinema";
 import { RoomsCinemaSchema } from "@/common/validations/cinema/roomsCinemaValid";
-import { createRoomsCinema, getAllRooms } from "@/services/cinema/cinemaRoomsCinema";
+import { createRoomsCinema, getAllRooms, updateCinemaScreenByID } from "@/services/cinema/cinemaRoomsCinema";
 import { getAllScreen } from "@/services/screen/screenService";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -39,10 +39,19 @@ export const useRoomsCinemaMutation = ({ type }: { type: "CREATE" | "DELETE" | "
     });
 
     const mutation = useMutation({
-        mutationFn: async (roomCinema: TRoomsCinema) => {
+        mutationFn: async (roomCinema: any) => {
             switch (type) {
                 case "CREATE":
                     await createRoomsCinema(roomCinema);
+                    break;
+                case "UPDATE":
+                    const cinema = {
+                        screen_id: roomCinema.screen_id,
+                        cinema_id: roomCinema.cinema_id,
+                        id: roomCinema.id,
+                    }
+                    console.log(cinema);
+                    await updateCinemaScreenByID(cinema);
                     break;
 
                 default: throw new Error("Thao tác không hợp lệ!");
@@ -50,12 +59,16 @@ export const useRoomsCinemaMutation = ({ type }: { type: "CREATE" | "DELETE" | "
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['ROOMS'],
+                queryKey: ['ROOMS-CINEMA'],
             });
             switch (type) {
                 case "CREATE":
                     navigate(`/dashboard/cinema/${idCinema}/room-cinema`);
                     toast.success('Đã thêm mới phòng chiếu!');
+                    break;
+                case "UPDATE":
+                    navigate(`/dashboard/room-cinema`);
+                    toast.success('Đã cập nhật phòng chiếu!');
                     break;
             }
         },
@@ -63,6 +76,9 @@ export const useRoomsCinemaMutation = ({ type }: { type: "CREATE" | "DELETE" | "
             switch (type) {
                 case "CREATE":
                     toast.error('Không thể thêm mới phòng chiếu!');
+                    break;
+                case "UPDATE":
+                    toast.error('Không thể cập nhật phòng chiếu!');
                     break;
             }
         }
