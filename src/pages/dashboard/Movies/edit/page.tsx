@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ServerError from "../../_components/500";
-import { uploadImage } from "@/utils/uploadImage";
+import { uploadImage } from "@/common/libs/uploadImage";
 import { formatDateToString } from "@/common/libs/formatDateToString";
 import { Button } from "antd";
 

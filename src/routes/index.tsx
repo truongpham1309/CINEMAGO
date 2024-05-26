@@ -19,6 +19,10 @@ import CinemaEditPage from "@/pages/dashboard/Cinema/edit/page"
 import ScreenCreatePage from "@/pages/dashboard/Screen/create/page"
 import ScreenListDasdBoardPage from "@/pages/dashboard/Screen/list/page"
 import ScreenEditPage from "@/pages/dashboard/Screen/edit/page"
+import CreateRoomByCinema from "@/pages/dashboard/RoomsCinema/create/page"
+import RoomsListDashBoardCinema from "@/pages/dashboard/RoomsCinema/listRooms/page"
+import DetailRoomCinema from "@/pages/dashboard/RoomsCinema/detailroom/page"
+import RoomCinemaEditPage from "@/pages/dashboard/RoomsCinema/edit/page"
 
 const Router = () => {
   return (
@@ -46,6 +50,11 @@ const Router = () => {
             <Route path="/dashboard/cinema" element={<CinemaListPage />} />
             <Route path="/dashboard/cinema/create" element={<CinemaCreatePage />} />
             <Route path="/dashboard/cinema/edit/:id" element={<CinemaEditPage />} />
+
+            <Route path="/dashboard/cinema/:idCinema/rooms/create" element={<CreateRoomByCinema />} />
+            <Route path="/dashboard/room-cinema" element={<RoomsListDashBoardCinema />} />
+            <Route path="/dashboard/room-cinema/detail/:idRoom" element={<DetailRoomCinema />} />
+            <Route path="/dashboard/room-cinema/edit/:idRoom" element={<RoomCinemaEditPage />} />
 
             <Route path="/dashboard/screen" element={<ScreenListDasdBoardPage />} />
             <Route path="/dashboard/screen/create" element={<ScreenCreatePage />} />
