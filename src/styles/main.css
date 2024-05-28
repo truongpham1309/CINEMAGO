@@ -623,6 +623,16 @@ textarea {
   /* 2 */
 }
 
+.hidden_visible {
+  visibility: hidden !important;
+}
+
+.seat_admin {
+  max-height: 25px !important;
+  max-width: 25px !important;
+  text-align: center;
+}
+
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
  */

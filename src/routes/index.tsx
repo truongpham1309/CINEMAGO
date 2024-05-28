@@ -23,6 +23,10 @@ import CreateRoomByCinema from "@/pages/dashboard/RoomsCinema/create/page"
 import RoomsListDashBoardCinema from "@/pages/dashboard/RoomsCinema/listRooms/page"
 import DetailRoomCinema from "@/pages/dashboard/RoomsCinema/detailroom/page"
 import RoomCinemaEditPage from "@/pages/dashboard/RoomsCinema/edit/page"
+import SeatMapCreatePage from "@/pages/dashboard/SeatMap/create/page"
+import SeatMapListPage from "@/pages/dashboard/SeatMap/list/page"
+import SeatMapDetailPage from "@/pages/dashboard/SeatMap/detail/page"
+import SeatMapEditPage from "@/pages/dashboard/SeatMap/edit/page"
 
 const Router = () => {
   return (
@@ -59,6 +63,11 @@ const Router = () => {
             <Route path="/dashboard/screen" element={<ScreenListDasdBoardPage />} />
             <Route path="/dashboard/screen/create" element={<ScreenCreatePage />} />
             <Route path="/dashboard/screen/edit/:id" element={<ScreenEditPage />} />
+
+            <Route path="/dashboard/seat-map" element={<SeatMapListPage />} />
+            <Route path="/dashboard/seat-map/detail/:id" element={<SeatMapDetailPage />} />
+            <Route path="/dashboard/seat-map/edit/:id" element={<SeatMapEditPage />} />
+            <Route path="/dashboard/seat-map/create" element={<SeatMapCreatePage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
