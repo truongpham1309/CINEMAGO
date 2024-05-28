@@ -630,6 +630,7 @@ textarea {
 .seat_admin {
   max-height: 25px !important;
   max-width: 25px !important;
+  text-align: center;
 }
 
 /**

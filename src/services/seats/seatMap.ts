@@ -38,3 +38,13 @@ export const deleteSeatMapByID = async (id: number) => {
         throw new Error(error)
     }
 }
+
+export const updateSeatMapByID = async (seatMap: any) => {
+    try {
+        const { data } = await axios.put(`/dashboard/seat-map/update/${seatMap.id}`, seatMap);
+        return data;
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error)
+    }
+}

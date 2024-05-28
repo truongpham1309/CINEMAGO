@@ -4,7 +4,7 @@ import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { SeatMapSchema } from "@/common/validations/seats/seatMapType";
-import { createSeatMap, deleteSeatMapByID, getAllListSeatMaps, getDetailSeatMap } from "@/services/seats/seatMap";
+import { createSeatMap, deleteSeatMapByID, getAllListSeatMaps, getDetailSeatMap, updateSeatMapByID } from "@/services/seats/seatMap";
 import { toast } from "react-toastify";
 
 
@@ -12,7 +12,7 @@ export const useSeatMapMutation = ({ type }: { type: "CREATE" | "EDIT" | "DELETE
     const queryClient = useQueryClient();
     const navigate = useNavigate();
     const cinema_screen = useRoomCinemaQuery();
-    const form = useForm({
+    const { ...form } = useForm({
         resolver: joiResolver(SeatMapSchema),
         defaultValues: {
             cinema_screen_id: 0,
@@ -30,6 +30,9 @@ export const useSeatMapMutation = ({ type }: { type: "CREATE" | "EDIT" | "DELETE
                 case "DELETE":
                     await deleteSeatMapByID(data);
                     break;
+                case "EDIT":
+                    await updateSeatMapByID(data);
+                    break;
                 default: toast.warning("Thao tác không hợp lệ!");
             }
         },
@@ -45,6 +48,10 @@ export const useSeatMapMutation = ({ type }: { type: "CREATE" | "EDIT" | "DELETE
                 case "DELETE":
                     toast.success("Đã xóa bản đồ ghế!");
                     break;
+                case "EDIT":
+                    navigate("/dashboard/seat-map");
+                    toast.success("Đã cập nhật bản đồ ghế!");
+                    break;
             }
         },
         onError: () => {
@@ -55,15 +62,19 @@ export const useSeatMapMutation = ({ type }: { type: "CREATE" | "EDIT" | "DELETE
                 case "DELETE":
                     toast.error("Không thể xóa bản đồ ghế!");
                     break;
+                case "EDIT":
+                    toast.error("Không thể cập nhật bản đồ ghế!");
+                    break;
             }
         }
     });
 
     const onSeatMapMutation: SubmitHandler<any> = (data) => {
         mutation.mutate(data);
+        // console.log(data);
     }
 
-    return { ...form, ...mutation, ...cinema_screen, onSeatMapMutation }
+    return { ...mutation, ...cinema_screen, onSeatMapMutation, ...form }
 }
 
 export const useSeatMapQuery = (id = 0) => {
