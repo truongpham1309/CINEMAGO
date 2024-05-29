@@ -1,8 +1,8 @@
 import { TService } from "@/common/types/service/TypeService";
 import { ServiceSchema } from "@/common/validations/service/serviceValid";
-import { createServiceAPI } from "@/services/service/callAPIService";
+import { createServiceAPI, deleteServiceByID, getAllServiceList } from "@/services/service/callAPIService";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -25,20 +25,22 @@ export const useServiceMutation = ({ type }: { type: "CREATE" | "DELETE" | "UPDA
             switch (type) {
                 case "CREATE":
                     return await createServiceAPI(data);
+                case "DELETE":
+                    return await deleteServiceByID(data.id!);
                 default: toast.warning('Thao tác không hợp lệ!'); navigate("/dashboard/services");
             }
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['SERVICE'],
+                queryKey: ['SERVICES'],
             });
             switch (type) {
                 case "CREATE":
-                    navigate("/dashboard/services");
+                    navigate("/dashboard/service");
                     toast.success("Đã thêm mới dịch vụ!");
                     break;
                 case "UPDATE":
-                    navigate("/dashboard/services");
+                    navigate("/dashboard/service");
                     toast.success("Đã cập nhật dịch vụ!");
                     break;
                 case "DELETE":
@@ -60,11 +62,20 @@ export const useServiceMutation = ({ type }: { type: "CREATE" | "DELETE" | "UPDA
             }
         }
     });
-
     const onMutationService: SubmitHandler<TService> = (data) => {
-        console.log(data);
-        // mutation.mutate(data);
+        mutation.mutate(data);
     }
 
     return { ...form, ...mutation, onMutationService }
+}
+
+export const useServiceQuery = () => {
+    const query = useQuery({
+        queryKey: ['SERVICES'],
+        queryFn: async () => {
+            return await getAllServiceList();
+        }
+    });
+
+    return { ...query }
 }

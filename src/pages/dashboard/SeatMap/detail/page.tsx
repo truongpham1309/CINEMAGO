@@ -11,7 +11,7 @@ const SeatMapDetailPage = () => {
     const { id: idSeatMap } = useParams();
     const nameRow = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
     const { data, isLoading, isError } = useSeatMapQuery(+idSeatMap!);
-    let [count, setCount] = useState<number>(0);
+    let [count, __] = useState<number>(0);
     const { mutate, isPending } = useSeatMapMutation({ type: "DELETE" });
     const onDelete = (data: any) => {
         if (!window.confirm("Bạn có chắc chắc muốn xóa bối trí ghế này?")) return;
@@ -36,14 +36,11 @@ const SeatMapDetailPage = () => {
                             return (
                                 <div key={index} className="d-flex w-75 mx-auto my-2 justify-content-center">
                                     {
-                                        seatMap.length > 0 ? (
-                                            <Button className="mx-2 seat_admin px-2 py-0 d-flex justify-content-center" type="text">{nameRow[count - 1]}</Button>
-                                        ) : (null)
+                                        <Button className="mx-2 seat_admin px-2 py-0 d-flex justify-content-center" type="text">{nameRow[count - 1]}</Button>
                                     }
-
                                     {
                                         seatMap.map((item: any, index: number) => (
-                                            <Seat key={index} type={item.type} seat_number={index + 1} />
+                                            <Seat key={index} type={item.type} seat_number={nameRow[count] + (index + 1)} />
                                         ))
                                     }
                                 </div>

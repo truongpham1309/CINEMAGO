@@ -10,3 +10,22 @@ export const createServiceAPI = async (service: TService) => {
         throw new Error(error);
     }
 }
+
+export const getAllServiceList = async (limit = 50) => {
+    try {
+        const { data } = await axios.get(`/dashboard/service?limit=${limit}`);
+        return data;
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const deleteServiceByID = async (id: number) => {
+    try {
+        await axios.delete(`dashboard/service/delete/${id}`);
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}

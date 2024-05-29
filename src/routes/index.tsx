@@ -1,7 +1,7 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import SignInPage from "@/pages/auth/SignIn/page"
 import SignUpUserPage from "@/pages/auth/SignUp/page"
 import LayoutDashBoard from "@/pages/dashboard/LayoutDashBoard"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
 import PrivateRouterLogin from "./PrivateRouterLogin"
 import MovieCreatePage from "@/pages/dashboard/Movies/create/page"
 import NotFoundPage from "@/pages/website/404/page"
@@ -28,6 +28,7 @@ import SeatMapListPage from "@/pages/dashboard/SeatMap/list/page"
 import SeatMapDetailPage from "@/pages/dashboard/SeatMap/detail/page"
 import SeatMapEditPage from "@/pages/dashboard/SeatMap/edit/page"
 import ServiceCreatePage from "@/pages/dashboard/Services/create/page"
+import ServiceListPage from "@/pages/dashboard/Services/list/page"
 
 const Router = () => {
   return (
@@ -40,8 +41,8 @@ const Router = () => {
           {/* DashBoard */}
           <Route path="dashboard" element={<LayoutDashBoard />}>
             <Route index element={<>DashBoard Home</>} />
-            <Route path="/dashboard/movie/create" element={<MovieCreatePage />} />
             <Route path="/dashboard/movie" element={<MovieListPage />} />
+            <Route path="/dashboard/movie/create" element={<MovieCreatePage />} />
             <Route path="/dashboard/movie/edit/:id" element={<MovieEditPage />} />
 
             <Route path="/dashboard/seattype" element={<SeatTypeListPage />} />
@@ -71,6 +72,7 @@ const Router = () => {
             <Route path="/dashboard/seat-map/create" element={<SeatMapCreatePage />} />
 
             <Route path="/dashboard/service/create" element={<ServiceCreatePage />} />
+            <Route path="/dashboard/service" element={<ServiceListPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
