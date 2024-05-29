@@ -2,7 +2,7 @@ import { Button } from "antd";
 
 type Props = {
     type: "N" | "V" | "C",
-    seat_number?: number;
+    seat_number?: string;
 }
 
 const Seat = ({ type, seat_number}: Props) => {
