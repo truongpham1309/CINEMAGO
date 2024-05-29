@@ -1,6 +1,6 @@
 import { TService } from "@/common/types/service/TypeService";
 import { ServiceSchema } from "@/common/validations/service/serviceValid";
-import { createServiceAPI, deleteServiceByID, getAllServiceList } from "@/services/service/callAPIService";
+import { createServiceAPI, deleteServiceByID, getAllServiceList, updateServiceByID } from "@/services/service/callAPIService";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 export const useServiceMutation = ({ type }: { type: "CREATE" | "DELETE" | "UPDATE" }) => {
     const queryClient = useQueryClient();
-    const form = useForm({
+    const { reset, ...form } = useForm({
         resolver: joiResolver(ServiceSchema),
         defaultValues: {
             name: '',
@@ -25,6 +25,8 @@ export const useServiceMutation = ({ type }: { type: "CREATE" | "DELETE" | "UPDA
             switch (type) {
                 case "CREATE":
                     return await createServiceAPI(data);
+                case "UPDATE":
+                    return await updateServiceByID(data);
                 case "DELETE":
                     return await deleteServiceByID(data.id!);
                 default: toast.warning('Thao tác không hợp lệ!'); navigate("/dashboard/services");
@@ -66,7 +68,7 @@ export const useServiceMutation = ({ type }: { type: "CREATE" | "DELETE" | "UPDA
         mutation.mutate(data);
     }
 
-    return { ...form, ...mutation, onMutationService }
+    return { ...form, ...mutation, onMutationService, reset }
 }
 
 export const useServiceQuery = () => {

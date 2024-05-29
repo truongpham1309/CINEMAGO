@@ -29,6 +29,7 @@ import SeatMapDetailPage from "@/pages/dashboard/SeatMap/detail/page"
 import SeatMapEditPage from "@/pages/dashboard/SeatMap/edit/page"
 import ServiceCreatePage from "@/pages/dashboard/Services/create/page"
 import ServiceListPage from "@/pages/dashboard/Services/list/page"
+import ServiceEditPage from "@/pages/dashboard/Services/edit/page"
 
 const Router = () => {
   return (
@@ -71,8 +72,9 @@ const Router = () => {
             <Route path="/dashboard/seat-map/edit/:id" element={<SeatMapEditPage />} />
             <Route path="/dashboard/seat-map/create" element={<SeatMapCreatePage />} />
 
-            <Route path="/dashboard/service/create" element={<ServiceCreatePage />} />
             <Route path="/dashboard/service" element={<ServiceListPage />} />
+            <Route path="/dashboard/service/create" element={<ServiceCreatePage />} />
+            <Route path="/dashboard/service/edit/:id" element={<ServiceEditPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

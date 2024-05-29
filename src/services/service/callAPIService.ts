@@ -29,3 +29,23 @@ export const deleteServiceByID = async (id: number) => {
         throw new Error(error);
     }
 }
+
+export const getDetailService = async (id: number) => {
+    try {
+        const { data } = await axios.get(`/dashboard/service/${id}`);
+        return data; 
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const updateServiceByID = async (service: TService) => {
+    try {
+        const { data } = await axios.put(`/dashboard/service/update/${service.id}`, service);
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}

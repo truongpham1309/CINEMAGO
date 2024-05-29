@@ -38,7 +38,7 @@ const ServiceListPage = () => {
             </>
         }
     ];
-    const onDeleteService = (data: TService) => {
+    const onDeleteService = (data: Required<TService>) => {
         if (!window.confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) return;
         mutate(data);
     }
