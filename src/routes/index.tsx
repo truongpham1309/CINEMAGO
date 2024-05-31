@@ -30,6 +30,7 @@ import SeatMapEditPage from "@/pages/dashboard/SeatMap/edit/page"
 import ServiceCreatePage from "@/pages/dashboard/Services/create/page"
 import ServiceListPage from "@/pages/dashboard/Services/list/page"
 import ServiceEditPage from "@/pages/dashboard/Services/edit/page"
+import LayoutClient from "@/pages/website/LayoutWebSite/LayoutClient"
 
 const Router = () => {
   return (
@@ -38,6 +39,11 @@ const Router = () => {
         <Routes>
           <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
           <Route path="/login" element={<PrivateRouterLogin><SignInPage /></PrivateRouterLogin>} />
+
+          <Route path="/" element={<LayoutClient />}>
+            {/* Các router website */}
+            <Route path="/" element={<>Hello World</>} />
+          </Route>
 
           {/* DashBoard */}
           <Route path="dashboard" element={<LayoutDashBoard />}>

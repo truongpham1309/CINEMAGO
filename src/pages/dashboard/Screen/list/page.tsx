@@ -6,6 +6,7 @@ import { useScreenMutation, useScreenQuery } from "../hooks/useScreen"
 import LoadingComponent from "@/components/ui/LoadingComponent"
 import ServerError from "../../_components/500"
 
+
 const ScreenListDasdBoardPage = () => {
     const { data, isLoading, isError } = useScreenQuery();
     const { mutate, isPending } = useScreenMutation({ action: "DELETE" })
