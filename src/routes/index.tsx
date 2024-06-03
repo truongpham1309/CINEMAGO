@@ -32,6 +32,7 @@ import ServiceListPage from "@/pages/dashboard/Services/list/page"
 import ServiceEditPage from "@/pages/dashboard/Services/edit/page"
 import LayoutClient from "@/pages/website/LayoutWebSite/LayoutClient"
 import ShowTimeCreate from "@/pages/dashboard/ShowTime/create/page"
+import ShowTimeDashBoardPage from "@/pages/dashboard/ShowTime/list/page"
 
 const Router = () => {
   return (
@@ -83,6 +84,7 @@ const Router = () => {
             <Route path="/dashboard/service/create" element={<ServiceCreatePage />} />
             <Route path="/dashboard/service/edit/:id" element={<ServiceEditPage />} />
 
+            <Route path="/dashboard/show-time" element={<ShowTimeDashBoardPage />} />
             <Route path="/dashboard/show-time/create" element={<ShowTimeCreate />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
