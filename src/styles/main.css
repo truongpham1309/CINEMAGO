@@ -353,6 +353,10 @@ body {
   margin: 0;
 }
 
+a:hover {
+  text-decoration: none !important;
+}
+
 /**
  * Render the `main` element consistently in IE.
  */
@@ -438,6 +442,11 @@ samp {
   /* 1 */
   font-size: 1em;
   /* 2 */
+}
+
+select {
+  max-height: 200px !important;
+  overflow-y: auto;
 }
 
 /**

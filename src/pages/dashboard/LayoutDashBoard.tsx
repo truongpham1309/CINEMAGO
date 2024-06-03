@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom"
 import SideBarComponent from "./_components/SideBarComponent"
-// import "@styles/sb-admin-2.css"
+import "@styles/sb-admin-2.css"
 import Footer from "./_components/Footer"
 
 const LayoutDashBoard = () => {
   return (
-    <div id="wrapper">
+    <div className="admin" id="wrapper">
       <SideBarComponent />
       <div id="content-wrapper" className="d-flex flex-column">
         <div id="content">
