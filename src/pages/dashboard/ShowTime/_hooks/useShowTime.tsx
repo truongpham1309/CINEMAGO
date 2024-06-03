@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMovieQuery } from "../../Movies/_hooks/useMovie";
 import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
 import { toast } from "react-toastify";
-import { createShowTime, deleteShowTimeByID, getAllShowTimeDashBoard } from "@/services/showTime/showTimeService";
+import { createShowTime, deleteShowTimeByID, getAllShowTimeDashBoard, updateShowTimeByID } from "@/services/showTime/showTimeService";
 import { Button, TableProps } from "antd";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 
@@ -18,6 +18,9 @@ export const useShowTimeMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DEL
             switch (type) {
                 case "CREATE":
                     await createShowTime(show_time);
+                    break;
+                case "UPDATE":
+                    await updateShowTimeByID(show_time);
                     break;
                 case "DELETE":
                     await deleteShowTimeByID(show_time.id!);
@@ -91,6 +94,7 @@ export const useShowTimeQuery = () => {
         {
             title: "Rạp",
             key: "cinema_screen",
+            align: "center",
             render: (record) => `${record.cinema} - ${record.screen}`,
         },
         {
@@ -112,8 +116,8 @@ export const useShowTimeQuery = () => {
             title: "Thao tác",
             key: "action",
             render: (record) => <>
-                <Link to={`/dashboard/show-time/edit/${record.id}`} ><Button icon={<EditFilled />} className="btn-success" ></Button></Link>
-                <Button onClick={() => onDelete(record)} icon={<DeleteFilled />} ></Button>
+                <Link className="mx-2" to={`/dashboard/show-time/edit/${record.id}`} ><Button icon={<EditFilled />} className="btn-success" ></Button></Link>
+                <Button onClick={() => onDelete(record)} className="btn-danger" icon={<DeleteFilled />} ></Button>
             </>
         }
     ]

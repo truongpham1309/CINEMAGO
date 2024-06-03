@@ -29,3 +29,22 @@ export const deleteShowTimeByID = async (id: number) => {
         throw new Error(error);
     }
 }
+
+export const getDetailShowTime = async (id: number) => {
+    try {
+        const { data } = await axios.get(`/dashboard/showtime/${id}`);
+        return data;
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const updateShowTimeByID = async (showTime: any) => {
+    try {
+        await axios.put(`/dashboard/showtime/update/${showTime.id}`, showTime);
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
