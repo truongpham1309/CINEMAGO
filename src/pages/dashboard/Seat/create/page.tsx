@@ -26,7 +26,7 @@ const SeatCreatePage = () => {
         <>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Tạo mới màn hình chiếu</h6>
+                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Tạo mới ghế</h6>
                 </div>
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>

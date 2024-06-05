@@ -1,9 +1,11 @@
-import { createSeat } from "@/services/seats/seatService";
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useNavigate } from "react-router-dom";
+import { createSeat, deleteSeatByID, getAllSeat } from "@/services/seats/seatService";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
 import { useSeatTypeQuery } from "@/common/hooks/seatType/useSeatType";
+import { Button, TableProps } from "antd";
+import { DeleteFilled, EditFilled } from "@ant-design/icons";
 
 export const useSeatMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE" }) => {
     const queryClient = useQueryClient();
@@ -11,10 +13,13 @@ export const useSeatMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE"
     const cinemaScreen = useRoomCinemaQuery();
     const seatType = useSeatTypeQuery();
     const mutation = useMutation({
-        mutationFn: async (seat) => {
+        mutationFn: async (seat: any) => {
             switch (type) {
                 case "CREATE":
                     await createSeat(seat);
+                    break;
+                case "DELETE":
+                    await deleteSeatByID(seat.id!);
                     break;
                 default: toast.warning("Thao tác không hợp lệ!");
             }
@@ -53,4 +58,55 @@ export const useSeatMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE"
     });
 
     return { ...mutation, cinemaScreen, seatType }
+}
+
+export const useSeatQuery = () => {
+    const { mutate, isPending } = useSeatMutation({ type: "DELETE" });
+    const onDeleteSeat = (data: any) => {
+        if (!window.confirm("Bạn có chắc chắn muốn xóa ghế này?")) return;
+        mutate(data);
+    };
+    const seat = useQuery({
+        queryKey: ['SEATS'],
+        queryFn: async () => {
+            const data = await getAllSeat();
+            return data
+        }
+    });
+    const columnsSeat: TableProps<any>['columns'] = [
+        {
+            title: "#",
+            key: "index",
+            render: (_, __, index) => index + 1
+        },
+        {
+            title: "Rạp",
+            key: "cinema",
+            render: (record) => `${record.cinema} - ${record.screen}`
+        },
+        {
+            title: "Số ghế",
+            key: "seat_number",
+            dataIndex: "seat_number",
+        },
+        {
+            title: "Loại ghế",
+            key: "seat_type",
+            dataIndex: "seat_type",
+        },
+        {
+            title: "Trạng thái",
+            key: "status",
+            dataIndex: "status",
+        },
+        {
+            title: "Thao tác",
+            key: "action",
+            render: (record) => <>
+                <Link className="mr-3" to={`/dashboard/service/edit/${record.id}`}><Button className="btn-success" icon={<EditFilled />}></Button></Link>
+                <Button onClick={() => onDeleteSeat(record)} className="btn-danger" icon={<DeleteFilled />}></Button>
+            </>
+        }
+    ];
+    return { columnsSeat, ...seat, isPending }
 }

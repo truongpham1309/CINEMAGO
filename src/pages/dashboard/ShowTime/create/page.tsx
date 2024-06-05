@@ -6,6 +6,7 @@ import { useShowTimeMutation } from "../_hooks/useShowTime";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import ServerError from "../../_components/500";
 import { formatDateToString } from "@/common/libs/formatDateToString";
+import { convertTo24Hour } from "@/common/libs/formatTime24hours";
 
 const ShowTimeCreate = () => {
 
@@ -23,8 +24,9 @@ const ShowTimeCreate = () => {
     });
     const onSubmit: SubmitHandler<any> = (data) => {
         const format_date = formatDateToString(data.show_date);
-        console.log({...data, show_date: format_date});
-        mutate({...data, show_date: format_date});
+        const format_time = convertTo24Hour(data.show_time);
+        console.log({ ...data, show_date: format_date, show_time: format_time });
+        mutate({ ...data, show_date: format_date, show_time: format_time });
     }
     if (movie.isLoadingMovie || cinema.isLoading) return <LoadingComponent />;
     if (movie.isErrorMovie || cinema.isError) return <ServerError />
