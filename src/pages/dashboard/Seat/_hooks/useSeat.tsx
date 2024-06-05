@@ -1,4 +1,4 @@
-import { createSeat, deleteSeatByID, getAllSeat } from "@/services/seats/seatService";
+import { createSeat, deleteSeatByID, getAllSeat, updateSeatByID } from "@/services/seats/seatService";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,6 +17,10 @@ export const useSeatMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE"
             switch (type) {
                 case "CREATE":
                     await createSeat(seat);
+                    break;
+                case "UPDATE":
+                    console.log(seat);
+                    await updateSeatByID(seat);
                     break;
                 case "DELETE":
                     await deleteSeatByID(seat.id!);
@@ -103,7 +107,7 @@ export const useSeatQuery = () => {
             title: "Thao tác",
             key: "action",
             render: (record) => <>
-                <Link className="mr-3" to={`/dashboard/service/edit/${record.id}`}><Button className="btn-success" icon={<EditFilled />}></Button></Link>
+                <Link className="mr-3" to={`/dashboard/seat/edit/${record.id}`}><Button className="btn-success" icon={<EditFilled />}></Button></Link>
                 <Button onClick={() => onDeleteSeat(record)} className="btn-danger" icon={<DeleteFilled />}></Button>
             </>
         }
