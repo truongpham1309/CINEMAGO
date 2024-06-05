@@ -34,6 +34,9 @@ import LayoutClient from "@/pages/website/LayoutWebSite/LayoutClient"
 import ShowTimeCreate from "@/pages/dashboard/ShowTime/create/page"
 import ShowTimeDashBoardPage from "@/pages/dashboard/ShowTime/list/page"
 import ShowTimeEditPage from "@/pages/dashboard/ShowTime/edit/page"
+import SeatCreatePage from "@/pages/dashboard/Seat/create/page"
+import SeatDashBoardPage from "@/pages/dashboard/Seat/list/page"
+import SeatEditPage from "@/pages/dashboard/Seat/edit/page"
 
 const Router = () => {
   return (
@@ -88,6 +91,10 @@ const Router = () => {
             <Route path="/dashboard/show-time" element={<ShowTimeDashBoardPage />} />
             <Route path="/dashboard/show-time/create" element={<ShowTimeCreate />} />
             <Route path="/dashboard/show-time/edit/:id" element={<ShowTimeEditPage />} />
+
+            <Route path="/dashboard/seat" element={<SeatDashBoardPage />} />
+            <Route path="/dashboard/seat/create" element={<SeatCreatePage />} />
+            <Route path="/dashboard/seat/edit/:id" element={<SeatEditPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

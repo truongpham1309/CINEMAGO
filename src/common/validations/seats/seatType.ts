@@ -7,4 +7,7 @@ export const SeatTypeSchema = Joi.object({
         "string.required": "Tên loại ghế là bắt buộc!",
         "string.empty": "Tên loại ghế không được để trống!",
     }),
+    cinema_screen_id: Joi.number().min(1).messages({
+        
+    })
 }).unknown(true)
