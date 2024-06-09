@@ -34,6 +34,7 @@ import LayoutClient from "@/pages/website/LayoutWebSite/LayoutClient"
 import ShowTimeCreate from "@/pages/dashboard/ShowTime/create/page"
 import ShowTimeDashBoardPage from "@/pages/dashboard/ShowTime/list/page"
 import ShowTimeEditPage from "@/pages/dashboard/ShowTime/edit/page"
+import MovieList from "@/pages/website/DetailPage/MovieDetail"
 
 const Router = () => {
   return (
@@ -46,6 +47,7 @@ const Router = () => {
           <Route path="/" element={<LayoutClient />}>
             {/* Các router website */}
             <Route path="/" element={<>Hello World</>} />
+            <Route path="/movie/detail/:id" element={<MovieList />} />
           </Route>
 
           {/* DashBoard */}
