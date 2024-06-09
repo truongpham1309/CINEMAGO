@@ -5,7 +5,7 @@ import { useEffect } from "react";
 //   title: string;
 // }
 
-const MovieList = () => {
+const MovieDetail = () => {
   // const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
@@ -704,4 +704,4 @@ const MovieList = () => {
   );
 };
 
-export default MovieList;
+export default MovieDetail;
