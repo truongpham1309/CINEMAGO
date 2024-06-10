@@ -39,3 +39,24 @@ export const updateMovieByID = async (movie: TMovie) => {
         throw new Error(error);
     }
 }
+
+
+export const getDetailMovieClient = async (id: number) => {
+    try {
+        const { data } = await axios.get(`/client/movie/${id}`);
+        return data;
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const getAllMovieClient = async (limit: number = 12, page: number = 1) => {
+    try {
+        const { data } = await axios.get("/client/movie?limit=limit&page=page");
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
