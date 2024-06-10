@@ -49,12 +49,6 @@
       ],
       "@styles/*": [
         "src/styles/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@service/*": [
-        "src/services/service/*"
       ]
     }
   },

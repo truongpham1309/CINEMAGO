@@ -34,6 +34,8 @@ import LayoutClient from "@/pages/website/LayoutWebSite/LayoutClient"
 import ShowTimeCreate from "@/pages/dashboard/ShowTime/create/page"
 import ShowTimeDashBoardPage from "@/pages/dashboard/ShowTime/list/page"
 import ShowTimeEditPage from "@/pages/dashboard/ShowTime/edit/page"
+import MovieDetail from "@/pages/website/DetailPage/MovieDetail"
+import MovieList from "@/pages/website/MovieList/MovieList"
 import SeatCreatePage from "@/pages/dashboard/Seat/create/page"
 import SeatDashBoardPage from "@/pages/dashboard/Seat/list/page"
 import SeatEditPage from "@/pages/dashboard/Seat/edit/page"
@@ -49,6 +51,8 @@ const Router = () => {
           <Route path="/" element={<LayoutClient />}>
             {/* Các router website */}
             <Route path="/" element={<>Hello World</>} />
+            <Route path="/movie" element={<MovieList />} />
+            <Route path="/movie/detail/:id" element={<MovieDetail />} />
           </Route>
 
           {/* DashBoard */}
