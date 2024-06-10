@@ -22,5 +22,5 @@ export const convertTo24Hour = (time: string) => {
     hours = hours.toString().padStart(2, '0');
     minutes = minutes.padStart(2, '0');
 
-    return `${hours}:${minutes}`;
+    return `${hours}:${minutes}:00`;
 }
