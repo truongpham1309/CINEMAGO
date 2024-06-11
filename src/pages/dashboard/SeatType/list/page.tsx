@@ -22,6 +22,21 @@ const SeatTypeListPage = () => {
             dataIndex: "name",
         },
         {
+            title: "Loại màn hình",
+            key: "screen",
+            dataIndex: "screen",
+        },
+        {
+            title: "Giá",
+            key: "price",
+            dataIndex: "price",
+        },
+        {
+            title: "Giá ưu đãi",
+            key: "promotion_price",
+            dataIndex: "promotion_price",
+        },
+        {
             title: "Thao tác",
             key: "actions",
             render: (record) => <>
@@ -56,6 +71,7 @@ const SeatTypeListPage = () => {
             return data;
         }
     });
+    console.log(data);
     if (isLoading) return <LoadingComponent />;
     if (isError) return <ServerError />;
     return (
@@ -64,8 +80,8 @@ const SeatTypeListPage = () => {
                 <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-primary">DANH SÁCH LOẠI GHẾ</h6>
                 </div>
-                <div className="card-body" style={{width: "600px"}}>
-                    <Table columns={tableSeatType} rowKey={record => record.id} size="small" dataSource={data.data.seatTypes} pagination={false} />
+                <div className="card-body" >
+                    <Table columns={tableSeatType} rowKey={record => record.id} dataSource={data.data.seatTypes} pagination={false} />
                 </div>
             </div>
         </>

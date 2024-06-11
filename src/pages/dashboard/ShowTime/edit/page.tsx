@@ -70,7 +70,7 @@ const ShowTimeEditPage = () => {
                                     <select {...register("cinema_screen_id")} className="form-control">
                                         <option className="form-control" value="">Chọn Rạp</option>
                                         {cinema.data.data.cinemaScreens.map((cinema: any) => (
-                                            <option key={cinema.id} className="form-control" value={cinema.id}>{`${cinema.name} - ${cinema.screen}`}</option>
+                                            <option key={cinema.id} className="form-control" value={cinema.id}>{`${cinema.cinema} - ${cinema.screen}`}</option>
                                         ))}
                                     </select>
                                     {errors.cinema_screen_id && (<span className="text-danger">{errors.cinema_screen_id.message}</span>)}
@@ -107,7 +107,7 @@ const ShowTimeEditPage = () => {
                         </div>
                         <div className="row mt-3">
                             <div className="col-sm-12">
-                                <Button loading={isPending} htmlType="submit" type="primary">Thêm mới</Button>
+                                <Button loading={isPending} htmlType="submit" type="primary">Cập nhật</Button>
                             </div>
                         </div>
                     </form>

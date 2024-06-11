@@ -7,6 +7,7 @@ import LoadingComponent from '@/components/ui/LoadingComponent';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getDetailSeatByID } from '@/services/seats/seatService';
+import ServerError from '../../_components/500';
 
 const SeatEditPage = () => {
     const {id: idSeat} = useParams();
@@ -23,18 +24,19 @@ const SeatEditPage = () => {
         queryKey: ['SEATS', idSeat],
         queryFn: async () => {
             const data = await getDetailSeatByID(+idSeat!);
+            console.log(data);
             reset(data.data.Seat);
             return data
         }
     })
     const { isPending, mutate, seatType, cinemaScreen } = useSeatMutation({ type: "UPDATE" });
-    // console.log(seatType, cinemaScreen);
     const onSubmit: SubmitHandler<any> = (data: any) => {
         console.log(data);
         const {id, cinema_screen_id, seat_type_id, status, seat_number} = data;
         mutate({id, cinema_screen_id, seat_type_id, status, seat_number});
     }
     if (cinemaScreen.isLoading || seatType.isLoading || isLoadingSeat) return <LoadingComponent />
+    if(isErrorSeat ) return <ServerError />
     return (
         <>
             <div className="card shadow mb-4">
@@ -48,9 +50,9 @@ const SeatEditPage = () => {
                                 <div>
                                     <label className="text-gray-800" htmlFor="">Rạp</label>
                                     <select className='form-control' {...register("cinema_screen_id")}>
-                                        <option >Chọn rạp</option>
+                                        <option value={0}>Chọn rạp</option>
                                         {cinemaScreen.data.data.cinemaScreens.map((cinema: any) => (
-                                            <option key={cinema.id} value={cinema.id}>{cinema.name} - {cinema.screen}</option>
+                                            <option key={cinema.id} value={cinema.id}>{cinema.cinema} - {cinema.screen}</option>
                                         ))}
                                     </select>
                                     {errors.cinema_screen_id && (<span className="text-danger">{errors.cinema_screen_id.message}</span>)}

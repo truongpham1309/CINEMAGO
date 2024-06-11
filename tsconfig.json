@@ -55,6 +55,9 @@
       ],
       "@service/*": [
         "src/services/service/*"
+      ],
+      "@booking/*": [
+        "src/services/booking/*"
       ]
     }
   },

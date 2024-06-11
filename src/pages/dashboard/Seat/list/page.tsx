@@ -5,7 +5,6 @@ import ServerError from "../../_components/500";
 
 const SeatDashBoardPage = () => {
   const { columnsSeat, isLoading, isError, isPending, data } = useSeatQuery();
-  console.log(data);
   if(isLoading || isPending) return <LoadingComponent />
   if(isError) return <ServerError />
   return (

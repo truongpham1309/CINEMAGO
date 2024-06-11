@@ -12,13 +12,11 @@ const SeatCreatePage = () => {
             cinema_screen_id: 0,
             seat_type_id: 0,
             status: "",
-            seat_number: 0,
+            seat_number: "",
         }
     });
     const { isPending, mutate, seatType, cinemaScreen } = useSeatMutation({ type: "CREATE" });
-    // console.log(seatType, cinemaScreen);
     const onSubmit: SubmitHandler<any> = (data: any) => {
-        console.log(data);
         mutate(data);
     }
     if (cinemaScreen.isLoading || seatType.isLoading) return <LoadingComponent />
@@ -37,7 +35,7 @@ const SeatCreatePage = () => {
                                     <select className='form-control' {...register("cinema_screen_id")}>
                                         <option >Chọn rạp</option>
                                         {cinemaScreen.data.data.cinemaScreens.map((cinema: any) => (
-                                            <option key={cinema.id} value={cinema.id}>{cinema.name} - {cinema.screen}</option>
+                                            <option key={cinema.id} value={cinema.id}>{cinema.cinema} - {cinema.screen}</option>
                                         ))}
                                     </select>
                                     {errors.cinema_screen_id && (<span className="text-danger">{errors.cinema_screen_id.message}</span>)}
