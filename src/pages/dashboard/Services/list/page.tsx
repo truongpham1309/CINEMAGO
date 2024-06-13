@@ -1,10 +1,11 @@
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { useServiceMutation, useServiceQuery } from "../_hook/useService"
-import { Button, Table, TableProps } from "antd";
+import { Button, Space, Table, TableProps } from "antd";
 import { TService } from "@/common/types/service/TypeService";
 import ServerError from "../../_components/500";
 import { Link } from "react-router-dom";
-import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, ExclamationCircleFilled } from "@ant-design/icons";
+import confirm from "antd/es/modal/confirm";
 
 const ServiceListPage = () => {
     const { mutate, isPending } = useServiceMutation({ type: "DELETE" });
@@ -39,8 +40,22 @@ const ServiceListPage = () => {
         }
     ];
     const onDeleteService = (data: Required<TService>) => {
-        if (!window.confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) return;
-        mutate(data);
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa dịch vụ này?",
+            icon: <ExclamationCircleFilled />,
+            content: "Nhấn OK để xóa",
+            okText: 'Yes',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                mutate(data);
+            },
+            onCancel() {
+                console.log('Cancel');
+            },
+        })
+
     }
     const { data, isLoading, isError } = useServiceQuery();
     if (isLoading || isPending) return <LoadingComponent />

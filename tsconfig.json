@@ -55,6 +55,12 @@
       ],
       "@service/*": [
         "src/services/service/*"
+      ],
+      "@booking/*": [
+        "src/services/booking/*"
+      ],
+      "@showTime/*": [
+        "src/services/showTime/*"
       ]
     }
   },

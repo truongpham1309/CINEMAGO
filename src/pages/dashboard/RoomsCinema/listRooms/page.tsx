@@ -17,12 +17,7 @@ const RoomsListDashBoardCinema = () => {
             title: "Tên phòng chiếu",
             key: "name",
             align: "center",
-            render: (record) => `${record.name} - ${record.screen}`
-        },
-        {
-            title: "Địa chỉ",
-            key: "city",
-            dataIndex: "city"
+            render: (record) => `${record.cinema} - ${record.screen}`
         },
         {
             title: "Chi tiết",

@@ -9,12 +9,16 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ServerError from "../../_components/500";
+import { useScreenQuery } from "../../Screen/hooks/useScreen";
 
 const SeatTypeEditPage = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: joiResolver(SeatTypeSchema),
         defaultValues: {
             name: "",
+            screen_id: 0,
+            price: 0,
+            promotion_price: 0,
         }
     });
     const navigate = useNavigate();
@@ -43,12 +47,13 @@ const SeatTypeEditPage = () => {
         onError: () => {
             toast.error("Không thể cập nhật loại ghế");
         }
-    })
+    });
+    const { data, isLoading:isLoadScreen, isError: isErrScreen } = useScreenQuery();
     const onSubmit: SubmitHandler<any> = (data) => {
         update(data);
     }
-    if (isPending || isLoading) return <LoadingComponent />
-    if (isError) return <ServerError />
+    if (isPending || isLoading || isLoadScreen) return <LoadingComponent />
+    if (isError || isErrScreen) return <ServerError />
     return (
         <>
             <div className="card shadow mb-4">
@@ -56,7 +61,7 @@ const SeatTypeEditPage = () => {
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Cập nhật loại ghế</h6>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row mt-3">
                             <div className="col-sm-12 col-md-6">
                                 <div>
@@ -65,10 +70,39 @@ const SeatTypeEditPage = () => {
                                     {errors.name && (<span className="text-danger">{errors.name.message}</span>)}
                                 </div>
                             </div>
+                            <div className="col-sm-12 col-md-6">
+                                <div>
+                                    <label className="text-gray-800" htmlFor="">Loại màn hình</label>
+                                    <select className="form-control" {...register("screen_id")}>
+                                        <option value={0}>Chọn loại màn hình</option>
+                                        {data.data.screens.map((sc: any) => (
+                                            <option value={sc.id} key={sc.id}>{sc.name}</option>
+                                        ))}
+                                    </select>
+                                    {errors.name && (<span className="text-danger">{errors.name.message}</span>)}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row mt-3">
+                            <div className="col-sm-12 col-md-6">
+                                <div>
+                                    <label className="text-gray-800" htmlFor="">Giá vé</label>
+                                    <input type="number" {...register("price")} placeholder="Giá vé..." className="form-control" />
+                                    {errors.price && <span className="text-danger">{errors.price.message}</span>}
+                                </div>
+
+                            </div>
+                            <div className="col-sm-12 col-md-6">
+                                <div>
+                                    <label className="text-gray-800" htmlFor="">Giá ưu đãi</label>
+                                    <input type="number" {...register("promotion_price")} placeholder="Giá vé..." className="form-control" />
+                                    {errors.promotion_price && <span className="text-danger">{errors.promotion_price.message}</span>}
+                                </div>
+                            </div>
                         </div>
                         <div className="row mt-3">
                             <div className="col-sm-12 col-md-12">
-                                <Button className="btn-success" htmlType="submit" type="primary">Cập nhật</Button>
+                                <Button htmlType="submit" type="primary">Cập nhật</Button>
                             </div>
                         </div>
                     </form>
