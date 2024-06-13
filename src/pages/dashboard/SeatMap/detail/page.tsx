@@ -40,7 +40,7 @@ const SeatMapDetailPage = () => {
                                     }
                                     {
                                         seatMap.map((item: any, index: number) => (
-                                            <Seat key={index} type={item.type} seat_number={nameRow[count] + (index + 1)} />
+                                            <Seat key={index} type={item.type} seat_number={item.seat_number} />
                                         ))
                                     }
                                 </div>

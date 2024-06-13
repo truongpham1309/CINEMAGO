@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const configAxiosUse = () => {
     axios.defaults.baseURL = 'http://localhost:8000/api';
-    axios.defaults.timeout = 10000;
+    axios.defaults.timeout = 15000;
     axios.interceptors.request.use(
         (config) => {
             const auth: any = localStorage.getItem('user');
