@@ -1,7 +1,31 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./",
     "paths": {
+      "@/*": [
+        "src/*"
+      ],
       "@assets/*": [
         "src/assets/*"
       ],
@@ -26,12 +50,26 @@
       "@styles/*": [
         "src/styles/*"
       ],
-      "@/*": [
-        "src/*"
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@service/*": [
+        "src/services/service/*"
       ],
       "@booking/*": [
         "src/services/booking/*"
+      ],
+      "@showTime/*": [
+        "src/services/showTime/*"
       ]
     }
-  }
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
