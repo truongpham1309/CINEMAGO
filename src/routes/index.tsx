@@ -39,6 +39,9 @@ import MovieList from "@/pages/website/MovieList/MovieList"
 import SeatCreatePage from "@/pages/dashboard/Seat/create/page"
 import SeatDashBoardPage from "@/pages/dashboard/Seat/list/page"
 import SeatEditPage from "@/pages/dashboard/Seat/edit/page"
+import BookingDashBoardPage from "@/pages/dashboard/Booking/list/page"
+import DashBoardHomePage from "@/pages/dashboard/Home/page"
+import BookingDetailDashBoardPage from "@/pages/dashboard/Booking/detail/page"
 
 const Router = () => {
   return (
@@ -57,7 +60,7 @@ const Router = () => {
 
           {/* DashBoard */}
           <Route path="dashboard" element={<LayoutDashBoard />}>
-            <Route index element={<>DashBoard Home</>} />
+            <Route index element={<DashBoardHomePage />} />
             <Route path="/dashboard/movie" element={<MovieListPage />} />
             <Route path="/dashboard/movie/create" element={<MovieCreatePage />} />
             <Route path="/dashboard/movie/edit/:id" element={<MovieEditPage />} />
@@ -99,6 +102,9 @@ const Router = () => {
             <Route path="/dashboard/seat" element={<SeatDashBoardPage />} />
             <Route path="/dashboard/seat/create" element={<SeatCreatePage />} />
             <Route path="/dashboard/seat/edit/:id" element={<SeatEditPage />} />
+
+            <Route path="/dashboard/booking" element={<BookingDashBoardPage />} />
+            <Route path="/dashboard/booking/detail/:id" element={<BookingDetailDashBoardPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

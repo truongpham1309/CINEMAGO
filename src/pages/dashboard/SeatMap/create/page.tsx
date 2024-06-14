@@ -24,7 +24,7 @@ const SeatMapCreatePage = () => {
                                     <select defaultValue={""} className="form-control" {...register("cinema_screen_id")}>
                                         <option value={""} >Chọn phòng chiếu</option>
                                         {cinema_screen.data.cinemaScreens.map((screen: any, index: number) => (
-                                            <option key={index} value={screen.id}>{screen.name} - {screen.screen} {screen.city}</option>
+                                            <option key={index} value={screen.id}>{screen.cinema} - {screen.screen} {screen.city}</option>
                                         ))}
                                     </select>
                                     {errors.cinema_screen_id && (<span className="text-danger">{errors.cinema_screen_id.message}</span>)}
