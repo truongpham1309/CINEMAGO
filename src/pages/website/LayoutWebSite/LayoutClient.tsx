@@ -9,11 +9,7 @@ const LayoutClient = () => {
     return (
         <>
             <HeaderClient />
-            <section className="movie-section padding-top padding-bottom">
-                <div className="container">
-                    <Outlet />
-                </div>
-            </section>
+            <Outlet />
             <GoToTop />
             <FooterClient />
         </>
