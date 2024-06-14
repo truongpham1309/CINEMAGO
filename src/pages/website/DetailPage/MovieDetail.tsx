@@ -1,3 +1,5 @@
+import { Banner03 } from "@/assets/images/banner";
+import { VideoButton } from "@/assets/images/movie";
 import { getDetailMovieClient } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -21,107 +23,104 @@ interface Movie {
 const MovieDetail = () => {
   const [movies, setMovies] = useState<Movie>();
   const { id } = useParams();
-  const [showTrailer, setShowTrailer] = useState(false);
 
   useEffect(() => {
     (async () => {
       const data = await getDetailMovieClient(+id!);
-      console.log(data);
       setMovies(data.data.movie);
     })();
   }, [id]);
   console.log(movies);
   return (
     <>
-      <div className="details-banner-wrapper">
-        <div key={movies?.id}>
-          <div className="details-banner-thumb">
-            <img src={movies?.image} alt="movie" />
-          </div>
-          <div className="details-banner-content offset-lg-3">
-            <h3 className="title">{movies?.title}</h3>
-            <div className="tags">
-              <a href="#0">English</a>
-              <a href="#0">Hindi</a>
-              <a href="#0">Telegu</a>
-              <a href="#0">Tamil</a>
+      <section
+        className="details-banner bg_img"
+        data-background={Banner03}
+      >
+        <div className="container">
+          <div className="details-banner-wrapper">
+            <div className="details-banner-thumb">
+              <img src={movies?.image} alt="movie" />
+              <Link
+                to={movies?.trailer!}
+                className="video-popup"
+              >
+                <img src={VideoButton} alt="movie" />
+              </Link>
             </div>
-            <a href="#0" className="button">
-              horror
-            </a>
-            <div className="social-and-duration">
-              <div className="duration-area">
-                <div className="item">
-                  <i className="fas fa-calendar-alt" />
-                  <span>{movies?.release_date}</span>
-                </div>
-                <div className="item">
-                  <i className="far fa-clock" />
-                  <span>{movies?.duration} phút</span>
+            <div className="details-banner-content offset-lg-3">
+              <h3 className="title fw-bold text-uppercase">{movies?.title}</h3>
+              <div className="tags">
+                <span>Tiếng Việt phụ đề Tiếng Anh</span>
+              </div>
+              <a href="#0" className="button">
+                {movies?.genre}
+              </a>
+              <div className="social-and-duration">
+                <div className="duration-area">
+                  <div className="item">
+                    <i className="fas fa-calendar-alt" />
+                    <span>{movies?.release_date}</span>
+                  </div>
+                  <div className="item">
+                    <i className="far fa-clock" />
+                    <span>{movies?.duration} phút</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <br />
-        <p>{movies?.description}</p>
-        <br />
-      </div>
-      {/* finished baner */}
-      {/* booking + trailer */}
+      </section>
+
       <section className="book-section bg-one">
         <div className="container">
           <div className="book-wrapper offset-lg-3">
             <div className="left-side">
               <div className="item">
-                <div className="item-header">
-                  <div className="counter-area">
-                    <span>{movies?.director}</span>
-                  </div>
-                </div>
-                <p>Đạo diễn</p>
-              </div>
-              <div className="item">
-                <div className="item-header">
-                  <div className="counter-area">
-                    <span>{movies?.actor}</span>
-                  </div>
-                </div>
-                <p>Diễn viên</p>
-              </div>
-              <div className="item">
-                <div className="item-header">
-                  <h5 className="title">{movies?.status}</h5>
-                  <div className="rated">
-                  </div>
-                </div>
-                <p>Trạng thái</p>
-              </div>
-              <div className="item">
-                <div className="item-header">
-                  <div className="rated rate-it">
 
-                  </div>
-                  <h5 className="title">{movies?.rated}</h5>
-                </div>
+                <p>tomatometer</p>
+              </div>
+              <div className="item">
+
+                <p>audience Score</p>
+              </div>
+            </div>
+            <span className="custom-button">
+              book tickets
+            </span>
+          </div>
+        </div>
+      </section>
+      <section className="movie-details-section padding-top padding-bottom">
+        <div className="container">
+          <div className="row justify-content-center mb--50">
+            <div className="col-lg-3 col-sm-10 col-md-6 mb-50">
+              <div className="widget-1 widget-tags">
+                <ul>
+                  <li>
+                    <a href="#0">2D</a>
+                  </li>
+                  <li>
+                    <a href="#0">imax 2D</a>
+                  </li>
+                  <li>
+                    <a href="#0">4DX</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-12 mb-50">
+              <div className="movie-details">
+                <h3 className="text-uppercase text-center text-bold">Tóm tắt</h3>
                 <p>
-                  <a href="#0">Độ tuổi</a>
+                  {movies?.description}
                 </p>
               </div>
             </div>
-            <a href="#0" onClick={() => setShowTrailer(!showTrailer)} className="custom-button">
-              Trailer
-            </a>
-            <Link to="#0" className="custom-button">
-              book tickets
-            </Link>
           </div>
-          {showTrailer && (
-            <iframe src={movies?.trailer}></iframe>
-          )}
         </div>
       </section>
-      {/* booking + trailer */}
     </>
   );
 };

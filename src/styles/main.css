@@ -2144,7 +2144,7 @@ input[type="submit"] {
 }
 
 .book-section {
-  padding: 47px 0;
+  padding: 65px 0;
   border-top: 1px solid #17305f;
   border-bottom: 1px solid #17305f;
 }
@@ -2342,6 +2342,7 @@ input[type="submit"] {
 
 .details-banner.event-details-banner .details-banner-wrapper .details-banner-content .title {
   text-transform: uppercase !important;
+  font-weight: 600 !important;
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
