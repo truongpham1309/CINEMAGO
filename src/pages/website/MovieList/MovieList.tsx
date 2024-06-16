@@ -1,4 +1,32 @@
-import { bgTicket01 } from "@/assets/images/ticket";
+// import React, { useState } from 'react';
+
+// const SelectComponent = () => {
+//   const [selectedValue, setSelectedValue] = useState('');
+
+//   const handleChange = (event) => {
+//     setSelectedValue(event.target.value);
+//     console.log('Selected value:', event.target.value);
+//   };
+
+//   return (
+//     <div>
+//       <br />
+//       <br />
+//       <br />
+//       <label htmlFor="selectBox">Choose an option:</label>
+//       <select id="selectBox" value={selectedValue} onChange={handleChange}>
+//         <option value="">--Please choose an option--</option>
+//         <option value="option1">Option 1</option>
+//         <option value="option2">Option 2</option>
+//         <option value="option3">Option 3</option>
+//       </select>
+//       <p>You selected: {selectedValue}</p>
+//     </div>
+//   );
+// };
+
+// export default SelectComponent;
+
 import { getAllMovieClient } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -21,13 +49,56 @@ interface Movie {
 
 const MovieList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [filterMovies, setFilterMovies] = useState<Movie[]>([]);
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [genreFilter, setGenreFilter] = useState<string>("all");
+  const [selectedValue, setSelectedValue] = useState("");
+
+  // const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     (async () => {
       const data = await getAllMovieClient();
       setMovies(data.data.movie);
+      setFilterMovies(data.data.movie);
     })();
   }, []);
+    const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+    console.log('Selected value:', event.target.value);
+  };
+
+  const handleFilterChange = (status: string, genre: string) => {
+    setStatusFilter(status);
+    setGenreFilter(genre);
+
+    let filtered = movies;
+    if (status !== "all") {
+      filtered = filtered.filter((movie) => movie.status === status);
+    }
+    if (genre !== "all") {
+      filtered = filtered.filter((movie) => movie.genre === genre);
+    }
+    setFilterMovies(filtered);
+  };
+
+  const handleStatusFilterChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const status = e.currentTarget.value;
+    console.log("Status changed:", status); // Log kiểm tra
+    handleFilterChange(status, genreFilter);
+  };
+
+  const handleGenreFilterChange = (genre: string) => {
+    handleFilterChange(statusFilter, genre);
+  };
+  const handleChangeTest = (e) => {
+    setSelectedValue(e.target.value);
+    console.log(statusFilter);
+  };
+  console.log(selectedValue);
+  const genres = Array.from(new Set(movies.map((movie) => movie.genre)));
 
   return (
     <>
@@ -37,49 +108,20 @@ const MovieList = () => {
             <div className="col-sm-10 col-md-8 col-lg-3">
               <div className="widget-1 widget-check">
                 <div className="widget-1-body">
-                  <h6 className="subtitle">genre</h6>
-                  <div className="check-area">
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre1" />
-                      <label htmlFor="genre1">thriller</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre2" />
-                      <label htmlFor="genre2">horror</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre3" />
-                      <label htmlFor="genre3">drama</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre4" />
-                      <label htmlFor="genre4">romance</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre5" />
-                      <label htmlFor="genre5">action</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre6" />
-                      <label htmlFor="genre6">comedy</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre7" />
-                      <label htmlFor="genre7">romantic</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre8" />
-                      <label htmlFor="genre8">animation</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre9" />
-                      <label htmlFor="genre9">sci-fi</label>
-                    </div>
-                    <div className="form-group">
-                      <input type="checkbox" name="genre" id="genre10" />
-                      <label htmlFor="genre10">adventure</label>
-                    </div>
-                  </div>
+                  <h6
+                    onClick={() => handleGenreFilterChange("all")}
+                    className="subtitle"
+                  >
+                    all genre
+                  </h6>
+                  {genres.map((genre) => (
+                    <button
+                      key={genre}
+                      onClick={() => handleGenreFilterChange(genre)}
+                    >
+                      {genre}
+                    </button>
+                  ))}
                   <div className="add-check-area">
                     <a href="#0">
                       view more <i className="plus" />
@@ -107,11 +149,14 @@ const MovieList = () => {
                       </div>
                       <div className="item">
                         <span className="show">Sort By :</span>
-                        <select className="select-bar">
-                          <option value="showing">now showing</option>
-                          <option value="exclusive">exclusive</option>
-                          <option value="trending">trending</option>
-                          <option value="most-view">most view</option>
+                        <select
+                          id="selectBox"
+                          value={selectedValue}
+                          onChange={handleChange}
+                        >
+                          <option value="all">Tất cả</option>
+                          <option value="Comming Soon">Option 2</option>
+                          <option value="Now Showwing">Option 3</option>{" "}
                         </select>
                       </div>
                     </div>
@@ -128,27 +173,28 @@ const MovieList = () => {
                 <div className="tab-area">
                   <div className="tab-item active">
                     <div className="row mb-10 justify-content-center">
-                      {movies.map((movie, index) => (
+                      {filterMovies.map((movie, index) => (
                         <div key={index} className="col-sm-6 col-lg-4">
                           <div className="movie-grid">
                             <div className="movie-thumb c-thumb">
                               <Link to={`/movie/detail/${movie.id}`}>
-                                <img
-                                  src={movie.image}
-                                  alt="movie"
-                                />
+                                <img src={movie.image} alt="movie" />
                               </Link>
                             </div>
                             <div className="movie-content bg-one">
                               <h5 className="title m-0">
-                                <Link to={`/movie/detail/${movie.id}`}>{movie.title}</Link>
+                                <Link to={`/movie/detail/${movie.id}`}>
+                                  {movie.title}
+                                </Link>
                               </h5>
                               <ul className="movie-rating-percent">
                                 <li>
                                   <span className="content">{movie.genre}</span>
                                 </li>
                                 <li>
-                                  <span className="content">{movie.duration} phút</span>
+                                  <span className="content">
+                                    {movie.duration} phút
+                                  </span>
                                 </li>
                               </ul>
                             </div>
