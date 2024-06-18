@@ -86,9 +86,12 @@ const MovieDetail = () => {
                 <p>audience Score</p>
               </div>
             </div>
-            <span className="custom-button">
-              book tickets
-            </span>
+            <Link to={`/movie/booking-movie/${movies?.id}`}>
+              <span className="custom-button">
+                book tickets
+              </span>
+            </Link>
+
           </div>
         </div>
       </section>
