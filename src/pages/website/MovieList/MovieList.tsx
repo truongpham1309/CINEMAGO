@@ -52,7 +52,6 @@ const MovieList = () => {
   const [filterMovies, setFilterMovies] = useState<Movie[]>([]);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [genreFilter, setGenreFilter] = useState<string>("all");
-  const [selectedValue, setSelectedValue] = useState("");
 
   // const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -63,10 +62,6 @@ const MovieList = () => {
       setFilterMovies(data.data.movie);
     })();
   }, []);
-    const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-    console.log('Selected value:', event.target.value);
-  };
 
   const handleFilterChange = (status: string, genre: string) => {
     setStatusFilter(status);
@@ -82,22 +77,14 @@ const MovieList = () => {
     setFilterMovies(filtered);
   };
 
-  const handleStatusFilterChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const status = e.currentTarget.value;
-    console.log("Status changed:", status); // Log kiểm tra
+  const handleStatusFilterChange = (status: string) => {
     handleFilterChange(status, genreFilter);
   };
 
   const handleGenreFilterChange = (genre: string) => {
     handleFilterChange(statusFilter, genre);
   };
-  const handleChangeTest = (e) => {
-    setSelectedValue(e.target.value);
-    console.log(statusFilter);
-  };
-  console.log(selectedValue);
+
   const genres = Array.from(new Set(movies.map((movie) => movie.genre)));
 
   return (
@@ -149,15 +136,32 @@ const MovieList = () => {
                       </div>
                       <div className="item">
                         <span className="show">Sort By :</span>
-                        <select
-                          id="selectBox"
-                          value={selectedValue}
-                          onChange={handleChange}
-                        >
-                          <option value="all">Tất cả</option>
-                          <option value="Comming Soon">Option 2</option>
-                          <option value="Now Showwing">Option 3</option>{" "}
-                        </select>
+                        <div className="nice-select" tabIndex={0}>
+                          <span className="current">Comming Soon</span>
+                          <ul className="list">
+                            <li
+                              data-value="all"
+                              onClick={() => handleStatusFilterChange('all')}
+                              className="option focus selected"
+                            >
+                              All
+                            </li>
+                            <li
+                              data-value="Coming Soon"
+                              onClick={() => handleStatusFilterChange('Coming Soon')}
+                              className="option focus"
+                            >
+                              Coming Soon
+                            </li>
+                            <li
+                              data-value="Currently Showing"
+                              onClick={() => handleStatusFilterChange('Currently Showing')}
+                              className="option focus"
+                            >
+                              Now Show
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                     <ul className="grid-button tab-menu">
