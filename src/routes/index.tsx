@@ -42,6 +42,7 @@ import SeatEditPage from "@/pages/dashboard/Seat/edit/page"
 import BookingDashBoardPage from "@/pages/dashboard/Booking/list/page"
 import DashBoardHomePage from "@/pages/dashboard/Home/page"
 import BookingDetailDashBoardPage from "@/pages/dashboard/Booking/detail/page"
+import ProfilePage from './../pages/website/Profile/page';
 
 const Router = () => {
   return (
@@ -56,6 +57,7 @@ const Router = () => {
             <Route path="/" element={<>Hello World</>} />
             <Route path="/movie" element={<MovieList />} />
             <Route path="/movie/detail/:id" element={<MovieDetail />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Route>
 
           {/* DashBoard */}
