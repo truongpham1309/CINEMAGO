@@ -72,7 +72,7 @@ const MovieList = () => {
       filtered = filtered.filter((movie) => movie.status === status);
     }
     if (genre !== "all") {
-      filtered = filtered.filter((movie) => movie.genre === genre);
+      filtered = filtered.filter((movie) => movie.genre.includes(genre));
     }
     setFilterMovies(filtered);
   };
@@ -85,8 +85,8 @@ const MovieList = () => {
     handleFilterChange(statusFilter, genre);
   };
 
-  const genres = Array.from(new Set(movies.map((movie) => movie.genre)));
-
+  const genres = Array.from(new Set(movies.flatMap((movie) => movie.genre.split(', '))));
+  console.log(genres);
   return (
     <>
       <section className="movie-section padding-top padding-bottom">
@@ -95,24 +95,14 @@ const MovieList = () => {
             <div className="col-sm-10 col-md-8 col-lg-3">
               <div className="widget-1 widget-check">
                 <div className="widget-1-body">
-                  <h6
-                    onClick={() => handleGenreFilterChange("all")}
-                    className="subtitle"
-                  >
-                    all genre
-                  </h6>
-                  {genres.map((genre) => (
-                    <button
-                      key={genre}
-                      onClick={() => handleGenreFilterChange(genre)}
-                    >
-                      {genre}
-                    </button>
-                  ))}
-                  <div className="add-check-area">
-                    <a href="#0">
-                      view more <i className="plus" />
-                    </a>
+                  <h6 className="subtitle">Language</h6>
+                  <div className="check-area">
+                    {genres.map((g, i) => (
+                      <div onClick={() => handleGenreFilterChange(g)} key={i} className="form-group">
+                        <input type="checkbox" name="lang" id={g} />
+                        <label htmlFor="lang1">{g}</label>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -141,21 +131,25 @@ const MovieList = () => {
                           <ul className="list">
                             <li
                               data-value="all"
-                              onClick={() => handleStatusFilterChange('all')}
+                              onClick={() => handleStatusFilterChange("all")}
                               className="option focus selected"
                             >
                               All
                             </li>
                             <li
                               data-value="Coming Soon"
-                              onClick={() => handleStatusFilterChange('Coming Soon')}
+                              onClick={() =>
+                                handleStatusFilterChange("Coming Soon")
+                              }
                               className="option focus"
                             >
                               Coming Soon
                             </li>
                             <li
                               data-value="Currently Showing"
-                              onClick={() => handleStatusFilterChange('Currently Showing')}
+                              onClick={() =>
+                                handleStatusFilterChange("Currently Showing")
+                              }
                               className="option focus"
                             >
                               Now Show
