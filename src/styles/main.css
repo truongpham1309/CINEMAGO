@@ -4573,7 +4573,7 @@ input[type="submit"] {
   padding: 30px;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  justify-content: start;
   margin: -5px;
 }
 
@@ -4599,6 +4599,9 @@ input[type="submit"] {
 }
 
 .seat-plan-wrapper li .movie-schedule .item:hover {
+  background: #31d7a9;
+}
+.seat-plan-wrapper li .movie-schedule .item.active {
   background: #31d7a9;
 }
 
