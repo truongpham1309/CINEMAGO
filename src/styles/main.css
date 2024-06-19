@@ -238,6 +238,50 @@ input[type="file"] {
   clear: both;
 }
 
+.card__description {
+  display: block;
+  max-height: 100px;
+  overflow: auto;
+  color: #6e707e;
+  border: 1px solid #52525250;
+  background-color: #Eaecf4;
+  padding: 5px;
+  padding-left: 12px;
+  border-radius: 5px;
+}
+.card__description::-webkit-scrollbar{
+  display: none;
+}
+.btn__detail--movie{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  color: #6e707e;
+  border: 1px solid #52525250;
+  background-color: #Eaecf4;
+  height: 45px;
+  border-radius: 5px;
+}
+.btn__detail--movie svg{
+  height: 24px;
+  width: 24px;
+  color: #ff0000;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.detail__movie .detail__movie__boxtrailer{
+  margin: auto;
+  width: 70%;
+  height: 80%;
+  background-color: #011440;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail__movie .detail__movie__boxtrailer iframe{
+  width: 100%;
+  height: 100%;
+}
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
