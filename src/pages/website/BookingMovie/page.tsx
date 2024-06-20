@@ -4,10 +4,12 @@ import { formatDateString } from "@/common/libs/formatDateToString";
 import { groupShowtimes } from "@/common/libs/formatObjectFillterMovie";
 import { getAllShowTimeByCityAndCinema } from "@/services/bookingClient/bookingClientService";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BookingMovieShowTimePage = () => {
     const { id: idMovie } = useParams();
+    const navigate = useNavigate();
     const [filterMovie, setFilterMovie] = useState([] as any[]);
     const [isShow, setIsShow] = useState(false);
     const [properties, setProperties] = useState<any>({
@@ -26,24 +28,27 @@ const BookingMovieShowTimePage = () => {
     useEffect(() => {
         (async () => {
             const data = await getAllShowTimeByCityAndCinema(+idMovie!);
-            setFilter({...filter, movie_title: data.data.movies[0].movie_name})
+            setFilter({ ...filter, movie_title: data.data.movies[0].movie_name })
             setFilterMovie(groupShowtimes(data.data.movies));
         })();
+        if (!filterMovie) {
+            navigate('/movie');
+        }
     }, [idMovie]);
 
     useEffect(() => {
         if (filterMovie.length > 0) {
             const cities = Array.from(new Set(filterMovie.map((item) => item.cinema_city)));
-            const city = cities[0] || '';
+            let city = cities[0] || '';
             const cinemas = getCinemasForCity(filterMovie, city);
-            const cinema = cinemas[0] || '';
+            let cinema = cinemas[0] || '';
             const dates = getDatesForCinema(filterMovie, city, cinema);
-            const date = dates[0] || '';
+            let date = dates[0] || '';
             const showtimes = getShowtimesForCinemaAndDate(filterMovie, city, cinema, date);
 
             setProperties({ cities, date: dates, cinema: cinemas, showtimes });
 
-            setFilter({ ...filter,city, date, cinema });
+            setFilter({ ...filter, city, date, cinema });
         }
     }, [filterMovie]);
 
@@ -105,22 +110,46 @@ const BookingMovieShowTimePage = () => {
 
         setFilter(updatedFilter);
     };
-    console.log(properties.showtimes);
+
+    const handleChooseBookingShowTimes = ({ type, id }: { type: 'CLOSE' | 'OPEN' | 'CHOOSE-SEATS', id?: any }) => {
+        switch (type) {
+            case 'CLOSE':
+                setIsShow(false);
+                break;
+            case 'OPEN':
+                setIsShow(true);
+                let user = JSON.parse(localStorage.getItem('user')!);
+                // user_id = user.data.id
+                let booking = JSON.stringify({
+                    showtime_id: id,
+                    user_id: user.data.id,
+                });
+                sessionStorage.setItem('booking', booking);
+                break;
+            case 'CHOOSE-SEATS': 
+                let current_booking = JSON.parse(sessionStorage.getItem('booking')!);
+                // showtime_id = current_booking.showtime_id;
+                navigate(`/movie/booking-seats/${current_booking.showtime_id}`);
+                break;
+            default: toast.warning('Thao tác không hợp lệ!');
+        }
+    }
+
     return (
         <>
             {isShow && (
-                <section onClick={() => setIsShow(false)} className="window-warning">
-                    <div className="lay" />
+                <section className="window-warning">
+                    <div onClick={() => handleChooseBookingShowTimes({ type: "CLOSE" })} className="lay" />
                     <div className="warning-item">
                         <h6 className="subtitle">Chào mừng!</h6>
                         <h4 className="title">Chọn Ghế của bạn</h4>
                         <div className="thumb">
                             <img src={SeatPlan} alt="movie" />
                         </div>
-                        <Link to="#" className="custom-button seatPlanButton">
+                        <span onClick={() => handleChooseBookingShowTimes({type: "CHOOSE-SEATS"})} className="custom-button seatPlanButton">
                             Seat Plans
                             <i className="fas fa-angle-right" />
-                        </Link>
+                        </span>
                     </div>
                 </section>
             )}
@@ -131,10 +160,10 @@ const BookingMovieShowTimePage = () => {
                         <div className="details-banner-content">
                             <h3 className="title">{filter.movie_title || "Loading..."}</h3>
                             <div className="tags">
-                                <a href="#0">English</a>
-                                <a href="#0">Hindi</a>
-                                <a href="#0">Telegu</a>
-                                <a href="#0">Tamil</a>
+                                <span>English</span>
+                                <span>Hindi</span>
+                                <span>Telegu</span>
+                                <span>Tamil</span>
                             </div>
                         </div>
                     </div>
@@ -170,7 +199,7 @@ const BookingMovieShowTimePage = () => {
                                 <span className="current">{filter.cinema || "Loading..."}</span>
                                 <ul className="list">
                                     {properties.cinema?.map((c: any, i: number) => (
-                                        <li onClick={() => handleChangeFilter('cinema', c)} key={i} data-value={c} className="option">
+                                        <li onClick={() => handleChangeFilter('cinema', c)} key={i} data-value={c} className={c === filter.cinema ? "option selected focus" : "option focus"} >
                                             {c}
                                         </li>
                                     ))}
@@ -187,14 +216,13 @@ const BookingMovieShowTimePage = () => {
                                 <span className="current">{formatDateString(filter.date || "")}</span>
                                 <ul className="list">
                                     {properties.date?.map((d: any, i: number) => (
-                                        <li onClick={() => handleChangeFilter('date', d)} data-value={formatDateString(d)} key={i} className={i === 0 ? "option selected focus" : "option  focus"}>
+                                        <li onClick={() => handleChangeFilter('date', d)} data-value={formatDateString(d)} key={i} className={d === filter.date ? "option selected focus" : "option  focus"}>
                                             {formatDateString(d)}
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>
@@ -213,7 +241,7 @@ const BookingMovieShowTimePage = () => {
                                         </div>
                                         <div className="movie-schedule col-8">
                                             {item.showtimes.map((s: any, i: number) => (
-                                                <div key={i} onClick={() => setIsShow(true)} className="item">{s.time.slice(0, -3)}</div>
+                                                <div key={i} onClick={() => handleChooseBookingShowTimes({ type: "OPEN", id: s.id })} className="item">{s.time.slice(0, -3)}</div>
                                             ))}
                                         </div>
                                     </li>

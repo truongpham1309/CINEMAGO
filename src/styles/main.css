@@ -1057,20 +1057,20 @@ input[type="submit"] {
 }
 
 .padding-top {
-  padding-top: 80px;
+  padding-top: 30px;
 }
 
 .padding-bottom {
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 @media (min-width: 992px) {
   .padding-top {
-    padding-top: 120px;
+    padding-top: 30px;
   }
 
   .padding-bottom {
-    padding-bottom: 120px;
+    padding-bottom: 30px;
   }
 }
 
@@ -4717,6 +4717,7 @@ input[type="submit"] {
 .window-warning .warning-item .seatPlanButton {
   font-weight: 600;
   padding: 11px 35px;
+  cursor: pointer;
   -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
   box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
 }
@@ -5737,7 +5738,7 @@ input[type="submit"] {
 .faq-item .faq-title .title {
   margin: 0;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 700 !important;
   width: calc(100% - 40px);
   max-width: 535px;
   line-height: 1.5;
@@ -7800,6 +7801,7 @@ input[type="submit"] {
 
 .feature-item .feature-content .title {
   text-transform: uppercase;
+  font-weight: 700 !important;
   margin-bottom: 24px;
 }
 
