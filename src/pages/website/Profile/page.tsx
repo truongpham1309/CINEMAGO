@@ -22,10 +22,10 @@ const ProfilePage = () => {
   function urlParamImg(e: any) {
     (async (e: any) => {
       const apiImgProfile = await uploadImage(e.target.files);
-      (async (apiImgProfile) => {
+      (async () => {
         const linkAvatar = { avatar: apiImgProfile };
-        const data = await postProfileUser(linkAvatar);
-      })(apiImgProfile);
+        await postProfileUser(linkAvatar);
+      })();
       setUrlImg(apiImgProfile);
     })(e);
   }
