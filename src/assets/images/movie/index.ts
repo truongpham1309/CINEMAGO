@@ -1,2 +1,3 @@
 import VideoButton from "./video-button.png";
-export { VideoButton } 
+import SeatPlan from "./seat-plan.png";
+export { VideoButton, SeatPlan } 

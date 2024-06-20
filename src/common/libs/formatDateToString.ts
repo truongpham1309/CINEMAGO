@@ -8,4 +8,7 @@ export const formatDateToString = (input: string): string => {
     return `${year}-${month}-${day}`;
 };
 
-
+export const formatDateString = (inputDate: any) => {
+    const parts = inputDate.split('-');
+    return inputDate && `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
