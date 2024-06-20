@@ -3927,6 +3927,7 @@ input[type="submit"] {
 
   .ticket-search-form.two .form-group .select-bar .current {
     font-size: 10px;
+    color: #fff;
   }
 }
 
@@ -5071,6 +5072,7 @@ input[type="submit"] {
 
 .page-title-area .date-item .select-bar .current {
   line-height: 36px;
+  color: #ffffff;
   display: inherit;
 }
 

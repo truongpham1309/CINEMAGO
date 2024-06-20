@@ -44,6 +44,7 @@ import DashBoardHomePage from "@/pages/dashboard/Home/page"
 import BookingDetailDashBoardPage from "@/pages/dashboard/Booking/detail/page"
 import BookingMovieShowTimePage from "@/pages/website/BookingMovie/page"
 import ProfilePage from './../pages/website/Profile/page';
+import BookingSeat from "@/pages/website/BookingSeat/page"
 
 const Router = () => {
   return (
@@ -59,6 +60,7 @@ const Router = () => {
             <Route path="/movie" element={<MovieList />} />
             <Route path="/movie/detail/:id" element={<MovieDetail />} />
             <Route path="/movie/booking-movie/:id" element={<BookingMovieShowTimePage />} />
+            <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
 
