@@ -342,28 +342,35 @@
           }
       }
     });
-    var book = 0;
-    $(".seat-free img").on('click', function(e) {
-      if(book == 0) {
-        $(this).attr("src","/src/pages/website/BookingSeat/_image/seat01-free.png");
-        book = 1;
-      }
-      else if(book == 1) {
-        $(this).attr("src","/src/pages/website/BookingSeat/_image/seat01-booked.png");
-        book = 0;
-      }
-    });
-    var bookTwo = 1;  
-    $(".seat-free-two img").on('click', function(e) {
-      if(bookTwo == 0) {
-        $(this).attr("src","/src/pages/website/BookingSeat/_image/seat02-free.png");
-        bookTwo = 1;
-      }
-      else if(bookTwo == 1) {
-        $(this).attr("src","/src/pages/website/BookingSeat/_image/seat02-booked.png");
-        bookTwo = 0;
-      }
-    });
+    $(document).ready(function() {
+      $(".seat-free img").on('mousedown', function(event) {
+          event.preventDefault(); // Ngăn chặn các sự kiện mặc định xảy ra khi click
+      }).on('click', function() {
+          var $seat = $(this);
+          var currentSrc = $seat.attr('src');
+          
+          // Kiểm tra trạng thái hiện tại của ảnh ghế để thay đổi
+          if (currentSrc === "/src/pages/website/BookingSeat/_image/seat01-free.png") {
+              $seat.attr("src", "/src/pages/website/BookingSeat/_image/seat01-booked.png");
+          } else {
+              $seat.attr("src", "/src/pages/website/BookingSeat/_image/seat01-free.png");
+          }
+      });
+  
+      $(".seat-free-two img").on('mousedown', function(event) {
+          event.preventDefault(); // Ngăn chặn các sự kiện mặc định xảy ra khi click
+      }).on('click', function() {
+          var $seat = $(this);
+          var currentSrc = $seat.attr('src');
+  
+          // Kiểm tra trạng thái hiện tại của ảnh ghế để thay đổi
+          if (currentSrc === "/src/pages/website/BookingSeat/_image/seat02-free.png") {
+              $seat.attr("src", "/src/pages/website/BookingSeat/_image/seat02-booked.png");
+          } else {
+              $seat.attr("src", "/src/pages/website/BookingSeat/_image/seat02-free.png");
+          }
+      });
+  });
     // shop cart + - start here
     var CartPlusMinus = $('.cart-plus-minus');
     CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');

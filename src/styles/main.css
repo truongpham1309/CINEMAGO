@@ -5061,7 +5061,7 @@ input[type="submit"] {
   margin-right: 30px;
 }
 
-.page-title-area .date-item .select-bar {
+.page-title-area .date-item .select-bar , .current_showtime {
   border-radius: 5px;
   background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
   -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);

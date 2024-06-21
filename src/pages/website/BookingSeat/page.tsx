@@ -7,6 +7,7 @@ import Seat02 from './_image/seat02.png';
 import Seat02_Free from './_image/seat02-free.png';
 import Seat02_Booked from './_image/seat02-booked.png';
 import Movie_bg_proceed from './_image/movie-bg-proceed.jpg';
+import CountDown from "./_components/CountDown";
 
 const BookingSeatPage = () => {
     const { id } = useParams();
@@ -45,14 +46,11 @@ const BookingSeatPage = () => {
                         </div>
                         <div className="item date-item">
                             <span className="date">MON, SEP 09 2020</span>
-                            <select className="select-bar">
-                                <option value="sc1">09:40</option>
-                            </select>
+                            <div className="nice-select current_showtime">
+                                <span className="current text-white">09:40</span>
+                            </div>  
                         </div>
-                        <div className="item">
-                            <h5 className="title">05:00</h5>
-                            <p>Mins Left</p>
-                        </div>
+                        <CountDown />
                     </div>
                 </div>
             </section>
