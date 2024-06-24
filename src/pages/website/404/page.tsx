@@ -1,3 +1,4 @@
+import Image404 from './_image/404.png';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,17 +8,14 @@ const NotFoundPage: React.FC = () => {
       <section className="section-404 padding-top padding-bottom">
         <div className="container">
           <div className="thumb-404">
-          <h3> Oops.. Trang hiện đang lỗi</h3>
-            <img src="https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?size=626&ext=jpg&ga=GA1.1.2082370165.1716163200&semt=ais_user" alt="404" width="50px" height="250px" />
-
+            <img className='w-50' src={Image404} alt={'404'} />
           </div>
-          
+          <h3 className="title text-uppercase">Trang không tồn tại :(</h3>
           <Link to="/" className="custom-button">
-            Back To Home <i className="flaticon-right"></i>
+            Về trang chủ <i className="flaticon-right" />
           </Link>
         </div>
       </section>
-     
     </>
   );
 };

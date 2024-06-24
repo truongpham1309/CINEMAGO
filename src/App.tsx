@@ -20,7 +20,7 @@ configAxiosUse();
 const App = () => {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer limit={3}/>
       <LoadingComponent />
       <Router />
     </>

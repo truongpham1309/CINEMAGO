@@ -123,6 +123,9 @@ const BookingMovieShowTimePage = () => {
                 let booking = JSON.stringify({
                     showtime_id: id,
                     user_id: user.data.id,
+                    seats:[],
+                    service: [],
+                    subtotal: 0,
                 });
                 sessionStorage.setItem('booking', booking);
                 break;
