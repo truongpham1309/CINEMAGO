@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const CountDown = () => {
     const navigate = useNavigate();
-    const [countDown, setCountDown] = useState<number>(+JSON.parse(sessionStorage.getItem('count_down')!) || 5 * 60);
+    const [countDown, setCountDown] = useState<number>(5 * 60);
 
     useEffect(() => {
         if (countDown === 5) {

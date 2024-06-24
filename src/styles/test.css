@@ -34,3 +34,8 @@
     background-color: #f00;
     cursor: not-allowed;
 }
+
+.seat-visible {
+    visibility: hidden;
+    width: 30px;
+}
