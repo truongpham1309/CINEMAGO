@@ -1101,20 +1101,20 @@ input[type="submit"] {
 }
 
 .padding-top {
-  padding-top: 80px;
+  padding-top: 30px;
 }
 
 .padding-bottom {
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 @media (min-width: 992px) {
   .padding-top {
-    padding-top: 120px;
+    padding-top: 30px;
   }
 
   .padding-bottom {
-    padding-bottom: 120px;
+    padding-bottom: 30px;
   }
 }
 
@@ -3971,6 +3971,7 @@ input[type="submit"] {
 
   .ticket-search-form.two .form-group .select-bar .current {
     font-size: 10px;
+    color: #fff;
   }
 }
 
@@ -4617,7 +4618,7 @@ input[type="submit"] {
   padding: 30px;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  justify-content: start;
   margin: -5px;
 }
 
@@ -4643,6 +4644,9 @@ input[type="submit"] {
 }
 
 .seat-plan-wrapper li .movie-schedule .item:hover {
+  background: #31d7a9;
+}
+.seat-plan-wrapper li .movie-schedule .item.active {
   background: #31d7a9;
 }
 
@@ -4758,6 +4762,7 @@ input[type="submit"] {
 .window-warning .warning-item .seatPlanButton {
   font-weight: 600;
   padding: 11px 35px;
+  cursor: pointer;
   -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
   box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
 }
@@ -5100,7 +5105,7 @@ input[type="submit"] {
   margin-right: 30px;
 }
 
-.page-title-area .date-item .select-bar {
+.page-title-area .date-item .select-bar , .current_showtime {
   border-radius: 5px;
   background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
   -webkit-box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
@@ -5111,6 +5116,7 @@ input[type="submit"] {
 
 .page-title-area .date-item .select-bar .current {
   line-height: 36px;
+  color: #ffffff;
   display: inherit;
 }
 
@@ -5778,7 +5784,7 @@ input[type="submit"] {
 .faq-item .faq-title .title {
   margin: 0;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 700 !important;
   width: calc(100% - 40px);
   max-width: 535px;
   line-height: 1.5;
@@ -7841,6 +7847,7 @@ input[type="submit"] {
 
 .feature-item .feature-content .title {
   text-transform: uppercase;
+  font-weight: 700 !important;
   margin-bottom: 24px;
 }
 
