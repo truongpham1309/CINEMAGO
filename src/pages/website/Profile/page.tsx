@@ -24,7 +24,11 @@ const ProfilePage = () => {
       const apiImgProfile = await uploadImage(e.target.files);
       (async () => {
         const linkAvatar = { avatar: apiImgProfile };
+<<<<<<< HEAD
+        const data = await postProfileUser(linkAvatar);
+=======
         await postProfileUser(linkAvatar);
+>>>>>>> cc86d27173fe9b87075f491dab8def02eb71f8ed
       })();
       setUrlImg(apiImgProfile);
     })(e);
