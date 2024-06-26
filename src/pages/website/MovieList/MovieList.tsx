@@ -1,31 +1,3 @@
-// import React, { useState } from 'react';
-
-// const SelectComponent = () => {
-//   const [selectedValue, setSelectedValue] = useState('');
-
-//   const handleChange = (event) => {
-//     setSelectedValue(event.target.value);
-//     console.log('Selected value:', event.target.value);
-//   };
-
-//   return (
-//     <div>
-//       <br />
-//       <br />
-//       <br />
-//       <label htmlFor="selectBox">Choose an option:</label>
-//       <select id="selectBox" value={selectedValue} onChange={handleChange}>
-//         <option value="">--Please choose an option--</option>
-//         <option value="option1">Option 1</option>
-//         <option value="option2">Option 2</option>
-//         <option value="option3">Option 3</option>
-//       </select>
-//       <p>You selected: {selectedValue}</p>
-//     </div>
-//   );
-// };
-
-// export default SelectComponent;
 
 import { getAllMovieClient } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
@@ -89,6 +61,23 @@ const MovieList = () => {
   console.log(genres);
   return (
     <>
+      <section className="banner-section">
+        <div
+          className="banner-bg bg_img bg-fixed"
+          data-background="assets/images/banner/banner02.jpg"
+        />
+        <div className="container">
+          <div className="banner-content">
+            <h1 className="title bold">
+              get <span className="color-theme">movie</span> tickets
+            </h1>
+            <p>
+              Buy movie tickets in advance, find movie times watch trailers, read
+              movie reviews and much more
+            </p>
+          </div>
+        </div>
+      </section>
       <section className="movie-section padding-top padding-bottom">
         <div className="container">
           <div className="row flex-wrap-reverse justify-content-center">
