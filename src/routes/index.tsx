@@ -46,7 +46,7 @@ import BookingMovieShowTimePage from "@/pages/website/BookingMovie/page"
 import ProfilePage from './../pages/website/Profile/page';
 import MovieDetailPage from "@/pages/dashboard/Movies/detail/page"
 import BookingSeat from "@/pages/website/BookingSeat/page"
-import SeatSelection from "@/pages/website/BookingSeat/SelectSeat"
+import BookingServicePage from "@/pages/website/BookingService/page"
 
 const Router = () => {
   return (
@@ -63,9 +63,10 @@ const Router = () => {
             <Route path="/movie/detail/:id" element={<MovieDetail />} />
             <Route path="/movie/booking-movie/:id" element={<BookingMovieShowTimePage />} />
             <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
+            <Route path="/movie/booking/services" element={<BookingServicePage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
-            <Route path="/movie/booking-seats/test" element={<SeatSelection />} />
+          {/* <Route path="/movie/booking-seats/test" element={<SeatSelection />} /> */}
 
           {/* DashBoard */}
           <Route path="dashboard" element={<LayoutDashBoard />}>

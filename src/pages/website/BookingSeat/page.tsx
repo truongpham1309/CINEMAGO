@@ -185,7 +185,7 @@ const BookingSeatPage = () => {
                             <div className="book-item">
                                 <span>Ghế bạn chọn</span>
                                 <h3 className="title">
-                                    {chooseSeat.map((_s: any, _i: number) => {
+                                    {chooseSeat?.map((_s: any, _i: number) => {
                                         return (_i + 1) % 4 === 0 ? (<Fragment key={_i}>{_s} <br /></Fragment>) : <Fragment key={_i}>{_s}, </Fragment>;
                                     })}
                                 </h3>

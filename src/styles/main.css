@@ -4566,6 +4566,11 @@ input[type="submit"] {
   border: none;
 }
 
+.seat-visible {
+  visibility: hidden;
+  width: 30px;
+}
+
 .seat-plan-wrapper li .movie-name {
   padding: 30px;
   -webkit-box-pack: justify;
