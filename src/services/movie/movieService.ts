@@ -40,6 +40,15 @@ export const updateMovieByID = async (movie: TMovie) => {
     }
 }
 
+export const getDetailMovieByID = async (id: number) => {
+  try {
+    const {data} = await axios.get(`/dashboard/movie/${id}`);
+    return data
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error);
+  }
+};
 
 export const getDetailMovieClient = async (id: number) => {
     try {
