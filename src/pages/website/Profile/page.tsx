@@ -24,7 +24,6 @@ const ProfilePage = () => {
       const apiImgProfile = await uploadImage(e.target.files);
       (async () => {
         const linkAvatar = { avatar: apiImgProfile };
-        const data = await postProfileUser(linkAvatar);
         await postProfileUser(linkAvatar);
       })();
       setUrlImg(apiImgProfile);
