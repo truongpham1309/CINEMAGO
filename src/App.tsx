@@ -14,10 +14,13 @@ import LoadingComponent from "@/components/ui/LoadingComponent";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { configAxiosUse } from "./configs/service";
+import useUnload from "./common/hooks/global/useUnLoad";
 
 configAxiosUse();
 
 const App = () => {
+
+  useUnload();
   return (
     <>
       <ToastContainer limit={3}/>

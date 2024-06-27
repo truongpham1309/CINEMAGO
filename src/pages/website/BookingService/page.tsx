@@ -1,9 +1,29 @@
 import { Banner04 } from "@/assets/images/banner"
 import { formatDate } from "@/common/libs/formatDateToString"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import CountDown from "../BookingSeat/_components/CountDown"
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
 
 const BookingServicePage = () => {
+    const navigate = useNavigate();
+    const [booking, setBookings] = useState(JSON.parse(sessionStorage.getItem('booking')!) || null);
+    const [infoMovie, _] = useState(JSON.parse(sessionStorage.getItem('info_movie')!) || null);
+    useEffect(() => {
+        if (!booking) {
+            toast.error('Mời bạn chọn phim!', {
+                position: 'top-center'
+            });
+            sessionStorage.clear();
+            navigate('/movie');
+            return;
+        }
+    }, []);
+
+    const handleNavigateCheckout = () => {
+        sessionStorage.setItem('booking', JSON.stringify(booking));
+        navigate("/movie/booking/checkout");
+    }
     return (
         <>
             {/* ==========Banner-Section========== */}
@@ -14,10 +34,10 @@ const BookingServicePage = () => {
                 <div className="container">
                     <div className="details-banner-wrapper">
                         <div className="details-banner-content style-two">
-                            <h3 className="title">King Kong 3</h3>
+                            <h3 className="title">{infoMovie?.movie_title}</h3>
                             <div className="tags">
-                                <span>Hà Nội </span>
-                                <span> English - 2D</span>
+                                <span>{infoMovie?.city} </span>
+                                <span> {infoMovie?.cinema_name} - {infoMovie?.screen}</span>
                             </div>
                         </div>
                     </div>
@@ -29,18 +49,18 @@ const BookingServicePage = () => {
                 <div className="container">
                     <div className="page-title-area">
                         <div className="item md-order-1">
-                            <a
-                                href="movie-ticket-plan.html"
+                            <Link
+                                to="/movie/booking"
                                 className="custom-button back-button"
                             >
                                 <i className="flaticon-double-right-arrows-angles" />
                                 back
-                            </a>
+                            </Link>
                         </div>
                         <div className="item date-item text-uppercase text-white" >
-                            <span className="date">{formatDate("2024-06-25")}</span>
+                            <span className="date">{formatDate(infoMovie?.show_date)}</span>
                             <div className="nice-select current_showtime">
-                                <span className="current">{("23:00:00").slice(0, -3)}</span>
+                                <span className="current">{infoMovie?.show_time?.slice(0, -3)}</span>
                             </div>
                         </div>
                         <CountDown />
@@ -243,9 +263,9 @@ const BookingServicePage = () => {
                                     <span>Phải thanh toán</span>
                                     <span>$257</span>
                                 </h6>
-                                <Link to="#0" className="custom-button back-button">
+                                <span onClick={handleNavigateCheckout} className="custom-button back-button">
                                     Tiếp tục
-                                </Link>
+                                </span>
                             </div>
                             <div className="note text-white">
                                 <h5 className="title">Chú ý :</h5>

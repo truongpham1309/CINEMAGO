@@ -12,7 +12,7 @@ export const getAllShowTimeByCityAndCinema = async (id: number) => {
 
 export const getSeatMapByIDShowTime = async (id: number) => {
     try {
-        const { data } = await axios.post(`/show-seat-map`, { showtime_id: id });
+        const { data } = await axios.get(`/show-seat-map/${id}`);
         return data;
     } catch (error: any) {
         console.log(error);

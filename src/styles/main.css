@@ -4568,7 +4568,7 @@ input[type="submit"] {
 
 .seat-visible {
   visibility: hidden;
-  width: 30px;
+  /* width: 30px; */
 }
 
 .seat-plan-wrapper li .movie-name {
@@ -4898,6 +4898,10 @@ input[type="submit"] {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0;
+}
+
+.seat-area .seat-line.empty {
+  height: 40px;
 }
 
 .seat-area .seat-line>span {

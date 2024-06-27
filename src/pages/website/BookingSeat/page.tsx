@@ -53,22 +53,22 @@ const BookingSeatPage = () => {
 
 
     const handleChooseSeatBooking = ({ id, price, ...rest }: any) => {
-        const seat = booking.seats.find((_s: any) => +_s === +id);
+        const seat = booking?.seats.find((_s: any) => +_s === +id);
         if (seat) {
-            let _newSeatsBooking = booking.seats.filter((_s: any) => +_s !== +id);
+            let _newSeatsBooking = booking?.seats.filter((_s: any) => +_s !== +id);
             let _newSeats = chooseSeat.filter((_s: any) => _s !== rest.seatNumber);
             let newSubtotal = Number(booking.subtotal) - Number(price);
             setBooking({ ...booking, seats: [..._newSeatsBooking], subtotal: newSubtotal });
             setChooseSeat([..._newSeats]);
             return;
         }
-        if (booking.seats.length >= 8) {
+        if (booking?.seats.length >= 8) {
             toast.warning("Bạn chỉ được đặt tối đa 8 ghế trong 1 lần đặt vé!");
             return;
         }
         else {
             setChooseSeat([...chooseSeat, rest.seatNumber]);
-            setBooking({ ...booking, seats: [...booking.seats, id], subtotal: Number(booking.subtotal) + Number(price) });
+            setBooking({ ...booking, seats: [...booking?.seats, id], subtotal: Number(booking.subtotal) + Number(price) });
         }
     }
 
@@ -82,7 +82,17 @@ const BookingSeatPage = () => {
             });
             return;
         }
+
+        const info_movie = {
+            movie_title: data.movie_title,
+            show_time: data.show_time,
+            show_date: data.show_date,
+            city: data.city,
+            screen: data.screen,
+            cinema_name: data.cinema_name
+        }
         sessionStorage.setItem('booking', JSON.stringify(booking));
+        sessionStorage.setItem('info_movie', JSON.stringify(info_movie))
         navigate('/movie/booking/services');
     }
     if (isLoading) return <LoadingComponent />;
@@ -110,7 +120,7 @@ const BookingSeatPage = () => {
                 <div className="container">
                     <div className="page-title-area">
                         <div className="item md-order-1">
-                            <Link to={'/movies'} className="custom-button back-button">
+                            <Link to={`/movie/booking-seats/${booking?.showtime_id}`} className="custom-button back-button">
                                 <i className="flaticon-double-right-arrows-angles" />
                                 back
                             </Link>
@@ -135,10 +145,10 @@ const BookingSeatPage = () => {
                         </div>
                         <div className="screen-wrapper">
                             <ul className="seat-area">
-                                {data.seats.map((s: any, i: number) => {
+                                {data?.seats?.map((s: any, i: number) => {
                                     if (s.length === 0) {
                                         return (
-                                            <li key={i} className="seat-line"></li>
+                                            <li key={i} className="seat-line empty"></li>
                                         )
                                     };
                                     count++;
@@ -149,10 +159,11 @@ const BookingSeatPage = () => {
                                                 <li className="front-seat">
                                                     <ul>
                                                         {s.map((_s: any, _i: number) => {
-                                                            if (_s.type === "X" || _s.type === "UNOCCUPIED") {
+                                                            if (_s.type === "X" || _s.status === "UNOCCUPIED") {
                                                                 return (
                                                                     <li key={_i} className='single-seat seat-visible'>
                                                                         <img src={Seat01} alt="seat" />
+                                                                        <span className="sit-num">X</span>
                                                                     </li>
                                                                 )
                                                             }
@@ -165,7 +176,7 @@ const BookingSeatPage = () => {
                                                                         seatType={_s.type} price={_s.price}
                                                                         handleClick={handleChooseSeatBooking}
                                                                         status={_s.status}
-                                                                        booked={booking.seats}
+                                                                        booked={booking?.seats}
                                                                     />
                                                                 )
                                                             }
