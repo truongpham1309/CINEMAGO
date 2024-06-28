@@ -58,7 +58,6 @@ const MovieList = () => {
   };
 
   const genres = Array.from(new Set(movies.flatMap((movie) => movie.genre.split(', '))));
-  console.log(genres);
   return (
     <>
       <section className="banner-section">

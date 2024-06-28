@@ -2,10 +2,14 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { notification } from 'antd';
 import { formatTime } from '@/common/libs/fomatSecondToMinute';
+import { useDispatch } from 'react-redux';
+import { clean_booking } from '@/common/store/booking/sliceBooking';
+import { delete_info_movie } from '@/common/store/booking/sliceMovie';
 
 const CountDown = () => {
     const navigate = useNavigate();
     const [countDown, setCountDown] = useState(5 * 60); // 5 minutes in seconds
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const storedStartTime = sessionStorage.getItem('countdownStart');
@@ -31,11 +35,11 @@ const CountDown = () => {
     const handleCountdownEnd = () => {
         sessionStorage.removeItem('countdownStart');
         sessionStorage.removeItem('count_down');
-        sessionStorage.removeItem('booking');
-        sessionStorage.removeItem('info_movie');
+        dispatch(clean_booking());
+        dispatch(delete_info_movie());
         notification.error({
             message: 'Thông báo',
-            description: 'Đã hết thời gian, vui lòng chọn lại suất chiếu!',
+            description: 'Đã hết thời gian, vui lòng thực hiện lại thao tác!',
         });
         navigate('/movie');
     };

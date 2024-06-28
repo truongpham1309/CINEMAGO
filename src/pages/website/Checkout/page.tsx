@@ -1,56 +1,15 @@
-import { Banner04 } from "@/assets/images/banner"
-import CountDown from "../BookingSeat/_components/CountDown"
-import { Link } from "react-router-dom"
-import { formatDate } from "@/common/libs/formatDateToString"
-import { useState } from "react"
+import MovieBanner from "../_components/Booking/MovieBanner"
+import { useSelector } from "react-redux";
+import { movieSelector } from "@/common/store/booking/selectorMovie";
+import { selectorBooking } from "@/common/store/booking/selectorBooking";
 
 const CheckOutPage = () => {
-    const [booking, setBookings] = useState(JSON.parse(sessionStorage.getItem('booking')!) || null);
-    const [infoMovie, _] = useState(JSON.parse(sessionStorage.getItem('info_movie')!) || null);
-    console.log(infoMovie);
+    const movie = useSelector(movieSelector);
+    const booking = useSelector(selectorBooking);
     return (
         <>
             {/* ==========Banner-Section========== */}
-            <section
-                className="details-banner hero-area bg_img seat-plan-banner"
-                data-background={Banner04}
-            >
-                <div className="container">
-                    <div className="details-banner-wrapper">
-                        <div className="details-banner-content style-two">
-                            <h3 className="title">{infoMovie?.movie_title || "LOADING..."}</h3>
-                            <div className="tags">
-                                <span>{infoMovie?.city} </span>
-                                <span> {infoMovie?.cinema_name} - {infoMovie?.screen}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* ==========Banner-Section========== */}
-            {/* ==========Page-Title========== */}
-            <section className="page-title bg-one">
-                <div className="container">
-                    <div className="page-title-area">
-                        <div className="item md-order-1">
-                            <Link
-                                to="movie"
-                                className="custom-button back-button"
-                            >
-                                <i className="flaticon-double-right-arrows-angles" />
-                                back
-                            </Link>
-                        </div>
-                        <div className="item date-item text-uppercase text-white" >
-                            <span className="date">{formatDate(infoMovie?.show_date)}</span>
-                            <div className="nice-select current_showtime">
-                                <span className="current">{infoMovie?.show_time?.slice(0, -3)}</span>
-                            </div>
-                        </div>
-                        <CountDown />
-                    </div>
-                </div>
-            </section>
+            <MovieBanner />
             {/* ==========Page-Title========== */}
             {/* ==========Movie-Section========== */}
             <div className="movie-facility padding-bottom padding-top">

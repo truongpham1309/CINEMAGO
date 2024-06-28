@@ -1,14 +1,19 @@
-import { Banner04 } from "@/assets/images/banner"
+import { formatCurrencyVND } from "@/common/libs/fomatMoneyVND"
 import { formatDate } from "@/common/libs/formatDateToString"
-import { Link, useNavigate } from "react-router-dom"
-import CountDown from "../BookingSeat/_components/CountDown"
-import { useEffect, useState } from "react"
+import { selectorBooking } from "@/common/store/booking/selectorBooking"
+import { movieSelector } from "@/common/store/booking/selectorMovie"
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import MovieBanner from "../_components/Booking/MovieBanner"
 
 const BookingServicePage = () => {
     const navigate = useNavigate();
-    const [booking, setBookings] = useState(JSON.parse(sessionStorage.getItem('booking')!) || null);
-    const [infoMovie, _] = useState(JSON.parse(sessionStorage.getItem('info_movie')!) || null);
+    const movie = useSelector(movieSelector);
+    const booking = useSelector(selectorBooking);
+    // const [booking, setBookings] = useState(JSON.parse(sessionStorage.getItem('booking')!) || null);
+    // const [infoMovie, _] = useState(JSON.parse(sessionStorage.getItem('info_movie')!) || null);
     useEffect(() => {
         if (!booking) {
             toast.error('Mời bạn chọn phim!', {
@@ -21,54 +26,12 @@ const BookingServicePage = () => {
     }, []);
 
     const handleNavigateCheckout = () => {
-        sessionStorage.setItem('booking', JSON.stringify(booking));
         navigate("/movie/booking/checkout");
     }
+
     return (
         <>
-            {/* ==========Banner-Section========== */}
-            <section
-                className="details-banner hero-area bg_img seat-plan-banner"
-                data-background={Banner04}
-            >
-                <div className="container">
-                    <div className="details-banner-wrapper">
-                        <div className="details-banner-content style-two">
-                            <h3 className="title">{infoMovie?.movie_title}</h3>
-                            <div className="tags">
-                                <span>{infoMovie?.city} </span>
-                                <span> {infoMovie?.cinema_name} - {infoMovie?.screen}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* ==========Banner-Section========== */}
-            {/* ==========Page-Title========== */}
-            <section className="page-title bg-one">
-                <div className="container">
-                    <div className="page-title-area">
-                        <div className="item md-order-1">
-                            <Link
-                                to="/movie/booking"
-                                className="custom-button back-button"
-                            >
-                                <i className="flaticon-double-right-arrows-angles" />
-                                back
-                            </Link>
-                        </div>
-                        <div className="item date-item text-uppercase text-white" >
-                            <span className="date">{formatDate(infoMovie?.show_date)}</span>
-                            <div className="nice-select current_showtime">
-                                <span className="current">{infoMovie?.show_time?.slice(0, -3)}</span>
-                            </div>
-                        </div>
-                        <CountDown />
-                    </div>
-                </div>
-            </section>
-            {/* ==========Page-Title========== */}
-            {/* ==========Movie-Section========== */}
+            <MovieBanner />
             <div className="movie-facility padding-bottom padding-top">
                 <div className="container">
                     <div className="row">
@@ -218,50 +181,50 @@ const BookingServicePage = () => {
                                 <h4 className="title">booking</h4>
                                 <ul>
                                     <li>
-                                        <h6 className="subtitle">Venus</h6>
-                                        <span className="info">English-2d</span>
+                                        <h6 className="subtitle">{movie?.movie_title}</h6>
+                                        <span className="info">{movie.cinema_name} - {movie.screen}</span>
                                     </li>
                                     <li>
                                         <h6 className="subtitle">
-                                            <span>Hà Nội</span>
-                                            <span>02</span>
+                                            <span>{movie.city}</span>
+                                            <span>{booking.seats.length}</span>
                                         </h6>
                                         <div className="info">
-                                            <span>10 SEP TUE, 23:00 PM</span> <span>Tickets</span>
+                                            <span>{formatDate(movie.show_date)}, {movie.show_time.slice(-3, 0)}</span> <span>Tickets</span>
                                         </div>
                                     </li>
                                     <li>
                                         <h6 className="subtitle mb-0">
                                             <span>Giá vé</span>
-                                            <span>$150</span>
+                                            <span>{formatCurrencyVND(booking.subtotal) || 0}</span>
                                         </h6>
                                     </li>
                                 </ul>
-                                <ul className="side-shape">
+                                {/* <ul className="side-shape">
                                     <li>
                                         <h6 className="subtitle">
                                             <span>combos</span>
                                             <span>$57</span>
                                         </h6>
                                     </li>
-                                </ul>
-                                <ul>
+                                </ul> */}
+                                {/* <ul>
                                     <li>
                                         <span className="info">
                                             <span>giá</span>
                                             <span>$207</span>
                                         </span>
-                                        {/* <span className="info">
+                                        <span className="info">
                                             <span>vat</span>
                                             <span>$15</span>
-                                        </span> */}
+                                        </span>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
                             <div className="proceed-area text-center">
                                 <h6 className="subtitle">
                                     <span>Phải thanh toán</span>
-                                    <span>$257</span>
+                                    <span>{formatCurrencyVND(booking.subtotal) || 0}</span>
                                 </h6>
                                 <span onClick={handleNavigateCheckout} className="custom-button back-button">
                                     Tiếp tục

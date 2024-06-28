@@ -7,4 +7,9 @@ export const storeBooking = configureStore({
         booking: sliceBooking.reducer,
         movie: sliceMovie.reducer
     }
+});
+
+storeBooking.subscribe(() => {
+    const bookingSession = JSON.stringify(storeBooking.getState());
+    sessionStorage.setItem('bookings', bookingSession);
 })
