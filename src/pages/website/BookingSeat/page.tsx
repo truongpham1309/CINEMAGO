@@ -85,7 +85,7 @@ const BookingSeatPage = () => {
 
         const info_movie = {
             movie_title: data.movie_title,
-            show_time: data.show_time,
+            show_time: data.showtime,
             show_date: data.show_date,
             city: data.city,
             screen: data.screen,
