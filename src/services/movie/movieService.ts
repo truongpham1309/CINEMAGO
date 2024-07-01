@@ -69,3 +69,13 @@ export const getAllMovieClient = async (limit: number = 12, page: number = 1) =>
         throw new Error(error);
     }
 }
+
+export const getAllMovieHomePage = async (limit: number = 12, page: number = 1) => {
+    try {
+        const { data } = await axios.get("/client/movie");
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}

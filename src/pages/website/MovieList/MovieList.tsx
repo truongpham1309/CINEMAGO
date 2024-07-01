@@ -1,4 +1,3 @@
-
 import { getAllMovieClient } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
