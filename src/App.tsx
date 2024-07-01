@@ -23,7 +23,7 @@ const App = () => {
   return (
     <>
       <ToastContainer limit={3}/>
-      <LoadingComponent />
+      {/* <LoadingComponent /> */}
       <Router />
     </>
   )
