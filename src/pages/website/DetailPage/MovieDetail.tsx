@@ -33,10 +33,7 @@ const MovieDetail = () => {
   console.log(movies);
   return (
     <>
-      <section
-        className="details-banner bg_img"
-        data-background={Banner03}
-      >
+      <section className="details-banner bg_img" data-background={Banner03}>
         <div className="container">
           <div className="details-banner-wrapper">
             <div className="details-banner-thumb">

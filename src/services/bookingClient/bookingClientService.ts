@@ -19,3 +19,21 @@ export const getSeatMapByIDShowTime = async (id: number) => {
         throw new Error(error);
     }
 }
+
+export const paymentBookingByMOMO = async (booking: any) => {
+    try {
+        const { data } = await axios.post('/client/momo/create', booking);
+        return data;
+    } catch (error: any) {
+        throw error;
+    }
+}
+
+export const paymentBookingConfirm = async (booking: any) => {
+    try {
+        const { data } = await axios.post(`/client/momo/success`, booking);
+        return data;
+    } catch (error: any) {
+        throw error;
+    }
+}

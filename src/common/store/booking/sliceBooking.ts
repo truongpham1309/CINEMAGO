@@ -3,17 +3,16 @@ import { toast } from "react-toastify";
 // import { useLocation } from "react-router-dom";
 
 const currentBooking = JSON.parse(sessionStorage.getItem("bookings")!)?.booking;
-const booking: any = {
-    user_id: 0,
+const booking: any = currentBooking ? currentBooking : {
+    user_id: JSON.parse(localStorage.getItem('user')!).data.id,
     showtime_id: 0,
     seats: [],
     services: [],
     subtotal: 0,
-    url: window.location.host,
-    ...currentBooking,
+    url: 'http://' + window.location.host + "/movie/booking/status",
 }
 
-export const sliceBooking = createSlice({
+export const sliceBooking: any = createSlice({
     name: 'booking',
     initialState: booking,
     reducers: {
@@ -32,7 +31,6 @@ export const sliceBooking = createSlice({
             if (seat) {
                 state.seats = state.seats.filter((_s: any) => _s !== action.payload.id);
                 state.subtotal = +state.subtotal - Number(action.payload.price);
-                console.log(state.seats);
                 return state;
             }
 
@@ -51,8 +49,11 @@ export const sliceBooking = createSlice({
         add_url: (state, action: PayloadAction<any>) => {
             return state.url = action.payload;
         },
-        clean_booking: () => {
-            return {};
+        clean_booking: (state) => {
+            state.showtime_id = 0;
+            state.seats = [];
+            state.services = [];
+            state.subtotal = 0;
         }
     }
 });

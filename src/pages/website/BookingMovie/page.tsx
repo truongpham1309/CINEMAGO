@@ -3,7 +3,7 @@ import { cinema, city, date } from "@/assets/images/ticket";
 import { formatDateString } from "@/common/libs/formatDateToString";
 import { groupShowtimes } from "@/common/libs/formatObjectFillterMovie";
 import { selectorBooking } from "@/common/store/booking/selectorBooking";
-import { add_showtime, add_user_id, delete_showtime } from "@/common/store/booking/sliceBooking";
+import { add_showtime, delete_showtime } from "@/common/store/booking/sliceBooking";
 import { getAllShowTimeByCityAndCinema } from "@/services/bookingClient/bookingClientService";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -124,15 +124,6 @@ const BookingMovieShowTimePage = () => {
                 break;
             case 'OPEN':
                 setIsShow(true);
-                let user = JSON.parse(localStorage.getItem('user')!);
-                if(!user) {
-                    navigate("/login");
-                    break;
-                }
-                console.log(user.data.id);
-                console.log(id);
-                dispatch(add_user_id(user.data.id));
-                // user_id = user.data.id
                 dispatch(add_showtime(id));
                 break;
             case 'CHOOSE-SEATS': 

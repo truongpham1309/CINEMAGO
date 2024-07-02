@@ -49,6 +49,7 @@ import BookingSeat from "@/pages/website/BookingSeat/page"
 import BookingServicePage from "@/pages/website/BookingService/page"
 import CheckOutPage from "@/pages/website/Checkout/page"
 import HomePage from "@/pages/website/homePage/homePage" 
+import CheckoutStatusPage from "@/pages/website/CheckoutStatus/page"
 
 const Router = () => {
   return (
@@ -68,6 +69,7 @@ const Router = () => {
             <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
             <Route path="/movie/booking/services" element={<BookingServicePage />} />
             <Route path="/movie/booking/checkout" element={<CheckOutPage />} />
+            <Route path="/movie/booking/status" element={<CheckoutStatusPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
           {/* <Route path="/movie/booking-seats/test" element={<SeatSelection />} /> */}

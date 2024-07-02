@@ -73,6 +73,7 @@ const BookingSeatPage = () => {
             return;
         }
         else {
+            if(bookingMovie.seats.length === 8) return;
             setChooseSeat([...chooseSeat, rest.seatNumber]);
         }
     }
