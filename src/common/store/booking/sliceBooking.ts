@@ -43,6 +43,16 @@ export const sliceBooking: any = createSlice({
         },
         add_services: (state, action: PayloadAction<any>) => {
             let { id, price, quantity } = action.payload;
+            let _total_quantity: number = state.services.reduce((total: number, service: any) => {
+                return total + parseInt(service.quantity, 10);
+            }, 0);
+
+            if (_total_quantity >= state.seats.length * 3 || (_total_quantity + parseInt(quantity)) > state.seats.length * 3) {
+                toast.error("Bạn chỉ được đặt tối đa 3 dịch vụ cho mỗi ghế đặt!", {
+                    position: "top-center",
+                });
+                return state;
+            }
             let subtotal: number = Number(price * quantity);
             let _service = state.services.find((_s: any) => +_s.id === +id);
             if (_service) {
@@ -66,12 +76,14 @@ export const sliceBooking: any = createSlice({
             }, 0);
 
             if (_total_quantity >= state.seats.length * 3) {
-                toast.error("Bạn chỉ được đặt tối đa 3 dịch vụ cho mỗi ghế đặt!");
+                toast.error("Bạn chỉ được đặt tối đa 3 dịch vụ cho mỗi ghế đặt!", {
+                    position: "top-center",
+                });
                 return state;
             }
             _service.quantity += 1;
-            _service.subtotal += action.payload.price;
-            state.subtotal += action.payload.price;
+            _service.subtotal += parseInt(action.payload.price, 10);
+            state.subtotal += parseInt(action.payload.price, 10);
             return state;
         },
         decrement_service: (state, action: PayloadAction<any>) => {
@@ -87,8 +99,8 @@ export const sliceBooking: any = createSlice({
             if (_service.quantity === 0) {
                 state.services = state.services.filter((s: any) => s.service_id !== _service.service_id)
             }
-            _service.subtotal -= action.payload.price;
-            state.subtotal -= action.payload.price;
+            _service.subtotal -= parseInt(action.payload.price, 10);
+            state.subtotal -= parseInt(action.payload.price, 10);
             return state;
         },
         delete_service: (state, action: PayloadAction<any>) => {
@@ -100,7 +112,7 @@ export const sliceBooking: any = createSlice({
                 return state;
             }
             state.services = state.services.filter((_s: any) => _s.service_id !== _service.service_id);
-            state.subtotal -= _service.subtotal;
+            state.subtotal -= parseInt(_service.subtotal, 10);
             return state;
         },
         add_url: (state, action: PayloadAction<any>) => {

@@ -14,8 +14,8 @@ const CheckOutPage = () => {
     const movie = useSelector(movieSelector);
     const booking = useSelector(selectorBooking);
     const [paymentMethod, setPaymentMethod] = useState<TPaymentMethod>();
-    const price_service = booking.services.length === 0 ? 0 : booking.services.reduce((sum: any, current: any) => sum + current.subtotal);
-    const price_ticket = booking.subtotal + price_service;
+    const price_service: number = booking.services.length === 0 ? 0 : booking.services.reduce((sum: any, current: any) => sum + current.subtotal, 0);
+    const price_ticket = booking.subtotal - price_service;
 
     const { mutate, isPending } = useMutation({
         mutationFn: async (argument: any) => {
@@ -60,16 +60,13 @@ const CheckOutPage = () => {
     }
     return (
         <>
-            {/* ==========Banner-Section========== */}
             <MovieBanner />
-            {/* ==========Page-Title========== */}
-            {/* ==========Movie-Section========== */}
             <div className="movie-facility padding-bottom padding-top">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="booking-summery bg-one">
-                                <h4 className="title">booking</h4>
+                                <h4 className="title">booking summary</h4>
                                 <ul>
                                     <li>
                                         <h6 className="subtitle">{movie.movie_title}</h6>
@@ -129,10 +126,6 @@ const CheckOutPage = () => {
                                         Thanh toán
                                     </button>
                                 </div>
-                                {/* <p className="notice">
-                                    By Clicking "Make Payment" you agree to the{" "}
-                                    <a href="#0">terms and conditions</a>
-                                </p> */}
                             </div>
                         </div>
                     </div>
