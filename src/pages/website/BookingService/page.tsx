@@ -2,18 +2,41 @@ import { formatCurrencyVND } from "@/common/libs/fomatMoneyVND"
 import { formatDate } from "@/common/libs/formatDateToString"
 import { selectorBooking } from "@/common/store/booking/selectorBooking"
 import { movieSelector } from "@/common/store/booking/selectorMovie"
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import MovieBanner from "../_components/Booking/MovieBanner"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import LoadingComponent from "@/components/ui/LoadingComponent"
+import { getAllServiceClient } from "@/services/bookingClient/bookingClientService"
+import { Button, Card, InputNumber, List, Result } from "antd"
+import NotFoundPage from "../404/page"
+import { add_services } from "@/common/store/booking/sliceBooking"
 
 const BookingServicePage = () => {
     const navigate = useNavigate();
     const movie = useSelector(movieSelector);
     const booking = useSelector(selectorBooking);
-    // const [booking, setBookings] = useState(JSON.parse(sessionStorage.getItem('booking')!) || null);
-    // const [infoMovie, _] = useState(JSON.parse(sessionStorage.getItem('info_movie')!) || null);
+    const dispatch = useDispatch();
+    const { data: services, isLoading, isError } = useQuery({
+        queryKey: ['SERVICES'],
+        queryFn: async () => {
+            return await getAllServiceClient();
+        }
+    });
+    const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+    const { } = useMutation({
+        mutationFn: async () => {
+
+        },
+        onSuccess: () => {
+
+        },
+        onError: () => {
+
+        }
+    });
     useEffect(() => {
         if (!booking) {
             toast.error('Mời bạn chọn phim!', {
@@ -28,7 +51,34 @@ const BookingServicePage = () => {
     const handleNavigateCheckout = () => {
         navigate("/movie/booking/checkout");
     }
+    const handleQuantityChange = (id: number, value: number) => {
+        setQuantities((prev) => ({ ...prev, [id]: value }));
+    };
 
+    const handleAddClick = (service: any) => {
+        const quantity = quantities[service.id] || 0;
+        console.log({ id: service.id, price: service.price, quantity });
+        console.log(services)
+        let _service = services.data.find((_s: any) => _s.id === service.id);
+
+        if(!_service) {
+            toast.error("Dịch vụ không tồn tại!", {
+                position: "top-center"
+            });
+            return;
+        }
+
+        if(quantity > _service.quantity) {
+            toast.error("Số lượng vượt quá số lượng dịch vụ của cửa hàng!", {
+                position: "top-center"
+            });
+            return;
+        }
+        dispatch(add_services({ id: service.id, price: service.price, quantity }))
+        setQuantities((prev) => ({ ...prev, [service.id]: 0 }));
+    };
+    if (isLoading) return <LoadingComponent />
+    if (isError) return <NotFoundPage />
     return (
         <>
             <MovieBanner />
@@ -40,140 +90,49 @@ const BookingServicePage = () => {
                                 <h2 className="title">we have food</h2>
                             </div>
                             <div className="grid--area">
-                                <div className="grid-area">
-                                    <div className="grid-item combos popcorn">
-                                        <div className="grid-inner">
-                                            <div className="grid-thumb">
-                                                <img
-                                                    src="/src/assets/images/movie/popcorn/pop1.png"
-                                                    alt="movie/popcorn"
-                                                />
-                                                <div className="offer-tag">$57</div>
-                                                <div className="offer-remainder">
-                                                    <h6 className="o-title mt-0">24%</h6>
-                                                    <span>off</span>
-                                                </div>
-                                            </div>
-                                            <div className="grid-content">
-                                                <h5 className="subtitle">
-                                                    <a href="#0">Muchaco, Crispy Taco, Bean Burrito</a>
-                                                </h5>
-                                                <form className="cart-button">
-                                                    <div className="cart-plus-minus">
-                                                        <input
-                                                            className="cart-plus-minus-box"
-                                                            type="text"
-                                                            name="qtybutton"
-                                                            defaultValue={2}
-                                                        />
-                                                    </div>
-                                                    <button type="submit" className="custom-button">
-                                                        add
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="grid-item bevarage">
-                                        <div className="grid-inner">
-                                            <div className="grid-thumb">
-                                                <img
-                                                    src="/src/assets/images/movie/popcorn/pop2.png"
-                                                    alt="movie/popcorn"
-                                                />
-                                                <div className="offer-tag">$57</div>
-                                                <div className="offer-remainder">
-                                                    <h6 className="o-title mt-0">24%</h6>
-                                                    <span>off</span>
-                                                </div>
-                                            </div>
-                                            <div className="grid-content">
-                                                <h5 className="subtitle">
-                                                    <a href="#0">Crispy Beef Taco, Beef Mucho Nachos</a>
-                                                </h5>
-                                                <form className="cart-button">
-                                                    <div className="cart-plus-minus">
-                                                        <input
-                                                            className="cart-plus-minus-box"
-                                                            type="text"
-                                                            name="qtybutton"
-                                                            defaultValue={2}
-                                                        />
-                                                    </div>
-                                                    <button type="submit" className="custom-button">
-                                                        add
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="grid-item combos">
-                                        <div className="grid-inner">
-                                            <div className="grid-thumb">
-                                                <img
-                                                    src="/src/assets/images/movie/popcorn/pop3.png"
-                                                    alt="movie/popcorn"
-                                                />
-                                                <div className="offer-tag">$57</div>
-                                                <div className="offer-remainder">
-                                                    <h6 className="o-title mt-0">24%</h6>
-                                                    <span>off</span>
-                                                </div>
-                                            </div>
-                                            <div className="grid-content">
-                                                <h5 className="subtitle">
-                                                    <a href="#0">Chicken Quesadilla Crispy Beef Taco</a>
-                                                </h5>
-                                                <form className="cart-button">
-                                                    <div className="cart-plus-minus">
-                                                        <input
-                                                            className="cart-plus-minus-box"
-                                                            type="text"
-                                                            name="qtybutton"
-                                                            defaultValue={2}
-                                                        />
-                                                    </div>
-                                                    <button type="submit" className="custom-button">
-                                                        add
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="grid-item bevarage popcorn">
-                                        <div className="grid-inner">
-                                            <div className="grid-thumb">
-                                                <img
-                                                    src="/src/assets/images/movie/popcorn/pop4.png"
-                                                    alt="movie/popcorn"
-                                                />
-                                                <div className="offer-tag">$57</div>
-                                                <div className="offer-remainder">
-                                                    <h6 className="o-title mt-0">24%</h6>
-                                                    <span>off</span>
-                                                </div>
-                                            </div>
-                                            <div className="grid-content">
-                                                <h5 className="subtitle">
-                                                    <a href="#0">MexiDips &amp; Chips, Beef Muchaco</a>
-                                                </h5>
-                                                <form className="cart-button">
-                                                    <div className="cart-plus-minus">
-                                                        <input
-                                                            className="cart-plus-minus-box"
-                                                            type="text"
-                                                            name="qtybutton"
-                                                            defaultValue={2}
-                                                        />
-                                                    </div>
-                                                    <button type="submit" className="custom-button">
-                                                        add
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {services.data.length === 0 ? (
+                                    <Result
+                                        status='404'
+                                        title={<span className="custom-title">Rạp hiện chưa có dịch vụ nào!</span>}
+                                        subTitle={<>
+                                            <span className="custom-subtitle">
+                                                Có lỗi xảy ra trong quá trình thanh toán. Vui lòng thử lại sau.
+                                            </span>
+                                        </>}
+                                    />
+                                ) : (
+                                    <List
+                                        grid={{ gutter: 16, column: 3 }}
+                                        dataSource={services.data}
+
+                                        renderItem={(service: any) => (
+                                            <List.Item style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}>
+                                                <Card
+                                                    title={service.name}
+                                                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
+                                                    actions={[
+                                                        <Button
+                                                            type="primary"
+                                                            onClick={() => handleAddClick(service)}
+                                                        >
+                                                            Add
+                                                        </Button>,
+                                                    ]}
+                                                >
+                                                    <p>Price: {formatCurrencyVND(service.price.slice(0, -3))}</p>
+                                                    <InputNumber
+                                                        min={0}
+                                                        type="number"
+                                                        max={service.quantity}
+                                                        value={quantities[service.id] || 0}
+                                                        onChange={(value) => handleQuantityChange(service.id, value)}
+                                                    />
+                                                    <span>Còn: {service.quantity}</span>
+                                                </Card>
+                                            </List.Item>
+                                        )}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="col-lg-4">

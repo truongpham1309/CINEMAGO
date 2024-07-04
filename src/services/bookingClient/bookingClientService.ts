@@ -37,3 +37,12 @@ export const paymentBookingConfirm = async (booking: any) => {
         throw error;
     }
 }
+
+export const getAllServiceClient = async () => {
+    try {
+        const { data } = await axios.get('/service');
+        return data
+    } catch (error) {
+        throw error
+    }
+}
