@@ -2,14 +2,19 @@ import { SeatPlan } from "@/assets/images/movie";
 import { cinema, city, date } from "@/assets/images/ticket";
 import { formatDateString } from "@/common/libs/formatDateToString";
 import { groupShowtimes } from "@/common/libs/formatObjectFillterMovie";
+import { selectorBooking } from "@/common/store/booking/selectorBooking";
+import { add_showtime, delete_showtime } from "@/common/store/booking/sliceBooking";
 import { getAllShowTimeByCityAndCinema } from "@/services/bookingClient/bookingClientService";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const BookingMovieShowTimePage = () => {
     const { id: idMovie } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const booking = useSelector(selectorBooking);
     const [filterMovie, setFilterMovie] = useState([] as any[]);
     const [isShow, setIsShow] = useState(false);
     const [properties, setProperties] = useState<any>({
@@ -23,7 +28,7 @@ const BookingMovieShowTimePage = () => {
         city: '',
         date: '',
         cinema: '',
-    })
+    });
 
     useEffect(() => {
         (async () => {
@@ -114,25 +119,15 @@ const BookingMovieShowTimePage = () => {
     const handleChooseBookingShowTimes = ({ type, id }: { type: 'CLOSE' | 'OPEN' | 'CHOOSE-SEATS', id?: any }) => {
         switch (type) {
             case 'CLOSE':
+                dispatch(delete_showtime());
                 setIsShow(false);
                 break;
             case 'OPEN':
                 setIsShow(true);
-                let user = JSON.parse(localStorage.getItem('user')!);
-                // user_id = user.data.id
-                let booking = JSON.stringify({
-                    showtime_id: id,
-                    user_id: user.data.id,
-                    seats:[],
-                    service: [],
-                    subtotal: 0,
-                });
-                sessionStorage.setItem('booking', booking);
+                dispatch(add_showtime(id));
                 break;
             case 'CHOOSE-SEATS': 
-                let current_booking = JSON.parse(sessionStorage.getItem('booking')!);
-                // showtime_id = current_booking.showtime_id;
-                navigate(`/movie/booking-seats/${current_booking.showtime_id}`);
+                navigate(`/movie/booking-seats/${booking.showtime_id}`);
                 break;
             default: toast.warning('Thao tác không hợp lệ!');
         }

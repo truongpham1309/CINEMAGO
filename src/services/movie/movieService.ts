@@ -41,13 +41,13 @@ export const updateMovieByID = async (movie: TMovie) => {
 }
 
 export const getDetailMovieByID = async (id: number) => {
-  try {
-    const {data} = await axios.get(`/dashboard/movie/${id}`);
-    return data
-  } catch (error: any) {
-    console.log(error);
-    throw new Error(error);
-  }
+    try {
+        const { data } = await axios.get(`/dashboard/movie/${id}`);
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
 };
 
 export const getDetailMovieClient = async (id: number) => {
@@ -63,6 +63,16 @@ export const getDetailMovieClient = async (id: number) => {
 export const getAllMovieClient = async (limit: number = 12, page: number = 1) => {
     try {
         const { data } = await axios.get("/client/movie?limit=limit&page=page");
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const getAllMovieHomePage = async (status: number = 0, limit: number = 12, page: number = 1) => {
+    try {
+        const { data } = await axios.get(`/client/movie?status=${status}`);
         return data
     } catch (error: any) {
         console.log(error);
