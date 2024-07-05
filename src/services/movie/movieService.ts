@@ -70,9 +70,9 @@ export const getAllMovieClient = async (limit: number = 12, page: number = 1) =>
     }
 }
 
-export const getAllMovieHomePage = async (limit: number = 12, page: number = 1) => {
+export const getAllMovieHomePage = async (status:number=0,limit: number = 12, page: number = 1) => {
     try {
-        const { data } = await axios.get("/client/movie");
+        const { data } = await axios.post("/client/movie",{status:status});
         return data
     } catch (error: any) {
         console.log(error);
