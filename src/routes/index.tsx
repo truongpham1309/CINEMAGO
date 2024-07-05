@@ -47,7 +47,7 @@ import ProfilePage from './../pages/website/Profile/page';
 import MovieDetailPage from "@/pages/dashboard/Movies/detail/page"
 import BookingSeat from "@/pages/website/BookingSeat/page"
 import SeatSelection from "@/pages/website/BookingSeat/SelectSeat"
-import HomePage from "@/pages/website/homePage/homePage" 
+import HomePage from "@/pages/website/homePage/HomePage" 
 
 const Router = () => {
   return (
