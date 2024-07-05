@@ -1,0 +1,10 @@
+.custom-result {
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.custom-title,
+.custom-subtitle {
+  color: white;
+}

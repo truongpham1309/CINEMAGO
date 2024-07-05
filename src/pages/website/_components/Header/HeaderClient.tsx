@@ -4,7 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const HeaderClient = () => {
   const location = useLocation();
-  console.log(location);
   const [pathName, setPathName] = useState("/");
   useEffect(() => {
     setPathName(location.pathname);

@@ -2026,7 +2026,7 @@ input[type="submit"] {
 
 /*Details-Banner Section Starts Here*/
 .details-banner {
-  padding-top: 235px;
+  padding-top: 200px;
   padding-bottom: 20px;
   position: relative;
 }
@@ -2865,8 +2865,8 @@ input[type="submit"] {
 }
 
 .widget-1.widget-check .form-group input {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   opacity: 0;
   z-index: -9;
 }
@@ -4566,6 +4566,11 @@ input[type="submit"] {
   border: none;
 }
 
+.seat-visible {
+  visibility: hidden;
+  /* width: 30px; */
+}
+
 .seat-plan-wrapper li .movie-name {
   padding: 30px;
   -webkit-box-pack: justify;
@@ -4893,6 +4898,10 @@ input[type="submit"] {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0;
+}
+
+.seat-area .seat-line.empty {
+  height: 40px;
 }
 
 .seat-area .seat-line>span {

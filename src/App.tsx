@@ -10,6 +10,7 @@ import "./styles/nice-select.css";
 import "./styles/jquery.animatedheadline.css";
 import "./styles/main.css"
 import Router from "@/routes";
+import 'react-modal-video/css/modal-video.min.css';
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
@@ -18,9 +19,11 @@ import { configAxiosUse } from "./configs/service";
 configAxiosUse();
 
 const App = () => {
+
+  // useUnload();
   return (
     <>
-      <ToastContainer limit={3}/>
+      <ToastContainer limit={3} autoClose={1000}/>
       {/* <LoadingComponent /> */}
       <Router />
     </>

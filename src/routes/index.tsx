@@ -46,8 +46,10 @@ import BookingMovieShowTimePage from "@/pages/website/BookingMovie/page"
 import ProfilePage from './../pages/website/Profile/page';
 import MovieDetailPage from "@/pages/dashboard/Movies/detail/page"
 import BookingSeat from "@/pages/website/BookingSeat/page"
-import SeatSelection from "@/pages/website/BookingSeat/SelectSeat"
-import HomePage from "@/pages/website/homePage/HomePage" 
+import BookingServicePage from "@/pages/website/BookingService/page"
+import CheckOutPage from "@/pages/website/Checkout/page"
+import CheckoutStatusPage from "@/pages/website/CheckoutStatus/page"
+import HomePage from "@/pages/website/HomePage/page"
 
 const Router = () => {
   return (
@@ -57,17 +59,20 @@ const Router = () => {
           <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
           <Route path="/login" element={<PrivateRouterLogin><SignInPage /></PrivateRouterLogin>} />
 
-          
+
           <Route path="/" element={<LayoutClient />}>
             {/* Các router website */}
-            <Route path="/" element={<HomePage/>} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/movie" element={<MovieList />} />
             <Route path="/movie/detail/:id" element={<MovieDetail />} />
             <Route path="/movie/booking-movie/:id" element={<BookingMovieShowTimePage />} />
             <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
+            <Route path="/movie/booking/services" element={<BookingServicePage />} />
+            <Route path="/movie/booking/checkout" element={<CheckOutPage />} />
+            <Route path="/movie/booking/status" element={<CheckoutStatusPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
-            <Route path="/movie/booking-seats/test" element={<SeatSelection />} />
+          {/* <Route path="/movie/booking-seats/test" element={<SeatSelection />} /> */}
 
           {/* DashBoard */}
           <Route path="dashboard" element={<LayoutDashBoard />}>
