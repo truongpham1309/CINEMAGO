@@ -8,7 +8,7 @@ const booking: any = currentBooking ? currentBooking : {
     seats: [],
     services: [],
     subtotal: 0,
-    url: 'http://' + window.location.host + "/movie/booking/status",
+    url: 'http://' + window.location.host + '/movie/booking/status',
 }
 
 export const sliceBooking: any = createSlice({

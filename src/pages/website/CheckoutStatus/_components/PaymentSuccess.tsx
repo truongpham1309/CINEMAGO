@@ -14,7 +14,7 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
         const countdownInterval = setInterval(() => {
             if (countdown <= 0) {
                 clearInterval(countdownInterval);
-                if (type === "QUESTIONS") {
+                if (type === "QUESTIONS" || type === "SUCCESS") {
                     dispatch(clean_booking());
                     dispatch(delete_info_movie());
                 }

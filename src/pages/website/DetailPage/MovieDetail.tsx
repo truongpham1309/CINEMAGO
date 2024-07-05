@@ -1,8 +1,12 @@
 import { Banner03 } from "@/assets/images/banner";
 import { VideoButton } from "@/assets/images/movie";
+import LoadingComponent from "@/components/ui/LoadingComponent";
 import { getDetailMovieClient } from "@/services/movie/movieService";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import ModalVideo from 'react-modal-video';
 import { Link, useParams } from "react-router-dom";
+import NotFoundPage from "../404/page";
 
 interface Movie {
   id: number;
@@ -17,20 +21,26 @@ interface Movie {
   duration: number;
   status: string;
   description: string;
-  // Add other relevant properties
 }
 
-const MovieDetail = () => {
-  const [movies, setMovies] = useState<Movie>();
-  const { id } = useParams();
+const extractVideoId = (url: string) => {
+  const urlObj = new URL(url);
+  return urlObj.searchParams.get('si');
+};
 
-  useEffect(() => {
-    (async () => {
+const MovieDetail = () => {
+  const { id } = useParams();
+  const [showTrailer, setShowTrailer] = useState(false);
+
+  const { data: movies, isLoading, isError } = useQuery({
+    queryKey: ['MOVIES', id],
+    queryFn: async () => {
       const data = await getDetailMovieClient(+id!);
-      setMovies(data.data.movie);
-    })();
-  }, [id]);
-  console.log(movies);
+      return data.data.movie as Movie;
+    }
+  });
+  if (isLoading) return <LoadingComponent />;
+  if (isError) return <NotFoundPage />;
   return (
     <>
       <section className="details-banner bg_img" data-background={Banner03}>
@@ -38,21 +48,19 @@ const MovieDetail = () => {
           <div className="details-banner-wrapper">
             <div className="details-banner-thumb">
               <img src={movies?.image} alt="movie" />
-              <Link
-                to={movies?.trailer!}
-                className="video-popup"
-              >
+              <span onClick={() => setShowTrailer(true)} className="video-popup">
                 <img src={VideoButton} alt="movie" />
-              </Link>
+              </span>
             </div>
+            <ModalVideo channel='youtube' isOpen={showTrailer} videoId={extractVideoId(movies?.trailer || "")} onClose={() => setShowTrailer(false)} />
             <div className="details-banner-content offset-lg-3">
               <h3 className="title fw-bold text-uppercase">{movies?.title}</h3>
               <div className="tags">
                 <span>Tiếng Việt phụ đề Tiếng Anh</span>
               </div>
-              <a href="#0" className="button">
+              <Link to="#0" className="button">
                 {movies?.genre}
-              </a>
+              </Link>
               <div className="social-and-duration">
                 <div className="duration-area">
                   <div className="item">
@@ -75,11 +83,9 @@ const MovieDetail = () => {
           <div className="book-wrapper offset-lg-3">
             <div className="left-side">
               <div className="item">
-
                 <p>tomatometer</p>
               </div>
               <div className="item">
-
                 <p>audience Score</p>
               </div>
             </div>
@@ -97,15 +103,15 @@ const MovieDetail = () => {
           <div className="row justify-content-center mb--50">
             <div className="col-lg-3 col-sm-10 col-md-6 mb-50">
               <div className="widget-1 widget-tags">
-                <ul>
+                <ul className="mt-4">
                   <li>
-                    <a href="#0">2D</a>
+                    <a>2D</a>
                   </li>
                   <li>
-                    <a href="#0">imax 2D</a>
+                    <a>imax 2D</a>
                   </li>
                   <li>
-                    <a href="#0">4DX</a>
+                    <a>4DX</a>
                   </li>
                 </ul>
               </div>

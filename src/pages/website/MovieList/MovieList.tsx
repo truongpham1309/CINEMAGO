@@ -1,55 +1,54 @@
+import { Movie } from "@/common/types/client/movie";
 import { getAllMovieClient } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-interface Movie {
-  id: number;
-  title: string;
-  genre: string;
-  release_date: string;
-  trailer: string;
-  director: string;
-  image: string;
-  rated: number;
-  actor: string;
-  duration: number;
-  status: string;
-  description: string;
-  // Add other relevant properties
-}
-
 const MovieList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [filterMovies, setFilterMovies] = useState<Movie[]>([]);
+  const [filterMovies, setFilterMovies] = useState<number[]>([]);
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [genreFilter, setGenreFilter] = useState<string>("all");
+  const [genreFilter, setGenreFilter] = useState<string[]>([]);
 
-  // const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     (async () => {
       const data = await getAllMovieClient();
       setMovies(data.data.movie);
-      setFilterMovies(data.data.movie);
+      setFilterMovies(data.data.movie.map((movie: any) => movie.id));
     })();
   }, []);
 
   const handleFilterChange = (status: string, genre: string) => {
-    setStatusFilter(status);
-    setGenreFilter(genre);
+    if (statusFilter !== status) setStatusFilter(status);
+    let _newGenre = [...genreFilter];
 
-    let filtered = movies;
-    if (status !== "all") {
-      filtered = filtered.filter((movie) => movie.status === status);
+    if (genre !== "") {
+      if (!genreFilter.includes(genre)) {
+        _newGenre = [...genreFilter, genre];
+      }
+      else {
+        _newGenre = genreFilter.filter(_g => _g !== genre);
+      }
+      setGenreFilter(_newGenre);
     }
-    if (genre !== "all") {
-      filtered = filtered.filter((movie) => movie.genre.includes(genre));
+    let filtered = movies.map(_m => _m.id);
+    if (status !== "all") {
+      filtered = movies.filter(movie => movie.status === status).map(movie => movie.id);
+    }
+
+    if (_newGenre.length > 0 ) {
+      let currentMovieId: number[] = [];
+      for (let _gen of _newGenre) {
+        let _movieid = movies.filter(_m => _m.genre.includes(_gen)).map(__m => __m.id);
+        currentMovieId = [...currentMovieId, ..._movieid];
+      }
+      filtered = [...new Set(currentMovieId)];
     }
     setFilterMovies(filtered);
   };
 
   const handleStatusFilterChange = (status: string) => {
-    handleFilterChange(status, genreFilter);
+    handleFilterChange(status, "");
   };
 
   const handleGenreFilterChange = (genre: string) => {
@@ -82,12 +81,12 @@ const MovieList = () => {
             <div className="col-sm-10 col-md-8 col-lg-3">
               <div className="widget-1 widget-check">
                 <div className="widget-1-body">
-                  <h6 className="subtitle">Language</h6>
+                  <h6 className="subtitle">Thể loại</h6>
                   <div className="check-area">
                     {genres.map((g, i) => (
-                      <div onClick={() => handleGenreFilterChange(g)} key={i} className="form-group">
-                        <input type="checkbox" name="lang" id={g} />
-                        <label htmlFor="lang1">{g}</label>
+                      <div onClick={() => handleGenreFilterChange(g)} key={i} className="form-group m-0">
+                        <input type="checkbox" name="lang" checked={genreFilter.includes(g)} id={g} />
+                        <label className="pt-1" htmlFor="lang1">{g}</label>
                       </div>
                     ))}
                   </div>
@@ -139,7 +138,7 @@ const MovieList = () => {
                               }
                               className="option focus"
                             >
-                              Now Show
+                              Currently Showing
                             </li>
                           </ul>
                         </div>
@@ -158,34 +157,37 @@ const MovieList = () => {
                 <div className="tab-area">
                   <div className="tab-item active">
                     <div className="row mb-10 justify-content-center">
-                      {filterMovies.map((movie, index) => (
-                        <div key={index} className="col-sm-6 col-lg-4">
-                          <div className="movie-grid">
-                            <div className="movie-thumb c-thumb">
-                              <Link to={`/movie/detail/${movie.id}`}>
-                                <img src={movie.image} alt="movie" />
-                              </Link>
-                            </div>
-                            <div className="movie-content bg-one">
-                              <h5 className="title m-0">
+                      {filterMovies.map((movieid, index) => {
+                        let movie = movies.find((movie) => movie.id === movieid);
+                        return movie ? (
+                          <div key={index} className="col-sm-6 col-lg-4">
+                            <div className="movie-grid">
+                              <div className="movie-thumb c-thumb">
                                 <Link to={`/movie/detail/${movie.id}`}>
-                                  {movie.title}
+                                  <img src={movie.image} alt="movie" />
                                 </Link>
-                              </h5>
-                              <ul className="movie-rating-percent">
-                                <li>
-                                  <span className="content">{movie.genre}</span>
-                                </li>
-                                <li>
-                                  <span className="content">
-                                    {movie.duration} phút
-                                  </span>
-                                </li>
-                              </ul>
+                              </div>
+                              <div className="movie-content bg-one">
+                                <h5 className="title m-0">
+                                  <Link to={`/movie/detail/${movie.id}`}>
+                                    {movie.title}
+                                  </Link>
+                                </h5>
+                                <ul className="movie-rating-percent">
+                                  <li>
+                                    <span className="content">{movie.genre}</span>
+                                  </li>
+                                  <li>
+                                    <span className="content">
+                                      {movie.duration} phút
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ) : null;
+                      })}
                     </div>
                   </div>
                 </div>

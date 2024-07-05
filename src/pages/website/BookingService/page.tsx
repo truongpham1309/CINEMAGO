@@ -2,7 +2,7 @@ import { formatCurrencyVND } from "@/common/libs/fomatMoneyVND"
 import { formatDate } from "@/common/libs/formatDateToString"
 import { selectorBooking } from "@/common/store/booking/selectorBooking"
 import { movieSelector } from "@/common/store/booking/selectorMovie"
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -12,7 +12,7 @@ import LoadingComponent from "@/components/ui/LoadingComponent"
 import { getAllServiceClient, paymentBookingByMOMO } from "@/services/bookingClient/bookingClientService"
 import { Button, Card, InputNumber, List, Result, Space } from "antd"
 import NotFoundPage from "../404/page"
-import { add_services, decrement_service, delete_service, increment_service } from "@/common/store/booking/sliceBooking"
+import { add_services, clean_booking, decrement_service, delete_service, increment_service } from "@/common/store/booking/sliceBooking"
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons"
 import { TPaymentMethod } from "@/common/types/booking"
 
@@ -29,31 +29,18 @@ const BookingServicePage = () => {
         }
     });
     const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
-    const { } = useMutation({
-        mutationFn: async () => {
-
-        },
-        onSuccess: () => {
-
-        },
-        onError: () => {
-
-        }
-    });
     useEffect(() => {
-        if (!booking) {
+        if (!booking || !movie) {
             toast.error('Mời bạn chọn phim!', {
                 position: 'top-center'
             });
+            dispatch(clean_booking());
             sessionStorage.clear();
             navigate('/movie');
             return;
         }
     }, []);
-
-    const handleNavigateCheckout = () => {
-        navigate("/movie/booking/checkout");
-    }
+    
     const handleQuantityChange = (id: number, value: number) => {
         setQuantities((prev) => ({ ...prev, [id]: value }));
     };
@@ -95,14 +82,15 @@ const BookingServicePage = () => {
         const serviceDetails = services.data.find((service: any) => service.id === serviceId);
         return serviceDetails;
     };
+
     const price_service: number = booking.services.length === 0 ? 0 : booking.services.reduce((sum: any, current: any) => sum + current.subtotal, 0);
-    const price_ticket = booking.subtotal - price_service;
+    const price_ticket: number = booking.subtotal - price_service;
 
     const { mutate, isPending } = useMutation({
         mutationFn: async (argument: any) => {
             switch (paymentMethod) {
                 case "VN_PAY":
-                    toast.warning("Chức năng chưa phát triển!", {
+                    toast.warning("Phương thức thanh toán đang phát triển!", {
                         position: 'top-center'
                     });
                     break;
@@ -126,7 +114,7 @@ const BookingServicePage = () => {
         onError: () => {
             toast.error("Thất bại! Vui lòng thử lại...");
         }
-    })
+    });
 
     const handlePaymentTicket = () => {
         if (!paymentMethod) {
@@ -197,7 +185,6 @@ const BookingServicePage = () => {
                                 )}
                             </div>
                             <div className="grid--area">
-                                
                                 <Space direction="vertical" size="middle" className="text-white p-3 row" style={{ background: "#032055" }}>
                                     {booking.services.map((service: any) => {
                                         const serviceDetails = renderServiceDetails(service.service_id);
@@ -211,7 +198,7 @@ const BookingServicePage = () => {
                                                     </div>
                                                     <Space>
                                                         <Button type="primary" onClick={() => handleIncrement(service.service_id, serviceDetails.price)} icon={<PlusOutlined />} />
-                                                        <InputNumber className="text-center d-flex align-items-center" style={{height: 35, width: 50}} value={service.quantity} readOnly />
+                                                        <InputNumber className="text-center d-flex align-items-center" style={{ height: 35, width: 50 }} value={service.quantity} readOnly />
                                                         <Button type="primary" onClick={() => handleDecrement(service.service_id, serviceDetails.price)} icon={<MinusOutlined />} />
                                                         <Button type="primary" onClick={() => handleRemove(service.service_id)} icon={<DeleteOutlined />} danger />
                                                     </Space>
@@ -224,57 +211,59 @@ const BookingServicePage = () => {
                         </div>
                         <div className="col-lg-4">
                             <div className="booking-summery bg-one">
-                                <h4 className="title">booking</h4>
+                                <h4 className="title">booking summary</h4>
                                 <ul>
                                     <li>
                                         <h6 className="subtitle">{movie?.movie_title}</h6>
-                                        <span className="info">{movie.cinema_name} - {movie.screen}</span>
+                                        <span className="info">{movie?.cinema_name} - {movie?.screen}</span>
                                     </li>
                                     <li>
                                         <h6 className="subtitle">
-                                            <span>{movie.city}</span>
+                                            <span>{movie?.city}</span>
                                             <span>{booking.seats.length}</span>
                                         </h6>
                                         <div className="info">
-                                            <span>{formatDate(movie.show_date)}, {movie.show_time.slice(-3, 0)}</span> <span>Tickets</span>
+                                            <span>{formatDate(movie?.show_date)}, {movie?.show_time.slice(-3, 0)}</span> <span>Tickets</span>
                                         </div>
                                     </li>
                                     <li>
                                         <h6 className="subtitle mb-0">
                                             <span>Giá vé</span>
-                                            <span>{formatCurrencyVND(booking.subtotal) || 0}</span>
+                                            <span>{formatCurrencyVND(price_ticket) || 0}</span>
                                         </h6>
                                     </li>
                                 </ul>
-                                {/* <ul className="side-shape">
+                                <ul className="side-shape">
+                                    {booking.services.map((service: any) => {
+                                        const _service = services.data.find((_s: any) => _s.id === service.service_id);
+                                        return (
+                                            <Fragment key={service.service_id}>
+                                                <li>
+                                                    <h6 className="subtitle">
+                                                        <span>{_service.name}</span>
+                                                        <span>{formatCurrencyVND(service.subtotal)}</span>
+                                                    </h6>
+                                                    <div className="info">
+                                                        <span>Số lượng</span>
+                                                        <span>{service.quantity}</span>
+                                                    </div>
+                                                </li>
+                                            </Fragment>
+                                        )
+                                    })}
                                     <li>
-                                        <h6 className="subtitle">
-                                            <span>combos</span>
-                                            <span>$57</span>
+                                        <h6 className="subtitle mb-0">
+                                            <span>Giá dịch vụ</span>
+                                            <span>{formatCurrencyVND(price_service) || 0}</span>
                                         </h6>
                                     </li>
-                                </ul> */}
-                                {/* <ul>
-                                    <li>
-                                        <span className="info">
-                                            <span>giá</span>
-                                            <span>$207</span>
-                                        </span>
-                                        <span className="info">
-                                            <span>vat</span>
-                                            <span>$15</span>
-                                        </span>
-                                    </li>
-                                </ul> */}
+                                </ul>
                             </div>
                             <div className="proceed-area text-center">
                                 <h6 className="subtitle">
                                     <span>Phải thanh toán</span>
                                     <span>{formatCurrencyVND(booking.subtotal) || 0}</span>
                                 </h6>
-                                <span onClick={handleNavigateCheckout} className="custom-button back-button">
-                                    Tiếp tục
-                                </span>
                             </div>
                             <div className="note text-white">
                                 <h5 className="title">Chú ý :</h5>

@@ -79,7 +79,6 @@ const CheckoutStatusPage = () => {
             <div className="col-12">
               <PaymentSuccess type={status} />
             </div>
-
           </div>
         </div>
       </section>

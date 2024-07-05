@@ -16,6 +16,7 @@ import { add_info_movie } from "@/common/store/booking/sliceMovie";
 import { selectorBooking } from "@/common/store/booking/selectorBooking";
 import { add_seats } from "@/common/store/booking/sliceBooking";
 import MovieBanner from "../_components/Booking/MovieBanner";
+import { validateSeatSelection } from "./libs/checkSeat";
 
 
 const items = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"];
@@ -38,7 +39,6 @@ const BookingSeatPage = () => {
         queryKey: ['SEATS_MAP', id],
         queryFn: async () => {
             const { data } = await getSeatMapByIDShowTime(+id!);
-            
             return data;
         }
     });
@@ -73,7 +73,7 @@ const BookingSeatPage = () => {
             return;
         }
         else {
-            if(bookingMovie.seats.length === 8) return;
+            if (bookingMovie.seats.length === 8) return;
             setChooseSeat([...chooseSeat, rest.seatNumber]);
         }
     }
@@ -88,7 +88,8 @@ const BookingSeatPage = () => {
             });
             return;
         }
-        navigate('/movie/booking/services');
+        const checkSeatEmptyMiddle = validateSeatSelection(data.seats, bookingMovie.seats);
+        if(checkSeatEmptyMiddle) navigate('/movie/booking/services');
     }
     if (isLoading) return <LoadingComponent />;
     if (isError) return <NotFoundPage />;

@@ -2865,8 +2865,8 @@ input[type="submit"] {
 }
 
 .widget-1.widget-check .form-group input {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   opacity: 0;
   z-index: -9;
 }

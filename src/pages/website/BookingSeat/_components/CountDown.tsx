@@ -8,7 +8,7 @@ import { delete_info_movie } from '@/common/store/booking/sliceMovie';
 
 const CountDown = () => {
     const navigate = useNavigate();
-    const [countDown, setCountDown] = useState(5 * 60); // 5 minutes in seconds
+    const [countDown, setCountDown] = useState(10 * 60); // 5 minutes in seconds
     const dispatch = useDispatch();
 
     useEffect(() => {

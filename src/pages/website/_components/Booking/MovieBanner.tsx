@@ -2,15 +2,26 @@ import { formatDate } from "@/common/libs/formatDateToString"
 import { useNavigate } from "react-router-dom"
 import CountDown from "../../BookingSeat/_components/CountDown"
 import { Banner04 } from "@/assets/images/banner"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { movieSelector } from "@/common/store/booking/selectorMovie"
+import { useEffect } from "react"
+import { clean_booking } from "@/common/store/booking/sliceBooking"
+import { delete_info_movie } from "@/common/store/booking/sliceMovie"
 
 const MovieBanner = () => {
     const navigate = useNavigate();
     const movie = useSelector(movieSelector);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (!movie) {
+            dispatch(clean_booking());
+            dispatch(delete_info_movie());
+            navigate('/movie');
+        }
+    }, [movie]);
     const handleBackPage = () => {
         navigate(-1);
-    }   
+    }
     return (
         <>
             <section
