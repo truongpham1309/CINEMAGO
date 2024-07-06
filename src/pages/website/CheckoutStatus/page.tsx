@@ -52,11 +52,10 @@ const CheckoutStatusPage = () => {
   useEffect(() => {
     if(resultCode === "0") setStatus("SUCCESS");
     if(resultCode === "1006") setStatus("FAILD");
-
-    if(['0', '1006'].includes(resultCode)) {
-      mutate();
-    }
   }, [location]);
+  if(['0', '1006'].includes(resultCode)) {
+    mutate();
+  }
   if (isPending) return <LoadingComponent />
   return (
     <>
