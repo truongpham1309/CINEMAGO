@@ -131,7 +131,7 @@ const LayoutDashBoard = () => {
                   <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                     Quản trị viên
                   </span>
-                  <img className="img-profile rounded-circle" src="" />
+                  <i className="fas fa-user-tie"></i>
                 </a>
                 <div
                   className="dropdown-menu dropdown-menu-right shadow animated--grow-in"

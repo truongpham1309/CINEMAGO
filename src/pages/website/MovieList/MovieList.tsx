@@ -61,7 +61,7 @@ const MovieList = () => {
       <section className="banner-section">
         <div
           className="banner-bg bg_img bg-fixed"
-          data-background="assets/images/banner/banner02.jpg"
+          data-background="/src/assets/images/banner/banner02.jpg"
         />
         <div className="container">
           <div className="banner-content">

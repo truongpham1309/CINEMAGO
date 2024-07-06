@@ -33,7 +33,7 @@ const BookingMovieShowTimePage = () => {
     useEffect(() => {
         (async () => {
             const data = await getAllShowTimeByCityAndCinema(+idMovie!);
-            setFilter({ ...filter, movie_title: data.data.movies[0].movie_name })
+            setFilter({ ...filter, movie_title: data.data.movies[0].movie_name });
             setFilterMovie(groupShowtimes(data.data.movies));
         })();
         if (!filterMovie) {
