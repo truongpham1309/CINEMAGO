@@ -5,8 +5,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Table, TableProps } from "antd";
 import { Link } from "react-router-dom";
 import ServerError from "../../_components/500";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
+import { DeleteFilled, DeleteOutlined, EditFilled, EditOutlined, ExclamationCircleFilled, InfoCircleTwoTone } from "@ant-design/icons"
 import { toast } from "react-toastify";
+import confirm from "antd/es/modal/confirm";
 
 const SeatTypeListPage = () => {
     const queryClient = useQueryClient();
@@ -14,17 +15,12 @@ const SeatTypeListPage = () => {
         {
             title: "#",
             key: "index",
-            render: (record, text, index) => index + 1
+            render: (_, __, index) => index + 1
         },
         {
             title: "Tên loại ghế",
             key: "name",
             dataIndex: "name",
-        },
-        {
-            title: "Loại màn hình",
-            key: "screen",
-            dataIndex: "screen",
         },
         {
             title: "Giá",
@@ -40,8 +36,8 @@ const SeatTypeListPage = () => {
             title: "Thao tác",
             key: "actions",
             render: (record) => <>
-                <Link className="mx-2" to={`/dashboard/seattype/edit/${record.id}`}><Button><EditOutlined /></Button></Link>
-                <Button loading={isPending} onClick={() => onDelete(record.id)} danger><DeleteOutlined /></Button>
+                <Link className="mr-2" to={`/dashboard/seattype/edit/${record.id}`}><Button icon={<EditFilled />} className="btn-success"></Button></Link>
+                <Button className="btn-danger" onClick={() => onDelete(record.id)} icon={<DeleteFilled />}></Button>
             </>
         }
     ];
@@ -61,7 +57,18 @@ const SeatTypeListPage = () => {
     });
 
     const onDelete = (id: number) => {
-        deleteSeatType(id);
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa loại ghế này?",
+            icon: <InfoCircleTwoTone />,
+            content: "Nhấn OK để xóa",
+            okText: 'Yes',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                deleteSeatType(id);
+            },
+        })
     }
 
     const { data, isLoading, isError } = useQuery({
@@ -71,8 +78,7 @@ const SeatTypeListPage = () => {
             return data;
         }
     });
-    console.log(data);
-    if (isLoading) return <LoadingComponent />;
+    if (isLoading || isPending) return <LoadingComponent />;
     if (isError) return <ServerError />;
     return (
         <>

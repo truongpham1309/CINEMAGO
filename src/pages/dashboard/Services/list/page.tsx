@@ -4,7 +4,7 @@ import { Button, Space, Table, TableProps } from "antd";
 import { TService } from "@/common/types/service/TypeService";
 import ServerError from "../../_components/500";
 import { Link } from "react-router-dom";
-import { DeleteFilled, EditFilled, ExclamationCircleFilled } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, ExclamationCircleFilled, InfoCircleTwoTone } from "@ant-design/icons";
 import confirm from "antd/es/modal/confirm";
 
 const ServiceListPage = () => {
@@ -42,7 +42,7 @@ const ServiceListPage = () => {
     const onDeleteService = (data: Required<TService>) => {
         confirm({
             title: "Bạn có chắc chắn muốn xóa dịch vụ này?",
-            icon: <ExclamationCircleFilled />,
+            icon: <InfoCircleTwoTone />,
             content: "Nhấn OK để xóa",
             okText: 'Yes',
             okType: 'primary',

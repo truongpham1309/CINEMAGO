@@ -6,8 +6,7 @@ export const createSeatType = async (seatType: any) => {
         const { data } = await axios.post(`/dashboard/seat-type/create`, seatType);
         return data;
     } catch (error: any) {
-        console.log(error);
-        throw new Error(error.message);
+        throw error;
     }
 }
 
@@ -35,8 +34,7 @@ export const updateSeatTypeByID = async (seatType: SeatType) => {
         const { data } = await axios.put(`/dashboard/seat-type/update/${seatType.id}`, seatType);
         return data;
     } catch (error: any) {
-        console.log(error);
-        throw new Error(error.message);
+        throw error
     }
 }
 
