@@ -14,7 +14,7 @@ const ShowTimeDashBoardPage = () => {
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách xuất chiếu</h6>
                 </div>
                 <div className="card-body">
-                    <Table columns={columnsShowTime} rowKey={record => record.id} dataSource={showTime.data.showtimes} />
+                    <Table columns={columnsShowTime} size="small" rowKey={record => record.id} dataSource={showTime.data.showtimes} />
                 </div>
             </div>
         </>

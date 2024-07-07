@@ -5,7 +5,8 @@ import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
 import { toast } from "react-toastify";
 import { createShowTime, deleteShowTimeByID, getAllShowTimeDashBoard, updateShowTimeByID } from "@/services/showTime/showTimeService";
 import { Button, TableProps } from "antd";
-import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
+import confirm from "antd/es/modal/confirm";
 
 export const useShowTimeMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE" }) => {
     const queryClient = useQueryClient();
@@ -76,8 +77,18 @@ export const useShowTimeQuery = () => {
 
     const { mutate, isPending } = useShowTimeMutation({ type: "DELETE" });
     const onDelete = (data: any) => {
-        if (!window.confirm("Bạn có chắc chắn muốn xóa suất chiếu này!")) return;
-        mutate(data);
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa suất chiếu này?",
+            icon: <InfoCircleTwoTone />,
+            content: "Nhấn OK để xóa",
+            okText: 'Yes',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                mutate(data);
+            }
+        })
     }
 
     const columnsShowTime: TableProps<any>["columns"] = [

@@ -51,7 +51,7 @@ const SeatMapListPage = () => {
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách phòng chiếu đã thêm ghế</h6>
                 </div>
                 <div className="card-body">
-                    <Table columns={tableSeatMap} dataSource={seat_map.data.seatMaps} rowKey={record => record.id} />
+                    <Table columns={tableSeatMap} size="small" dataSource={seat_map.data.seatMaps} rowKey={record => record.id} />
                 </div>
             </div>
         </>

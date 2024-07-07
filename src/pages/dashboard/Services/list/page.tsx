@@ -50,12 +50,8 @@ const ServiceListPage = () => {
             cancelText: 'Hủy',
             onOk() {
                 mutate(data);
-            },
-            onCancel() {
-                console.log('Cancel');
-            },
+            }
         })
-
     }
     const { data, isLoading, isError } = useServiceQuery();
     if (isLoading || isPending) return <LoadingComponent />
@@ -67,7 +63,7 @@ const ServiceListPage = () => {
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách dịch vụ</h6>
                 </div>
                 <div className="card-body">
-                    <Table columns={tableService} rowKey={record => record.id!} dataSource={data.data.services} />
+                    <Table columns={tableService} size="small" rowKey={record => record.id!} dataSource={data.data.services} />
                 </div>
             </div>
         </>

@@ -40,6 +40,7 @@ const BookingDashBoardPage = () => {
     },
     {
       title: "Chi tiết",
+      align: "center",
       key: "detail",
       render: (record) => <Link to={`/dashboard/booking/detail/${record.id}`}><InfoCircleFilled /></Link> 
     }

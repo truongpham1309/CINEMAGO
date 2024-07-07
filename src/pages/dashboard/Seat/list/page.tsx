@@ -14,7 +14,7 @@ const SeatDashBoardPage = () => {
           <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách ghế</h6>
         </div>
         <div className="card-body">
-          <Table columns={columnsSeat} dataSource={data.data.seats} rowKey={record => record.id} />
+          <Table columns={columnsSeat} size="small" dataSource={data.data.seats} rowKey={record => record.id} />
         </div>
       </div>
     </>

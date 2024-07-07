@@ -1,30 +1,12 @@
 import { TMovie } from "@/common/types/movie";
 import LoadingComponent from "@/components/ui/LoadingComponent";
-import { deleteMovieByID, getAllMovieList } from "@/services/movie/movieService";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Table, TableProps } from "antd"
-import { Link } from "react-router-dom"
-import { toast } from "react-toastify";
+import { getAllMovieList } from "@/services/movie/movieService";
+import { useQuery } from "@tanstack/react-query";
+import { Table, TableProps } from "antd";
+import { Link } from "react-router-dom";
 import ServerError from "../../_components/500";
 
 const MovieListPage = () => {
-    const queryClient = useQueryClient();
-    const { mutate: deleteMovie, isPending: isDeleting } = useMutation({
-        mutationFn: async (movie: TMovie) => {
-            console.log(movie);
-            await deleteMovieByID(movie.id);
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["MOVIES"],
-            })
-            toast.success("Xóa phim thành công!")
-        },
-        onError: () => {
-            toast.error("Không thể xóa phim!")
-        }
-    });
-
     const { data: movie, isLoading, isError } = useQuery({
         queryKey: ["MOVIES"],
         queryFn: async () => {
@@ -36,7 +18,7 @@ const MovieListPage = () => {
         {
             title: "#",
             dataIndex: "index",
-            render: (text, record, index) => index + 1,
+            render: (_, __, index) => index + 1,
         },
         {
             title: "Tên phim",
@@ -69,11 +51,11 @@ const MovieListPage = () => {
             key: "status",
         },
         {
-            title: "Thao tác",
+            title: "",
             key: "action",
-            render: (text, record) => <>
-                <Link to={`/dashboard/movie/edit/${record.id}`}><Button type="primary" >Edit</Button></Link>
-                <Button loading={isDeleting} onClick={() => deleteMovie(record)} type="primary" danger>Xóa</Button>
+            render: (_, record) => <>
+                <Link className="mr-3" to={`/dashboard/movie/edit/${record.id}`}>Sửa</Link>
+                <Link to={`/dashboard/movie/detail/${record.id}`}>Chi tiết</Link>
             </>
         }
     ];
@@ -87,7 +69,7 @@ const MovieListPage = () => {
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách phim</h6>
                 </div>
                 <div className="card-body">
-                    <Table columns={tableColumns} dataSource={movie?.data?.movies} rowKey={(record) => record.id} pagination={{ defaultPageSize: 10 }} />
+                    <Table columns={tableColumns} size="small" dataSource={movie?.data?.movies} rowKey={(record) => record.id} pagination={{ defaultPageSize: 10 }} />
                 </div>
             </div>
         </>

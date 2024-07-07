@@ -89,7 +89,7 @@ const BookingDetailDashBoardPage = () => {
             <Descriptions.Item label="Ngày">{ResponseAPI.booking.show_date}</Descriptions.Item>
             <Descriptions.Item label="Giờ">{ResponseAPI.booking.show_time}</Descriptions.Item>
             <Descriptions.Item label="Loại màn hình">{ResponseAPI.booking.screen}</Descriptions.Item>
-            <Descriptions.Item label="Trạng thái">{ResponseAPI.booking.status === "PAID" ? "Đã thanh toán" : "Chưa thanh toán" }</Descriptions.Item>
+            <Descriptions.Item label="Trạng thái">{ResponseAPI.booking.status}</Descriptions.Item>
           </Descriptions>
           <Table dataSource={tableData} columns={columns} rowKey={record => record.name} pagination={false} style={{ marginTop: 20 }} />
           <div className="row align-items-center">
@@ -99,7 +99,7 @@ const BookingDetailDashBoardPage = () => {
               </span>
             </div>
             <div className="col-sm-12 col-md-6" style={{ marginTop: 20, textAlign: "right" }}>
-              <Button onClick={handleCancelBooking} className="btn-danger">Hủy</Button>
+              {ResponseAPI.booking.status === "Unpaid" ? <Button onClick={handleCancelBooking} className="btn-danger">Hủy</Button> : null}
             </div>
           </div>
         </Card>

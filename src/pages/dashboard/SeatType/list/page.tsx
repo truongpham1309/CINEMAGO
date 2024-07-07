@@ -87,7 +87,7 @@ const SeatTypeListPage = () => {
                     <h6 className="m-0 font-weight-bold text-primary">DANH SÁCH LOẠI GHẾ</h6>
                 </div>
                 <div className="card-body" >
-                    <Table columns={tableSeatType} rowKey={record => record.id} dataSource={data.data.seatTypes} pagination={false} />
+                    <Table columns={tableSeatType} size="small" rowKey={record => record.id} dataSource={data.data.seatTypes} pagination={false} />
                 </div>
             </div>
         </>
