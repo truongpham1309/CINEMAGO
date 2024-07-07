@@ -9,7 +9,7 @@ import { toast } from "react-toastify"
 import MovieBanner from "../_components/Booking/MovieBanner"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import LoadingComponent from "@/components/ui/LoadingComponent"
-import { getAllServiceClient, paymentBookingByMOMO } from "@/services/bookingClient/bookingClientService"
+import { getAllServiceClient, paymentBookingByMOMO, paymentBookingByVNPAY } from "@/services/bookingClient/bookingClientService"
 import { Button, Card, InputNumber, List, Result, Space } from "antd"
 import NotFoundPage from "../404/page"
 import { add_services, clean_booking, decrement_service, delete_service, increment_service } from "@/common/store/booking/sliceBooking"
@@ -90,10 +90,7 @@ const BookingServicePage = () => {
         mutationFn: async (argument: any) => {
             switch (paymentMethod) {
                 case "VN_PAY":
-                    toast.warning("Phương thức thanh toán đang phát triển!", {
-                        position: 'top-center'
-                    });
-                    break;
+                    return await paymentBookingByVNPAY(argument);
                 case "MOMO":
                     return await paymentBookingByMOMO(argument);
                 default: toast.error("Phương thức thanh toán không hợp lệ!", {
@@ -104,14 +101,15 @@ const BookingServicePage = () => {
         onSuccess: (data) => {
             switch (paymentMethod) {
                 case "VN_PAY":
-
+                    console.log(data.data.url);
                     break;
                 case "MOMO":
                     window.location.href = data?.data?.payment_link?.payUrl;
                     break;
             }
         },
-        onError: () => {
+        onError: (error) => {
+            console.log(error);
             toast.error("Thất bại! Vui lòng thử lại...");
         }
     });
@@ -185,7 +183,7 @@ const BookingServicePage = () => {
                                 )}
                             </div>
                             <div className="grid--area">
-                                <Space direction="vertical" size="middle" className="text-white p-3 row" style={{ background: "#032055" }}>
+                                <Space direction="vertical" size="middle" className="text-white py-3 row" style={{ background: "#032055" }}>
                                     {booking.services.map((service: any) => {
                                         const serviceDetails = renderServiceDetails(service.service_id);
                                         return (
@@ -290,9 +288,9 @@ const BookingServicePage = () => {
                                     </li>
                                 </ul>
                                 <div className="form-group">
-                                    <button type="submit" disabled={isPending} onClick={handlePaymentTicket} className="custom-button">
+                                    <Button htmlType="submit" loading={isPending} onClick={handlePaymentTicket} className="custom-button">
                                         Thanh toán
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </div>

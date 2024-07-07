@@ -10,14 +10,12 @@ import { formatCurrencyVND } from "@/common/libs/fomatMoneyVND";
 
 const BookingDetailDashBoardPage = () => {
   const { id: idBooking } = useParams();
-  // const [countDown, setCountDown] = useState<number>(5);
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const { data, isLoading, isError } = useBookingQuery(+idBooking!);
-  console.log(data);
   if (isLoading) return <LoadingComponent />
   if (isError) return <ServerError />;
-  const { data: ResponseAPI } = data
+  const { data: ResponseAPI } = data;
 
   const columns: TableProps<any>['columns'] = [
     {
@@ -64,7 +62,7 @@ const BookingDetailDashBoardPage = () => {
   const tableData = [
     ...ResponseAPI.services,
     {
-      name: "Vé",
+      name: "Vé phim",
       quantity: ResponseAPI.ticket.quantity,
       subtotal: ResponseAPI.ticket.subtotal,
     }
@@ -87,9 +85,9 @@ const BookingDetailDashBoardPage = () => {
             <Descriptions.Item label="Booking ID">{ResponseAPI.booking.id}</Descriptions.Item>
             <Descriptions.Item label="Khách hàng">{ResponseAPI.booking.user}</Descriptions.Item>
             <Descriptions.Item label="Ngày">{ResponseAPI.booking.show_date}</Descriptions.Item>
-            <Descriptions.Item label="Giờ">{ResponseAPI.booking.show_time}</Descriptions.Item>
+            <Descriptions.Item label="Suất chiếu">{ResponseAPI.booking.show_time}</Descriptions.Item>
             <Descriptions.Item label="Loại màn hình">{ResponseAPI.booking.screen}</Descriptions.Item>
-            <Descriptions.Item label="Trạng thái">{ResponseAPI.booking.status === "PAID" ? "Đã thanh toán" : "Chưa thanh toán" }</Descriptions.Item>
+            <Descriptions.Item label="Trạng thái">{ResponseAPI.booking.status}</Descriptions.Item>
           </Descriptions>
           <Table dataSource={tableData} columns={columns} rowKey={record => record.name} pagination={false} style={{ marginTop: 20 }} />
           <div className="row align-items-center">
@@ -99,7 +97,7 @@ const BookingDetailDashBoardPage = () => {
               </span>
             </div>
             <div className="col-sm-12 col-md-6" style={{ marginTop: 20, textAlign: "right" }}>
-              <Button onClick={handleCancelBooking} className="btn-danger">Hủy</Button>
+              {ResponseAPI.booking.status === "Unpaid" ? <Button onClick={handleCancelBooking} className="btn-danger">Hủy</Button> : null}
             </div>
           </div>
         </Card>

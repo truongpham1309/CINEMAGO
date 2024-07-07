@@ -47,7 +47,6 @@ import ProfilePage from './../pages/website/Profile/page';
 import MovieDetailPage from "@/pages/dashboard/Movies/detail/page"
 import BookingSeat from "@/pages/website/BookingSeat/page"
 import BookingServicePage from "@/pages/website/BookingService/page"
-import CheckOutPage from "@/pages/website/Checkout/page"
 import CheckoutStatusPage from "@/pages/website/CheckoutStatus/page"
 import HomePage from "@/pages/website/HomePage/page"
 
@@ -68,11 +67,9 @@ const Router = () => {
             <Route path="/movie/booking-movie/:id" element={<BookingMovieShowTimePage />} />
             <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
             <Route path="/movie/booking/services" element={<BookingServicePage />} />
-            <Route path="/movie/booking/checkout" element={<CheckOutPage />} />
             <Route path="/movie/booking/status" element={<CheckoutStatusPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
-          {/* <Route path="/movie/booking-seats/test" element={<SeatSelection />} /> */}
 
           {/* DashBoard */}
           <Route path="dashboard" element={<LayoutDashBoard />}>

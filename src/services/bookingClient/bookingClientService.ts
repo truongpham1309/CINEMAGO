@@ -29,6 +29,24 @@ export const paymentBookingByMOMO = async (booking: any) => {
     }
 }
 
+export const paymentBookingByVNPAY = async (booking: any) => {
+    try {
+        const { data } = await axios.post('/pay/vnpay', booking);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const paymentBookingByVNPAYConfirm = async (booking: any) => {
+    try {
+        const { data } = await axios.post('/pay/vnpay/send', booking);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const paymentBookingConfirm = async (booking: any) => {
     try {
         const { data } = await axios.post(`/client/momo/success`, booking);

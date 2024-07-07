@@ -14,7 +14,7 @@ const MovieDetailPage = () => {
   const [movie, setMovie] = React.useState<any>({});
   React.useEffect(() => {
     (async () => {
-      const { data } = await getDetailMovieByID(id);
+      const { data } = await getDetailMovieByID(+id!);
       setMovie(data.movie);
     })();
   }, [id]);
