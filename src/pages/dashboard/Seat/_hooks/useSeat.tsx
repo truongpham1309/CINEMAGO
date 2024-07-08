@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
 import { useSeatTypeQuery } from "@/common/hooks/seatType/useSeatType";
 import { Button, TableProps } from "antd";
-import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
+import confirm from "antd/es/modal/confirm";
 
 export const useSeatMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE" }) => {
     const queryClient = useQueryClient();
@@ -67,8 +68,18 @@ export const useSeatMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE"
 export const useSeatQuery = () => {
     const { mutate, isPending } = useSeatMutation({ type: "DELETE" });
     const onDeleteSeat = (data: any) => {
-        if (!window.confirm("Bạn có chắc chắn muốn xóa ghế này?")) return;
-        mutate(data);
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa ghế này?",
+            icon: <InfoCircleTwoTone />,
+            content: "Nhấn OK để xóa",
+            okText: 'Yes',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                mutate(data);
+            }
+        })
     };
     const seat = useQuery({
         queryKey: ['SEATS'],

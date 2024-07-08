@@ -1,10 +1,11 @@
 import { TRoomsCinemaData } from '@/common/types/cinema/roomsCinema';
-import { Table, TableProps } from 'antd';
-import { useRoomCinemaQuery } from '../hooks/useRoomsCinema';
-import { Link } from 'react-router-dom';
-import { EditFilled, InfoCircleFilled } from '@ant-design/icons';
 import LoadingComponent from '@/components/ui/LoadingComponent';
+import { DeleteFilled, EditFilled, InfoCircleTwoTone, Loading3QuartersOutlined } from '@ant-design/icons';
+import { Alert, Button, Table, TableProps } from 'antd';
+import confirm from 'antd/es/modal/confirm';
+import { Link } from 'react-router-dom';
 import ServerError from '../../_components/500';
+import { useRoomCinemaQuery, useRoomsCinemaMutation } from '../hooks/useRoomsCinema';
 
 const RoomsListDashBoardCinema = () => {
     const tableRooms: TableProps<TRoomsCinemaData>['columns'] = [
@@ -24,24 +25,48 @@ const RoomsListDashBoardCinema = () => {
             key: "action",
             align: "center",
             render: (record) => <>
-                <Link title='Sửa' className='mx-3' to={`/dashboard/room-cinema/edit/${record.id}`}><EditFilled /></Link>
-                <Link to={`/dashboard/room-cinema/detail/${record.id}`}><InfoCircleFilled /></Link>
+                <Link title='Sửa' className='mx-3' to={`/dashboard/room-cinema/edit/${record.id}`}><Button className='btn-success' icon={<EditFilled />}></Button></Link>
+                <Button onClick={() => onDelete(record)} icon={<DeleteFilled />} className='btn-danger'></Button>
             </>
         }
     ];
+    const { mutate, isPending } = useRoomsCinemaMutation({ type: "DELETE" });
+    const onDelete = (record: any) => {
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa phòng chiếu này?",
+            icon: <InfoCircleTwoTone />,
+            content: "Nhấn OK để xóa",
+            okText: 'OK',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                mutate(record);
+            }
+        })
+    }
     const { data, isLoading, isError } = useRoomCinemaQuery();
-    if (isLoading) return <LoadingComponent />;
+    if (isLoading || isPending) return <LoadingComponent />;
     if (isError) return <ServerError />
     return (
         <>
-            <div className="card shadow mb-4">
-                <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách phòng chiếu</h6>
+            {data.data.cinemaScreens.length === 0 ? <Alert
+                message="Warning"
+                description="Hiện tại chưa có phòng chiếu nào!"
+                type="warning"
+                showIcon
+                closable
+            /> : (
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
+                        <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách phòng chiếu</h6>
+                    </div>
+                    <div className="card-body">
+                        <Table columns={tableRooms} rowKey={record => record.id} dataSource={data.data.cinemaScreens} pagination={false} />
+                    </div>
                 </div>
-                <div className="card-body">
-                    <Table columns={tableRooms} rowKey={record => record.id} dataSource={data.data.cinemaScreens} pagination={false} />
-                </div>
-            </div>
+            )}
+
         </>
     )
 }
