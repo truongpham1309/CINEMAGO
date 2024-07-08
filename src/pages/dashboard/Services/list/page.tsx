@@ -1,11 +1,11 @@
-import LoadingComponent from "@/components/ui/LoadingComponent";
-import { useServiceMutation, useServiceQuery } from "../_hook/useService"
-import { Button, Space, Table, TableProps } from "antd";
 import { TService } from "@/common/types/service/TypeService";
-import ServerError from "../../_components/500";
-import { Link } from "react-router-dom";
-import { DeleteFilled, EditFilled, ExclamationCircleFilled } from "@ant-design/icons";
+import LoadingComponent from "@/components/ui/LoadingComponent";
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
+import { Alert, Button, Table, TableProps } from "antd";
 import confirm from "antd/es/modal/confirm";
+import { Link } from "react-router-dom";
+import ServerError from "../../_components/500";
+import { useServiceMutation, useServiceQuery } from "../_hook/useService";
 
 const ServiceListPage = () => {
     const { mutate, isPending } = useServiceMutation({ type: "DELETE" });
@@ -42,7 +42,7 @@ const ServiceListPage = () => {
     const onDeleteService = (data: Required<TService>) => {
         confirm({
             title: "Bạn có chắc chắn muốn xóa dịch vụ này?",
-            icon: <ExclamationCircleFilled />,
+            icon: <InfoCircleTwoTone />,
             content: "Nhấn OK để xóa",
             okText: 'Yes',
             okType: 'primary',
@@ -50,26 +50,31 @@ const ServiceListPage = () => {
             cancelText: 'Hủy',
             onOk() {
                 mutate(data);
-            },
-            onCancel() {
-                console.log('Cancel');
-            },
+            }
         })
-
     }
     const { data, isLoading, isError } = useServiceQuery();
     if (isLoading || isPending) return <LoadingComponent />
     if (isError) return <ServerError />
     return (
         <>
-            <div className="card shadow mb-4">
-                <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách dịch vụ</h6>
+            {data.data.services.length === 0 ? <Alert
+                message="Warning"
+                description="Hiện tại chưa có dịch vụ nào!"
+                type="warning"
+                showIcon
+                closable
+            /> : (
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
+                        <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách dịch vụ</h6>
+                    </div>
+                    <div className="card-body">
+                        <Table columns={tableService} size="small" rowKey={record => record.id!} dataSource={data.data.services} pagination={false} />
+                    </div>
                 </div>
-                <div className="card-body">
-                    <Table columns={tableService} rowKey={record => record.id!} dataSource={data.data.services} />
-                </div>
-            </div>
+            )}
+
         </>
     )
 }

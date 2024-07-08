@@ -40,23 +40,13 @@ const BookingDashBoardPage = () => {
     },
     {
       title: "Chi tiết",
+      align: "center",
       key: "detail",
       render: (record) => <Link to={`/dashboard/booking/detail/${record.id}`}><InfoCircleFilled /></Link> 
     }
   ];
   const {data, isLoading, isError} = useBookingQuery();
 
-  // const rows = [
-  //   { id: 1, username: 'Snow', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 2, username: 'Lannister', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 3, username: 'Lannister', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 4, username: 'Stark', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 5, username: 'Targaryen', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 6, username: 'Melisandre', show_time: "10:00", status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 7, username: 'Clifford', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 8, username: 'Frances', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  //   { id: 9, username: 'Roxie', show_time: '10:00', status: "Đã thanh toán", subtotal: 300000, quantity: 10 },
-  // ];
   if(isLoading) return <LoadingComponent />
   if(isError) return <ServerError />
   return (

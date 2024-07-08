@@ -4,19 +4,19 @@ import LoadingComponent from "@/components/ui/LoadingComponent";
 import { getDetailSeatType, updateSeatTypeByID } from "@/services/seats/seatTypeService";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button } from "antd";
+import { Alert, Button } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ServerError from "../../_components/500";
 import { useScreenQuery } from "../../Screen/hooks/useScreen";
+import { WarningFilled } from "@ant-design/icons";
 
 const SeatTypeEditPage = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: joiResolver(SeatTypeSchema),
         defaultValues: {
             name: "",
-            screen_id: 0,
             price: 0,
             promotion_price: 0,
         }
@@ -32,7 +32,7 @@ const SeatTypeEditPage = () => {
             return data;
         }
     })
-    const { mutate: update, isPending } = useMutation({
+    const { mutate: update, isPending, isError: isErrorMutation, error } = useMutation({
         mutationFn: async (seatType: SeatType) => {
             const data = await updateSeatTypeByID(seatType)
             return data;
@@ -48,37 +48,33 @@ const SeatTypeEditPage = () => {
             toast.error("Không thể cập nhật loại ghế");
         }
     });
-    const { data, isLoading:isLoadScreen, isError: isErrScreen } = useScreenQuery();
     const onSubmit: SubmitHandler<any> = (data) => {
         update(data);
     }
-    if (isPending || isLoading || isLoadScreen) return <LoadingComponent />
-    if (isError || isErrScreen) return <ServerError />
+    if (isPending || isLoading) return <LoadingComponent />
+    if (isError) return <ServerError />
     return (
         <>
+            {isErrorMutation && (
+                <Alert
+                    type="error"
+                    icon={<WarningFilled />}
+                    className="mb-3"
+                    message="Có lỗi xảy ra khi cập nhật loại ghế."
+                    description={(error as any)?.response?.data?.message.name.map((_m: any) => _m)}
+                />
+            )}
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Cập nhật loại ghế</h6>
                 </div>
                 <div className="card-body">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row mt-3">
-                            <div className="col-sm-12 col-md-6">
+                            <div className="col-sm-12">
                                 <div>
                                     <label className="text-gray-800" htmlFor="">Tên Loại Ghế</label>
                                     <input type="text" {...register("name")} placeholder="Tên loại ghế..." className="form-control" />
-                                    {errors.name && (<span className="text-danger">{errors.name.message}</span>)}
-                                </div>
-                            </div>
-                            <div className="col-sm-12 col-md-6">
-                                <div>
-                                    <label className="text-gray-800" htmlFor="">Loại màn hình</label>
-                                    <select className="form-control" {...register("screen_id")}>
-                                        <option value={0}>Chọn loại màn hình</option>
-                                        {data.data.screens.map((sc: any) => (
-                                            <option value={sc.id} key={sc.id}>{sc.name}</option>
-                                        ))}
-                                    </select>
                                     {errors.name && (<span className="text-danger">{errors.name.message}</span>)}
                                 </div>
                             </div>

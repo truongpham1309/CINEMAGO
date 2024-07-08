@@ -1,11 +1,12 @@
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { deleteCinemaByID, getAllCinemas } from "@/services/cinema/cinemaService";
-import { DeleteFilled, EditFilled, InfoCircleOutlined } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, InfoCircleOutlined, InfoCircleTwoTone } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Table, TableProps } from "antd";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import ServerError from "../../_components/500";
+import confirm from "antd/es/modal/confirm";
 
 const CinemaListPage = () => {
     const queryClient = useQueryClient();
@@ -29,15 +30,15 @@ const CinemaListPage = () => {
             title: "",
             key: "action",
             render: (record) => <>
-                <Link className="mx-2" to={`/dashboard/cinema/edit/${record.id}`}><Button><EditFilled /></Button></Link>
-                <Button onClick={() => onDeleteCinema(record.id)} danger><DeleteFilled /></Button>
+                <Link className="mx-2" to={`/dashboard/cinema/edit/${record.id}`}><Button className="btn-success" icon={<EditFilled />}></Button></Link>
+                <Button onClick={() => onDeleteCinema(record.id)} className="btn-danger" icon={<DeleteFilled />}></Button>
             </>
         },
         {
             title: "",
             key: "detail",
             render: (record) => <>
-                <Link className="mx-2" to={`/dashboard/cinema/${record.id}/room-cinema`}><InfoCircleOutlined /></Link>
+                <Link className="mx-2" to={`/dashboard/cinema/${record.id}/room-cinema`}>Chi tiết</Link>
             </>
         }
     ];
@@ -64,8 +65,18 @@ const CinemaListPage = () => {
         }
     });
     const onDeleteCinema = (id: number) => {
-        if (!confirm("Bạn có chắc chắn muốn xóa rạp phim này không!")) return;
-        mutate(id);
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa rạp chiếu này?",
+            icon: <InfoCircleTwoTone />,
+            content: "Nhấn OK để xóa",
+            okText: 'Yes',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                mutate(id);
+            }
+        })
     }
     if (isLoading || isPending) return <LoadingComponent />;
     if (isError) return <ServerError />;
