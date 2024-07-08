@@ -4,7 +4,7 @@ import { useMovieQuery } from "../../Movies/_hooks/useMovie";
 import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
 import { toast } from "react-toastify";
 import { createShowTime, deleteShowTimeByID, getAllShowTimeDashBoard, updateShowTimeByID } from "@/services/showTime/showTimeService";
-import { Button, TableProps } from "antd";
+import { Button, Popconfirm, TableProps } from "antd";
 import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
 import confirm from "antd/es/modal/confirm";
 
@@ -76,20 +76,6 @@ export const useShowTimeQuery = () => {
     });
 
     const { mutate, isPending } = useShowTimeMutation({ type: "DELETE" });
-    const onDelete = (data: any) => {
-        confirm({
-            title: "Bạn có chắc chắn muốn xóa suất chiếu này?",
-            icon: <InfoCircleTwoTone />,
-            content: "Nhấn OK để xóa",
-            okText: 'Yes',
-            okType: 'primary',
-            okCancel: true,
-            cancelText: 'Hủy',
-            onOk() {
-                mutate(data);
-            }
-        })
-    }
 
     const columnsShowTime: TableProps<any>["columns"] = [
         {
@@ -128,7 +114,15 @@ export const useShowTimeQuery = () => {
             key: "action",
             render: (record) => <>
                 <Link className="mx-2" to={`/dashboard/show-time/edit/${record.id}`} ><Button icon={<EditFilled />} className="btn-success" ></Button></Link>
-                <Button onClick={() => onDelete(record)} className="btn-danger" icon={<DeleteFilled />} ></Button>
+                <Popconfirm
+                    title="Xóa suất chiếu?"
+                    icon={<InfoCircleTwoTone />}
+                    description="Bạn có chắc chắn muốn xóa suất chiếu này?"
+                    okText="Yes"
+                    cancelText="No"
+                    onConfirm={() => mutate(record)}>
+                    <Button className="btn-danger" icon={<DeleteFilled />} ></Button>
+                </Popconfirm>
             </>
         }
     ]

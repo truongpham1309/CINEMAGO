@@ -10,14 +10,12 @@ import { formatCurrencyVND } from "@/common/libs/fomatMoneyVND";
 
 const BookingDetailDashBoardPage = () => {
   const { id: idBooking } = useParams();
-  // const [countDown, setCountDown] = useState<number>(5);
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const { data, isLoading, isError } = useBookingQuery(+idBooking!);
-  console.log(data);
   if (isLoading) return <LoadingComponent />
   if (isError) return <ServerError />;
-  const { data: ResponseAPI } = data
+  const { data: ResponseAPI } = data;
 
   const columns: TableProps<any>['columns'] = [
     {
