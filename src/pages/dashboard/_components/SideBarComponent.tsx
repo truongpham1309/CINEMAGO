@@ -35,7 +35,7 @@ const SideBarComponent = () => {
         {
             id: 5, title: "Ghế", sku: "seat", icon: "fas fa-fw fa-chair", children: [
                 { id: "seat1", title: "Danh sách ghế", path: "/dashboard/seat" },
-                { id: "seat1", title: "Thêm mới ghế", path: "/dashboard/seat/create" },
+                { id: "seat2", title: "Thêm mới ghế", path: "/dashboard/seat/create" },
             ]
         },
         {
@@ -95,7 +95,7 @@ const SideBarComponent = () => {
                     </Link>
                     <div id={_link.sku} className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">
-                            <h6 className="collapse-header">Quản Lí {_link.title}</h6>
+                            <h6 className="collapse-header">Quản lí {_link.title}</h6>
                             {_link.children.map((_child) => (
                                 <Link key={_child.id} className="collapse-item" to={_child.path}>
                                     {_child.title}

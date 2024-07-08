@@ -40,12 +40,13 @@ const BookingDashBoardPage = () => {
     },
     {
       title: "Chi tiết",
-      key: "detail",
       align: "center",
+      key: "detail",
       render: (record) => <Link to={`/dashboard/booking/detail/${record.id}`}><InfoCircleFilled /></Link> 
     }
   ];
   const {data, isLoading, isError} = useBookingQuery();
+
   if(isLoading) return <LoadingComponent />
   if(isError) return <ServerError />
   return (

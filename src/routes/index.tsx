@@ -49,6 +49,8 @@ import BookingSeat from "@/pages/website/BookingSeat/page"
 import BookingServicePage from "@/pages/website/BookingService/page"
 import CheckoutStatusPage from "@/pages/website/CheckoutStatus/page"
 import HomePage from "@/pages/website/HomePage/page"
+import CinemaList from "@/pages/dashboard/RoomsCinema/create/cinemaList"
+import TicketListPage from "@/pages/dashboard/Ticket/list/page"
 
 const Router = () => {
   return (
@@ -93,6 +95,7 @@ const Router = () => {
 
             <Route path="/dashboard/cinema/:idCinema/rooms/create" element={<CreateRoomByCinema />} />
             <Route path="/dashboard/room-cinema" element={<RoomsListDashBoardCinema />} />
+            <Route path="/dashboard/room-cinema/show-cinema" element={<CinemaList />} />
             <Route path="/dashboard/room-cinema/detail/:idRoom" element={<DetailRoomCinema />} />
             <Route path="/dashboard/room-cinema/edit/:idRoom" element={<RoomCinemaEditPage />} />
 
@@ -119,6 +122,9 @@ const Router = () => {
 
             <Route path="/dashboard/booking" element={<BookingDashBoardPage />} />
             <Route path="/dashboard/booking/detail/:id" element={<BookingDetailDashBoardPage />} />
+
+
+            <Route path="/dashboard/ticket" element={<TicketListPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

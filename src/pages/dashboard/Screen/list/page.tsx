@@ -1,10 +1,11 @@
 import { TScreen } from "@/common/types/screen/screenType"
-import { DeleteFilled, EditFilled } from "@ant-design/icons"
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons"
 import { Button, Table, TableProps } from "antd"
 import { Link } from "react-router-dom"
 import { useScreenMutation, useScreenQuery } from "../hooks/useScreen"
 import LoadingComponent from "@/components/ui/LoadingComponent"
 import ServerError from "../../_components/500"
+import confirm from "antd/es/modal/confirm"
 
 
 const ScreenListDasdBoardPage = () => {
@@ -25,15 +26,25 @@ const ScreenListDasdBoardPage = () => {
             title: "",
             key: "action",
             render: (record) => <>
-                <Link className="mx-2" to={`/dashboard/screen/edit/${record.id}`}><Button><EditFilled /></Button></Link>
-                <Button onClick={() => onDeleteScreen(record)} danger><DeleteFilled /></Button>
+                <Link className="mx-2" to={`/dashboard/screen/edit/${record.id}`}><Button className="btn-success" icon={<EditFilled />}></Button></Link>
+                <Button onClick={() => onDeleteScreen(record)} className="btn-danger" icon={<DeleteFilled />}></Button>
             </>
         }
     ];
 
     const onDeleteScreen = (record: Required<TScreen>) => {
-        if (!confirm("Bạn có chắc chắc muốn xóa màn hình này không?")) return;
-        mutate(record);
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa màn hình này?",
+            icon: <InfoCircleTwoTone />,
+            content: "Nhấn OK để xóa",
+            okText: 'Yes',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                mutate(record);
+            }
+        })
     }
     if (isLoading || isPending) return <LoadingComponent />
     if (isError) return <ServerError />;
@@ -41,10 +52,10 @@ const ScreenListDasdBoardPage = () => {
         <>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Tạo mới màn hình chiếu</h6>
+                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách màn hình chiếu</h6>
                 </div>
                 <div className="card-body">
-                    <Table columns={tableScreen} rowKey={record => record.id} dataSource={data.data.screens} pagination={false} />
+                    <Table columns={tableScreen} size="small" style={{width: 500, margin: "0 auto"}} rowKey={record => record.id} dataSource={data.data.screens} pagination={false} />
                 </div>
             </div>
         </>

@@ -6,7 +6,7 @@ import { deleteMovieByID } from "@/services/movie/movieService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import confirm from "antd/es/modal/confirm";
-import { ExclamationCircleFilled } from "@ant-design/icons";
+import { InfoCircleTwoTone } from "@ant-design/icons";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -38,7 +38,7 @@ const MovieDetailPage = () => {
   const onDeleteService = (data: any) => {
     confirm({
       title: "Bạn có chắc chắn muốn xóa phim này?",
-      icon: <ExclamationCircleFilled />,
+      icon: <InfoCircleTwoTone />,
       content: "Nhấn OK để xóa",
       okText: "Yes",
       okType: "primary",
@@ -46,10 +46,7 @@ const MovieDetailPage = () => {
       cancelText: "Hủy",
       onOk() {
         deleteMovie(data);
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
+      }
     });
   };
 

@@ -3,9 +3,10 @@ import { useSeatMapMutation, useSeatMapQuery } from "../_hooks/useSeatMap";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import ServerError from "../../_components/500";
 import Seat from "../_components/Seat";
-import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
 import { Button } from "antd";
 import { useState } from "react";
+import confirm from "antd/es/modal/confirm";
 
 const SeatMapDetailPage = () => {
     const { id: idSeatMap } = useParams();
@@ -14,8 +15,18 @@ const SeatMapDetailPage = () => {
     let [count, __] = useState<number>(0);
     const { mutate, isPending } = useSeatMapMutation({ type: "DELETE" });
     const onDelete = (data: any) => {
-        if (!window.confirm("Bạn có chắc chắc muốn xóa bối trí ghế này?")) return;
-        mutate(data);
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa bản đồ ghế này?",
+            icon: <InfoCircleTwoTone />,
+            content: "Nhấn OK để xóa",
+            okText: 'Yes',
+            okType: 'primary',
+            okCancel: true,
+            cancelText: 'Hủy',
+            onOk() {
+                mutate(data);
+            }
+        })
     }
 
     if (isLoading) return <LoadingComponent />
