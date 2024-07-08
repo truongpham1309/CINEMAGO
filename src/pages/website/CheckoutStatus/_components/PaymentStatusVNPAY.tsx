@@ -15,15 +15,12 @@ const PaymentStatusVNPAY = () => {
     const queryParams = new URLSearchParams(location.search);
     const dispatch = useDispatch();
     const [status, setStatus] = useState<"SUCCESS" | "QUESTIONS" | "FAILD">("QUESTIONS");
-
-    const booking_id = queryParams.get("booking_id") || "";
-    // const orderId = queryParams.get("orderId") || "";
-    const resultCode = queryParams.get("vnp_TransactionStatus") || ""; // thay bằng status của VNPAY
-
+    const booking_id = queryParams.get("vnp_TxnRef") || "";
+    const resultCode = queryParams.get("vnp_TransactionStatus") || "";
 
     const { mutate, error, isPending, isError } = useMutation({
         mutationFn: async () => {
-            const data = await paymentBookingByVNPAYConfirm({ booking_id, resultCode });
+            const data = await paymentBookingByVNPAYConfirm({ vnp_TxnRef: booking_id, vnp_TransactionStatus: resultCode });
             return data;
         },
         onSuccess: () => {
@@ -53,9 +50,12 @@ const PaymentStatusVNPAY = () => {
         if (resultCode === "00") setStatus("SUCCESS");
         if (resultCode === "02") setStatus("FAILD");
     }, [location]);
-    if (['00', '02'].includes(resultCode)) {
-        mutate();
-    }
+
+    useEffect(() => {
+        if (['00', '02'].includes(resultCode) && !isPending) {
+            mutate();
+        }
+    }, [resultCode]);
     if (isPending) return <LoadingComponent />
     return (
         <>

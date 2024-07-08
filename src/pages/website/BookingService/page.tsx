@@ -2,7 +2,7 @@ import { formatCurrencyVND } from "@/common/libs/fomatMoneyVND"
 import { formatDate } from "@/common/libs/formatDateToString"
 import { selectorBooking } from "@/common/store/booking/selectorBooking"
 import { movieSelector } from "@/common/store/booking/selectorMovie"
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -30,7 +30,7 @@ const BookingServicePage = () => {
     });
     const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
     useEffect(() => {
-        if (!booking || !movie) {
+        if (!movie) {
             toast.error('Mời bạn chọn phim!', {
                 position: 'top-center'
             });
@@ -39,14 +39,28 @@ const BookingServicePage = () => {
             navigate('/movie');
             return;
         }
+
+        if (booking.seats.length === 0) {
+            toast.warning("Bạn chưa chọn ghế!", {
+                position: "top-center",
+            });
+            navigate(`/movie/booking-seats/${booking.showtime_id}`);
+            return;
+        }
     }, []);
-    
+
     const handleQuantityChange = (id: number, value: number) => {
         setQuantities((prev) => ({ ...prev, [id]: value }));
     };
 
     const handleAddClick = (service: any) => {
         const quantity = quantities[service.id] || 0;
+        if (quantity === 0) {
+            toast.warning("Số lượng phải lớn hơn 0!", {
+                position: "top-center"
+            })
+            return;
+        }
         let _service = services.data.find((_s: any) => _s.id === service.id);
 
         if (!_service) {
@@ -83,8 +97,8 @@ const BookingServicePage = () => {
         return serviceDetails;
     };
 
-    const price_service: number = booking.services.length === 0 ? 0 : booking.services.reduce((sum: any, current: any) => sum + current.subtotal, 0);
-    const price_ticket: number = booking.subtotal - price_service;
+    const price_service: number = booking?.services.length === 0 ? 0 : booking.services.reduce((sum: any, current: any) => sum + current.subtotal, 0);
+    const price_ticket: number = booking?.subtotal - price_service;
 
     const { mutate, isPending } = useMutation({
         mutationFn: async (argument: any) => {
@@ -101,7 +115,7 @@ const BookingServicePage = () => {
         onSuccess: (data) => {
             switch (paymentMethod) {
                 case "VN_PAY":
-                    console.log(data.data.url);
+                    window.location.href = data.data.url;
                     break;
                 case "MOMO":
                     window.location.href = data?.data?.payment_link?.payUrl;
@@ -121,11 +135,9 @@ const BookingServicePage = () => {
             });
             return;
         };
-        console.log(booking);
         mutate(booking);
-
     }
-    if (isLoading) return <LoadingComponent />
+    if (isLoading || isPending) return <LoadingComponent />
     if (isError) return <NotFoundPage />
     return (
         <>
@@ -167,7 +179,7 @@ const BookingServicePage = () => {
                                                         </Button>,
                                                     ]}
                                                 >
-                                                    <p>Price: {formatCurrencyVND(service.price.slice(0, -3))}</p>
+                                                    <p>Price: {formatCurrencyVND(service?.price?.slice(0, -3))}</p>
                                                     <InputNumber
                                                         min={0}
                                                         type="number"
@@ -191,7 +203,7 @@ const BookingServicePage = () => {
                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                     <div>
                                                         <h3 className="text-uppercase">{serviceDetails?.name}</h3>
-                                                        <p>Giá: {formatCurrencyVND(serviceDetails?.price.slice(0, -3))}</p>
+                                                        <p>Giá: {formatCurrencyVND(serviceDetails?.price?.slice(0, -3))}</p>
                                                         <p>Đã chọn: {service.quantity}</p>
                                                     </div>
                                                     <Space>
@@ -221,7 +233,7 @@ const BookingServicePage = () => {
                                             <span>{booking.seats.length}</span>
                                         </h6>
                                         <div className="info">
-                                            <span>{formatDate(movie?.show_date)}, {movie?.show_time.slice(-3, 0)}</span> <span>Tickets</span>
+                                            <span>{formatDate(movie?.show_date)}, {movie?.show_time?.slice(-3, 0)}</span> <span>Tickets</span>
                                         </div>
                                     </li>
                                     <li>
@@ -232,21 +244,19 @@ const BookingServicePage = () => {
                                     </li>
                                 </ul>
                                 <ul className="side-shape">
-                                    {booking.services.map((service: any) => {
+                                    {booking?.services.map((service: any) => {
                                         const _service = services.data.find((_s: any) => _s.id === service.service_id);
                                         return (
-                                            <Fragment key={service.service_id}>
-                                                <li>
-                                                    <h6 className="subtitle">
-                                                        <span>{_service.name}</span>
-                                                        <span>{formatCurrencyVND(service.subtotal)}</span>
-                                                    </h6>
-                                                    <div className="info">
-                                                        <span>Số lượng</span>
-                                                        <span>{service.quantity}</span>
-                                                    </div>
-                                                </li>
-                                            </Fragment>
+                                            <li key={service.service_id}>
+                                                <h6 className="subtitle">
+                                                    <span>{_service.name}</span>
+                                                    <span>{formatCurrencyVND(service.subtotal)}</span>
+                                                </h6>
+                                                <div className="info">
+                                                    <span>Số lượng</span>
+                                                    <span>{service.quantity}</span>
+                                                </div>
+                                            </li>
                                         )
                                     })}
                                     <li>
@@ -260,7 +270,7 @@ const BookingServicePage = () => {
                             <div className="proceed-area text-center">
                                 <h6 className="subtitle">
                                     <span>Phải thanh toán</span>
-                                    <span>{formatCurrencyVND(booking.subtotal) || 0}</span>
+                                    <span>{formatCurrencyVND(booking?.subtotal) || 0}</span>
                                 </h6>
                             </div>
                             <div className="note text-white">
@@ -288,9 +298,9 @@ const BookingServicePage = () => {
                                     </li>
                                 </ul>
                                 <div className="form-group">
-                                    <Button htmlType="submit" loading={isPending} onClick={handlePaymentTicket} className="custom-button">
+                                    <span onClick={handlePaymentTicket} className="custom-button">
                                         Thanh toán
-                                    </Button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
