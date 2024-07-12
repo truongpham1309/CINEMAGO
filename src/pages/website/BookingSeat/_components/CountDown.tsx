@@ -1,18 +1,18 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { notification } from 'antd';
 import { formatTime } from '@/common/libs/fomatSecondToMinute';
 import { useDispatch } from 'react-redux';
 import { clean_booking } from '@/common/store/booking/sliceBooking';
 import { delete_info_movie } from '@/common/store/booking/sliceMovie';
+import { toast } from 'react-toastify';
 
 const CountDown = () => {
     const navigate = useNavigate();
-    const [countDown, setCountDown] = useState(10 * 60); // 5 minutes in seconds
+    const [countDown, setCountDown] = useState(5 * 60);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const storedStartTime = sessionStorage.getItem('countdownStart');
+        const storedStartTime = sessionStorage.getItem('countdownStart') || null;
         const startTime = storedStartTime ? new Date(storedStartTime) : new Date();
         sessionStorage.setItem('countdownStart', startTime.toISOString());
 
@@ -22,7 +22,14 @@ const CountDown = () => {
             const newCountDown = countDown - elapsedSeconds;
 
             if (newCountDown <= 0) {
-                handleCountdownEnd();
+                sessionStorage.clear();
+                dispatch(clean_booking());
+                dispatch(delete_info_movie());
+                toast.error("Hết thời gian, vui lòng thực hiện lại thao tác!", {
+                    position: 'top-center',
+
+                })
+                navigate('/movie');
                 clearInterval(intervalId);
             } else {
                 setCountDown(newCountDown);
@@ -31,19 +38,6 @@ const CountDown = () => {
 
         return () => clearInterval(intervalId);
     }, []);
-
-    const handleCountdownEnd = () => {
-        sessionStorage.removeItem('countdownStart');
-        sessionStorage.removeItem('count_down');
-        dispatch(clean_booking());
-        dispatch(delete_info_movie());
-        notification.error({
-            message: 'Thông báo',
-            description: 'Đã hết thời gian, vui lòng thực hiện lại thao tác!',
-        });
-        navigate('/movie');
-    };
-
     return (
         <div className="item">
             <h5 className="title">{formatTime(countDown)}</h5>

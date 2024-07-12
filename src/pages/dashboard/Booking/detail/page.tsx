@@ -62,7 +62,7 @@ const BookingDetailDashBoardPage = () => {
   const tableData = [
     ...ResponseAPI.services,
     {
-      name: "Vé",
+      name: "Vé phim",
       quantity: ResponseAPI.ticket.quantity,
       subtotal: ResponseAPI.ticket.subtotal,
     }
@@ -85,7 +85,7 @@ const BookingDetailDashBoardPage = () => {
             <Descriptions.Item label="Booking ID">{ResponseAPI.booking.id}</Descriptions.Item>
             <Descriptions.Item label="Khách hàng">{ResponseAPI.booking.user}</Descriptions.Item>
             <Descriptions.Item label="Ngày">{ResponseAPI.booking.show_date}</Descriptions.Item>
-            <Descriptions.Item label="Giờ">{ResponseAPI.booking.show_time}</Descriptions.Item>
+            <Descriptions.Item label="Suất chiếu">{ResponseAPI.booking.show_time}</Descriptions.Item>
             <Descriptions.Item label="Loại màn hình">{ResponseAPI.booking.screen}</Descriptions.Item>
             <Descriptions.Item label="Trạng thái">{ResponseAPI.booking.status}</Descriptions.Item>
           </Descriptions>

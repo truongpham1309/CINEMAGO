@@ -14,10 +14,8 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
         const countdownInterval = setInterval(() => {
             if (countdown <= 0) {
                 clearInterval(countdownInterval);
-                if (type === "QUESTIONS" || type === "SUCCESS") {
-                    dispatch(clean_booking());
-                    dispatch(delete_info_movie());
-                }
+                dispatch(clean_booking());
+                dispatch(delete_info_movie());
                 navigate('/');
                 return;
             }
@@ -26,6 +24,24 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
 
         return () => clearInterval(countdownInterval);
     }, [countdown]);
+    const handleNavigateHome = () => {
+        dispatch(clean_booking());
+        dispatch(delete_info_movie());
+        navigate('/');
+        return;
+    }
+
+    const handleNavigateCheckout = () => {
+        navigate('/movie/booking/services');
+        return;
+    }
+
+    const handleViewDetailTicket = () => {
+        dispatch(clean_booking());
+        dispatch(delete_info_movie());
+        navigate('/detail/ticket');
+        return;
+    }
     return (
         <div className="custom-result">
             {type === "QUESTIONS" ? (
@@ -59,13 +75,13 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
                     extra={
                         [
                             type === "SUCCESS" ?
-                                <Button onClick={() => navigate('/detail/ticket')} type="primary" key="ticketDetails">
+                                <Button onClick={handleViewDetailTicket} type="primary" key="ticketDetails">
                                     Xem chi tiết vé
                                 </Button> :
-                                <Button onClick={() => navigate('/movie/booking/checkout')} className='btn-danger' key="ticketDetails">
+                                <Button onClick={handleNavigateCheckout} className='btn-danger' key="ticketDetails">
                                     Quay lại trang thanh toán
                                 </Button>,
-                            <Button onClick={() => navigate('/')} className='btn-success' key="home">
+                            <Button onClick={handleNavigateHome} className='btn-success' key="home">
                                 Quay về trang chủ
                             </Button>,
                         ]
