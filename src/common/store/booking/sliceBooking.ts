@@ -118,6 +118,11 @@ export const sliceBooking: any = createSlice({
         add_url: (state, action: PayloadAction<any>) => {
             return state.url = action.payload;
         },
+        clean_seats: (state) => {
+            let price_service = state.services.length === 0 ? 0 : state.services.reduce((sum: any, current: any) => sum + current.subtotal, 0);
+            state.subtotal = price_service;
+            state.seats = [];
+        },
         clean_booking: (state) => {
             state.showtime_id = 0;
             state.seats = [];
@@ -127,5 +132,5 @@ export const sliceBooking: any = createSlice({
     }
 });
 
-export const { add_showtime, add_seats, add_services, clean_booking, delete_showtime, add_user_id, delete_service, decrement_service, increment_service } = sliceBooking.actions;
+export const { add_showtime, add_seats, clean_seats, add_services, clean_booking, delete_showtime, add_user_id, delete_service, decrement_service, increment_service } = sliceBooking.actions;
 export default sliceBooking.reducer;

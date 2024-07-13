@@ -17,13 +17,15 @@ import { selectorBooking } from "@/common/store/booking/selectorBooking";
 import { add_seats } from "@/common/store/booking/sliceBooking";
 import MovieBanner from "../_components/Booking/MovieBanner";
 import { validateSeatSelection } from "./libs/checkSeat";
+import { useChooseSeatsBooking } from "./hooks/useChooseSeat";
 
 
 const items = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"];
 const BookingSeatPage = () => {
     let count = 0;
-    const { id } = useParams();
+    const { id: showtime_id } = useParams();
     const dispatch = useDispatch();
+    const { mutate, isError: isErrorSeat, isPending } = useChooseSeatsBooking();
     const bookingMovie = useSelector(selectorBooking);
     const navigate = useNavigate();
     useEffect(() => {
@@ -36,9 +38,9 @@ const BookingSeatPage = () => {
     }, [bookingMovie]);
 
     const { data, isLoading, isError } = useQuery({
-        queryKey: ['SEATS_MAP', id],
+        queryKey: ['SEATS_MAP', showtime_id],
         queryFn: async () => {
-            const { data } = await getSeatMapByIDShowTime(+id!);
+            const { data } = await getSeatMapByIDShowTime(+showtime_id!);
             return data;
         }
     });
@@ -66,6 +68,9 @@ const BookingSeatPage = () => {
 
     const handleChooseSeatBooking = ({ id, price, ...rest }: any) => {
         const seat = bookingMovie?.seats.find((_s: any) => +_s === +id);
+        const booking_seat = seat || rest.status === "Selected" ? { seat_ids: [id], showtime_id: showtime_id } : { id, showtime_id: showtime_id };
+        mutate({ type: seat || rest.status === "Selected" ? "CANCEL" : "CHOOSE", booking_seat: booking_seat });
+        if (isErrorSeat) return
         dispatch(add_seats({ id, price }));
         if (seat) {
             let _newSeats = chooseSeat.filter((_s: any) => _s !== rest.seatNumber);
@@ -89,7 +94,7 @@ const BookingSeatPage = () => {
             return;
         }
         const checkSeatEmptyMiddle = validateSeatSelection(data.seats, bookingMovie.seats);
-        if(checkSeatEmptyMiddle) navigate('/movie/booking/services');
+        if (checkSeatEmptyMiddle) navigate('/movie/booking/services');
     }
     if (isLoading) return <LoadingComponent />;
     if (isError) return <NotFoundPage />;
