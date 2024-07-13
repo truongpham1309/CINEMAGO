@@ -30,14 +30,16 @@ const PaymentStatusMoMo = () => {
             switch (resultCode) {
                 case "0":
                     toast.success("Thanh toán thành công!", {
-                        position: 'top-center'
+                        position: 'top-center',
+                        autoClose: 1000,
                     });
                     dispatch(clean_booking());
                     dispatch(delete_info_movie());
                     break;
                 case "1006":
                     toast.success("Đã hủy thanh toán!", {
-                        position: 'top-center'
+                        position: 'top-center',
+                        autoClose: 1000,
                     });
                     break;
                 default:
@@ -46,16 +48,17 @@ const PaymentStatusMoMo = () => {
         onError: () => {
             toast.error("Lỗi xác nhận thanh toán!", {
                 position: 'top-center',
+                autoClose: 1000,
             })
         }
     });
     useEffect(() => {
         if (resultCode === "0") setStatus("SUCCESS");
         if (resultCode === "1006") setStatus("FAILD");
+        if (['0', '1006'].includes(resultCode)) {
+            mutate();
+        }
     }, [location]);
-    if (['0', '1006'].includes(resultCode)) {
-        mutate();
-    }
     if (isPending) return <LoadingComponent />
     return (
         <>
