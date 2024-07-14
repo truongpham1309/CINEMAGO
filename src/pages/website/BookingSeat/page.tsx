@@ -18,6 +18,7 @@ import { add_seats } from "@/common/store/booking/sliceBooking";
 import MovieBanner from "../_components/Booking/MovieBanner";
 import { validateSeatSelection } from "./libs/checkSeat";
 import { useChooseSeatsBooking } from "./hooks/useChooseSeat";
+import { toast } from "react-toastify";
 
 
 const items = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"];
@@ -25,14 +26,11 @@ const BookingSeatPage = () => {
     let count = 0;
     const { id: showtime_id } = useParams();
     const dispatch = useDispatch();
-    const { mutate, isError: isErrorSeat, isPending } = useChooseSeatsBooking();
+    const { mutate } = useChooseSeatsBooking();
     const bookingMovie = useSelector(selectorBooking);
     const navigate = useNavigate();
     useEffect(() => {
-        if (!bookingMovie) {
-            notification.info({
-                message: "Bạn chưa chọn suất chiếu!",
-            });
+        if (!bookingMovie.showtime_id) {
             navigate('/movie');
         }
     }, [bookingMovie]);
@@ -69,8 +67,21 @@ const BookingSeatPage = () => {
     const handleChooseSeatBooking = ({ id, price, ...rest }: any) => {
         const seat = bookingMovie?.seats.find((_s: any) => +_s === +id);
         const booking_seat = seat || rest.status === "Selected" ? { seat_ids: [id], showtime_id: showtime_id } : { id, showtime_id: showtime_id };
-        mutate({ type: seat || rest.status === "Selected" ? "CANCEL" : "CHOOSE", booking_seat: booking_seat });
-        if (isErrorSeat) return
+        if (bookingMovie.seats.length === 8 && !seat) {
+            toast.error("Bạn chỉ được đặt tối đa 8 ghế!", {
+                position: "top-center",
+                autoClose: 1000
+            });
+            return
+        }
+        mutate({ type: seat && rest.status === "Selected" ? "CANCEL" : "CHOOSE", booking_seat: booking_seat }, {
+            onSuccess: () => {
+            },
+            onError: (err) => {
+                console.log(err);
+                dispatch(add_seats({ id, price }));
+            }
+        });
         dispatch(add_seats({ id, price }));
         if (seat) {
             let _newSeats = chooseSeat.filter((_s: any) => _s !== rest.seatNumber);
@@ -119,7 +130,7 @@ const BookingSeatPage = () => {
                                     count++;
                                     return (
                                         <li key={i} className="seat-line">
-                                            <span>{s[0].type?.includes("thường") ? "N" : (s[0].type?.includes("VIP") ? "V" : "C")}</span>
+                                            <span>{s[0].type?.includes("thường") ? "N" : (s[0].type?.includes("vip") ? "V" : "C")}</span>
                                             <ul className="seat--area">
                                                 <li className="front-seat">
                                                     <ul>

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import SignInPage from "@/pages/auth/SignIn/page"
 import SignUpUserPage from "@/pages/auth/SignUp/page"
 import LayoutDashBoard from "@/pages/dashboard/LayoutDashBoard"
-import PrivateRouterLogin from "./PrivateRouterLogin"
+import PrivateRouterLogin, { PrivateRouterBooking, PrivateRouterDashBoard } from "./PrivateRouterLogin"
 import MovieCreatePage from "@/pages/dashboard/Movies/create/page"
 import NotFoundPage from "@/pages/website/404/page"
 import MovieListPage from "@/pages/dashboard/Movies/list/page"
@@ -51,6 +51,7 @@ import CheckoutStatusPage from "@/pages/website/CheckoutStatus/page"
 import HomePage from "@/pages/website/HomePage/page"
 import CinemaList from "@/pages/dashboard/RoomsCinema/create/cinemaList"
 import TicketListPage from "@/pages/dashboard/Ticket/list/page"
+import LayoutBooking from "@/pages/website/_components/LayoutBooking/LayoutBooking"
 
 const Router = () => {
   return (
@@ -66,15 +67,18 @@ const Router = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/movie" element={<MovieList />} />
             <Route path="/movie/detail/:id" element={<MovieDetail />} />
-            <Route path="/movie/booking-movie/:id" element={<BookingMovieShowTimePage />} />
-            <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
-            <Route path="/movie/booking/services" element={<BookingServicePage />} />
-            <Route path="/movie/booking/status/:method" element={<CheckoutStatusPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route path="" element={<PrivateRouterBooking><LayoutBooking /></PrivateRouterBooking>}>
+              <Route path="/movie/booking-movie/:id" element={<BookingMovieShowTimePage />} />
+              <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
+              <Route path="/movie/booking/services" element={<BookingServicePage />} />
+              <Route path="/movie/booking/status/:method" element={<CheckoutStatusPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Route>
           </Route>
 
           {/* DashBoard */}
-          <Route path="dashboard" element={<LayoutDashBoard />}>
+          <Route path="dashboard" element={<PrivateRouterDashBoard><LayoutDashBoard /></PrivateRouterDashBoard>}>
             <Route index element={<DashBoardHomePage />} />
             <Route path="/dashboard/movie" element={<MovieListPage />} />
             <Route path="/dashboard/movie/create" element={<MovieCreatePage />} />

@@ -1,7 +1,8 @@
 import { selectorBooking } from '@/common/store/booking/selectorBooking';
 import { clean_seats } from '@/common/store/booking/sliceBooking';
+import { delete_info_movie } from '@/common/store/booking/sliceMovie';
 import { useChooseSeatsBooking } from '@/pages/website/BookingSeat/hooks/useChooseSeat';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useUnload = () => {
@@ -9,53 +10,47 @@ const useUnload = () => {
     const dispatch = useDispatch();
     const { mutate } = useChooseSeatsBooking();
     const isApiCalled = useRef(false);
-    const [shouldReload, setShouldReload] = useState(false);
 
-    const handleUnload = (event: any) => {
-        console.log('handleUnload called');  // Câu lệnh debugging
-        if (booking.seats.length > 0 && !isApiCalled.current) {
-            event.preventDefault();
-            event.returnValue = '';
+    const handleCancelBooking = () => {
+        if (booking?.seats.length > 0) {
             isApiCalled.current = true;
 
             mutate({
                 type: "CANCEL",
-                booking_seat: { seat_ids: booking.seats, showtime_id: booking?.showtime_id }
+                booking_seat: { seat_ids: booking?.seats, showtime_id: booking?.showtime_id }
             }, {
                 onSuccess: () => {
+                    console.log('Cancel booking API call successful');
                     dispatch(clean_seats());
+                    dispatch(delete_info_movie());
                     sessionStorage.removeItem("countdownStart");
-                    isApiCalled.current = false;
-                    setShouldReload(true); // Set state to trigger reload
                 },
                 onError: () => {
+                    console.log('Cancel booking API call failed');
                     isApiCalled.current = false;
                 }
             });
-            return false;
         }
     };
 
     useEffect(() => {
-        window.addEventListener('beforeunload', handleUnload);
-
-        const removeUnloadListener = () => {
-            window.removeEventListener('beforeunload', handleUnload);
+        const handleBeforeUnload = (event: any) => {
+            if (booking?.seats.length > 0) {
+                handleCancelBooking();
+                const confirmationMessage = 'Bạn có thay đổi chưa lưu, bạn có thực sự muốn rời đi?';
+                event.returnValue = confirmationMessage;
+                return confirmationMessage;
+            }
         };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
         return () => {
-            removeUnloadListener();
+            window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [booking]);  // Đảm bảo event listener được cập nhật khi booking thay đổi
+    });
 
-    useEffect(() => {
-        if (shouldReload) {
-            window.location.reload();
-        }
-    }, [shouldReload]);
-
-    useEffect(() => {
-        isApiCalled.current = false;
-    }, []);
+    return null;
 };
 
 export default useUnload;
