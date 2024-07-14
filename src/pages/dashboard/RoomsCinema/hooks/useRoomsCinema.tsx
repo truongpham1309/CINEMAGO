@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 export const useRoomCinemaQuery = () => {
     const query = useQuery({
-        queryKey: ['CINEMA-SCREEN'],
+        queryKey: ['ROOMS-CINEMA'],
         queryFn: async () => {
             const data = await getAllRooms();
             return data;

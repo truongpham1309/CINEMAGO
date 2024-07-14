@@ -23,7 +23,8 @@ const SideBarComponent = () => {
         },
         {
             id: 4, title: "Phòng chiếu", sku: "rooms", icon: "fas fa-door-open fa-fw", children: [
-                { id: "rooms1", title: "Danh sách phòng chiếu", path: "/dashboard/room-cinema" }
+                { id: "rooms1", title: "Danh sách phòng chiếu", path: "/dashboard/room-cinema" },
+                { id: "rooms2", title: "Thêm mới phòng chiếu", path: "/dashboard/room-cinema/show-cinema"}
             ]
         },
         {

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 const currentBooking = JSON.parse(sessionStorage.getItem("bookings")!)?.booking;
 const booking: any = currentBooking ? currentBooking : {
-    user_id: JSON.parse(localStorage.getItem('user')!).data.id,
+    user_id: JSON.parse(localStorage.getItem('user')!)?.data.id || null,
     showtime_id: 0,
     seats: [],
     services: [],

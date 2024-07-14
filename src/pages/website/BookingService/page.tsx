@@ -15,6 +15,7 @@ import NotFoundPage from "../404/page"
 import { add_services, clean_booking, decrement_service, delete_service, increment_service } from "@/common/store/booking/sliceBooking"
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons"
 import { TPaymentMethod } from "@/common/types/booking"
+import { delete_info_movie } from "@/common/store/booking/sliceMovie"
 
 const BookingServicePage = () => {
     const navigate = useNavigate();
@@ -30,11 +31,12 @@ const BookingServicePage = () => {
     });
     const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
     useEffect(() => {
-        if (!movie) {
+        if (!movie || booking.seats.length === 0) {
             toast.error('Mời bạn chọn phim!', {
                 position: 'top-center'
             });
             dispatch(clean_booking());
+            dispatch(delete_info_movie());
             sessionStorage.clear();
             navigate('/movie');
             return;
