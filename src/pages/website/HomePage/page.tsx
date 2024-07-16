@@ -20,6 +20,7 @@ const HomePage = () => {
                 <div
                     className="banner-bg bg_img bg-fixed"
                     data-background="/src/assets/images/banner/banner01.jpg"
+                    
                 />
                 <div className="container">
                     <div className="banner-content">
@@ -44,24 +45,24 @@ const HomePage = () => {
                     <div className="tab">
                         <div className="section-header-2">
                             <div className="left">
-                                <h2 className="title">movies</h2>
-                                <p>Be sure not to miss these Movies today.</p>
+                                <h2 className="title">Phim</h2>
+                                {/* <p>Be sure not to miss these Movies today.</p> */}
                             </div>
-                            <ul className="tab-menu">
+                            <ul className="tab-menu text-white">
                                 <li
                                     className="active"
                                     onClick={() => {
                                         setStatusMovie(1);
                                     }}
                                 >
-                                    now showing
+                                    Phim Đang chiếu
                                 </li>
                                 <li
                                     onClick={() => {
                                         setStatusMovie(2);
                                     }}
                                 >
-                                    coming soon
+                                    Phim sắp chiếu
                                 </li>
                             </ul>
                         </div>

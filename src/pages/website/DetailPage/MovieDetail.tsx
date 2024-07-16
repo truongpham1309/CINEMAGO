@@ -3,10 +3,11 @@ import { VideoButton } from "@/assets/images/movie";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { getDetailMovieClient } from "@/services/movie/movieService";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalVideo from 'react-modal-video';
 import { Link, useParams } from "react-router-dom";
 import NotFoundPage from "../404/page";
+import ShowTimeByMovie from "./_components/ShowTimeByMovie";
 
 interface Movie {
   id: number;
@@ -24,8 +25,9 @@ interface Movie {
 }
 
 const extractVideoId = (url: string) => {
-  const urlObj = new URL(url);
-  return urlObj.searchParams.get('si');
+  const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
 };
 
 const MovieDetail = () => {
@@ -43,7 +45,7 @@ const MovieDetail = () => {
   if (isError) return <NotFoundPage />;
   return (
     <>
-      <section className="details-banner bg_img" data-background={Banner03}>
+      <section className="details-banner bg_img" data-background={movies?.image}>
         <div className="container">
           <div className="details-banner-wrapper">
             <div className="details-banner-thumb">
@@ -52,7 +54,7 @@ const MovieDetail = () => {
                 <img src={VideoButton} alt="movie" />
               </span>
             </div>
-            <ModalVideo channel='youtube' isOpen={showTrailer} videoId={extractVideoId(movies?.trailer || "")} onClose={() => setShowTrailer(false)} />
+            <ModalVideo channel='youtube' isOpen={showTrailer} videoId={extractVideoId(movies?.trailer || "") || ""} onClose={() => setShowTrailer(false)} />
             <div className="details-banner-content offset-lg-3">
               <h3 className="title fw-bold text-uppercase">{movies?.title}</h3>
               <div className="tags">
@@ -89,33 +91,20 @@ const MovieDetail = () => {
                 <p>audience Score</p>
               </div>
             </div>
-            <Link to={`/movie/booking-movie/${movies?.id}`}>
+            {/* <Link to={`/movie/booking-movie/${movies?.id}`}>
               <span className="custom-button">
                 book tickets
               </span>
-            </Link>
+            </Link> */}
 
           </div>
         </div>
       </section>
+      
+      <ShowTimeByMovie movieID={movies?.id} />
       <section className="movie-details-section padding-top padding-bottom">
         <div className="container">
           <div className="row justify-content-center mb--50">
-            <div className="col-lg-3 col-sm-10 col-md-6 mb-50">
-              <div className="widget-1 widget-tags">
-                <ul className="mt-4">
-                  <li>
-                    <a>2D</a>
-                  </li>
-                  <li>
-                    <a>imax 2D</a>
-                  </li>
-                  <li>
-                    <a>4DX</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
             <div className="col-lg-12 mb-50">
               <div className="movie-details">
                 <h3 className="text-uppercase text-center text-bold">Tóm tắt</h3>
