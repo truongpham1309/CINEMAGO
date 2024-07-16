@@ -36,7 +36,7 @@ const MovieList = () => {
       filtered = movies.filter(movie => movie.status === status).map(movie => movie.id);
     }
 
-    if (_newGenre.length > 0 ) {
+    if (_newGenre.length > 0) {
       let currentMovieId: number[] = [];
       for (let _gen of _newGenre) {
         let _movieid = movies.filter(_m => _m.genre.includes(_gen)).map(__m => __m.id);
@@ -83,7 +83,7 @@ const MovieList = () => {
                 <div className="widget-1-body">
                   <h6 className="subtitle">Thể loại</h6>
                   <div className="check-area">
-                    {genres.map((g, i) => (
+                    {genres?.map((g, i) => (
                       <div onClick={() => handleGenreFilterChange(g)} key={i} className="form-group m-0">
                         <input type="checkbox" name="lang" checked={genreFilter.includes(g)} id={g} />
                         <label className="pt-1" htmlFor="lang1">{g}</label>
@@ -99,20 +99,11 @@ const MovieList = () => {
                   <div className="filter-main">
                     <div className="left">
                       <div className="item">
-                        <span className="show">Show :</span>
-                        <select className="select-bar">
-                          <option value={12}>12</option>
-                          <option value={15}>15</option>
-                          <option value={18}>18</option>
-                          <option value={21}>21</option>
-                          <option value={24}>24</option>
-                          <option value={27}>27</option>
-                          <option value={30}>30</option>
-                        </select>
+                        <span className="show text-white">Hiển thị: {movies?.length} phim</span>
                       </div>
                       <div className="item">
-                        <span className="show">Sort By :</span>
-                        <div className="nice-select" tabIndex={0}>
+                        <span className="show text-white">Sort By :</span>
+                        <div className="nice-select">
                           <span className="current">Comming Soon</span>
                           <ul className="list">
                             <li
@@ -169,8 +160,8 @@ const MovieList = () => {
                               </div>
                               <div className="movie-content bg-one">
                                 <h5 className="title m-0">
-                                  <Link to={`/movie/detail/${movie.id}`}>
-                                    {movie.title}
+                                  <Link to={`/movie/detail/${movie?.id}`}>
+                                    {movie?.title.length > 20 ? `${movie?.title.substring(0, 20)}...` : movie?.title}
                                   </Link>
                                 </h5>
                                 <ul className="movie-rating-percent">
@@ -186,12 +177,12 @@ const MovieList = () => {
                               </div>
                             </div>
                           </div>
-                        ) : null;
+                        ) : null
                       })}
                     </div>
                   </div>
                 </div>
-                <div className="pagination-area text-center">
+                {/* <div className="pagination-area text-center">
                   <a href="#0">
                     <i className="fas fa-angle-double-left" />
                     <span>Prev</span>
@@ -207,7 +198,7 @@ const MovieList = () => {
                     <span>Next</span>
                     <i className="fas fa-angle-double-right" />
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

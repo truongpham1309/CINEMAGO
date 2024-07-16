@@ -1,12 +1,12 @@
 import axios from 'axios';
-const seatMap = "NNNNNNNNNN|NNNNNNNNNN|NNNNNNNNNN|NNNNNNNNNN|VVVVVVVVVV|VVVVVVVVVV|VVVVVVVVVV|VVVVVVVVVV|CCCCCCCCCC";
+const seatMap = "NNNNNNNNNNNN|NNNNNNNNNNNN|NNNNNNNNNNNN|NNNNNNNNNNNN|VVVVVVVVVVVV|VVVVVVVVVVVV|VVVVVVVVVVVV|VVVVVVVVVVVV|XXXXXXXXXXXX|CCCCCCCCCCCC";
 const row = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"];
 let count = 0;
-const CINEMA_SCREEN_ID = 7
+const CINEMA_SCREEN_ID = 6
 const seatType = {
-    nomal: 7,
-    vip: 8,
-    copple: 9
+    nomal: 1,
+    vip: 2,
+    copple: 3
 }
 const createSeat = (seatMap) => {
     seatMap.split("|").forEach((_seatmap) => {

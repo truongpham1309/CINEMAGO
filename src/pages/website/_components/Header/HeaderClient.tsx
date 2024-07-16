@@ -4,10 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 
 const HeaderClient = () => {
   const location = useLocation();
+  const user = JSON.parse(localStorage.getItem("user")!) || null;
   const [pathName, setPathName] = useState("/");
   useEffect(() => {
     setPathName(location.pathname);
   }, [location.pathname]);
+
   return (
     <>
       <header className="header-section">
@@ -21,33 +23,28 @@ const HeaderClient = () => {
             <ul className="menu">
               <li>
                 <Link to="/" className={pathName === "/" ? "active" : ""}>
-                  Home
+                  Trang chủ
                 </Link>
               </li>
               <li>
-                <Link to="/movie" className={pathName === "/movie" ? "active" : ""}>movies</Link>
+                <Link to="/movie" className={pathName.includes("/movie") ? "active" : ""}>Phim</Link>
               </li>
               <li>
-                <Link to="#0">events</Link>
+                <Link to="#0">Rạp</Link>
               </li>
               <li>
-                <Link to="#0">pages</Link>
+                <Link to="#0">Sự kiện</Link>
               </li>
-              <li>
-                <Link to="contact.html">contact</Link>
-              </li>
-              <li>
-                <Link to="#0" />
-              </li>
-              <li>
-                <Link to="#0" />
-              </li>
-              <li>
-                <Link to="#0" />
-              </li>
-              <li className="header-button pr-0">
-                <Link to="/sign-up">Sign up</Link>
-              </li>
+              {user ? (
+                <li className="header-button pr-0">
+                  <Link to="">Tài khoản</Link>
+                </li>
+              ) : (
+                <li className="header-button pr-0">
+                  <Link to="/sign-up">Sign up</Link>
+                </li>
+              )}
+
             </ul>
             <div className="header-bar d-lg-none">
               <span />

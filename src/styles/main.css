@@ -2188,7 +2188,7 @@ input[type="submit"] {
 }
 
 .book-section {
-  padding: 65px 0;
+  padding: 80px 0;
   border-top: 1px solid #17305f;
   border-bottom: 1px solid #17305f;
 }
@@ -3417,6 +3417,10 @@ input[type="submit"] {
   width: 100%;
   overflow: hidden;
   border-radius: 7px 7px 0px 0px;
+}
+.movie-list .movie-thumb img{
+  object-fit: contain;
+  width: 100%;
 }
 
 @media (min-width: 576px) {
