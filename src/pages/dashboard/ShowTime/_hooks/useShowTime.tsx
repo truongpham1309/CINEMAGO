@@ -6,12 +6,17 @@ import { toast } from "react-toastify";
 import { createShowTime, deleteShowTimeByID, getAllShowTimeDashBoard, updateShowTimeByID } from "@/services/showTime/showTimeService";
 import { Button, Popconfirm, TableProps } from "antd";
 import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
-import confirm from "antd/es/modal/confirm";
+import { getAllMovieListShowTime } from "@/services/movie/movieService";
 
 export const useShowTimeMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE" }) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const movie = useMovieQuery();
+    const movie = useQuery({
+        queryKey: ['MOVIES'],
+        queryFn: async () => {
+            return await getAllMovieListShowTime();
+        }
+    });
     const cinema = useRoomCinemaQuery();
 
     const mutation = useMutation({

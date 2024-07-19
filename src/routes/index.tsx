@@ -42,7 +42,6 @@ import SeatEditPage from "@/pages/dashboard/Seat/edit/page"
 import BookingDashBoardPage from "@/pages/dashboard/Booking/list/page"
 import DashBoardHomePage from "@/pages/dashboard/Home/page"
 import BookingDetailDashBoardPage from "@/pages/dashboard/Booking/detail/page"
-import BookingMovieShowTimePage from "@/pages/website/BookingMovie/page"
 import ProfilePage from './../pages/website/Profile/page';
 import MovieDetailPage from "@/pages/dashboard/Movies/detail/page"
 import BookingSeat from "@/pages/website/BookingSeat/page"
@@ -69,7 +68,6 @@ const Router = () => {
             <Route path="/movie/detail/:id" element={<MovieDetail />} />
 
             <Route path="" element={<PrivateRouterBooking><LayoutBooking /></PrivateRouterBooking>}>
-              <Route path="/movie/booking-movie/:id" element={<BookingMovieShowTimePage />} />
               <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
               <Route path="/movie/booking/services" element={<BookingServicePage />} />
               <Route path="/movie/booking/status/:method" element={<CheckoutStatusPage />} />

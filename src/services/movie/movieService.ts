@@ -79,3 +79,13 @@ export const getAllMovieHomePage = async (status: number = 0, limit: number = 12
         throw new Error(error);
     }
 }
+
+export const getAllMovieListShowTime = async () => {
+    try {
+        const { data } = await axios.get("/client/movie");
+        return data
+    } catch (error: any) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
