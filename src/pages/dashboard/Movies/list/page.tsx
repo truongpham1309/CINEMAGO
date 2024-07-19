@@ -46,6 +46,11 @@ const MovieListPage = () => {
             key: "release_date",
         },
         {
+            title: "Ngày dừng chiếu",
+            dataIndex: "end_date",
+            key: "end_date",
+        },
+        {
             title: "Trạng thái",
             dataIndex: "status",
             key: "status",
@@ -59,7 +64,7 @@ const MovieListPage = () => {
             </>
         }
     ];
-
+    console.log(movie);
     if (isLoading) return <LoadingComponent />
     if (isError) return <ServerError />
     return (

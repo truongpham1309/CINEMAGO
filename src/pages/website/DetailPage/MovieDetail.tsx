@@ -1,4 +1,3 @@
-import { Banner03 } from "@/assets/images/banner";
 import { VideoButton } from "@/assets/images/movie";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { getDetailMovieClient } from "@/services/movie/movieService";
@@ -63,6 +62,7 @@ const MovieDetail = () => {
               <Link to="#0" className="button">
                 {movies?.genre}
               </Link>
+              <span className="button ml-2">{movies?.rated}</span>
               <div className="social-and-duration">
                 <div className="duration-area">
                   <div className="item">

@@ -10,7 +10,7 @@ import { useChooseSeatsBooking } from '../hooks/useChooseSeat';
 
 const CountDown = () => {
     const navigate = useNavigate();
-    const [countDown, setCountDown] = useState(1 * 60);
+    const [countDown, setCountDown] = useState(5 * 60);
     const [countDownStart, setCountDownStart] = useState<Date | null>(null);
     const booking = useSelector(selectorBooking);
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const CountDown = () => {
         if (!storedStartTime) {
             setCountDownStart(_temp_time);
             sessionStorage.setItem('countdownStart', _temp_time.toISOString());
-            setCountDown(1 * 60); // Khởi tạo countdown khi không có storedStartTime
+            setCountDown(5 * 60);
             return;
         }
         let newTime = _temp_time;
@@ -42,7 +42,7 @@ const CountDown = () => {
         const intervalId = setInterval(() => {
             const currentTime = new Date();
             const elapsedSeconds = Math.floor((currentTime.getTime() - countDownStart.getTime()) / 1000);
-            const newCountDown = 1 * 60 - elapsedSeconds;
+            const newCountDown = 5 * 60 - elapsedSeconds;
             if (newCountDown <= 0) {
                 if (booking.seats.length > 0) {
                     mutate({

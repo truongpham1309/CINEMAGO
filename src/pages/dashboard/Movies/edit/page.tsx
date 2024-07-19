@@ -142,21 +142,28 @@ const MovieEditPage = () => {
                     </div>
 
                     <div className="row mt-3">
-                        <div className="col-sm-6 col-md-4">
+                        <div className="col-sm-6 col-md-3">
                             <div>
                                 <label className="text-gray-800" htmlFor="">Ngày khởi chiếu</label>
                                 <input type="date" {...register("release_date")} className="form-control" />
                                 {errors.release_date && <span className="text-danger">{errors.release_date.message}</span>}
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-4">
+                        <div className="col-sm-6 col-md-3">
                             <div>
-                                <label className="text-gray-800" htmlFor="">Image</label>
+                                <label className="text-gray-800" htmlFor="">Ngày dừng chiếu</label>
+                                <input type="date" {...register("end_date")} className="form-control" />
+                                {errors.end_date && <span className="text-danger">{errors.end_date.message}</span>}
+                            </div>
+                        </div>
+                        <div className="col-sm-6 col-md-3">
+                            <div>
+                                <label className="text-gray-800" htmlFor="">Ảnh</label>
                                 <input type="file" {...register("image")} className="form-control" />
                                 {errors.image && <span className="text-danger">{errors.image.message}</span>}
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-4">
+                        <div className="col-sm-6 col-md-3">
                             <div>
                                 <label className="text-gray-800" htmlFor="">Trailer(URL)</label>
                                 <input type="text" {...register("trailer")} placeholder="Trailer..." className="form-control" />

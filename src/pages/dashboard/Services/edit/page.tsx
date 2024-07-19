@@ -7,7 +7,7 @@ import LoadingComponent from "@/components/ui/LoadingComponent";
 import ServerError from "../../_components/500";
 
 const ServiceEditPage = () => {
-    const { register, formState: { errors }, reset, handleSubmit, onMutationService, isPending } = useServiceMutation({ type: "UPDATE" });
+    const { register, formState: { errors }, reset, handleSubmit, isPending, mutate } = useServiceMutation({ type: "UPDATE" });
     const { id: idService } = useParams();
     const { isLoading, isError } = useQuery({
         queryKey: ['SERVICES', +idService!],
@@ -17,8 +17,12 @@ const ServiceEditPage = () => {
             return data
         }
     });
-    if(isLoading) return <LoadingComponent />
-    if(isError) return <ServerError />
+
+    const onSubmit = (data: any) => {
+        mutate(data)
+    }
+    if (isLoading) return <LoadingComponent />
+    if (isError) return <ServerError />
     return (
         <>
             <div className="card shadow mb-4">
@@ -26,7 +30,7 @@ const ServiceEditPage = () => {
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Cập nhật dịch vụ</h6>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={handleSubmit(onMutationService)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row mt-3">
                             <div className="col-sm-12 col-md-4">
                                 <div>

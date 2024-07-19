@@ -33,6 +33,12 @@ export const MovieSchema = Joi.object({
         "data.max": "Ngày khởi chiếu phải bắt đầu từ hôm nay!",
         "date.empty": "Ngày khởi chiếu không được để trống",
     }),
+    end_date: Joi.date().required().greater(Joi.ref('release_date')).messages({
+        "date.base": 'Ngày kết thúc không hợp lệ!',
+        "date.required": "Ngày kết thúc là bắt buộc!",
+        "date.greater": "Ngày kết thúc phải lớn hơn ngày khởi chiếu!",
+        "date.empty": "Ngày kết thúc không được để trống",
+    }),
     status: Joi.string().required().max(50).messages({
         "any.required": "Trạng thái phim là bắt buộc",
         "string.empty": "Trạng thái không được để trống!",

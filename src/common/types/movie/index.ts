@@ -9,6 +9,7 @@ export type TMovieCreate = {
     description: string;
     trailer: string;
     release_date: string;
+    end_date: string;
     image: Array<object>;
 }
 
@@ -24,5 +25,6 @@ export type TMovie = {
     description: string;
     trailer: string;
     release_date: string;
+    end_date: string;
     image: string;
 }

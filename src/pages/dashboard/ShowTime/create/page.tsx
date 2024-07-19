@@ -1,5 +1,5 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import { Button } from "antd";
+import { Alert, Button } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ShowTimeSchema } from './../../../../common/validations/showTime/showTimeValid';
 import { useShowTimeMutation } from "../_hooks/useShowTime";
@@ -10,7 +10,7 @@ import { convertTo24Hour } from "@/common/libs/formatTime24hours";
 
 const ShowTimeCreate = () => {
 
-    const { movie, cinema, mutate, isPending } = useShowTimeMutation({ type: "CREATE" });
+    const { movie, cinema, mutate, isPending, error, isError } = useShowTimeMutation({ type: "CREATE" });
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: joiResolver(ShowTimeSchema),
         defaultValues: {
@@ -25,17 +25,17 @@ const ShowTimeCreate = () => {
     const onSubmit: SubmitHandler<any> = (data) => {
         const format_date = formatDateToString(data.show_date);
         const format_time = convertTo24Hour(data.show_time);
-        console.log({ ...data, show_date: format_date, show_time: format_time });
         mutate({ ...data, show_date: format_date, show_time: format_time });
     }
-    if (movie.isLoadingMovie || cinema.isLoading) return <LoadingComponent />;
-    if (movie.isErrorMovie || cinema.isError) return <ServerError />
+    if (movie.isLoading || cinema.isLoading) return <LoadingComponent />;
+    if (movie.isError || cinema.isError) return <ServerError />
     return (
         <>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Tạo mới xuất chiếu</h6>
                 </div>
+                {isError && (<Alert type="warning" message={"Có lỗi sảy ra!"} description={(error as any)?.response.data.message} />)}
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row mt-3">
@@ -44,7 +44,7 @@ const ShowTimeCreate = () => {
                                     <label className="text-gray-800" htmlFor="">Phim</label>
                                     <select {...register("movie_id")} className="form-control">
                                         <option className="form-control" value="">Chọn phim</option>
-                                        {movie.movie.data.movies.map((movie: any) => (
+                                        {movie?.data.data.movie.map((movie: any) => (
                                             <option key={movie.id} className="form-control" value={movie.id}>{movie.title}</option>
                                         ))}
                                     </select>

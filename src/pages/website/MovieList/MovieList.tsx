@@ -99,7 +99,7 @@ const MovieList = () => {
                   <div className="filter-main">
                     <div className="left">
                       <div className="item">
-                        <span className="show text-white">Hiển thị: {movies?.length} phim</span>
+                        <span className="show text-white">Hiển thị: {filterMovies?.length} phim</span>
                       </div>
                       <div className="item">
                         <span className="show text-white">Sort By :</span>
