@@ -72,6 +72,9 @@ const Router = () => {
               <Route path="/movie/booking/services" element={<BookingServicePage />} />
               <Route path="/movie/booking/status/:method" element={<CheckoutStatusPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              {/* <Route />
+              <Route />
+              <Route /> */}
             </Route>
           </Route>
 

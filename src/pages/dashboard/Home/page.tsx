@@ -21,7 +21,22 @@ const DashBoardHomePage = () => {
   return (
     <div className="app">
       <div className="row">
-        <div className="col-6">
+        <div className="col-sm-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu tổng</h6>
+            </div>
+            <div className="card-body">
+              <Chart
+                options={options}
+                series={series}
+                type="radar"
+                width={"700"}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col-sm-12 col-lg-6">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu theo rạp</h6>
@@ -31,12 +46,12 @@ const DashBoardHomePage = () => {
                 options={options}
                 series={series}
                 type="bar"
-                width={"650"}
+                width={"580"}
               />
             </div>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-sm-12 col-lg-6">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu theo phim</h6>
@@ -46,27 +61,27 @@ const DashBoardHomePage = () => {
                 options={options}
                 series={series}
                 type="bar"
-                width={"650"}
+                width={"580"}
               />
             </div>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-sm-12 col-lg-6">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu theo dịch vụ</h6>
+              <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu dịch vụ</h6>
             </div>
             <div className="card-body">
               <Chart
                 options={options}
                 series={series}
                 type="bar"
-                width={"650"}
+                width={"580"}
               />
             </div>
           </div>
         </div>
-        <div className="col-6">
+        <div className="col-sm-12 col-lg-6">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu vé</h6>
@@ -76,7 +91,7 @@ const DashBoardHomePage = () => {
                 options={options}
                 series={series}
                 type="bar"
-                width={"650"}
+                width={"580"}
               />
             </div>
           </div>

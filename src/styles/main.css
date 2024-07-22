@@ -1597,7 +1597,7 @@ input[type="submit"] {
     left: 6px;
     background: #ffffff;
     min-width: 240px;
-    padding: 20px 0;
+    padding: 10px 0;
     -webkit-box-shadow: 0px 0px 11.7px 1.3px rgba(0, 0, 0, 0.08);
     box-shadow: 0px 0px 11.7px 1.3px rgba(0, 0, 0, 0.08);
     opacity: 0;
@@ -1609,7 +1609,7 @@ input[type="submit"] {
   }
 
   .header-wrapper .menu li .submenu li {
-    padding: 0 20px;
+    padding: 0 10px;
   }
 
   .header-wrapper .menu li .submenu li a {
