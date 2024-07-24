@@ -31,9 +31,9 @@ const MovieListPage = () => {
             key: "genre"
         },
         {
-            title: "Đạo diễn",
-            dataIndex: "director",
-            key: "director",
+            title: "Ảnh",
+            key: "image",
+            render: (record) => (<img src={record.image} style={{width: 80}} />),
         },
         {
             title: "Thời lượng",

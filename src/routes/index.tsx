@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"
 import SignInPage from "@/pages/auth/SignIn/page"
 import SignUpUserPage from "@/pages/auth/SignUp/page"
 import LayoutDashBoard from "@/pages/dashboard/LayoutDashBoard"
@@ -51,11 +51,13 @@ import HomePage from "@/pages/website/HomePage/page"
 import CinemaList from "@/pages/dashboard/RoomsCinema/create/cinemaList"
 import TicketListPage from "@/pages/dashboard/Ticket/list/page"
 import LayoutBooking from "@/pages/website/_components/LayoutBooking/LayoutBooking"
+import { ScrollToTop } from "@/common/hooks/global/useScrollToTop"
 
 const Router = () => {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
           <Route path="/login" element={<PrivateRouterLogin><SignInPage /></PrivateRouterLogin>} />
