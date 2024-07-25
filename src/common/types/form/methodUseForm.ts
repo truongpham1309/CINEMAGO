@@ -19,7 +19,7 @@ export type TFormSignUpMethodProps = {
 }
 
 export type TFormSignInMethodProps = {
-    register: UseFormRegister<TInputDataLogin>;
+    register: UseFormRegister<TInputDataLogin | any>;
     handleSubmit: UseFormHandleSubmit<TInputDataLogin>;
     errors: FieldErrors<TInputDataLogin>;
     onSubmit?: (data: TInputDataLogin) => void;

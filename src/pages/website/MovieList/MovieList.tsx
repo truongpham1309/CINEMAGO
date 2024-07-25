@@ -1,7 +1,7 @@
 import { Movie } from "@/common/types/client/movie";
 import { getAllMovieClient } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import ItemsMovieComponent from "../_components/Movies/ItemsMovieComponent";
 
 const MovieList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -58,22 +58,7 @@ const MovieList = () => {
   const genres = Array.from(new Set(movies.flatMap((movie) => movie.genre.split(', '))));
   return (
     <>
-      <section className="banner-section">
-        <div
-          className="banner-bg bg_img bg-fixed"
-          data-background="/src/assets/images/banner/banner02.jpg"
-        />
-        <div className="container">
-          <div className="banner-content">
-            <h1 className="title bold">
-              get <span className="color-theme">movie</span> tickets
-            </h1>
-            <p>
-              Buy movie tickets in advance, find movie times watch trailers, read
-              movie reviews and much more
-            </p>
-          </div>
-        </div>
+      <section className="py-5">
       </section>
       <section className="movie-section padding-top padding-bottom">
         <div className="container">
@@ -111,7 +96,7 @@ const MovieList = () => {
                               onClick={() => handleStatusFilterChange("all")}
                               className="option focus selected"
                             >
-                              All
+                              Tất cả
                             </li>
                             <li
                               data-value="Coming Soon"
@@ -120,7 +105,7 @@ const MovieList = () => {
                               }
                               className="option focus"
                             >
-                              Coming Soon
+                              Phim sắp chiếu
                             </li>
                             <li
                               data-value="Currently Showing"
@@ -129,7 +114,7 @@ const MovieList = () => {
                               }
                               className="option focus"
                             >
-                              Currently Showing
+                              Phim dừng chiếu
                             </li>
                           </ul>
                         </div>
@@ -147,58 +132,16 @@ const MovieList = () => {
                 </div>
                 <div className="tab-area">
                   <div className="tab-item active">
-                    <div className="row mb-10 justify-content-center">
+                    <div className="row mb-10 align-items-strech">
                       {filterMovies.map((movieid, index) => {
                         let movie = movies.find((movie) => movie.id === movieid);
                         return movie ? (
-                          <div key={index} className="col-sm-6 col-lg-4">
-                            <div className="movie-grid">
-                              <div className="movie-thumb c-thumb">
-                                <Link to={`/movie/detail/${movie.id}`}>
-                                  <img src={movie.image} alt="movie" />
-                                </Link>
-                              </div>
-                              <div className="movie-content bg-one">
-                                <h5 className="title m-0">
-                                  <Link to={`/movie/detail/${movie?.id}`}>
-                                    {movie?.title.length > 20 ? `${movie?.title.substring(0, 20)}...` : movie?.title}
-                                  </Link>
-                                </h5>
-                                <ul className="movie-rating-percent">
-                                  <li>
-                                    <span className="content">{movie.genre}</span>
-                                  </li>
-                                  <li>
-                                    <span className="content">
-                                      {movie.duration} phút
-                                    </span>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
+                          <ItemsMovieComponent className="col-md-6 col-lg-4" key={index} movie={movie} />
                         ) : null
                       })}
                     </div>
                   </div>
                 </div>
-                {/* <div className="pagination-area text-center">
-                  <a href="#0">
-                    <i className="fas fa-angle-double-left" />
-                    <span>Prev</span>
-                  </a>
-                  <a href="#0">1</a>
-                  <a href="#0">2</a>
-                  <a href="#0" className="active">
-                    3
-                  </a>
-                  <a href="#0">4</a>
-                  <a href="#0">5</a>
-                  <a href="#0">
-                    <span>Next</span>
-                    <i className="fas fa-angle-double-right" />
-                  </a>
-                </div> */}
               </div>
             </div>
           </div>

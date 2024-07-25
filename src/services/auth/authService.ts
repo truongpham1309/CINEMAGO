@@ -41,3 +41,13 @@ export const postProfileUser = async (urlImg: any) => {
     throw new Error(error.message || "Cập nhật ảnh đại diện không thành công!");
   }
 };
+
+
+export const logoutUser = async () => {
+  try {
+    const { data } = await axios.post(`/account/logout`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

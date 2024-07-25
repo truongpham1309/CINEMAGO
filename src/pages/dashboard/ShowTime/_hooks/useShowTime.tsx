@@ -1,12 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Link, useNavigate } from "react-router-dom";
-import { useMovieQuery } from "../../Movies/_hooks/useMovie";
-import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
-import { toast } from "react-toastify";
-import { createShowTime, deleteShowTimeByID, getAllShowTimeDashBoard, updateShowTimeByID } from "@/services/showTime/showTimeService";
-import { Button, Popconfirm, TableProps } from "antd";
-import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
 import { getAllMovieListShowTime } from "@/services/movie/movieService";
+import { createShowTime, deleteShowTimeByID, getAllShowTimeDashBoard, updateShowTimeByID } from "@/services/showTime/showTimeService";
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button, Popconfirm, TableProps } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useRoomCinemaQuery } from "../../RoomsCinema/hooks/useRoomsCinema";
 
 export const useShowTimeMutation = ({ type }: { type: "CREATE" | "UPDATE" | "DELETE" }) => {
     const queryClient = useQueryClient();

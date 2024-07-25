@@ -3,6 +3,7 @@ export interface Movie {
     title: string;
     genre: string;
     release_date: string;
+    end_date: string;
     trailer: string;
     director: string;
     image: string;

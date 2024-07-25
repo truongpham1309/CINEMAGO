@@ -10,12 +10,6 @@ const SideBarComponent = () => {
             ],
         },
         {
-            id: 2, title: "Màn hình", sku: "screen", icon: "fas fa-fw fa-tv", children: [
-                { id: "screen1", title: "Danh sách màn hình", path: "/dashboard/screen" },
-                { id: "screen2", title: "Thêm mới màn hình", path: "/dashboard/screen/create" },
-            ]
-        },
-        {
             id: 3, title: "Rạp chiếu", sku: "cinema", icon: "fas fa-fw fa-theater-masks", children: [
                 { id: "cinema1", title: "Danh sách rạp chiếu", path: "/dashboard/cinema" },
                 { id: "cinema2", title: "Thêm mới rạp chiếu", path: "/dashboard/cinema/create" },

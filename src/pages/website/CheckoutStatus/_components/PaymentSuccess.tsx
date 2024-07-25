@@ -50,7 +50,7 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
                     title={<span className="custom-title">Trạng thái không hợp lệ</span>}
                     subTitle={<>
                         <span className="custom-subtitle">
-                            Có lỗi xảy ra trong quá trình thanh toán. Vui lòng thử lại sau.
+                            Bạn đã hủy thanh toán!
                         </span> <br /> <br />
                         <span className="custom-subtitle text-danger">Trang sẽ điều hướng về trang chủ sau {countdown} giây</span>
                     </>}

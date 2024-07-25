@@ -166,11 +166,10 @@ const BookingServicePage = () => {
                                     <List
                                         grid={{ gutter: 16, xs: 1, sm: 2, md: 3, }}
                                         dataSource={services.data}
-
                                         renderItem={(service: any) => (
-                                            <List.Item style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}>
+                                            <List.Item className="" style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', width: 220 }}>
                                                 <Card
-                                                    title={service.name}
+                                                    title={<div style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>{service.name}</div>}
                                                     style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
                                                     actions={[
                                                         <Button
@@ -189,7 +188,6 @@ const BookingServicePage = () => {
                                                         value={quantities[service.id] || 0}
                                                         onChange={(value) => handleQuantityChange(service.id, value)}
                                                     />
-                                                    <span>Còn: {service.quantity}</span>
                                                 </Card>
                                             </List.Item>
                                         )}

@@ -63,7 +63,7 @@ const SignInPage = () => {
               errors={errors}
               onSubmit={handleOnLogin} />
             <div className="option">
-              Don't have an account? <Link to="/signup">sign up now</Link>
+              Bạn chưa có tài khoản? <Link to="/signup">Đăng kí ngay</Link>
             </div>
           </div>
         </div>

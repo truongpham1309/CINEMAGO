@@ -8,11 +8,10 @@ const FormSignIn = ({ register, handleSubmit, errors, onSubmit }: Required<TForm
 
     const items: Array<TInputFormRegister> = [
         { id: 1, lable: "email", keysub: "email", typeInput: "email", hasRequired: true },
-        { id: 2, lable: "password", keysub: "password", typeInput: "password", hasRequired: true }
+        { id: 2, lable: "Mật khẩu", keysub: "password", typeInput: "password", hasRequired: true }
     ]
     return (
         <form className="account-form" onSubmit={handleSubmit(onSubmit)}>
-
             {items.map((item, index) => (
                 <InputForm key={index} item={item} form={{ register, errors }} />
             ))}

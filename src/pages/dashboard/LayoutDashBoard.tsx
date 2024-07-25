@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import SideBarComponent from "./_components/SideBarComponent"
 import "@styles/sb-admin-2.css"
 import Footer from "./_components/Footer"
@@ -150,15 +150,15 @@ const LayoutDashBoard = () => {
                     Activity Log
                   </a>
                   <div className="dropdown-divider" />
-                  <a
+                  <Link
                     className="dropdown-item"
-                    href="#"
+                    to="/"
                     data-toggle="modal"
                     data-target="#logoutModal"
                   >
                     <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
-                    Logout
-                  </a>
+                    Website
+                  </Link>
                 </div>
               </li>
             </ul>

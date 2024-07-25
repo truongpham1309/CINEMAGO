@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useBookingQuery } from "../_hooks/useBooking";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import ServerError from "../../_components/500";
-import { Alert, AutoComplete, Button, Card, Descriptions, Table, TableProps } from "antd";
+import { Alert, Button, Card, Descriptions, Table, TableProps } from "antd";
 import { useState } from "react";
 import confirm from "antd/es/modal/confirm";
 import { ExclamationCircleFilled } from "@ant-design/icons";
@@ -62,7 +62,7 @@ const BookingDetailDashBoardPage = () => {
   const tableData = [
     ...ResponseAPI.services,
     {
-      name: "Vé phim",
+      name: "Ghế",
       quantity: ResponseAPI.ticket.quantity,
       subtotal: ResponseAPI.ticket.subtotal,
     }

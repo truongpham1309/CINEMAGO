@@ -63,12 +63,12 @@ const SignUpUserPage = () => {
                     <div className="padding-top padding-bottom">
                         <div className="account-area">
                             <div className="section-header-3">
-                                <span className="cate">welcome</span>
-                                <h2 className="title">to Boleto </h2>
+                                <span className="cate">Chào mừng</span>
+                                <h2 className="title">bạn đến với CinemaGo</h2>
                             </div>
                             <FormSignUp register={register} handleSubmit={handleSubmit} errors={errors} onSubmit={handleSignUp} />
                             <div className="option">
-                                Already have an account? <Link to="/login">Login</Link>
+                               Bạn đã có tài khoản <Link to="/login">Đăng nhập</Link>
                             </div>
                         </div>
                     </div>
