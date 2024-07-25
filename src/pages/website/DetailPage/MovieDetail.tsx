@@ -16,7 +16,7 @@ interface Movie {
   trailer: string;
   director: string;
   image: string;
-  rated: number;
+  rated: string;
   actor: string;
   duration: number;
   status: string;
@@ -62,7 +62,7 @@ const MovieDetail = () => {
               <Link to="#0" className="button">
                 {movies?.genre}
               </Link>
-              <span className="button ml-2">{movies?.rated}</span>
+              <span className="button ml-2">{movies?.rated === "C18" ? "Trên 18 tuổi" : (movies?.rated === "C16" ? "Trên 16 tuổi" : (movies?.rated === "C13" ? "Trên 13 tuổi" : "Mọi lứa tuổi"))}</span>
               <div className="social-and-duration">
                 <div className="duration-area">
                   <div className="item">
@@ -91,12 +91,6 @@ const MovieDetail = () => {
                 <p>audience Score</p>
               </div>
             </div>
-            {/* <Link to={`/movie/booking-movie/${movies?.id}`}>
-              <span className="custom-button">
-                book tickets
-              </span>
-            </Link> */}
-
           </div>
         </div>
       </section>
@@ -107,7 +101,7 @@ const MovieDetail = () => {
           <div className="row justify-content-center mb--50">
             <div className="col-lg-12 mb-50">
               <div className="movie-details">
-                <h3 className="text-uppercase text-center text-bold">Tóm tắt</h3>
+                <h3 className="text-uppercase text-center mb-4 text-bold">Tóm tắt</h3>
                 <p>
                   {movies?.description}
                 </p>

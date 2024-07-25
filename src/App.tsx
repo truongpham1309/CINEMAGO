@@ -15,6 +15,7 @@ import "./styles/nice-select.css";
 import "./styles/odometer.css";
 import "./styles/owl.carousel.min.css";
 import "./styles/owl.theme.default.min.css";
+import "react-multi-carousel/lib/styles.css";
 
 configAxiosUse();
 

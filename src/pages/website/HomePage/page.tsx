@@ -1,26 +1,45 @@
 import { Movie } from "@/common/types/client/movie";
 import { getAllMovieHomePage } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+import ItemsMovieComponent from "../_components/Movies/ItemsMovieComponent";
+import "react-multi-carousel/lib/styles.css";
 
 const HomePage = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
-    const [statusMovie, setStatusMovie] = useState<number>(1);
     useEffect(() => {
         (async () => {
-            const data = await getAllMovieHomePage(statusMovie);
+            const data = await getAllMovieHomePage();
             setMovies(data.data.movie);
-        })();
-    }, [statusMovie]);
 
+        })();
+    }, []);
+
+    const responsive = {
+        superLargeDesktop: {
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    };
+    console.log(movies?.filter(movie => new Date(movie.release_date) <= new Date()));
     return (
         <>
             <section className="banner-section">
                 <div
                     className="banner-bg bg_img bg-fixed"
                     data-background="/src/assets/images/banner/banner01.jpg"
-                    
+
                 />
                 <div className="container">
                     <div className="banner-content">
@@ -45,63 +64,16 @@ const HomePage = () => {
                     <div className="tab">
                         <div className="section-header-2">
                             <div className="left">
-                                <h2 className="title">Phim</h2>
-                                {/* <p>Be sure not to miss these Movies today.</p> */}
+                                <h2 className="title">Phim sắp chiếu</h2>
                             </div>
-                            <ul className="tab-menu text-white">
-                                <li
-                                    className="active"
-                                    onClick={() => {
-                                        setStatusMovie(1);
-                                    }}
-                                >
-                                    Phim Đang chiếu
-                                </li>
-                                <li
-                                    onClick={() => {
-                                        setStatusMovie(2);
-                                    }}
-                                >
-                                    Phim sắp chiếu
-                                </li>
-                            </ul>
                         </div>
                         <div className="mb-30-none">
                             <div className="tab-item active">
                                 <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
                                     <div className="owl-stage-outer">
                                         <div className="owl-stage row m-0">
-                                            {movies.map((movie, index) => (
-                                                <div className="owl-item col-3" key={index}>
-                                                    <div className="item">
-                                                        <div className="movie-grid">
-                                                            <div className="movie-thumb c-thumb">
-                                                                <Link to={`/movie/detail/${movie.id}`}>
-                                                                    <img src={movie.image} alt="movie" />
-                                                                </Link>
-                                                            </div>
-                                                            <div className="movie-content bg-one">
-                                                                <h5 className="title m-0">
-                                                                    <Link to={`/movie/detail/${movie.id}`}>
-                                                                        {movie.title}
-                                                                    </Link>
-                                                                </h5>
-                                                                <ul className="movie-rating-percent">
-                                                                    <li className="w-100">
-                                                                        <span className="content">
-                                                                            {"Thể loại: " + movie.genre}
-                                                                        </span>
-                                                                    </li>
-                                                                    <li className="w-100">
-                                                                        <span className="content">
-                                                                            {"Thời lượng: " + movie.duration}
-                                                                        </span>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            {movies.filter(_m => new Date(_m.release_date) > new Date()).map((movie, index) => (
+                                                <ItemsMovieComponent key={index} movie={movie} className="col-md-6 col-lg-3" />
                                             ))}
                                         </div>
                                     </div>
@@ -112,285 +84,22 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* <section class="event-section padding-top padding-bottom bg-four">
-        <div class="container">
-            <div class="tab">
-                <div class="section-header-2">
-                    <div class="left">
-                        <h2 class="title">events</h2>
-                        <p>Be sure not to miss these Event today.</p>
-                    </div>
-                    <ul class="tab-menu">
-                        <li class="active">
-                            now showing 
-                        </li>
-                        <li>
-                            coming soon
-                        </li>
-                        <li>
-                            exclusive
-                        </li>
-                    </ul>
-                </div>
-                <div class="tab-area mb-30-none">
-                    <div class="tab-item active">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event01.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">Digital Economy Conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event02.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">web design conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event03.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">digital thinkers meetup</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event04.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">world digital conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
+            <section className="movie-section padding-top padding-bottom">
+                <div className="container">
+                    <div className="tab">
+                        <div className="section-header-2">
+                            <div className="left">
+                                <h2 className="title fs-12">Phim đang chiếu</h2>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event01.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">Digital Economy Conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event02.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">web design conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event03.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">digital thinkers meetup</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event04.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">world digital conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event01.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">Digital Economy Conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event02.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">web design conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event03.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">digital thinkers meetup</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="event-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <Link to="#0">
-                                            <img src="/src/assets/images/event/event04.jpg" alt="event">
-                                        </Link>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
-                                        </div>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <Link to="#0">world digital conference 2020</Link>
-                                        </h5>
-                                        <div class="movie-rating-percent">
-                                            <span>327 Montague Street</span>
+                        <div className="mb-30-none">
+                            <div className="tab-item active">
+                                <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
+                                    <div className="owl-stage-outer">
+                                        <div className="owl-stage row m-0">
+                                            {movies.filter(movie => new Date(movie.release_date) <= new Date()).map((movie, index) => (
+                                                <ItemsMovieComponent className="col-md-4 col-lg-3" key={index} movie={movie} />
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
@@ -398,9 +107,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section> */}
+            </section>
         </>
     );
 };
