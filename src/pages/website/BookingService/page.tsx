@@ -232,7 +232,7 @@ const BookingServicePage = () => {
                         </div>
                         <div className="col-lg-4">
                             <div className="booking-summery bg-one">
-                                <h4 className="title">booking summary</h4>
+                                <h4 className="title">Vé của bạn</h4>
                                 <ul>
                                     <li>
                                         <h6 className="subtitle">{movie?.movie_title}</h6>
