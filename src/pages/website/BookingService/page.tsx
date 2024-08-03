@@ -194,6 +194,17 @@ const BookingServicePage = () => {
                                     />
                                 )}
                             </div>
+                            <div>
+                            <div className="note text-white">
+                                <h5 className="title">Chú ý :</h5>
+                                <p>
+                                    Mỗi ghế chỉ được đặt tối đa 3 dịch vụ
+                                </p>
+                                <p> 
+                                    Vui lòng có mặt tại quầy trước 15 phút để nhận vé và dịch vụ
+                                </p>
+                            </div>
+                            </div>
                             <div className="grid--area">
                                 <Space direction="vertical" size="middle" className="text-white py-3 row" style={{ background: "#032055" }}>
                                     {booking.services.map((service: any) => {
@@ -272,12 +283,6 @@ const BookingServicePage = () => {
                                     <span>Phải thanh toán</span>
                                     <span>{formatCurrencyVND(booking?.subtotal) || 0}</span>
                                 </h6>
-                            </div>
-                            <div className="note text-white">
-                                <h5 className="title">Chú ý :</h5>
-                                <p>
-                                    Vui lòng đến rạp sớm trước 15 phút để chúng tôi có thể chuẩn bị đồ ăn và vé cho bạn
-                                </p>
                             </div>
                         </div>
                         <div className="col-lg-12 mt-3">
