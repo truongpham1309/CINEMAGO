@@ -1,8 +1,9 @@
 import Seat01 from './../_image/seat01.png';
 import Seat01_Free from './../_image/seat01-free.png';
 import Seat01_Booked from './../_image/seat01-booked.png';
-import Seat01Held from "./../_image/1c9bc34a-eed9-4a0e-92c7-17694838cca6.png";
-import Seat03 from "./../_image/seat03.png"
+import Seat01Held from "./../_image/seat03Held.png";
+import Seat03 from "./../_image/seat03.png";
+import Seat03Held from "./../_image/seat03Held.png";
 
 type SeatProps = {
     seatType: string;
@@ -32,10 +33,10 @@ const SeatClient = ({ seatNumber, seatType, price, status, id, handleClick, book
 
     if (seatType.includes("vip")) {
         let checkSeat = booked?.find(_s => _s === id);
-        const image = status === 'Available' ? Seat01_Free : (status === 'Reserved' ? Seat01 : Seat01Held);
+        const image = status === 'Available' ? Seat01_Free : (status === 'Reserved' ? Seat01 : Seat03Held);
         return (
             <li className={status === 'Available' ? "single-seat seat-free-two" : "single-seat"} onClick={status === "Available" || (checkSeat && status === "Selected") ? handleChooseSeatBooking : () => null}>
-                <img src={checkSeat || status === "Selected" ? Seat01_Booked : image} alt="seat" />
+                <img src={checkSeat || status === "Selected" ? Seat03 : image} alt="seat" />
                 {status === "Available" || status === "Selected" ? <span className="sit-num">{seatNumber}</span> : null}
             </li>
         )

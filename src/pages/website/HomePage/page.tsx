@@ -2,7 +2,6 @@ import { Movie } from "@/common/types/client/movie";
 import { getAllMovieHomePage } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
 import ItemsMovieComponent from "../_components/Movies/ItemsMovieComponent";
-import "react-multi-carousel/lib/styles.css";
 
 const HomePage = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -14,25 +13,6 @@ const HomePage = () => {
         })();
     }, []);
 
-    const responsive = {
-        superLargeDesktop: {
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-        }
-    };
-    console.log(movies?.filter(movie => new Date(movie.release_date) <= new Date()));
     return (
         <>
             <section className="banner-section">
@@ -72,9 +52,9 @@ const HomePage = () => {
                                 <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
                                     <div className="owl-stage-outer">
                                         <div className="owl-stage row m-0">
-                                            {movies.filter(_m => new Date(_m.release_date) > new Date()).map((movie, index) => (
+                                            {movies.filter(_m => new Date(_m.release_date) > new Date())?.length > 0 ? movies.filter(_m => new Date(_m.release_date) > new Date()).slice(0, 4).map((movie, index) => (
                                                 <ItemsMovieComponent key={index} movie={movie} className="col-md-6 col-lg-3" />
-                                            ))}
+                                            )) : null}
                                         </div>
                                     </div>
                                 </div>
@@ -97,9 +77,9 @@ const HomePage = () => {
                                 <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
                                     <div className="owl-stage-outer">
                                         <div className="owl-stage row m-0">
-                                            {movies.filter(movie => new Date(movie.release_date) <= new Date()).map((movie, index) => (
+                                            {movies.filter(movie => new Date(movie.release_date) <= new Date())?.length > 0 ? movies.filter(movie => new Date(movie.release_date) <= new Date()).slice(0, 4).map((movie, index) => (
                                                 <ItemsMovieComponent className="col-md-4 col-lg-3" key={index} movie={movie} />
-                                            ))}
+                                            )) : null}
                                         </div>
                                     </div>
                                 </div>

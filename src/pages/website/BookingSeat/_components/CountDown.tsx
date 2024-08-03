@@ -38,7 +38,6 @@ const CountDown = () => {
 
     useEffect(() => {
         if (!countDownStart) return;
-
         const intervalId = setInterval(() => {
             const currentTime = new Date();
             const elapsedSeconds = Math.floor((currentTime.getTime() - countDownStart.getTime()) / 1000);
