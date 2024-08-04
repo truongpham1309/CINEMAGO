@@ -5,7 +5,7 @@ import { Banner04 } from "@/assets/images/banner"
 import { useDispatch, useSelector } from "react-redux"
 import { movieSelector } from "@/common/store/booking/selectorMovie"
 import { useEffect } from "react"
-import { clean_booking } from "@/common/store/booking/sliceBooking"
+import { clean_booking, clear_services } from "@/common/store/booking/sliceBooking"
 import { delete_info_movie } from "@/common/store/booking/sliceMovie"
 
 const MovieBanner = () => {
@@ -20,6 +20,7 @@ const MovieBanner = () => {
         }
     }, [movie]);
     const handleBackPage = () => {
+        dispatch(clear_services());
         navigate(-1);
     }
     return (

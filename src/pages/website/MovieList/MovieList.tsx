@@ -62,7 +62,7 @@ const MovieList = () => {
       </section>
       <section className="movie-section padding-top padding-bottom">
         <div className="container">
-          <div className="row flex-wrap-reverse justify-content-center">
+          <div className="row align-items-strech flex-wrap-reverse justify-content-center">
             <div className="col-sm-10 col-md-8 col-lg-3">
               <div className="widget-1 widget-check">
                 <div className="widget-1-body">

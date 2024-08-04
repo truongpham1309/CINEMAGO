@@ -42,7 +42,7 @@ const CountDown = () => {
             const currentTime = new Date();
             const elapsedSeconds = Math.floor((currentTime.getTime() - countDownStart.getTime()) / 1000);
             const newCountDown = 5 * 60 - elapsedSeconds;
-            if (newCountDown <= 0) {
+            if (newCountDown === 0) {
                 if (booking.seats.length > 0) {
                     mutate({
                         type: "CANCEL",

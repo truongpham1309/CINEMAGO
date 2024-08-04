@@ -124,13 +124,21 @@ export const sliceBooking: any = createSlice({
             state.seats = [];
         },
         clean_booking: (state) => {
+            if(state.seats.length > 0) {
+                console.log(state?.seats);
+            }
             state.showtime_id = 0;
             state.seats = [];
             state.services = [];
             state.subtotal = 0;
+        },
+        clear_services: (state) => {
+            let _priceServices = state?.services?.reduce((sum: any, current: any) => sum + current.subtotal, 0);
+            state.subtotal = state.subtotal -  _priceServices;
+            return state;
         }
     }
 });
 
-export const { add_showtime, add_seats, clean_seats, add_services, clean_booking, delete_showtime, add_user_id, delete_service, decrement_service, increment_service } = sliceBooking.actions;
+export const { add_showtime, add_seats, clean_seats, add_services, clean_booking, delete_showtime, add_user_id, delete_service, decrement_service, increment_service, clear_services } = sliceBooking.actions;
 export default sliceBooking.reducer;

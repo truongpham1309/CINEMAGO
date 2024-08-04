@@ -9,7 +9,6 @@ const HomePage = () => {
         (async () => {
             const data = await getAllMovieHomePage();
             setMovies(data.data.movie);
-
         })();
     }, []);
 
