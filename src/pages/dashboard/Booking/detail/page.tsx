@@ -85,9 +85,11 @@ const BookingDetailDashBoardPage = () => {
             <Descriptions.Item label="Booking ID">{ResponseAPI.booking.id}</Descriptions.Item>
             <Descriptions.Item label="Khách hàng">{ResponseAPI.booking.user}</Descriptions.Item>
             <Descriptions.Item label="Ngày">{ResponseAPI.booking.show_date}</Descriptions.Item>
-            {/* <Descriptions.Item label="Tên rạp">{ResponseAPI.booking.}</Descriptions.Item>
-            <Descriptions.Item label="Số lượng ghế">{ResponseAPI.booking.}</Descriptions.Item>
-            <Descriptions.Item label="Tên ghế">{ResponseAPI.booking.}</Descriptions.Item> */}
+            <Descriptions.Item label="Tên rạp">{ResponseAPI.booking.cinema}</Descriptions.Item>
+            <Descriptions.Item label="Số lượng ghế">{ResponseAPI.booking.quantity}</Descriptions.Item>
+            <Descriptions.Item label="Tên ghế">{ResponseAPI.seats[0].seat_type}
+              <br />
+              {ResponseAPI.seats.map(_s => _s.seat_number).join(', ')}</Descriptions.Item>
             <Descriptions.Item label="Suất chiếu">{ResponseAPI.booking.show_time}</Descriptions.Item>
             <Descriptions.Item label="Loại màn hình">{ResponseAPI.booking.screen}</Descriptions.Item>
             <Descriptions.Item label="Trạng thái">{ResponseAPI.booking.status}</Descriptions.Item>
