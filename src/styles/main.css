@@ -8071,6 +8071,7 @@ input[type="submit"] {
 
 .account-area .option {
   text-align: center;
+  color: #000 !important;
   margin-bottom: 28px;
 }
 

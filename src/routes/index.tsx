@@ -62,7 +62,6 @@ const Router = () => {
           <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
           <Route path="/login" element={<PrivateRouterLogin><SignInPage /></PrivateRouterLogin>} />
 
-
           <Route path="/" element={<LayoutClient />}>
             {/* Các router website */}
             <Route path="/" element={<HomePage />} />
