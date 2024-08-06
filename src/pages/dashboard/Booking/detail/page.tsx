@@ -82,9 +82,10 @@ const BookingDetailDashBoardPage = () => {
         />}
         <Card className="text-uppercase" title="Chi tiết vé" bordered={false} style={{ width: '100%' }}>
           <Descriptions bordered column={{ xxl: 4, xl: 3, lg: 3, md: 2, sm: 1, }}>
-            <Descriptions.Item label="Booking ID">{ResponseAPI.booking.id}</Descriptions.Item>
+            {/* <Descriptions.Item label="Booking ID">{ResponseAPI.booking.id}</Descriptions.Item> */}
+            <Descriptions.Item label="Tên phim">{ResponseAPI.booking.movie}</Descriptions.Item>
             <Descriptions.Item label="Khách hàng">{ResponseAPI.booking.user}</Descriptions.Item>
-            <Descriptions.Item label="Ngày">{ResponseAPI.booking.show_date}</Descriptions.Item>
+            <Descriptions.Item label="Ngày đặt">{ResponseAPI.booking.show_date}</Descriptions.Item>
             <Descriptions.Item label="Tên rạp">{ResponseAPI.booking.cinema}</Descriptions.Item>
             <Descriptions.Item label="Số lượng ghế">{ResponseAPI.booking.quantity}</Descriptions.Item>
             <Descriptions.Item label="Tên ghế">{ResponseAPI.seats[0].seat_type}
