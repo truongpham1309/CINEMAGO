@@ -37,16 +37,6 @@ const BookingDashBoardPage = () => {
       key: "movie",
       dataIndex: "movie",
     },
-    // {
-    //   title: "Tên rạp",
-    //   key: "cinema",
-    //   dataIndex: "cinema",
-    // },
-    // {
-    //   title: "Suất chiếu",
-    //   key: "show_time",
-    //   dataIndex: "show_time",
-    // },
     {
       title: "Ngày đặt vé",
       key: "show_date",
