@@ -51,3 +51,13 @@ export const logoutUser = async () => {
     throw error;
   }
 }
+
+export const getAllUserList = async () => {
+  const {data} = await axios.get(`/dashboard/user`)
+  return data.data;
+};
+
+export const getUserDetail = async (id: string) => {
+  const {data} = await axios.get(`/dasboard/user/${id}`);
+  return data.data;
+};
