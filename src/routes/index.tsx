@@ -52,6 +52,7 @@ import CinemaList from "@/pages/dashboard/RoomsCinema/create/cinemaList"
 import TicketListPage from "@/pages/dashboard/Ticket/list/page"
 import LayoutBooking from "@/pages/website/_components/LayoutBooking/LayoutBooking"
 import { ScrollToTop } from "@/common/hooks/global/useScrollToTop"
+import UserListPage from "@/pages/dashboard/User/list/page"
 
 const Router = () => {
   return (
@@ -129,6 +130,9 @@ const Router = () => {
 
             <Route path="/dashboard/booking" element={<BookingDashBoardPage />} />
             <Route path="/dashboard/booking/detail/:id" element={<BookingDetailDashBoardPage />} />
+
+            <Route path="/dashboard/user" element={<UserListPage/>} />
+            {/* <Route path="/dashboard/movies" element={MovieListPage} /> */}
 
 
             <Route path="/dashboard/ticket" element={<TicketListPage />} />

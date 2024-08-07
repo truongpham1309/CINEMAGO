@@ -4,6 +4,11 @@ const SideBarComponent = () => {
 
     const listLink = [
         {
+            id: 11, title: "Người dùng", sku: "user", icon: "fas fa-user fa-fw", children: [
+                { id: "user1", title: "Danh sách người dùng", path: "/dashboard/user" },
+            ]
+        },
+        {
             id: 1, title: "Phim", sku: "movie", icon: "fas fa-fw fa-film", children: [
                 { id: "phim1", title: "Danh sách phim", path: '/dashboard/movie' },
                 { id: "phim2", title: "Thêm mới phim", path: "/dashboard/movie/create" }
@@ -55,7 +60,7 @@ const SideBarComponent = () => {
                 { id: "services1", title: "Danh sách dịch vụ", path: "/dashboard/service" },
                 { id: "services2", title: "Thêm mới dịch vụ", path: "/dashboard/service/create" },
             ]
-        }
+        },
     ]
     return (
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
