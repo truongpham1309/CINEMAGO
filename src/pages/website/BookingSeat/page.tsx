@@ -65,25 +65,27 @@ const BookingSeatPage = () => {
 
 
     const handleChooseSeatBooking = ({ id, price, ...rest }: any) => {
-        if(!id) return;
+        if (!id) return null;
         const seat = bookingMovie?.seats.find((_s: any) => +_s === +id);
-        const booking_seat = seat || rest.status === "Selected" ? { seat_ids: [id], showtime_id: showtime_id } : { id, showtime_id: showtime_id };
+        const booking_seat = seat && rest.status === "Selected" ? { seat_ids: [id], showtime_id: showtime_id } : { id, showtime_id: showtime_id };
         if (bookingMovie.seats.length === 8 && !seat) {
             toast.error("Bạn chỉ được đặt tối đa 8 ghế!", {
                 position: "top-center",
                 autoClose: 1000
             });
-            return
+            return null;
         }
         mutate({ type: seat && rest.status === "Selected" ? "CANCEL" : "CHOOSE", booking_seat: booking_seat }, {
             onSuccess: () => {
-                dispatch(add_seats({ id, price }));
+                console.log("Đã chọn ghế");
             },
             onError: (err) => {
                 console.log(err);
+                dispatch(add_seats({ id, price }));
             }
         });
-        // dispatch(add_seats({ id, price }));
+
+        dispatch(add_seats({ id, price }));
         if (seat) {
             let _newSeats = chooseSeat.filter((_s: any) => _s !== rest.seatNumber);
             setChooseSeat([..._newSeats]);
@@ -93,6 +95,7 @@ const BookingSeatPage = () => {
             if (bookingMovie.seats.length === 8) return;
             setChooseSeat([...chooseSeat, rest.seatNumber]);
         }
+
     }
 
     const handleBookingSeatPlans = () => {

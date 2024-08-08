@@ -38,55 +38,59 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className="movie-section padding-top padding-bottom">
-                <div className="container">
-                    <div className="tab">
-                        <div className="section-header-2">
-                            <div className="left">
-                                <h2 className="title">Phim sắp chiếu</h2>
+            {movies.filter(movie => new Date(movie.release_date) > new Date())?.length > 0 && (
+                <section className="movie-section padding-top padding-bottom">
+                    <div className="container">
+                        <div className="tab">
+                            <div className="section-header-2">
+                                <div className="left">
+                                    <h2 className="title">Phim sắp chiếu</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div className="mb-30-none">
-                            <div className="tab-item active">
-                                <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
-                                    <div className="owl-stage-outer">
-                                        <div className="owl-stage row m-0">
-                                            {movies.filter(_m => new Date(_m.release_date) > new Date())?.length > 0 ? movies.filter(_m => new Date(_m.release_date) > new Date()).slice(0, 4).map((movie, index) => (
-                                                <ItemsMovieComponent key={index} movie={movie} className="col-md-6 col-lg-3" />
-                                            )) : null}
+                            <div className="mb-30-none">
+                                <div className="tab-item active">
+                                    <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
+                                        <div className="owl-stage-outer">
+                                            <div className="owl-stage row m-0">
+                                                {movies.filter(_m => new Date(_m.release_date) > new Date())?.length > 0 ? movies.filter(_m => new Date(_m.release_date) > new Date()).slice(0, 4).map((movie, index) => (
+                                                    <ItemsMovieComponent key={index} movie={movie} className="col-md-6 col-lg-3" />
+                                                )) : null}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
-            <section className="movie-section padding-top padding-bottom">
-                <div className="container">
-                    <div className="tab">
-                        <div className="section-header-2">
-                            <div className="left">
-                                <h2 className="title fs-12">Phim đang chiếu</h2>
+            {movies.filter(movie => new Date(movie.release_date) <= new Date())?.length > 0 && (
+                <section className="movie-section padding-top padding-bottom">
+                    <div className="container">
+                        <div className="tab">
+                            <div className="section-header-2">
+                                <div className="left">
+                                    <h2 className="title fs-12">Phim đang chiếu</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div className="mb-30-none">
-                            <div className="tab-item active">
-                                <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
-                                    <div className="owl-stage-outer">
-                                        <div className="owl-stage row m-0">
-                                            {movies.filter(movie => new Date(movie.release_date) <= new Date())?.length > 0 ? movies.filter(movie => new Date(movie.release_date) <= new Date()).slice(0, 4).map((movie, index) => (
-                                                <ItemsMovieComponent className="col-md-4 col-lg-3" key={index} movie={movie} />
-                                            )) : null}
+                            <div className="mb-30-none">
+                                <div className="tab-item active">
+                                    <div className="owl-carousel owl-theme tab-slider owl-loaded owl-drag">
+                                        <div className="owl-stage-outer">
+                                            <div className="owl-stage row m-0">
+                                                {movies.filter(movie => new Date(movie.release_date) <= new Date())?.length > 0 ? movies.filter(movie => new Date(movie.release_date) <= new Date()).slice(0, 4).map((movie, index) => (
+                                                    <ItemsMovieComponent className="col-md-4 col-lg-3" key={index} movie={movie} />
+                                                )) : null}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
         </>
     );
 };
