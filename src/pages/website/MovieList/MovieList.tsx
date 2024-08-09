@@ -62,7 +62,7 @@ const MovieList = () => {
       </section>
       <section className="movie-section padding-top padding-bottom">
         <div className="container">
-          <div className="row flex-wrap-reverse justify-content-center">
+          <div className="row align-items-strech flex-wrap-reverse justify-content-center">
             <div className="col-sm-10 col-md-8 col-lg-3">
               <div className="widget-1 widget-check">
                 <div className="widget-1-body">
@@ -86,15 +86,15 @@ const MovieList = () => {
                       <div className="item">
                         <span className="show text-white">Hiển thị: {filterMovies?.length} phim</span>
                       </div>
-                      <div className="item">
-                        <span className="show text-white">Sort By :</span>
-                        <div className="nice-select">
+                      <span className="show text-white mt-1">Trạng thái :</span>
+                      <div className="">
+                        <div className="nice-select"> 
                           <span className="current">Comming Soon</span>
                           <ul className="list">
                             <li
                               data-value="all"
                               onClick={() => handleStatusFilterChange("all")}
-                              className="option focus selected"
+                              className="option text-black focus selected"
                             >
                               Tất cả
                             </li>
@@ -103,7 +103,7 @@ const MovieList = () => {
                               onClick={() =>
                                 handleStatusFilterChange("Coming Soon")
                               }
-                              className="option focus"
+                              className="option text-black focus"
                             >
                               Phim sắp chiếu
                             </li>
@@ -112,22 +112,14 @@ const MovieList = () => {
                               onClick={() =>
                                 handleStatusFilterChange("Currently Showing")
                               }
-                              className="option focus"
+                              className="option text-black focus"
                             >
-                              Phim dừng chiếu
+                              Phim đang chiếu
                             </li>
                           </ul>
                         </div>
                       </div>
                     </div>
-                    <ul className="grid-button tab-menu">
-                      <li className="active">
-                        <i className="fas fa-th" />
-                      </li>
-                      <li>
-                        <i className="fas fa-bars" />
-                      </li>
-                    </ul>
                   </div>
                 </div>
                 <div className="tab-area">

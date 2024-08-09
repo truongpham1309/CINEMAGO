@@ -53,6 +53,7 @@ import TicketListPage from "@/pages/dashboard/Ticket/list/page"
 import LayoutBooking from "@/pages/website/_components/LayoutBooking/LayoutBooking"
 import { ScrollToTop } from "@/common/hooks/global/useScrollToTop"
 import UserListPage from "@/pages/dashboard/User/list/page"
+import TicketsPage from "@/pages/website/TicketList/page"
 
 const Router = () => {
   return (
@@ -62,7 +63,6 @@ const Router = () => {
         <Routes>
           <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
           <Route path="/login" element={<PrivateRouterLogin><SignInPage /></PrivateRouterLogin>} />
-
 
           <Route path="/" element={<LayoutClient />}>
             {/* Các router website */}
@@ -75,9 +75,9 @@ const Router = () => {
               <Route path="/movie/booking/services" element={<BookingServicePage />} />
               <Route path="/movie/booking/status/:method" element={<CheckoutStatusPage />} />
               <Route path="/profile" element={<ProfilePage />} />
-              {/* <Route />
+              <Route path="/ticket" element={<TicketsPage />} />
               <Route />
-              <Route /> */}
+              <Route />
             </Route>
           </Route>
 
@@ -131,7 +131,7 @@ const Router = () => {
             <Route path="/dashboard/booking" element={<BookingDashBoardPage />} />
             <Route path="/dashboard/booking/detail/:id" element={<BookingDetailDashBoardPage />} />
 
-            <Route path="/dashboard/user" element={<UserListPage/>} />
+            <Route path="/dashboard/user" element={<UserListPage />} />
             {/* <Route path="/dashboard/movies" element={MovieListPage} /> */}
 
 

@@ -872,7 +872,14 @@ ul {
 
 ul li {
   list-style: none;
-  padding: 5px 0;
+  /* padding: 5px 0; */
+}
+
+.ant-pagination {
+    margin: 0 !important;
+    padding: 10px 0;
+    background: #fff;
+    border-radius: 0 0 8px 8px;
 }
 
 select,
@@ -8071,6 +8078,7 @@ input[type="submit"] {
 
 .account-area .option {
   text-align: center;
+  color: #000 !important;
   margin-bottom: 28px;
 }
 

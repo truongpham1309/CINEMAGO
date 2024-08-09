@@ -158,7 +158,7 @@ const BookingServicePage = () => {
                                         title={<span className="custom-title">Rạp hiện chưa có dịch vụ nào!</span>}
                                         subTitle={<>
                                             <span className="custom-subtitle">
-                                                Có lỗi xảy ra trong quá trình thanh toán. Vui lòng thử lại sau.
+                                                Rạp chưa có dịch vụ nào!
                                             </span>
                                         </>}
                                     />
