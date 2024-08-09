@@ -2,7 +2,7 @@ import { TMovie } from "@/common/types/movie";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { getAllMovieList } from "@/services/movie/movieService";
 import { useQuery } from "@tanstack/react-query";
-import { Table, TableProps, Select } from "antd";
+import { Table, TableProps, Select, Tag } from "antd";
 import { Link } from "react-router-dom";
 import ServerError from "../../_components/500";
 import { useState } from "react";
@@ -14,6 +14,18 @@ const MovieListPage = () => {
     undefined
   );
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'Coming Soon':
+        return 'green';
+      case 'Currently Showing':
+        return 'gold';
+      case 'Stopped Showing':
+        return 'red';
+      default:
+        return 'default';
+    }
+  };
   const {
     data: movie,
     isLoading,
@@ -32,8 +44,8 @@ const MovieListPage = () => {
 
   const filteredMovies = filterStatus
     ? movie?.data?.movies.filter(
-        (movie: TMovie) => movie.status === filterStatus
-      )
+      (movie: TMovie) => movie.status === filterStatus
+    )
     : movie?.data?.movies;
 
   const tableColumns: TableProps<TMovie>["columns"] = [
@@ -59,17 +71,20 @@ const MovieListPage = () => {
     },
     {
       title: "Thời lượng",
+      align: "center",
       dataIndex: "duration",
       key: "duration",
     },
     {
       title: "Ngày phát hành",
       dataIndex: "release_date",
+      align: "center",
       key: "release_date",
     },
     {
       title: "Ngày dừng chiếu",
       dataIndex: "end_date",
+      align: "center",
       key: "end_date",
     },
     {
@@ -77,11 +92,13 @@ const MovieListPage = () => {
       key: "status",
       render: (_, record) => (
         <>
-          {record.status === "Coming Soon"
-            ? "Sắp chiếu"
-            : record.status === "Currently Showing"
-            ? "Đang chiếu"
-            : "Dừng chiếu"}
+          <Tag color={getStatusColor(record.status)}>
+            {record.status === "Coming Soon"
+              ? "Sắp chiếu"
+              : record.status === "Currently Showing"
+                ? "Đang chiếu"
+                : "Dừng chiếu"}
+          </Tag>
         </>
       ),
     },

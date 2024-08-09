@@ -24,7 +24,7 @@ const SeatClient = ({ seatNumber, seatType, price, status, id, handleClick, book
         let checkSeat = booked?.find(_s => _s === id);
         const image = status === 'Available' ? Seat01_Free : (status === 'Reserved' ? Seat01 : Seat01Held);
         return (
-            <li className={status === 'Available' ? "single-seat seat-free-two" : "single-seat"} onClick={status === "Available" || (checkSeat && status === "Selected") ? handleChooseSeatBooking : () => null}>
+            <li className={status === 'Available' ? "single-seat seat-free-two" : "single-seat"} onClick={status === "Available" || (checkSeat || status === "Selected") ? handleChooseSeatBooking : () => null}>
                 <img src={checkSeat || status === "Selected" ? Seat01_Booked : image} alt="seat" />
                 {status === "Available" || status === "Selected" ? <span className="sit-num">{seatNumber}</span> : null}
             </li>
@@ -35,7 +35,7 @@ const SeatClient = ({ seatNumber, seatType, price, status, id, handleClick, book
         let checkSeat = booked?.find(_s => _s === id);
         const image = status === 'Available' ? Seat01_Free : (status === 'Reserved' ? Seat01 : Seat03Held);
         return (
-            <li className={status === 'Available' ? "single-seat seat-free-two" : "single-seat"} onClick={status === "Available" || (checkSeat && status === "Selected") ? handleChooseSeatBooking : () => null}>
+            <li className={status === 'Available' ? "single-seat seat-free-two" : "single-seat"} onClick={status === "Available" || (checkSeat || status === "Selected") ? handleChooseSeatBooking : () => null}>
                 <img src={checkSeat || status === "Selected" ? Seat03 : image} alt="seat" />
                 {status === "Available" || status === "Selected" ? <span className="sit-num">{seatNumber}</span> : null}
             </li>

@@ -64,6 +64,9 @@
       ],
       "@store/*": [
         "src/common/store/*"
+      ],
+      "@thongke/*": [
+        "src/services/thongke/*"
       ]
     }
   },
