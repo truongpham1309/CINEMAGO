@@ -5,7 +5,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { formatCurrencyVND } from '@/common/libs/fomatMoneyVND';
 
-// Đăng ký các phần tử của Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface RevenueItem {
@@ -15,7 +14,6 @@ interface RevenueItem {
     };
 }
 
-// Định nghĩa kiểu dữ liệu cho biểu đồ
 interface ChartData {
     labels: string[];
     datasets: {
@@ -100,7 +98,7 @@ const DoanhThuTong = () => {
     };
 
     return (
-        <div className="col-sm-12 col-lg-6 mt-5">
+        <div className="col-sm-12 col-lg-5">
             <div className="card shadow h-100 mb-4">
                 <div className="card-header py-3">
                     <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu Cinema-Go</h6>

@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import Chart from 'react-apexcharts';
-const DoanhThuThanhPhan = ({ type, name }: any) => {
+const DoanhThuThanhPhan = ({ url }: any) => {
   const [options, setOptions] = useState({
     chart: {
       id: 'basic-bar'
@@ -18,20 +18,13 @@ const DoanhThuThanhPhan = ({ type, name }: any) => {
     }
   ]);
   return (
-    <div className="col-sm-12 col-lg-6 mt-5">
-      <div className="card shadow h-100 mb-4">
-        <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary text-uppercase">Doanh thu theo {name}</h6>
-        </div>
-        <div className="card-body mx-auto">
-          <Chart
-            options={options}
-            series={series}
-            type="bar"
-            width={"500"}
-          />
-        </div>
-      </div>
+    <div className="card-body mx-auto">
+      <Chart
+        options={options}
+        series={series}
+        type="bar"
+        width={"600"}
+      />
     </div>
   )
 }
