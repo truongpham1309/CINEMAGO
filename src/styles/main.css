@@ -1849,6 +1849,11 @@ input[type="submit"] {
   -moz-animation-duration: 1s;
 }
 
+.title-valueChart {
+  color: #333;
+  font-weight: 600;
+}
+
 .header-bar {
   width: 30px;
   height: 25px;

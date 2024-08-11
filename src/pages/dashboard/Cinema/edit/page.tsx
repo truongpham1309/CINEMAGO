@@ -77,7 +77,7 @@ const CinemaEditPage = () => {
                         </div>
                         <div className="row mt-3">
                             <div className="col-sm-12 col-md-6">
-                                <Button htmlType="submit" className="btn-primary">Thêm mới</Button>
+                                <Button htmlType="submit" className="btn-success">Cập nhật</Button>
                             </div>
                         </div>
                     </form>
