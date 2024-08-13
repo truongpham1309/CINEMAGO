@@ -85,7 +85,7 @@ const DoanhThuTong = () => {
             },
         },
         responsive: true,
-        onHover: (event: any, elements: any) => {
+        onHover: (_: any, elements: any) => {
             if (elements.length > 0) {
                 const index = elements[0].index;
                 const label = chartData.labels[index];
