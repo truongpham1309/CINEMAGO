@@ -29,3 +29,13 @@ export const getTotalRevenueByAllMovie = async () => {
         throw error;
     }
 }
+
+export const getTotalRevenueDashBoard = async (uri: string) => {
+    try {
+        const { data } = await axios.get(uri);
+        return data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
