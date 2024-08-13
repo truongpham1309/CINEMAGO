@@ -14,7 +14,7 @@ const DashBoardHomePage = () => {
   const [selectedCinema, setSelectedCinema] = useState<string | null>(null);
 
   const handleViewReport = () => {
-    if(!selectedCinema) {
+    if(!selectedCinema && selectedType === "CINEMAS") {
       toast.warning("Mời bạn chọn rạp!", {
         position: "top-center",
         autoClose: 1000

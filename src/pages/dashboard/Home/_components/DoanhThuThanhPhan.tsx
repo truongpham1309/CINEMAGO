@@ -14,6 +14,7 @@ const DoanhThuThanhPhan = ({ url, typeChart }: any) => {
         position: "top-center",
         autoClose: 1000
       });
+      return null
     }
   }
 };
