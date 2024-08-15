@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import ScreenThumb from './_image/screen-thumb.png';
 import Movie_bg_proceed from './_image/movie-bg-proceed.jpg';
 import Seat01 from './_image/seat01.png';
+import Seat02 from './_image/seat02.png';
 import { useQuery } from "@tanstack/react-query";
 import { getSeatMapByIDShowTime } from "@/services/bookingClient/bookingClientService";
 import LoadingComponent from "@/components/ui/LoadingComponent";
@@ -19,6 +20,8 @@ import MovieBanner from "../_components/Booking/MovieBanner";
 import { validateSeatSelection } from "./libs/checkSeat";
 import { useChooseSeatsBooking } from "./hooks/useChooseSeat";
 import { toast } from "react-toastify";
+import { chunkArray } from "@/common/libs/chunkArray";
+import SeatCopple from "./_components/SeatCopple";
 
 
 const items = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"];
@@ -148,35 +151,59 @@ const BookingSeatPage = () => {
                                         )
                                     };
                                     count++;
+
                                     return (
                                         <li key={i} className="seat-line">
                                             <span>{s[0].type?.includes("thường") ? "N" : (s[0].type?.includes("vip") ? "V" : "C")}</span>
                                             <ul className="seat--area">
                                                 <li className="front-seat">
-                                                    <ul>
-                                                        {s.map((_s: any, _i: number) => {
-                                                            if (_s.type === "X" || _s.status === "UNOCCUPIED") {
-                                                                return (
-                                                                    <li key={_i} className='single-seat seat-visible'>
-                                                                        <img src={Seat01} alt="seat" />
-                                                                        <span className="sit-num">X</span>
-                                                                    </li>
-                                                                )
-                                                            }
-                                                            if (_s.id) {
-                                                                return (
-                                                                    <SeatClient
-                                                                        key={_i}
-                                                                        id={_s.id}
-                                                                        seatNumber={_s.seat_number}
-                                                                        seatType={_s.type} price={_s.price}
-                                                                        handleClick={handleChooseSeatBooking}
-                                                                        status={_s.status}
-                                                                        booked={bookingMovie?.seats}
-                                                                    />
-                                                                )
-                                                            }
-                                                        })}
+                                                    <ul className="justify">
+                                                        {s[0].type?.includes("đôi") ? (
+                                                            chunkArray(s, 2)?.map((_s: any, _i: number) => {
+                                                                if (_s[0].type === "X" || _s[0].status === "UNOCCUPIED") {
+                                                                    return (
+                                                                        <li key={_i} className='single-seat seat-visible'>
+                                                                            <img src={Seat02} alt="seat" />
+                                                                            <span className="sit-num">X</span>
+                                                                        </li>
+                                                                    )
+                                                                }
+                                                                if (_s[0].id) {
+                                                                    return (
+                                                                        <SeatCopple
+                                                                            key={_i}
+                                                                            seat={_s}
+                                                                            handleClick={handleChooseSeatBooking}
+                                                                            booked={bookingMovie?.seats}
+                                                                        />
+                                                                    )
+                                                                }
+                                                            })
+                                                        ) : (
+                                                            s.map((_s: any, _i: number) => {
+                                                                if (_s.type === "X" || _s.status === "UNOCCUPIED") {
+                                                                    return (
+                                                                        <li key={_i} className='single-seat seat-visible'>
+                                                                            <img src={Seat01} alt="seat" />
+                                                                            <span className="sit-num">X</span>
+                                                                        </li>
+                                                                    )
+                                                                }
+                                                                if (_s.id) {
+                                                                    return (
+                                                                        <SeatClient
+                                                                            key={_i}
+                                                                            id={_s.id}
+                                                                            seatNumber={_s.seat_number}
+                                                                            seatType={_s.type} price={_s.price}
+                                                                            handleClick={handleChooseSeatBooking}
+                                                                            status={_s.status}
+                                                                            booked={bookingMovie?.seats}
+                                                                        />
+                                                                    )
+                                                                }
+                                                            })
+                                                        )}
                                                     </ul>
                                                 </li>
                                             </ul>

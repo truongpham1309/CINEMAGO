@@ -4956,9 +4956,12 @@ input[type="submit"] {
 }
 
 .seat-area .seat-line ul .front-seat ul li {
-  padding: 5px;
+  padding: 10px;
 }
 
+.seat-area .seat-line ul .front-seat ul li.seat-copple {
+  margin: 0 15px;
+}
 .seat-area .seat-line ul.seat--area {
   width: calc(100% - 60px);
 }
@@ -4972,6 +4975,7 @@ input[type="submit"] {
   .seat-area .seat-line .single-seat img {
     width: 100%;
   }
+
 }
 
 .seat-area.couple {
@@ -4987,6 +4991,7 @@ input[type="submit"] {
 
 .seat-area.couple .seat-line .single-seat {
   padding: 10px;
+
 }
 
 @media (max-width: 991px) and (min-width: 768px) {
