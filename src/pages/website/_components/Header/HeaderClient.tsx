@@ -1,4 +1,4 @@
-import { logo } from "@/assets/images/logo";
+import { logo } from "@assets/images/logo";
 import { logoutUser } from "@/services/auth/authService";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -55,13 +55,13 @@ const HeaderClient = () => {
               </li>
               {user ? (
                 <li>
-                  <Link to="/profile">{user?.data?.full_name}</Link>
+                  <Link to="/account/profile">{user?.data?.full_name}</Link>
                   <ul className="submenu">
                     <li>
                       <Link to="/account/ticket">Lịch sử</Link>
                     </li>
                     <li>
-                      <Link to="/account/ticket">Thông tin tài khoản</Link>
+                      <Link to="/account/profile">Thông tin tài khoản</Link>
                     </li>
                     {+user.data.role_id === 1 ? (
                       <li>
