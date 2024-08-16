@@ -205,6 +205,7 @@ const BookingServicePage = () => {
                                 </p>
                             </div>
                             </div>
+                            <br />
                             <div className="grid--area">
                                 <Space direction="vertical" size="middle" className="text-white py-3 row" style={{ background: "#032055" }}>
                                     {booking.services.map((service: any) => {
@@ -214,6 +215,7 @@ const BookingServicePage = () => {
                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                     <div>
                                                         <h3 className="text-uppercase">{serviceDetails?.name}</h3>
+                                                        <br />
                                                         <p>Giá: {formatCurrencyVND(serviceDetails?.price?.slice(0, -3))}</p>
                                                         <p>Đã chọn: {service.quantity}</p>
                                                     </div>

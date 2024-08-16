@@ -1,4 +1,4 @@
-import { logo } from "@/assets/images/logo";
+import { logo } from "@assets/images/logo";
 import { logoutUser } from "@/services/auth/authService";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
