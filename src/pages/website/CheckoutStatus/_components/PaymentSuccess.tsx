@@ -39,7 +39,7 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
     const handleViewDetailTicket = () => {
         dispatch(clean_booking());
         dispatch(delete_info_movie());
-        navigate('/detail/ticket');
+        navigate('/account/ticket');
         return;
     }
     return (

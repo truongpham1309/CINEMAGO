@@ -74,7 +74,7 @@ const Router = () => {
               <Route path="/movie/booking-seats/:id" element={<BookingSeat />} />
               <Route path="/movie/booking/services" element={<BookingServicePage />} />
               <Route path="/movie/booking/status/:method" element={<CheckoutStatusPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/account/profile" element={<ProfilePage />} />
               <Route path="account/ticket" element={<TicketsPage />} />
               <Route />
               <Route />

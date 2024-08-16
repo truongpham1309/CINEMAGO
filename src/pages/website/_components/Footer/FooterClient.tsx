@@ -26,9 +26,9 @@ const FooterClient = () => {
                 <div className="container">
                     <div className="footer-top">
                         <div className="logo">
-                            <a href="index-1.html">
+                            {/* <a href="index-1.html">
                                 <img src={logo} alt="footer" />
-                            </a>
+                            </a> */}
                         </div>
                         <ul className="social-icons">
                             <li>
@@ -62,7 +62,7 @@ const FooterClient = () => {
                         <div className="footer-bottom-area">
                             <div className="left">
                                 <p>
-                                    Copyright © 2020.All Rights Reserved By <a href="#0">Boleto </a>
+                                    Copyright © 2024.All Rights Reserved By <a href="#0">CinemaGO </a>
                                 </p>
                             </div>
                             <ul className="links">
