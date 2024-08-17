@@ -103,14 +103,14 @@ const MovieListPage = () => {
       ),
     },
     {
-      title: "",
+      title: "Action",
       key: "action",
       render: (_, record) => (
         <>
-          <Link className="mr-3" to={`/dashboard/movie/edit/${record.id}`}>
+          <Link className="mr-3 btn btn-warning" to={`/dashboard/movie/edit/${record.id}`}>
             Sửa
           </Link>
-          <Link to={`/dashboard/movie/detail/${record.id}`}>Chi tiết</Link>
+          <Link className="btn btn-danger" to={`/dashboard/movie/detail/${record.id}`}>Chi tiết</Link>
         </>
       ),
     },

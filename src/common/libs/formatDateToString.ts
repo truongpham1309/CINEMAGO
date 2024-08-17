@@ -15,11 +15,11 @@ export const formatDateString = (inputDate: any) => {
 
 export const formatDate = (dateStr: string) => {
     const dateObj = new Date(dateStr);
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const days = ["Chủ Nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
+    const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
     const dayName = days[dateObj.getUTCDay()];
     const monthName = months[dateObj.getUTCMonth()];
     const day = ("0" + dateObj.getUTCDate()).slice(-2);
     const year = dateObj.getUTCFullYear();
-    return `${dayName}, ${monthName} ${day} ${year}`;
+    return `${dayName}, ${day}/${monthName}/${year}`;
 }
