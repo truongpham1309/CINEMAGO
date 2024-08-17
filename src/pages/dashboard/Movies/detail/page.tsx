@@ -76,37 +76,103 @@ const MovieDetailPage = () => {
     setTrailerUrl(url);
     setVisible(true);
   };
+  const getAgeRatingText = (rated) => {
+    if (rated === 'P') {
+      return 'Phù hợp cho mọi lứa tuổi';
+    } else if (parseInt(rated) > 0) {
+      return `Dành cho người trên ${rated} tuổi`;
+    } else {
+      return 'Không xác định độ tuổi';
+    }
+  };
+
+  const ageRatingText = getAgeRatingText(movie.rated);
+  
 
   return (
     <Card style={{ width: '100%' }}>
-      <Row gutter={[16, 16]}>
-        <Col span={4}>
-          <Image
-            src={movie.image}
-            alt={movie.title}
-            onClick={() => showTrailerModal(movie.trailer)}
-            style={{ cursor: 'pointer' }}
+      <div className="row h-100">
+        {/* Cột 1: Hình ảnh */}
+        <div className="col-md-3 d-flex align-items-stretch">
+          <div className="w-100">
+            <img
+              src={movie.image}
+              alt={movie.title}
+              onClick={() => showTrailerModal(movie.trailer)}
+              style={{ cursor: 'pointer', width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+
+        {/* Cột 2 và 3: Thông tin phim */}
+        <div className="col-md-9 d-flex flex-column">
+          {/* Tên phim */}
+          <h1 className="mb-4 text-dark">{movie.title}</h1>
+          <div className="row flex-grow-1">
+            {/* Thông tin cột bên trái */}
+            <div className="col-md-6 d-flex flex-column">
+              <label><strong>Thể loại:</strong></label>
+              <input type="text" className="form-control mb-2" value={movie.genre} readOnly />
+              <br />
+
+              <label><strong>Đạo diễn:</strong></label>
+              <input type="text" className="form-control mb-2" value={movie.director} readOnly />
+              <br />
+
+              <label><strong>Diễn viên:</strong></label>
+              <input type="text" className="form-control mb-2" value={movie.actor} readOnly />
+              <br />
+
+              <label><strong>Thời lượng:</strong></label>
+              <input type="text" className="form-control mb-2" value={`${movie.duration} phút`} readOnly />
+            </div>
+
+            {/* Thông tin cột bên phải */}
+            <div className="col-md-6 d-flex flex-column">
+              <label><strong>Ngày khởi chiếu:</strong></label>
+              <input type="text" className="form-control mb-2" value={movie.release_date} readOnly />
+              <br />
+
+              <label><strong>Ngày dừng chiếu:</strong></label>
+              <input type="text" className="form-control mb-2" value={movie.end_date} readOnly />
+              <br />
+
+              <label><strong>Trạng thái:</strong></label>
+              <input
+                type="text"
+                className="form-control mb-2"
+                value={
+                  movie.status === "Coming Soon"
+                    ? "Sắp chiếu"
+                    : movie.status === "Currently Showing"
+                    ? "Đang chiếu"
+                    : "Dừng chiếu"
+                }
+                readOnly
+              />
+              <br />
+
+              <label><strong>Độ tuổi:</strong></label>
+              <input type="text" className="form-control mb-2 text-dark" value={ageRatingText} readOnly />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hàng cuối cùng: Mô tả */}
+      <div className="row mt-4">
+        <div className="col-12">
+          <label><strong>Mô tả:</strong></label>
+          <textarea
+            // type="text"
+            className="form-control"
+            value={movie.description?.replace(/<[^>]+>/g, '')}
+            readOnly
           />
-        </Col>
-        <Col span={16} style={{ fontSize: "20px" }}>
-          <Title level={1}>{movie.title}</Title>
-          <Text strong>Thể loại: </Text><Text>{movie.genre}</Text><br />
-          <Text strong>Đạo diễn: </Text><Text>{movie.director}</Text><br />
-          <Text strong>Diễn viên: </Text><Text>{movie.actor}</Text><br />
-          <Text strong>Thời lượng: </Text><Text>{movie.duration} phút</Text><br />
-          <Text strong>Ngày khởi chiếu: </Text><Text>{movie.release_date}</Text><br />
-          <Text strong>Ngày dừng chiếu: </Text><Text>{movie.end_date}</Text><br />
-          <Text strong>Trạng thái: </Text><Tag color={getStatusColor(movie.status)}>
-            {movie.status === "Coming Soon"
-              ? "Sắp chiếu"
-              : movie.status === "Currently Showing"
-                ? "Đang chiếu"
-                : "Dừng chiếu"}
-          </Tag><br />
-          <Text strong>Độ tuổi: </Text><Text>{movie.rated}</Text><br />
-          <Text strong>Mô tả: </Text><div dangerouslySetInnerHTML={{ __html: movie.description }} /> <br />
-        </Col>
-      </Row>
+        </div>
+      </div>
+
+      {/* Nút Xóa phim */}
       <Button
         type="primary"
         danger
@@ -116,8 +182,13 @@ const MovieDetailPage = () => {
         Xóa phim
       </Button>
 
-      <ModalVideo channel='youtube' isOpen={visible} videoId={extractVideoId(movie?.trailer || "") || ""} onClose={() => setVisible(false)} />
-
+      {/* Modal Trailer */}
+      <ModalVideo
+        channel='youtube'
+        isOpen={visible}
+        videoId={extractVideoId(movie?.trailer || "") || ""}
+        onClose={() => setVisible(false)}
+      />
     </Card>
   );
 };
