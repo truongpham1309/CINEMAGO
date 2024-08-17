@@ -25,7 +25,7 @@ export const validateSeatSelection = (seats: any[], selectedSeatIds: any[]) => {
         let firstSelectedIndex = row.findIndex((seat: any) => selectedSeatIds.includes(seat.id));
         let lastSelectedIndex = row.length - 1 - row.slice().reverse().findIndex((seat: any) => selectedSeatIds.includes(seat.id));
 
-        // Kiểm tra các ghế trống giữa các ghế đã chọn
+        // Kiểm tra ghế trống giữa các ghế đã chọn
         let gap = 0;
         for (let i = firstSelectedIndex; i <= lastSelectedIndex; i++) {
             if (!selectedSeatIds.includes(row[i].id) && !['Selected', 'Held'].includes(row[i].status)) {
@@ -41,32 +41,31 @@ export const validateSeatSelection = (seats: any[], selectedSeatIds: any[]) => {
             }
         }
 
-        if (firstSelectedIndex > 0) {
-            let leftGap = firstSelectedIndex;
-            let selectedCount = row.slice(firstSelectedIndex).filter((seat: any) => selectedSeatIds.includes(seat.id)).length;
-            if (leftGap === 1 && selectedCount === row.length - 1) {
-                // Trường hợp đặc biệt: chỉ còn một ghế trống ở đầu hàng
-            } else if (leftGap === 1 && row[firstSelectedIndex - 1].status === "Available") {
-                toast.error(`Không được để trống ghế ${row[firstSelectedIndex - 1].seat_number}`,
-                    {
-                        position: "top-center",
-                    }
-                );
-                return false; // Ghế không hợp lệ
-            }
+        // Kiểm tra ghế trống ở đầu hàng
+        if (firstSelectedIndex === 1 && row[0].status === "Available") {
+            toast.error(`Không được để trống ghế ${row[0].seat_number}`, {
+                position: "top-center",
+            });
+            return false; // Ghế không hợp lệ
         }
 
         // Kiểm tra ghế trống ở cuối hàng
-        if (lastSelectedIndex < row.length - 1) {
-            let rightGap = row.length - 1 - lastSelectedIndex;
-            let selectedCount = row.slice(0, lastSelectedIndex + 1).filter((seat: any) => selectedSeatIds.includes(seat.id)).length;
-            if (rightGap === 1 && selectedCount === row.length - 1) {
-                // Trường hợp đặc biệt: chỉ còn một ghế trống ở cuối hàng
-            } else if (rightGap === 1 && row[lastSelectedIndex + 1] === "Available") {
-                toast.error(`Không được để trống ghế ${row[lastSelectedIndex + 1].seat_number}`, {
-                    position: "top-center",
-                });
-                return false; // Ghế không hợp lệ
+        if (lastSelectedIndex === row.length - 2 && row[row.length - 1].status === "Available") {
+            toast.error(`Không được để trống ghế ${row[row.length - 1].seat_number}`, {
+                position: "top-center",
+            });
+            return false; // Ghế không hợp lệ
+        }
+
+        // Kiểm tra nếu ghế trước ghế đã chọn có trạng thái "Available" nhưng bị bỏ trống
+        for (let i = 1; i < row.length; i++) {
+            if (selectedSeatIds.includes(row[i].id)) {
+                if (row[i - 1].status === "Available" && !selectedSeatIds.includes(row[i - 1].id) && row[i - 1].status !== "Reserved") {
+                    toast.error(`Không được để trống ghế ${row[i - 1].seat_number}`, {
+                        position: "top-center",
+                    });
+                    return false;
+                }
             }
         }
     }
