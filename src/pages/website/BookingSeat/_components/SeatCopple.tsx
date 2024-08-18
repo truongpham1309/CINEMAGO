@@ -7,7 +7,7 @@ const SeatCopple = ({ seat, handleClick, booked }: any) => {
     const handleChooseSeatBooking = () => {
         console.log("đã chọn ghế")
         handleClick({ id: seat[0]?.id, price: seat[0]?.price, seatNumber: seat[0]?.seat_number, type: seat[0]?.type, status: seat[0]?.status });
-        handleClick({ id: seat[1]?.id, price: 0, seatNumber: seat[1]?.seat_number, type: seat[1]?.type, status: seat[1]?.status });
+        handleClick({ id: seat[1]?.id, price: seat[1]?.price, seatNumber: seat[1]?.seat_number, type: seat[1]?.type, status: seat[1]?.status });
     }
     console.log(seat);
 

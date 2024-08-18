@@ -1,8 +1,8 @@
 import axios from 'axios';
-const seatMap = "NNNNNNNNNN|NNNNNNNNNN|VVVVVVVVVV|XXXXXXXXXX|CCCCCCCCCC";
+const seatMap = "NNNNNNNNNN|NNNNNNNNNN|VVVVVVVVVV|VVVVVVVVVV|VVVVVVVVVV|CCCCCCCCCC";
 const row = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"];
 let count = 0;
-const CINEMA_SCREEN_ID = 9
+const CINEMA_SCREEN_ID = 12
 const seatType = {
     nomal: 1,
     vip: 2,
@@ -45,7 +45,16 @@ const createSeat = (seatMap) => {
                         status: "UNOCCUPIED"
                     }
                 }
-                await axios.post("http://localhost:8000/api/dashboard/seat/create", seat);
+                (async function () {
+                    setTimeout(async () => {
+                        try {
+                            await axios.post("http://localhost:8000/api/dashboard/seat/create", seat);
+                            console.log("Create seat successful: ", seat?.seat_number);
+                        } catch (error) {
+                            console.log("Error create seat: ", seat?.seat_number, ", Chi tiết lỗi: ", error?.response?.data?.message)
+                        }
+                    }, 3000)
+                })()
             });
             count++;
         }
