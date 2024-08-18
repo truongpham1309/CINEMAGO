@@ -76,7 +76,7 @@ const HeaderClient = () => {
               ) : null}
               {!user ? (
                 <li className="header-button pr-0">
-                  <Link to="/login">login</Link>
+                  <Link to="/login">Login</Link>
                 </li>
               ) : null}
 

@@ -58,6 +58,8 @@ const MovieList = () => {
   const genres = Array.from(new Set(movies.flatMap((movie) => movie.genre.split(', '))));
   return (
     <>
+    <br />
+    <br />
       <section className="py-5">
       </section>
       <section className="movie-section padding-top padding-bottom">
@@ -89,7 +91,7 @@ const MovieList = () => {
                       <span className="show text-white mt-1">Trạng thái :</span>
                       <div className="">
                         <div className="nice-select"> 
-                          <span className="current">Comming Soon</span>
+                          <span className="current">Sắp chiếu</span>
                           <ul className="list">
                             <li
                               data-value="all"
