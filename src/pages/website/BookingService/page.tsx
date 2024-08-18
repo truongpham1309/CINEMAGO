@@ -176,7 +176,7 @@ const BookingServicePage = () => {
                                                             type="primary"
                                                             onClick={() => handleAddClick(service)}
                                                         >
-                                                            Add
+                                                            Thêm
                                                         </Button>,
                                                     ]}
                                                 >

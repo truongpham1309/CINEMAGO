@@ -11,19 +11,19 @@ const TicketsPage = () => {
   const [idBooking, setIdBooking] = useState(null);
   const columns: TableProps<any>['columns'] = [
     {
-      title: 'Phim',
+      title: 'PHIM',
       dataIndex: 'movie',
       key: 'movieName',
     },
     {
-      title: 'Ngày',
+      title: 'NGÀY',
       key: 'showDate',
       render: (record) => (
         formatDateString(record?.show_date)
       )
     },
     {
-      title: 'Giờ',
+      title: 'LỊCH CHIẾU',
       key: 'showTime',
       dataIndex: 'show_time',
       render: (record) => {
@@ -31,14 +31,14 @@ const TicketsPage = () => {
       }
     },
     {
-      title: 'Rạp',
+      title: 'RẠP',
       className: "text-truncate",
       key: 'cinemaName',
       align: "center",
       dataIndex: "cinema"
     },
     {
-      title: 'Tổng tiền',
+      title: 'TỔNG TIỀN',
       dataIndex: 'subtotal',
       className: "text-truncate",
       key: 'totalPrice',
@@ -71,18 +71,21 @@ const TicketsPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-8 text-center">
+              <br />
+              <br />
               <h4 className="title text-uppercase mb-4">Lịch sử</h4>
+              <br />
             </div>
             <div className="col-md-12 col-lg-8">
               {tickets?.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '20px', color: "#fff" }}>
                   <Empty description={<span className="text-white text-uppercase text-xl">Bạn chưa có vé nào!</span>} />
                 </div>
-              ) : <Table
+              ) : <Table className="table table-striped table-bored"
                 columns={columns}
                 dataSource={tickets}
                 rowKey={(record) => record.id}
-                pagination={{ pageSize: 5 }}
+                pagination={{ pageSize: 10 }}
               />}
             </div>
             <div className="col-md-12 col-lg-4">

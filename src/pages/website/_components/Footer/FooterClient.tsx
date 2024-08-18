@@ -12,13 +12,13 @@ const FooterClient = () => {
                             data-background={NewsLaster}
                         >
                             <div className="newslater-wrapper">
-                                <h5 className="cate">subscribe to Boleto </h5>
-                                <h3 className="title">to get exclusive benifits</h3>
+                                <h5 className="cate">Đăng ký ngay tại CinemaGo </h5>
+                                <h3 className="title">Để nhận được những voucher hấp dẫn!</h3>
                                 <form className="newslater-form">
-                                    <input type="text" placeholder="Your Email Address" />
-                                    <button type="submit">subscribe</button>
+                                    <input type="text" placeholder="Địa chỉ email của bạn" />
+                                    <button type="submit">Đăng kí</button>
                                 </form>
-                                <p>We respect your privacy, so we never share your info</p>
+                                <p>Chúng tôi tôn trọng quyền riêng tư của bạn nên chúng tôi không bao giờ chia sẻ thông tin của bạn</p>
                             </div>
                         </div>
                     </div>
@@ -65,23 +65,6 @@ const FooterClient = () => {
                                     Copyright © 2024.All Rights Reserved By <a href="#0">CinemaGO </a>
                                 </p>
                             </div>
-                            <ul className="links">
-                                <li>
-                                    <a href="#0">About</a>
-                                </li>
-                                <li>
-                                    <a href="#0">Terms Of Use</a>
-                                </li>
-                                <li>
-                                    <a href="#0">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#0">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#0">Feedback</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

@@ -23,16 +23,13 @@ const HomePage = () => {
                 <div className="container">
                     <div className="banner-content">
                         <h1 className="title cd-headline clip">
-                            <span className="d-block">book your</span> tickets for <span> </span>
-                            <span className="color-theme cd-words-wrapper p-0 m-0">
-                                <b className="is-visible">Movie</b>
-                                <b>Event</b>
-                                <b>Sport</b>
+                            <span className="d-block">Chào mừng bạn </span>đến với <span> </span>
+                            <span className="color-theme p-0 m-0">
+                                <b className="is-visible">CinemeGO</b>
                             </span>
                         </h1>
                         <p>
-                            Safe, secure, reliable ticketing.Your ticket to live
-                            entertainment!
+                            Đặt vé an toàn, uy tín, bảo mật, đáng tin cậy.
                         </p>
                     </div>
                 </div>
