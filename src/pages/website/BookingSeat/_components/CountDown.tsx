@@ -10,38 +10,49 @@ import { useChooseSeatsBooking } from '../hooks/useChooseSeat';
 
 const CountDown = () => {
     const navigate = useNavigate();
-    const [countDown, setCountDown] = useState(5 * 60);
+    const [countDown, setCountDown] = useState(300); // 30 giây đếm ngược
     const [countDownStart, setCountDownStart] = useState<Date | null>(null);
     const booking = useSelector(selectorBooking);
     const dispatch = useDispatch();
     const { mutate } = useChooseSeatsBooking();
 
+    const resetCountdown = () => {
+        sessionStorage.removeItem('countdownStart');
+        setCountDownStart(null);
+        setCountDown(300);
+    };
+
     useEffect(() => {
         const storedStartTime = sessionStorage.getItem('countdownStart');
-        let _temp_time = new Date();
+        const _temp_time = new Date();
+
         if (!storedStartTime) {
+            // Nếu không có thời gian bắt đầu được lưu trữ, khởi tạo lại thời gian đếm ngược
             setCountDownStart(_temp_time);
             sessionStorage.setItem('countdownStart', _temp_time.toISOString());
-            setCountDown(5 * 60);
-            return;
-        }
-        let newTime = _temp_time;
-        if (storedStartTime) {
-            let _startTime = new Date(storedStartTime);
-            if (((+_startTime - +_temp_time) / (1000 * 60)) < 5) {
-                newTime = _startTime;
+            setCountDown(300);
+        } else {
+            const _startTime = new Date(storedStartTime);
+            const elapsedSeconds = Math.floor((_temp_time.getTime() - _startTime.getTime()) / 1000);
+
+            if (elapsedSeconds >= 300) {
+                // Nếu thời gian đã hết, reset lại đếm ngược
+                resetCountdown();
+            } else {
+                setCountDownStart(_startTime);
+                setCountDown(300 - elapsedSeconds);
             }
         }
-        setCountDownStart(newTime);
-        sessionStorage.setItem('countdownStart', newTime.toISOString());
     }, []);
 
     useEffect(() => {
         if (!countDownStart) return;
+        console.log(countDownStart)
         const intervalId = setInterval(() => {
             const currentTime = new Date();
             const elapsedSeconds = Math.floor((currentTime.getTime() - countDownStart.getTime()) / 1000);
-            const newCountDown = 5 * 60 - elapsedSeconds;
+            const newCountDown = 300 - elapsedSeconds;
+
             if (newCountDown <= 0) {
                 if (booking.seats.length > 0) {
                     mutate({
@@ -57,9 +68,10 @@ const CountDown = () => {
                 toast.warning("Hết thời gian, vui lòng thực hiện lại thao tác!", {
                     position: 'top-center',
                 });
-                sessionStorage.removeItem('countdownStart');
-                navigate('/movie');
                 clearInterval(intervalId);
+                resetCountdown();
+                console.log(countDownStart)
+                navigate('/');
             } else {
                 setCountDown(newCountDown);
             }
@@ -71,7 +83,6 @@ const CountDown = () => {
     return (
         <div className="item">
             <h5 className="title">{formatTime(countDown)}</h5>
-            <p>Mins Left</p>
         </div>
     );
 };

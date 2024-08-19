@@ -53,11 +53,32 @@ export const logoutUser = async () => {
 }
 
 export const getAllUserList = async () => {
-  const {data} = await axios.get(`/dashboard/user`)
+  const { data } = await axios.get(`/dashboard/user`)
   return data.data;
 };
 
 export const getUserDetail = async (id: string) => {
-  const {data} = await axios.get(`/dasboard/user/${id}`);
+  const { data } = await axios.get(`/dasboard/user/${id}`);
   return data.data;
 };
+
+
+export const checkTokenExpiry = async () => {
+  try {
+    const { data } = await axios.get('/account/check-token-expiry');
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export const checkTokenIsAdmin = async () => {
+  try {
+    const { data } = await axios.get("/account/check-admin-role");
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error
+  }
+}

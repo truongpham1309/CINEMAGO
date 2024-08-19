@@ -9,8 +9,6 @@ const SeatCopple = ({ seat, handleClick, booked }: any) => {
         handleClick({ id: seat[0]?.id, price: seat[0]?.price, seatNumber: seat[0]?.seat_number, type: seat[0]?.type, status: seat[0]?.status });
         handleClick({ id: seat[1]?.id, price: seat[1]?.price, seatNumber: seat[1]?.seat_number, type: seat[1]?.type, status: seat[1]?.status });
     }
-    console.log(seat);
-
     let checkSeat = booked?.find((_s: any) => _s === seat[0]?.id || _s === seat[1]?.id);
     const image = seat[0]?.status === 'Available' ? Seat02Free : (seat[0]?.status === 'Reserved' ? Seat02 : Seat02_Held);
     return (
