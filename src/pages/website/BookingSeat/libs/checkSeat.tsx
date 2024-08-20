@@ -29,7 +29,7 @@ export const validateSeatSelection = (seats: any[], selectedSeatIds: any[]) => {
         // Kiểm tra các ghế trống giữa các ghế đã chọn
         for (let i = firstSelectedIndex + 1; i < lastSelectedIndex; i++) {
             if (!selectedSeatIds.includes(row[i].id) && row[i].status === "Available") {
-                toast.error(`Không được để trống ghế ${row[i].seat_number} giữa các ghế đã chọn`, {
+                toast.error(`Không được để trống ghế ${row[i].seat_number}`, {
                     position: "top-center",
                 });
                 return false;
