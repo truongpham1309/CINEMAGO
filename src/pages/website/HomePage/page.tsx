@@ -25,7 +25,7 @@ const HomePage = () => {
                         <h1 className="title cd-headline clip">
                             <span className="d-block">Chào mừng bạn </span>đến với <span> </span>
                             <span className="color-theme p-0 m-0">
-                                <b className="is-visible">CinemeGO</b>
+                                <b className="is-visible">CinemaGO</b>
                             </span>
                         </h1>
                         <p>
