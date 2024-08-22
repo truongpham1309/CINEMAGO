@@ -3,6 +3,28 @@ import { getAllMovieHomePage } from "@/services/movie/movieService";
 import { useEffect, useState } from "react";
 import ItemsMovieComponent from "../_components/Movies/ItemsMovieComponent";
 import AOS from 'aos';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive = {
+    superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 4
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+    }
+};
 
 const HomePage = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -43,9 +65,9 @@ const HomePage = () => {
                 <section className="movie-section padding-top padding-bottom" data-aos="fade-left">
                     <div className="container">
                         <div className="tab">
-                            <div className="section-header-2">
+                            <div className="section-header-2 border-0">
                                 <div className="left">
-                                    <h2 className="title">Phim đang chiếu</h2>
+                                    <h2 className="title fs-5">Phim sắp chiếu</h2>
                                 </div>
                             </div>
                             <div className="mb-30-none">
@@ -72,7 +94,7 @@ const HomePage = () => {
                         <div className="tab">
                             <div className="section-header-2 border-0">
                                 <div className="left">
-                                    <h2 className="title fs-5">Phim đang chiếu</h2>
+                                    <h2 className="title">Phim đang chiếu</h2>
                                 </div>
                             </div>
                             <div className="mb-30-none">

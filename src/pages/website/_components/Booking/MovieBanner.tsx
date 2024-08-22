@@ -41,8 +41,6 @@ const MovieBanner = () => {
                     </div>
                 </div>
             </section>
-            {/* ==========Banner-Section========== */}
-            {/* ==========Page-Title========== */}
             <section className="page-title bg-one">
                 <div className="container">
                     <div className="page-title-area">
@@ -52,7 +50,7 @@ const MovieBanner = () => {
                                 className="custom-button back-button"
                             >
                                 <i className="flaticon-double-right-arrows-angles" />
-                                back
+                                Quay lại
                             </p>
                         </div>
                         <div className="item date-item text-uppercase text-white" >

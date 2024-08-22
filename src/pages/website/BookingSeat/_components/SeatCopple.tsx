@@ -14,7 +14,7 @@ const SeatCopple = ({ seat, handleClick, booked }: any) => {
     return (
         <li className="single-seat seat-free-two seat-copple" onClick={seat[0]?.status === "Available" || checkSeat || seat[0]?.status === "Selected" ? handleChooseSeatBooking : () => null}>
             <img src={checkSeat || seat[0]?.status === "Selected" ? Seat02_Booked : image} alt="seat" />
-            {seat[0]?.status === "Available" || seat[0]?.status === "Selected" ? <span className="sit-num text-nowrap">{seat?.map((_s: any) => _s?.seat_number).join(" ")}</span> : null}
+            {seat[0]?.status === "Available" || seat[0]?.status === "Selected" ? <span className="sit-num text-nowrap  text-white">{seat?.map((_s: any) => _s?.seat_number).join("  \n")}</span> : null}
         </li>
     )
 }
