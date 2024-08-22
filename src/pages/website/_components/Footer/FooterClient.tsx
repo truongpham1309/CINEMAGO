@@ -1,7 +1,9 @@
 import { logo } from "@/assets/images/logo"
 import { NewsLaster } from "@/assets/images/newslater"
+import { Link, useNavigate } from "react-router-dom"
 
 const FooterClient = () => {
+    const navigate = useNavigate();
     return (
         <>
             <footer className="footer-section">
@@ -15,8 +17,8 @@ const FooterClient = () => {
                                 <h5 className="cate">Đăng ký ngay tại CinemaGo </h5>
                                 <h3 className="title">Để nhận được những voucher hấp dẫn!</h3>
                                 <form className="newslater-form">
-                                    <input type="text" placeholder="Địa chỉ email của bạn" />
-                                    <button type="submit">Đăng kí</button>
+                                    <input className=""  type="email" placeholder="Địa chỉ email của bạn" />
+                                    <button onClick={() => navigate('/signup')} type="submit">Đăng kí</button>
                                 </form>
                                 <p>Chúng tôi tôn trọng quyền riêng tư của bạn nên chúng tôi không bao giờ chia sẻ thông tin của bạn</p>
                             </div>
@@ -26,9 +28,9 @@ const FooterClient = () => {
                 <div className="container">
                     <div className="footer-top">
                         <div className="logo">
-                            {/* <a href="index-1.html">
-                                <img src={logo} alt="footer" />
-                            </a> */}
+                            <Link to="/">
+                                <img width={120} src={logo} alt="footer" />
+                            </Link>
                         </div>
                         <ul className="social-icons">
                             <li>

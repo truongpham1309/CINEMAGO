@@ -1,9 +1,10 @@
-import { logo } from "@assets/images/logo";
 import { logoutUser } from "@/services/auth/authService";
+import { logo } from "@assets/images/logo";
 import { useMutation } from "@tanstack/react-query";
+import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+const { confirm } = Modal;
 
 const HeaderClient = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const HeaderClient = () => {
     setPathName(location.pathname);
   }, [location.pathname]);
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async () => {
       await logoutUser();
     },
@@ -23,10 +24,22 @@ const HeaderClient = () => {
       localStorage.removeItem("user");
     },
     onError: () => {
-      toast.error("Có lỗi xảy ra, bạn không thể đăng xuất!");
       localStorage.removeItem("user");
     }
   });
+
+  const handleLogout = () => {
+    confirm({
+      content: 'Bạn có chắc chắn muốn đăng xuất!',
+      okText: 'Có',
+      cancelText: 'Không',
+      onOk() {
+        mutate()
+      },
+      onCancel() {
+      },
+    });
+  }
 
   return (
     <>
@@ -50,12 +63,9 @@ const HeaderClient = () => {
               <li>
                 <Link to="#0">Rạp</Link>
               </li>
-              <li>
-                <Link to="#0">Sự kiện</Link>
-              </li>
               {user ? (
                 <li>
-                  <Link to="/account/profile">{user?.data?.full_name}</Link>
+                  <Link className={pathName.includes("/account") ? "active" : ""} to="#">{user?.data?.full_name}</Link>
                   <ul className="submenu">
                     <li>
                       <Link to="/account/ticket">Lịch sử</Link>
@@ -69,7 +79,7 @@ const HeaderClient = () => {
                       </li>
                     ) : null}
                     <li>
-                      <Link to="#" onClick={() => mutate()}>Đăng xuất</Link>
+                      <Link to="#" onClick={() => handleLogout()}>Đăng xuất</Link>
                     </li>
                   </ul>
                 </li>
