@@ -21,6 +21,7 @@ interface GroupedData {
 
 export const groupShowtimes = (data: any[]): GroupedData[] => {
   if (!data) return [];
+  
   const groupedData: Record<string, Record<string, Record<string, Record<string, Showtime[]>>>> = {};
 
   data.forEach(item => {
@@ -43,6 +44,19 @@ export const groupShowtimes = (data: any[]): GroupedData[] => {
     }
 
     groupedData[cinema_city][cinema_name][screen_name][show_date].push({ id: id_showtime, time: show_time });
+  });
+
+  // Sắp xếp các suất chiếu theo thời gian
+  Object.values(groupedData).forEach(cinemaCity => {
+    Object.values(cinemaCity).forEach(cinema => {
+      Object.values(cinema).forEach(screen => {
+        Object.values(screen).forEach(showtimes => {
+          showtimes.sort((a, b) => {
+            return new Date(`1970-01-01T${a.time}`).getTime() - new Date(`1970-01-01T${b.time}`).getTime();
+          });
+        });
+      });
+    });
   });
 
   const result: GroupedData[] = Object.entries(groupedData).flatMap(([cinema_city, cinemas]) =>

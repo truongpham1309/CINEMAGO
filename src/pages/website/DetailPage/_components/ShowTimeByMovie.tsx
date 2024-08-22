@@ -134,7 +134,7 @@ const ShowTimeByMovie = ({ movieID }: any) => {
   }
   if (filterMovie.length === 0) {
     return (
-      <div className="container my-3">
+      <div className="container my-5">
         <Alert message={"Phim hiện chưa có suất chiếu nào!"} type="warning"></Alert>
       </div>
     )
