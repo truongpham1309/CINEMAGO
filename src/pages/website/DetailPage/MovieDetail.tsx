@@ -81,15 +81,9 @@ const MovieDetail = () => {
       </section>
 
       <section className="book-section bg-one">
-        <div className="container">
+        <div className="container py-3">
           <div className="book-wrapper offset-lg-3">
             <div className="left-side">
-              <div className="item">
-                <p>tomatometer</p>
-              </div>
-              <div className="item">
-                <p>audience Score</p>
-              </div>
             </div>
           </div>
         </div>
