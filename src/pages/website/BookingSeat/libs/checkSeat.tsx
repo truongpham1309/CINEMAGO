@@ -41,6 +41,7 @@ export const validateSeatSelection = (seats: any[], selectedSeatIds: any[]) => {
 
         // Kiểm tra ghế trống ngay trước ghế đã chọn
         if (firstSelectedIndex > 0 && row[firstSelectedIndex - 1].status === "Available" && !selectedSeatIds.includes(row[firstSelectedIndex - 1].id)) {
+            // Không được để trống 1 ghế trước ghế đã chọn nếu hàng trước đã đặt hết
             if (firstSelectedIndex === 1 || row[firstSelectedIndex - 2].status !== "Available") {
                 toast.warn(`Không được để trống ghế ${row[firstSelectedIndex - 1].seat_number}`, {
                     position: "top-center",
@@ -51,8 +52,8 @@ export const validateSeatSelection = (seats: any[], selectedSeatIds: any[]) => {
 
         // Kiểm tra ghế trống ngay sau ghế đã chọn
         if (lastSelectedIndex < row.length - 1 && row[lastSelectedIndex + 1].status === "Available" && !selectedSeatIds.includes(row[lastSelectedIndex + 1].id)) {
-            // Cho phép bỏ trống 1 ghế cuối cùng nếu các ghế trước đó đã chọn liền kề
-            if (lastSelectedIndex < row.length - 2 && row[lastSelectedIndex + 2].status !== "Available") {
+            // Không được để trống 1 ghế sau ghế đã chọn nếu hàng sau đã đặt hết
+            if (lastSelectedIndex === row.length - 2 || row[lastSelectedIndex + 2].status !== "Available") {
                 toast.warn(`Không được để trống ghế ${row[lastSelectedIndex + 1].seat_number}`, {
                     position: "top-center",
                 });

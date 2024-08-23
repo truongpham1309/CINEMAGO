@@ -13,7 +13,7 @@ type MyComponentProps = {
 const PrivateRouterLogin: React.FC<MyComponentProps> = ({ children }) => {
     const [user,] = useLocalStorage("user", JSON.parse(localStorage.getItem("user")!));
     const { data, isLoading, isError } = useQuery({
-        queryKey: ['CHECK-TOKEN'],
+        queryKey: ['CHECK-TOKEN-LOGIN'],
         queryFn: async () => {
             const data = await checkTokenExpiry();
             return data;
@@ -33,7 +33,7 @@ const PrivateRouterLogin: React.FC<MyComponentProps> = ({ children }) => {
 export const PrivateRouterBooking: React.FC<MyComponentProps> = ({ children }) => {
     const user = JSON.parse(localStorage.getItem("user")!);
     const { data, isLoading, isError } = useQuery({
-        queryKey: ['CHECK-TOKEN'],
+        queryKey: ['CHECK-TOKEN-BOOKING'],
         queryFn: async () => {
             const data = await checkTokenExpiry();
             return data;
@@ -56,7 +56,7 @@ export const PrivateRouterBooking: React.FC<MyComponentProps> = ({ children }) =
 export const PrivateRouterDashBoard: React.FC<MyComponentProps> = ({ children }) => {
     const user = JSON.parse(localStorage.getItem("user")!);
     const { data, isLoading, isError } = useQuery({
-        queryKey: ['CHECK-TOKEN'],
+        queryKey: ['CHECK-TOKEN-ADMIN'],
         queryFn: async () => {
             const data = await checkTokenExpiry();
             return data;

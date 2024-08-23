@@ -1,12 +1,10 @@
+import { Banner04 } from "@/assets/images/banner"
 import { formatDate } from "@/common/libs/formatDateToString"
+import { movieSelector } from "@/common/store/booking/selectorMovie"
+import { clear_services } from "@/common/store/booking/sliceBooking"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import CountDown from "../../BookingSeat/_components/CountDown"
-import { Banner04 } from "@/assets/images/banner"
-import { useDispatch, useSelector } from "react-redux"
-import { movieSelector } from "@/common/store/booking/selectorMovie"
-import { useEffect } from "react"
-import { clean_booking, clear_services } from "@/common/store/booking/sliceBooking"
-import { delete_info_movie } from "@/common/store/booking/sliceMovie"
 
 const MovieBanner = () => {
     const navigate = useNavigate();
