@@ -1,14 +1,19 @@
+import { selectorBooking } from "@/common/store/booking/selectorBooking";
 import { logoutUser } from "@/services/auth/authService";
 import { logo } from "@assets/images/logo";
 import { useMutation } from "@tanstack/react-query";
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useChooseSeatsBooking } from "../../BookingSeat/hooks/useChooseSeat";
 const { confirm } = Modal;
 
 const HeaderClient = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const booking = useSelector(selectorBooking);
+  const { mutate: cancelSeats } = useChooseSeatsBooking();
   const user = JSON.parse(localStorage.getItem("user")!) || null;
   const [pathName, setPathName] = useState("/");
   useEffect(() => {
@@ -34,7 +39,20 @@ const HeaderClient = () => {
       okText: 'Có',
       cancelText: 'Không',
       onOk() {
-        mutate()
+        if (booking?.seats.length > 0) {
+          cancelSeats({
+            type: "CANCEL",
+            booking_seat: {
+              seat_ids: [...booking?.seats],
+              showtime_id: booking?.showtime_id
+            }
+          }, {
+            onSuccess: () => {
+              mutate();
+            }
+          })
+        }
+        else mutate();
       },
       onCancel() {
       },
@@ -65,7 +83,7 @@ const HeaderClient = () => {
               </li>
               {user ? (
                 <li>
-                  <Link className={pathName.includes("/account") ? "active" : ""} to="#">{user?.data?.full_name}</Link>
+                  <Link className={pathName.includes("/account") ? "active" : ""} to="#">{user?.data?.full_name} <i className="bi bi-chevron-up"></i></Link>
                   <ul className="submenu">
                     <li>
                       <Link to="/account/ticket">Lịch sử</Link>

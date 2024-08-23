@@ -67,7 +67,7 @@ const TicketDetail = ({ idTicket }: any) => {
                     <span>Tổng giá vé</span>
                     <span>{formatCurrencyVND(booking?.booking?.subtotal?.slice(0, -3)) || 0}</span>
                 </h6>
-                <div className='bg-white px-3'>
+                <div className='bg-white py-1 px-3'>
                     <img className='w-100' src={booking?.booking?.code} alt="" />
                 </div>
             </div>

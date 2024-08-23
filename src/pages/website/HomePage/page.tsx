@@ -1,10 +1,9 @@
 import { Movie } from "@/common/types/client/movie";
 import { getAllMovieHomePage } from "@/services/movie/movieService";
-import { useEffect, useState } from "react";
-import ItemsMovieComponent from "../_components/Movies/ItemsMovieComponent";
 import AOS from 'aos';
-import Carousel from "react-multi-carousel";
+import { useEffect, useState } from "react";
 import "react-multi-carousel/lib/styles.css";
+import ItemsMovieComponent from "../_components/Movies/ItemsMovieComponent";
 
 const responsive = {
     superLargeDesktop: {
@@ -76,7 +75,7 @@ const HomePage = () => {
                                         <div className="owl-stage-outer">
                                             <div className="owl-stage row m-0">
                                                 {movies.filter(_m => new Date(_m.release_date) > new Date())?.length > 0 ? movies.filter(_m => new Date(_m.release_date) > new Date()).slice(0, 4).map((movie, index) => (
-                                                    <ItemsMovieComponent key={index} movie={movie} className="col-md-6 col-lg-3" />
+                                                    <ItemsMovieComponent key={index} movie={movie} className="col-md-4 col-lg-3" />
                                                 )) : null}
                                             </div>
                                         </div>

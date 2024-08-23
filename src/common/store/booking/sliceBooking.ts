@@ -32,12 +32,10 @@ export const sliceBooking: any = createSlice({
                 state.subtotal = +state.subtotal - Number(action.payload.price);
                 return state;
             }
-
             if (state.seats.length >= 8) {
                 toast.error("Bạn chỉ được đặt tối đa 8 ghế trong 1 lần đặt!");
                 return state;
             }
-
             state.seats.push(action.payload.id);
             state.subtotal += Number(action.payload.price);
         },
@@ -140,5 +138,8 @@ export const sliceBooking: any = createSlice({
     }
 });
 
-export const { add_showtime, add_seats, clean_seats, add_services, clean_booking, delete_showtime, add_user_id, delete_service, decrement_service, increment_service, clear_services } = sliceBooking.actions;
+export const { add_showtime, add_seats, clean_seats, 
+    add_services, clean_booking, delete_showtime, add_user_id, 
+    delete_service, decrement_service, increment_service, 
+    clear_services } = sliceBooking.actions;
 export default sliceBooking.reducer;
