@@ -76,13 +76,15 @@ const TicketsPage = () => {
               <h4 className="title text-uppercase mb-4">Lịch sử</h4>
               <br />
             </div>
-            <div className="col-md-12 col-lg-8">
+            <div className="col-md-12 col-lg-8 custom-table">
               {tickets?.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '20px', color: "#fff" }}>
                   <Empty description={<span className="text-white text-uppercase text-xl">Bạn chưa có vé nào!</span>} />
                 </div>
-              ) : <Table className="table table-striped table-bored"
+              ) : <Table
                 columns={columns}
+                className="custom-antd-table"
+                size="middle"
                 dataSource={tickets}
                 rowKey={(record) => record.id}
                 pagination={{ pageSize: 10 }}

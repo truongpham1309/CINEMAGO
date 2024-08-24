@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import ServerError from "../../_components/500";
 import { uploadImage } from "@/common/libs/uploadImage";
 import { formatDateToString } from "@/common/libs/formatDateToString";
-import { Button } from "antd";
+import { Alert, Button } from "antd";
 
 const MovieEditPage = () => {
     const { id: idMovie } = useParams();
@@ -34,7 +34,7 @@ const MovieEditPage = () => {
     });
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const { mutate, isPending } = useMutation({
+    const { mutate, isPending, error, isError: isErrorUpdate } = useMutation({
         mutationFn: async (movie: TMovie) => {
             const data = await updateMovieByID(movie);
             return data;
@@ -69,8 +69,9 @@ const MovieEditPage = () => {
     return (
         <div className="card shadow mb-4">
             <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary text-uppercase">Cập nhật PHIM {data.data.movie.title}</h6>
+                <h6 className="m-0 font-weight-bold text-primary text-uppercase">Cập nhật phim {data.data.movie.title}</h6>
             </div>
+            {isErrorUpdate && (<Alert type="warning" message={"Bạn không thể cập nhật phim"} description={(error as any)?.response.data.message} />)}
             <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="row mt-3">

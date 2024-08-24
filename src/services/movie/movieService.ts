@@ -7,7 +7,7 @@ export const createMovieDashBoard = async (movie: TMovieCreate) => {
         return data;
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -26,7 +26,7 @@ export const deleteMovieByID = async (id: number) => {
         await axios.delete(`/dashboard/movie/delete/${id}`);
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -36,7 +36,7 @@ export const updateMovieByID = async (movie: TMovie) => {
         return data;
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -46,7 +46,7 @@ export const getDetailMovieByID = async (id: number) => {
         return data
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 };
 
@@ -56,7 +56,7 @@ export const getDetailMovieClient = async (id: number) => {
         return data;
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -66,7 +66,7 @@ export const getAllMovieClient = async (limit: number = 12, page: number = 1) =>
         return data
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw  error;
     }
 }
 
@@ -76,7 +76,7 @@ export const getAllMovieHomePage = async (status: number = 0, limit: number = 12
         return data
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -86,6 +86,6 @@ export const getAllMovieListShowTime = async () => {
         return data
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }

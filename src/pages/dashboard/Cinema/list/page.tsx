@@ -38,7 +38,7 @@ const CinemaListPage = () => {
             title: "",
             key: "detail",
             render: (record) => <>
-                <Link className="mx-2" to={`/dashboard/cinema/${record.id}/room-cinema`}>Chi tiết</Link>
+                <Link className="mx-2" to={`/dashboard/room-cinema/detail/${record.id}`}>Chi tiết</Link>
             </>
         }
     ];
