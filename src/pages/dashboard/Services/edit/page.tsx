@@ -54,6 +54,14 @@ const ServiceEditPage = () => {
                                     {errors.quantity && (<span className="text-danger">{errors.quantity.message}</span>)}
                                 </div>
                             </div>
+
+                            {/* <div className="col-sm-12 col-md-4">
+                                <div>
+                                    <label className="text-gray-800" htmlFor="">Mô tả</label>
+                                    <textarea {...register("description")} placeholder="Mô tả..." className="form-control"/>
+                                    {errors.description && (<span className="text-danger">{errors.description.message}</span>)}
+                                </div>
+                            </div> */}
                         </div>
                         <div className="row mt-3">
                             <div className="col-sm-12">

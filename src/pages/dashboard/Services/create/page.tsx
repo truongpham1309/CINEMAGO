@@ -34,6 +34,8 @@ const ServiceCreatePage = () => {
                                     {errors.quantity && (<span className="text-danger">{errors.quantity.message}</span>)}
                                 </div>
                             </div>
+
+                
                         </div>
                         <div className="row mt-3">
                             <div className="col-sm-12">

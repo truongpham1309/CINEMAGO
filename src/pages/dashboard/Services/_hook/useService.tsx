@@ -3,6 +3,7 @@ import { ServiceSchema } from "@/common/validations/service/serviceValid";
 import { createServiceAPI, deleteServiceByID, getAllServiceList, updateServiceByID } from "@/services/service/callAPIService";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { descriptors } from "node_modules/chart.js/dist/core/core.defaults";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,7 +16,8 @@ export const useServiceMutation = ({ type }: { type: "CREATE" | "DELETE" | "UPDA
         defaultValues: {
             name: '',
             price: 0,
-            quantity: 0
+            quantity: 0,
+            description: '',
         }
     });
     const navigate = useNavigate();
