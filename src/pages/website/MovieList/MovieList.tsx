@@ -91,7 +91,7 @@ const MovieList = () => {
                       <span className="show text-white mt-1">Trạng thái :</span>
                       <div className="">
                         <div className="nice-select"> 
-                          <span className="current">Sắp chiếu</span>
+                          <span className="current">Danh sách phim</span>
                           <ul className="list">
                             <li
                               data-value="all"

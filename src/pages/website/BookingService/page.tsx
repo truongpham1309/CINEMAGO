@@ -148,7 +148,7 @@ const BookingServicePage = () => {
                 <div className="container">
                     <div className="row">
                         <div className="section-header-3 col-12">
-                            <h2 className="title">we have food</h2>
+                            <h2 className="title">COMBO ƯU ĐÃI LỚN!!!</h2>
                         </div>
                         <div className="col-lg-8">
                             <div className="grid--area">
