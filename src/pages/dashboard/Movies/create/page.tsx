@@ -6,6 +6,7 @@ import { createMovieDashBoard } from "@/services/movie/movieService";
 import { uploadImage } from "@common/libs/uploadImage";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Alert } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -29,7 +30,7 @@ const MovieCreatePage = () => {
     });
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const { mutate, isPending } = useMutation({
+    const { mutate, isPending, error, isError: isErrorCreate } = useMutation({
         mutationFn: async (movie: TMovieCreate) => {
             const data = await createMovieDashBoard(movie);
             return data;
@@ -42,7 +43,6 @@ const MovieCreatePage = () => {
             navigate("/dashboard/movie");
         },
         onError: (err: Error) => {
-            toast.error(err.message || "");
             toast.error("Thêm phim thất bại!");
         }
     })
@@ -59,6 +59,19 @@ const MovieCreatePage = () => {
             <div className="card-header py-3">
                 <h6 className="m-0 font-weight-bold text-primary">TẠO MỚI PHIM</h6>
             </div>
+            {isErrorCreate && (<Alert type="warning" message={"Bạn không thể cập nhật phim"} description={typeof((error as any)?.response?.data?.message) === "string" ? (error as any)?.response?.data?.message : 
+                <>
+                    <ul>
+                        {
+                            (error as any)?.response?.data?.message.map((err: any, index: number) => (
+                                <li key={index}>
+                                    {err}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </>
+            } />)}
             <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="row mt-3">
