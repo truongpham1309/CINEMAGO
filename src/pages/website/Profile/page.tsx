@@ -31,7 +31,7 @@ const ProfilePage = () => {
   }
   return (
     <section className="movie-section padding-top padding-bottom bg-two">
-      <div className="container">
+      <div className="container" style={{ marginTop: '150px' }}>
         <div className="row row--form">
           <div className="col-12">
             <h4 className="form__title text-center my-4">Thông tin chi tiết</h4>

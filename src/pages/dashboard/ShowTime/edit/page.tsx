@@ -14,6 +14,7 @@ import { convertTo24Hour } from "@/common/libs/formatTime24hours";
 const ShowTimeEditPage = () => {
 
     const { movie, cinema, mutate, isPending } = useShowTimeMutation({ type: "UPDATE" });
+    console.log(movie);
     const { id: idShowTime } = useParams();
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: joiResolver(ShowTimeSchema),
@@ -57,7 +58,7 @@ const ShowTimeEditPage = () => {
                                     <label className="text-gray-800" htmlFor="">Phim</label>
                                     <select {...register("movie_id")} className="form-control">
                                         <option className="form-control" value="">Chọn phim</option>
-                                        {movie.movie.data.movies.map((movie: any) => (
+                                        {movie.data.data.movie.map((movie: any) => (
                                             <option key={movie.id} className="form-control" value={movie.id}>{movie.title}</option>
                                         ))}
                                     </select>

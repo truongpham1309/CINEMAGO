@@ -56,13 +56,13 @@ const UserListPage = () => {
             dataIndex: "status",
             key: "status"
         },
-        {
-            title: "",
-            key: "action",
-            render: (_, record) => (
-                <Link to={`/dashboard/user/detail/${record.id}`}>Chi tiết</Link>
-            )
-        }
+        // {
+        //     title: "",
+        //     key: "action",
+        //     render: (_, record) => (
+        //         <Link to={`/dashboard/user/detail/${record.id}`}>Chi tiết</Link>
+        //     )
+        // }
     ];
 
     if (isLoading) return <LoadingComponent />;
