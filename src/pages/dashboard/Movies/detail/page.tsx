@@ -1,14 +1,12 @@
-import { getDetailMovieByID } from "@/services/movie/movieService";
-import { Button, Card, Col, Image, Modal, Row, Tag, Typography } from "antd";
-import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { deleteMovieByID } from "@/services/movie/movieService";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import confirm from "antd/es/modal/confirm";
+import { deleteMovieByID, getDetailMovieByID } from "@/services/movie/movieService";
 import { InfoCircleTwoTone } from "@ant-design/icons";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Alert, Button, Card, Typography } from "antd";
+import confirm from "antd/es/modal/confirm";
+import React, { useState } from "react";
 import ModalVideo from "react-modal-video";
-const { Title, Text } = Typography;
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 const MovieDetailPage = () => {
   const { id } = useParams();
   const queryClient = useQueryClient();
@@ -22,7 +20,7 @@ const MovieDetailPage = () => {
     })();
   }, [id]);
   const navigate = useNavigate();
-  const { mutate: deleteMovie, isPending: isDeleting } = useMutation({
+  const { mutate: deleteMovie, isPending: isDeleting, error, isError: isErrorDelete } = useMutation({
     mutationFn: async (id: any) => {
       console.log(id);
       await deleteMovieByID(id);
@@ -59,24 +57,11 @@ const MovieDetailPage = () => {
     return match ? match[1] : null;
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Coming Soon':
-        return 'green';
-      case 'Currently Showing':
-        return 'gold';
-      case 'Stopped Showing':
-        return 'red';
-      default:
-        return 'default';
-    }
-  };
-
   const showTrailerModal = (url: string) => {
     setTrailerUrl(url);
     setVisible(true);
   };
-  const getAgeRatingText = (rated) => {
+  const getAgeRatingText = (rated: any) => {
     if (rated === 'P') {
       return 'Phù hợp cho mọi lứa tuổi';
     } else if (parseInt(rated) > 0) {
@@ -87,11 +72,11 @@ const MovieDetailPage = () => {
   };
 
   const ageRatingText = getAgeRatingText(movie.rated);
-  
-
   return (
     <Card style={{ width: '100%' }}>
+        {isErrorDelete && (<Alert className="mb-3" type="warning" message={"Bạn không thể xóa phim!"} description={(error as any)?.response?.data?.message} />)}
       <div className="row h-100">
+
         {/* Cột 1: Hình ảnh */}
         <div className="col-md-3 d-flex align-items-stretch">
           <div className="w-100">
@@ -145,8 +130,8 @@ const MovieDetailPage = () => {
                   movie.status === "Coming Soon"
                     ? "Sắp chiếu"
                     : movie.status === "Currently Showing"
-                    ? "Đang chiếu"
-                    : "Dừng chiếu"
+                      ? "Đang chiếu"
+                      : "Dừng chiếu"
                 }
                 readOnly
               />

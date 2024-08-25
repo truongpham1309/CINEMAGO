@@ -8,49 +8,63 @@ import { useDispatch, useSelector } from 'react-redux';
 const useUnload = () => {
     const booking = useSelector(selectorBooking);
     const dispatch = useDispatch();
-    const { mutate } = useChooseSeatsBooking();
+    const { mutateAsync } = useChooseSeatsBooking();
     const isApiCalled = useRef(false);
 
-    const handleCancelBooking = () => {
-        if (booking?.seats.length > 0) {
-            isApiCalled.current = true;
+    const handleCancelBooking = async () => {
+        if (booking?.seats.length > 0 && !isApiCalled.current) {
+            const userConfirmed = window.confirm('Bạn có thay đổi chưa lưu, bạn có thực sự muốn rời đi?');
+            
+            if (userConfirmed) {
+                isApiCalled.current = true;
 
-            mutate({
-                type: "CANCEL",
-                booking_seat: { seat_ids: booking?.seats, showtime_id: booking?.showtime_id }
-            }, {
-                onSuccess: () => {
-                    console.log('Cancel booking API call successful');
+                try {
+                    await mutateAsync({
+                        type: "CANCEL",
+                        booking_seat: { seat_ids: booking?.seats, showtime_id: booking?.showtime_id }
+                    });
+
                     dispatch(clean_seats());
                     dispatch(delete_info_movie());
                     sessionStorage.removeItem("countdownStart");
-                },
-                onError: () => {
-                    console.log('Cancel booking API call failed');
+                    window.removeEventListener('beforeunload', handleBeforeUnload);
+                    window.removeEventListener('unload', handleUnload);
+                    window.location.reload(); 
+                } catch (error) {
                     isApiCalled.current = false;
                 }
-            });
+            } else {
+                isApiCalled.current = false;
+            }
+        }
+    };
+
+    const handleBeforeUnload = (event: any) => {
+        if (booking?.seats.length > 0 && !isApiCalled.current) {
+            event.preventDefault();
+            event.returnValue = '';
+        }
+    };
+
+    const handleUnload = async (event: any) => {
+        if (booking?.seats.length > 0 && !isApiCalled.current) {
+            event.preventDefault();
+            await handleCancelBooking();
         }
     };
 
     useEffect(() => {
-        const handleBeforeUnload = (event: any) => {
-            if (booking?.seats.length > 0) {
-                handleCancelBooking();
-                const confirmationMessage = 'Bạn có thay đổi chưa lưu, bạn có thực sự muốn rời đi?';
-                event.returnValue = confirmationMessage;
-                return confirmationMessage;
-            }
-        };
-
         window.addEventListener('beforeunload', handleBeforeUnload);
+        window.addEventListener('unload', handleUnload);
 
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
+            window.removeEventListener('unload', handleUnload);
         };
-    });
+    }, [booking]);
 
     return null;
 };
+
 
 export default useUnload;

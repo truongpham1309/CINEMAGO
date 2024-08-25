@@ -185,3 +185,41 @@
 .no-csspointerevents .nice-select.open .list {
     display: block;
 }
+
+.custom-antd-table .ant-table {
+    background-color: #032055; /* Màu nền của bảng */
+}
+
+.custom-antd-table .ant-table-thead > tr > th {
+    background-color: #032055; /* Màu nền của tiêu đề cột */
+    color: white; /* Màu chữ của tiêu đề cột */
+}
+
+.custom-antd-table .ant-table-tbody > tr > td {
+    color: white; /* Màu chữ của nội dung bảng */
+    border-color: #032055; /* Màu viền các ô trong bảng */
+}
+
+.custom-antd-table .ant-table-tbody > tr:hover > td {
+    background-color: #032055 !important; /* Màu nền khi hover vào hàng trong bảng */
+}
+.custom-antd-table .ant-pagination {
+    background-color: #032055; /* Màu nền cho phân trang */
+}
+
+.custom-antd-table .ant-pagination-item, 
+.custom-antd-table .ant-pagination-options,
+.custom-antd-table .ant-pagination-prev, 
+.custom-antd-table .ant-pagination-next {
+    background-color: #032055; 
+    color: white; 
+    border-color: #032055; 
+}
+
+.custom-antd-table .ant-pagination-item:hover,
+.custom-antd-table .ant-pagination-prev:hover, 
+.custom-antd-table .ant-pagination-next:hover,
+.custom-antd-table .ant-pagination-item-active {
+    background-color: #032055; 
+    border-color: white; 
+}

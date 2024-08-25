@@ -22,6 +22,13 @@ import { useChooseSeatsBooking } from "./hooks/useChooseSeat";
 import { toast } from "react-toastify";
 import { chunkArray } from "@/common/libs/chunkArray";
 import SeatCopple from "./_components/SeatCopple";
+import SeatNomal from './_image/seat_vip_free.png';
+import SeatVIP from './_image/seat01-free.png'
+import SeatCoppleUI from './_image/seat02-free.png'
+import Seat_Booked from './_image/seat01-booked.png';
+import SeatHeld from './_image/seat03Held.png'
+import Seat from './_image/seat01.png'
+import { getSeatPrices } from "./libs/getPriceSeat";
 
 
 const items = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"];
@@ -29,6 +36,7 @@ const BookingSeatPage = () => {
     let count = 0;
     const { id: showtime_id } = useParams();
     const dispatch = useDispatch();
+    const [seatPrice, setSeatPrice] = useState<any>();
     const { mutate } = useChooseSeatsBooking();
     const bookingMovie = useSelector(selectorBooking);
     const navigate = useNavigate();
@@ -42,11 +50,12 @@ const BookingSeatPage = () => {
         queryKey: ['SEATS_MAP', showtime_id],
         queryFn: async () => {
             const { data } = await getSeatMapByIDShowTime(+showtime_id!);
+            const priceSeats: any = getSeatPrices(data?.seats);
+            setSeatPrice(priceSeats);
             return data;
         }
     });
     const [chooseSeat, setChooseSeat] = useState<any>();
-
     useEffect(() => {
         let _newSeats = data?.seats?.flatMap((s: any) => s);
         const _listSeatNumbers = bookingMovie?.seats?.flatMap((_seat: any) => {
@@ -110,11 +119,6 @@ const BookingSeatPage = () => {
             if (bookingMovie.seats.length === 8) return;
             setChooseSeat([...chooseSeat, rest.seatNumber]);
         }
-
-
-
-
-
     }
 
     const handleBookingSeatPlans = () => {
@@ -213,6 +217,25 @@ const BookingSeatPage = () => {
                                 })}
                             </ul>
                         </div>
+                    </div>
+                    <div className="mb-3">
+                        <ul className="seat--area">
+                            <li className="front-seat">
+                                <ul className="justify d-flex text-white">
+                                    <li className="single-seat mr-5">
+                                        <div className="my-3"><img src={SeatNomal} alt="seat" /> <img src={SeatVIP} alt="seat" /> : Ghế trống</div>
+                                        <div className="my-3"><img src={Seat_Booked} alt="seat" /> : Ghế đang chọn</div>
+                                        <div className="my-3"><img src={SeatHeld} alt="seat" /> : Ghế đang được giữ</div>
+                                        <div className="my-3"><img src={Seat} alt="seat" /> : Ghế đã đặt</div>
+                                    </li>
+                                    <li className="single-seat">
+                                        <div className="my-3"><img src={SeatNomal} alt="seat" /> : Ghế thường( <span className="text-white">{formatCurrencyVND(seatPrice?.normal?.slice(0, -3) || 0) || "Đang cập nhật"} </span>)</div>
+                                        <div className="my-3"><img src={SeatVIP} alt="seat" /> : Ghế VIP(<span className="text-white"> {formatCurrencyVND(seatPrice?.vip.slice(0, -3) || 0) || "Đang cập nhật"} </span>)</div>
+                                        <div className="my-3"><img src={SeatCoppleUI} alt="seat" /> : Ghế đôi( <span className="text-white">{formatCurrencyVND((+seatPrice?.double.slice(0, -3) * 2) || 0) || "Đang cập nhật"} </span>)</div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                     <div className="proceed-book bg_img" data-background={Movie_bg_proceed}>
                         <div className="proceed-to-book">

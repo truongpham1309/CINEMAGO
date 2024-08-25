@@ -978,6 +978,12 @@ input[type="submit"] {
 
 .section-header-2 {
   border-bottom: 1px solid #fff;
+
+}
+
+.section-header-2 .title {
+  text-align: center !important;
+  
 }
 
 .section-header-1,
@@ -1347,14 +1353,14 @@ input[type="submit"] {
   box-shadow: 0px 10px 15px 0px rgba(59, 55, 188, 0.5);
 }
 
-.section-header-2 .left {
+.section-header-2  {
   /* width: calc(40% - 15px);
    */
 }
 
 .section-header-2 .left .title {
   text-transform: uppercase;
-  font-size: 2rem;
+  font-size: 1.75rem;
   margin-bottom: 0px;
 }
 
@@ -2011,6 +2017,7 @@ input[type="submit"] {
   bottom: 0;
   right: 0;
   opacity: .3;
+  background-image: url('/src/assets/images/banner/banner01.jpg');
 }
 
 .banner-section .banner-content {

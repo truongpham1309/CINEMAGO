@@ -1,24 +1,22 @@
+import { Banner04 } from "@/assets/images/banner"
 import { formatDate } from "@/common/libs/formatDateToString"
+import { movieSelector } from "@/common/store/booking/selectorMovie"
+import { clear_services } from "@/common/store/booking/sliceBooking"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import CountDown from "../../BookingSeat/_components/CountDown"
-import { Banner04 } from "@/assets/images/banner"
-import { useDispatch, useSelector } from "react-redux"
-import { movieSelector } from "@/common/store/booking/selectorMovie"
-import { useEffect } from "react"
-import { clean_booking, clear_services } from "@/common/store/booking/sliceBooking"
-import { delete_info_movie } from "@/common/store/booking/sliceMovie"
 
 const MovieBanner = () => {
     const navigate = useNavigate();
     const movie = useSelector(movieSelector);
     const dispatch = useDispatch();
-    useEffect(() => {
-        if (!movie) {
-            dispatch(clean_booking());
-            dispatch(delete_info_movie());
-            navigate('/movie');
-        }
-    }, [movie]);
+    // useEffect(() => {
+    //     if (!movie) {
+    //         dispatch(clean_booking());
+    //         dispatch(delete_info_movie());
+    //         navigate('/movie');
+    //     }
+    // }, [movie]);
     const handleBackPage = () => {
         dispatch(clear_services());
         navigate(-1);
@@ -41,8 +39,6 @@ const MovieBanner = () => {
                     </div>
                 </div>
             </section>
-            {/* ==========Banner-Section========== */}
-            {/* ==========Page-Title========== */}
             <section className="page-title bg-one">
                 <div className="container">
                     <div className="page-title-area">
@@ -52,7 +48,7 @@ const MovieBanner = () => {
                                 className="custom-button back-button"
                             >
                                 <i className="flaticon-double-right-arrows-angles" />
-                                back
+                                Quay lại
                             </p>
                         </div>
                         <div className="item date-item text-uppercase text-white" >

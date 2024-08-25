@@ -194,27 +194,16 @@ const BookingServicePage = () => {
                                     />
                                 )}
                             </div>
-                            <div>
-                            <div className="note text-white">
-                                <h5 className="title">Chú ý :</h5>
-                                <p>
-                                    Mỗi ghế chỉ được đặt tối đa 3 dịch vụ
-                                </p>
-                                <p> 
-                                    Vui lòng có mặt tại quầy trước 15 phút để nhận vé và dịch vụ
-                                </p>
-                            </div>
-                            </div>
-                            <br />
-                            <div className="grid--area">
-                                <Space direction="vertical" size="middle" className="text-white py-3 row" style={{ background: "#032055" }}>
+
+                            <div className="grid--area pr-4 ml-2">
+                                <Space direction="vertical" size="small" className="text-white py-3 row" style={{ background: "#001232" }}>
                                     {booking.services.map((service: any) => {
                                         const serviceDetails = renderServiceDetails(service.service_id);
                                         return (
-                                            <Card key={service.service_id} className="text-white" style={{ background: "#032055" }}>
+                                            <Card key={service.service_id} className="text-white ml-1" style={{ background: "#001232" }}>
                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                     <div>
-                                                        <h3 className="text-uppercase">{serviceDetails?.name}</h3>
+                                                        <h3 className="text-uppercase title">{serviceDetails?.name}</h3>
                                                         <br />
                                                         <p>Giá: {formatCurrencyVND(serviceDetails?.price?.slice(0, -3))}</p>
                                                         <p>Đã chọn: {service.quantity}</p>
@@ -231,6 +220,16 @@ const BookingServicePage = () => {
                                     })}
                                 </Space>
                             </div>
+                            <div className="note text-white">
+                                <h5 className="title">Chú ý :</h5>
+                                <p>
+                                    Mỗi ghế chỉ được đặt tối đa 3 dịch vụ
+                                </p>
+                                <p>
+                                    Vui lòng có mặt tại quầy trước 15 phút để nhận vé và dịch vụ
+                                </p>
+                            </div>
+
                         </div>
                         <div className="col-lg-4">
                             <div className="booking-summery bg-one">

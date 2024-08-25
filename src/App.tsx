@@ -1,9 +1,5 @@
-import Router from "@/routes";
 import 'react-modal-video/css/modal-video.min.css';
-import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import useUnload from "./common/hooks/global/useUnLoad";
-import { configAxiosUse } from "./configs/service";
 import "./styles/all.min.css";
 import "./styles/animate.css";
 import "./styles/bootstrap.min.css";
@@ -16,11 +12,15 @@ import "./styles/odometer.css";
 import "./styles/owl.carousel.min.css";
 import "./styles/owl.theme.default.min.css";
 import "react-multi-carousel/lib/styles.css";
+import "aos/dist/aos.css";
+import Router from "@/routes";
+import { ToastContainer } from "react-toastify";
+import useUnload from "./common/hooks/global/useUnLoad";
+import { configAxiosUse } from "./configs/service";
 
 configAxiosUse();
 
 const App = () => {
-
   useUnload();
   return (
     <>

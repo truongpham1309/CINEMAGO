@@ -92,6 +92,7 @@ const MovieList = () => {
                       <div className="">
                         <div className="nice-select"> 
                           <span className="current">Danh sách phim</span>
+                          <span className="current">Tất cả</span>
                           <ul className="list">
                             <li
                               data-value="all"
