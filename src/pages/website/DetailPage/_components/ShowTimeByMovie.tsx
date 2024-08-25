@@ -72,6 +72,7 @@ const ShowTimeByMovie = ({ movieID }: any) => {
 
   const getShowtimesForCinemaAndDate = (movies: any[], city: string, cinema: string, date: string) => {
     return movies.flatMap((item) => {
+      console.log(item);
       if (item.cinema_city === city && item.cinema === cinema) {
         return item.rooms.flatMap((room: any) => {
           return room.children.date === date ? {
@@ -116,6 +117,7 @@ const ShowTimeByMovie = ({ movieID }: any) => {
     setFilter(updatedFilter);
   };
 
+
   const handleChooseBookingShowTimes = ({ type, id }: { type: 'CLOSE' | 'OPEN' | 'CHOOSE-SEATS', id?: any }) => {
     switch (type) {
       case 'CLOSE':
@@ -134,7 +136,7 @@ const ShowTimeByMovie = ({ movieID }: any) => {
   }
   if (filterMovie.length === 0) {
     return (
-      <div className="container my-5">
+      <div className="container py-3 my-5">
         <Alert message={"Phim hiện chưa có suất chiếu!"} type="warning"></Alert>
       </div>
     )
@@ -226,7 +228,7 @@ const ShowTimeByMovie = ({ movieID }: any) => {
                     </div>
                     <div className="movie-schedule col-8">
                       {item.showtimes.map((s: any, i: number) => (
-                        <div key={i} onClick={() => handleChooseBookingShowTimes({ type: "OPEN", id: s.id })} className="item">{s.time.slice(0, -3)}</div>
+                        <div key={i} onClick={() => handleChooseBookingShowTimes({ type: "OPEN", id: s.id })} style={s.status === "Suất chiếu sớm" ? {background: '#FF1122'} : {}} title={s.status === "Suất chiếu sớm" ? s.status : ""} className="item">{s.time.slice(0, -3)}</div>
                       ))}
                     </div>
                   </li>

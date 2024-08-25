@@ -1,6 +1,7 @@
 interface Showtime {
   id: number;
   time: string;
+  status: string
 }
 
 interface ShowtimeChildren {
@@ -25,7 +26,7 @@ export const groupShowtimes = (data: any[]): GroupedData[] => {
   const groupedData: Record<string, Record<string, Record<string, Record<string, Showtime[]>>>> = {};
 
   data.forEach(item => {
-    const { cinema_city, cinema_name, screen_name, show_date, show_time, id_showtime } = item;
+    const { cinema_city, cinema_name, screen_name, show_date, show_time, id_showtime, status } = item;
 
     if (!groupedData[cinema_city]) {
       groupedData[cinema_city] = {};
@@ -43,7 +44,7 @@ export const groupShowtimes = (data: any[]): GroupedData[] => {
       groupedData[cinema_city][cinema_name][screen_name][show_date] = [];
     }
 
-    groupedData[cinema_city][cinema_name][screen_name][show_date].push({ id: id_showtime, time: show_time });
+    groupedData[cinema_city][cinema_name][screen_name][show_date].push({ id: id_showtime, time: show_time, status: status });
   });
 
   // Sắp xếp các suất chiếu theo thời gian
