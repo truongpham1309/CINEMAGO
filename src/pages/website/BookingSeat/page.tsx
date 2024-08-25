@@ -56,7 +56,6 @@ const BookingSeatPage = () => {
         }
     });
     const [chooseSeat, setChooseSeat] = useState<any>();
-
     useEffect(() => {
         let _newSeats = data?.seats?.flatMap((s: any) => s);
         const _listSeatNumbers = bookingMovie?.seats?.flatMap((_seat: any) => {
@@ -230,7 +229,7 @@ const BookingSeatPage = () => {
                                         <div className="my-3"><img src={Seat} alt="seat" /> : Ghế đã đặt</div>
                                     </li>
                                     <li className="single-seat">
-                                        <div className="my-3"><img src={SeatNomal} alt="seat" /> : Ghế thường( <span className="text-white">{formatCurrencyVND(seatPrice?.normal.slice(0, -3) || 0) || "Đang cập nhật"} </span>)</div>
+                                        <div className="my-3"><img src={SeatNomal} alt="seat" /> : Ghế thường( <span className="text-white">{formatCurrencyVND(seatPrice?.normal?.slice(0, -3) || 0) || "Đang cập nhật"} </span>)</div>
                                         <div className="my-3"><img src={SeatVIP} alt="seat" /> : Ghế VIP(<span className="text-white"> {formatCurrencyVND(seatPrice?.vip.slice(0, -3) || 0) || "Đang cập nhật"} </span>)</div>
                                         <div className="my-3"><img src={SeatCoppleUI} alt="seat" /> : Ghế đôi( <span className="text-white">{formatCurrencyVND((+seatPrice?.double.slice(0, -3) * 2) || 0) || "Đang cập nhật"} </span>)</div>
                                     </li>

@@ -10,11 +10,11 @@ export const getSeatPrices = (seats: any) => {
             const { type, price } = seat;
 
             if (type.includes("Ghế thường")) {
-                prices.normal.add(price);
+                prices.normal.add(price + '');
             } else if (type.includes("Ghế vip")) {
-                prices.vip.add(price);
+                prices.vip.add(price + '');
             } else if (type.includes("Ghế đôi")) {
-                prices.double.add(price);
+                prices.double.add(price + '');
             }
         });
     });
