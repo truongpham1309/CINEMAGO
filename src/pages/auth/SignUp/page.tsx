@@ -10,6 +10,7 @@ import { registerUser } from "@/services/auth/authService";
 import { toast } from "react-toastify";
 import { formatDateToString } from "@/common/libs/formatDateToString";
 import LoadingComponent from "@/components/ui/LoadingComponent";
+import { logo } from "@assets/images/logo";
 
 const SignUpUserPage = () => {
 
@@ -58,17 +59,23 @@ const SignUpUserPage = () => {
             <section
                 className="account-section bg_img"
                 data-background={backgroundAccount}
+                style={{ backgroundImage: "url('/src/assets/images/account/account-bg.jpg')", height: "100vh" }}
             >
                 <div className="container">
                     <div className="padding-top padding-bottom">
                         <div className="account-area">
+
                             <div className="section-header-3">
-                                <span className="cate">Chào mừng</span>
-                                <h2 className="title">bạn đến với CinemaGo</h2>
+                                <div className="logo">
+                                    <Link to="/">
+                                        <img width={100} className="my-3" src={logo} alt="logo" />
+                                    </Link>
+                                </div>
+                                <h2 style={{ fontWeight: '700' }} className="title">chào mừng bạn đến với CinemaGo</h2>
                             </div>
                             <FormSignUp register={register} handleSubmit={handleSubmit} errors={errors} onSubmit={handleSignUp} />
                             <div className="option">
-                               Bạn đã có tài khoản <Link to="/login">Đăng nhập</Link>
+                                Bạn đã có tài khoản <Link to="/login">Đăng nhập</Link>
                             </div>
                         </div>
                     </div>

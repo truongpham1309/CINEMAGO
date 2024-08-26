@@ -79,7 +79,7 @@ export const useShowTimeQuery = () => {
         }
     });
 
-    const { mutate, isPending } = useShowTimeMutation({ type: "DELETE" });
+    const { mutate, isPending, isError: isErrorUpdate, error: errorMutation } = useShowTimeMutation({ type: "DELETE" });
 
     const columnsShowTime: TableProps<any>["columns"] = [
         {
@@ -131,5 +131,5 @@ export const useShowTimeQuery = () => {
         }
     ]
 
-    return { ...query, columnsShowTime, isPending }
+    return { ...query, columnsShowTime, isPending, isErrorUpdate, errorMutation }
 }

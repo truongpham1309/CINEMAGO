@@ -82,3 +82,13 @@ export const checkTokenIsAdmin = async () => {
     throw error
   }
 }
+
+export const forgotPassword = async (email: any) => {
+  try {
+    const { data } = await axios.post("/account/forgot-password", email);
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error
+  }
+}

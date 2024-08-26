@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const ShowTimeByMovie = ({ movieID }: any) => {
+const ShowTimeByMovie = ({ movieID, rate }: any) => {
+  const rates = rate === "C13" ? 13 : (rate === 'C16' ? 16 : (rate === 'C18' ? 18 : null));
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const booking = useSelector(selectorBooking);
@@ -149,11 +150,12 @@ const ShowTimeByMovie = ({ movieID }: any) => {
           <div className="warning-item">
             <h6 className="subtitle">Chào mừng!</h6>
             <h4 className="title">Chọn Ghế của bạn</h4>
+          {rate !== 'P' ? <><span className="py-4">⚠️ Phim có giới hạn độ tuổi {rates}+. Chỉ dành cho khán giả từ {rates} tuổi trở lên.</span></> : null}
             <div className="thumb">
               <img src={SeatPlan} alt="movie" />
             </div>
             <span onClick={() => handleChooseBookingShowTimes({ type: "CHOOSE-SEATS" })} className="custom-button seatPlanButton">
-              Seat Plans
+              Chọn ghế
               <i className="fas fa-angle-right" />
             </span>
           </div>
@@ -228,7 +230,7 @@ const ShowTimeByMovie = ({ movieID }: any) => {
                     </div>
                     <div className="movie-schedule col-8">
                       {item.showtimes.map((s: any, i: number) => (
-                        <div key={i} onClick={() => handleChooseBookingShowTimes({ type: "OPEN", id: s.id })} style={s.status === "Suất chiếu sớm" ? {background: '#FF1122'} : {}} title={s.status === "Suất chiếu sớm" ? s.status : ""} className="item">{s.time.slice(0, -3)}</div>
+                        <div key={i} onClick={() => handleChooseBookingShowTimes({ type: "OPEN", id: s.id })} style={s.status === "Suất chiếu sớm" ? { background: '#FF1122' } : {}} title={s.status === "Suất chiếu sớm" ? s.status : ""} className="item">{s.time.slice(0, -3)}</div>
                       ))}
                     </div>
                   </li>
