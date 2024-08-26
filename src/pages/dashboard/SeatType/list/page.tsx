@@ -37,7 +37,6 @@ const SeatTypeListPage = () => {
             key: "actions",
             render: (record) => <>
                 <Link className="mr-2" to={`/dashboard/seattype/edit/${record.id}`}><Button icon={<EditFilled />} className="btn-success"></Button></Link>
-                <Button className="btn-danger" onClick={() => onDelete(record.id)} icon={<DeleteFilled />}></Button>
             </>
         }
     ];
