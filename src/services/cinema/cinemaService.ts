@@ -46,6 +46,6 @@ export const deleteCinemaByID = async (id: number) => {
         await axios.delete(`dashboard/cinema/delete/${id}`);
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }

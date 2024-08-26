@@ -89,7 +89,7 @@ const MovieDetail = () => {
         </div>
       </section>
       
-      <ShowTimeByMovie movieID={movies?.id} />
+      <ShowTimeByMovie rate={movies?.rated} movieID={movies?.id} />
       <section className="movie-details-section padding-top padding-bottom">
         <div className="container">
           <div className="row justify-content-center mb--50">

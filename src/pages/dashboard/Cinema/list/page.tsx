@@ -2,7 +2,7 @@ import LoadingComponent from "@/components/ui/LoadingComponent";
 import { deleteCinemaByID, getAllCinemas } from "@/services/cinema/cinemaService";
 import { DeleteFilled, EditFilled, InfoCircleOutlined, InfoCircleTwoTone } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Table, TableProps } from "antd";
+import { Alert, Button, Table, TableProps } from "antd";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import ServerError from "../../_components/500";
@@ -20,16 +20,19 @@ const CinemaListPage = () => {
             title: "Tên rạp phim",
             key: "name",
             dataIndex: "name",
+            align: "center"
         },
         {
             title: "Thành phố",
             key: "city",
             dataIndex: "city",
+            align: "center"
         },
         {
             title: "Số lượng phòng",
             key: 'quantity',
             dataIndex: "quantity",
+            align: "center"
         },
         {
             title: "",
@@ -40,7 +43,7 @@ const CinemaListPage = () => {
             </>
         },
     ];
-    const { mutate, isPending } = useMutation({
+    const { mutate, isPending, isError: isErrorUpdate, error } = useMutation({
         mutationFn: async (id: number) => {
             const data = await deleteCinemaByID(id);
             return data;
@@ -82,8 +85,21 @@ const CinemaListPage = () => {
         <>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách rạp phim</h6>
+                    <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách rạp chiếu</h6>
                 </div>
+                {isErrorUpdate && (<Alert type="warning" message={"Bạn không thể xóa rạp!"} description={typeof ((error as any)?.response?.data?.message) === "string" ? (error as any)?.response?.data?.message :
+                    <>
+                        <ul>
+                            {
+                                (error as any)?.response?.data?.message.map((err: any, index: number) => (
+                                    <li key={index}>
+                                        {err}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </>
+                } />)}
                 <div className="card-body">
                     <Table columns={tableCinema} dataSource={data.data.cinemas} rowKey={record => record.id} pagination={false} />
                 </div>

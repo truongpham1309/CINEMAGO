@@ -25,7 +25,7 @@ export const deleteShowTimeByID = async (id: number) => {
         await axios.delete(`/dashboard/showtime/delete/${id}`);
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
