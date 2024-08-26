@@ -11,7 +11,9 @@ const ItemsMovieComponent = ({
   return (
     <div className={className}>
       <div className="movie-grid">
-        <div className="movie-thumb c-thumb">
+        <div className="movie-thumb position-relative c-thumb">
+        {movie?.is_early_showtime === 1 ? <span className="custom-showtime-early">Suất chiếu sớm</span> : null}
+          
           <Link to={`/movie/detail/${movie.id}`}>
             <img src={movie.image} alt="movie" />
           </Link>

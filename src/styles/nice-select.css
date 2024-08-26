@@ -1,225 +1,238 @@
 .nice-select {
-    -webkit-tap-highlight-color: transparent;
-    /* background-color: #fff; */
-    border-radius: 5px;
-    /* border: solid 1px #e8e8e8; */
-    box-sizing: border-box;
-    clear: both;
-    cursor: pointer;
-    display: block;
-    float: left;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: normal;
-    height: 42px;
-    line-height: 40px;
-    outline: none;
-    padding-left: 18px;
-    padding-right: 30px;
-    position: relative;
-    text-align: left !important;
-    -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    white-space: nowrap;
-    width: auto;
+  -webkit-tap-highlight-color: transparent;
+  /* background-color: #fff; */
+  border-radius: 5px;
+  /* border: solid 1px #e8e8e8; */
+  box-sizing: border-box;
+  clear: both;
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: normal;
+  height: 42px;
+  line-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 30px;
+  position: relative;
+  text-align: left !important;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  width: auto;
 }
 
 .nice-select:hover {
-    border-color: #dbdbdb;
+  border-color: #dbdbdb;
 }
 
 .nice-select:active,
 .nice-select.open,
 .nice-select:focus {
-    border-color: #999;
+  border-color: #999;
 }
 
 .nice-select:after {
-    border-bottom: 2px solid #999;
-    border-right: 2px solid #999;
-    content: '';
-    display: block;
-    height: 5px;
-    margin-top: -4px;
-    pointer-events: none;
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    -webkit-transform-origin: 66% 66%;
-    -ms-transform-origin: 66% 66%;
-    transform-origin: 66% 66%;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -webkit-transition: all 0.15s ease-in-out;
-    transition: all 0.15s ease-in-out;
-    width: 5px;
+  border-bottom: 2px solid #999;
+  border-right: 2px solid #999;
+  content: "";
+  display: block;
+  height: 5px;
+  margin-top: -4px;
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  -webkit-transform-origin: 66% 66%;
+  -ms-transform-origin: 66% 66%;
+  transform-origin: 66% 66%;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  width: 5px;
 }
 
 .nice-select.open:after {
-    -webkit-transform: rotate(-135deg);
-    -ms-transform: rotate(-135deg);
-    transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
 .nice-select.open .list {
-    opacity: 1;
-    pointer-events: auto;
-    -webkit-transform: scale(1) translateY(0);
-    -ms-transform: scale(1) translateY(0);
-    transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: scale(1) translateY(0);
+  -ms-transform: scale(1) translateY(0);
+  transform: scale(1) translateY(0);
 }
 
 .nice-select.disabled {
-    border-color: #ededed;
-    color: #999;
-    pointer-events: none;
+  border-color: #ededed;
+  color: #999;
+  pointer-events: none;
 }
 
 .nice-select.disabled:after {
-    border-color: #cccccc;
+  border-color: #cccccc;
 }
 
 .nice-select.wide {
-    width: 100%;
+  width: 100%;
 }
 
 .nice-select.wide .list {
-    left: 0 !important;
-    right: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
 .nice-select.right {
-    float: right;
+  float: right;
 }
 
 .nice-select.right .list {
-    left: auto;
-    right: 0;
+  left: auto;
+  right: 0;
 }
 
 .nice-select.small {
-    font-size: 12px;
-    height: 36px;
-    line-height: 34px;
+  font-size: 12px;
+  height: 36px;
+  line-height: 34px;
 }
 
 .nice-select.small:after {
-    height: 4px;
-    width: 4px;
+  height: 4px;
+  width: 4px;
 }
 
 .nice-select.small .option {
-    line-height: 34px;
-    color: black;
-    min-height: 34px;
+  line-height: 34px;
+  color: black;
+  min-height: 34px;
 }
 
 .nice-select .list {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px rgba(68, 68, 68, 0.11);
-    box-sizing: border-box;
-    margin-top: 4px;
-    opacity: 0;
-    overflow: hidden;
-    padding: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    -webkit-transform-origin: 50% 0;
-    -ms-transform-origin: 50% 0;
-    transform-origin: 50% 0;
-    -webkit-transform: scale(0.75) translateY(-21px);
-    -ms-transform: scale(0.75) translateY(-21px);
-    transform: scale(0.75) translateY(-21px);
-    -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
-    transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
-    z-index: 9;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgba(68, 68, 68, 0.11);
+  box-sizing: border-box;
+  margin-top: 4px;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  -webkit-transform-origin: 50% 0;
+  -ms-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-transform: scale(0.75) translateY(-21px);
+  -ms-transform: scale(0.75) translateY(-21px);
+  transform: scale(0.75) translateY(-21px);
+  -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+  transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+  z-index: 9;
 }
 
 .nice-select .list:hover .option:not(:hover) {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .nice-select .option {
-    cursor: pointer;
-    font-weight: 400;
-    line-height: 40px;
-    color: black;
-    list-style: none;
-    min-height: 40px;
-    outline: none;
-    padding-left: 18px;
-    padding-right: 29px;
-    text-align: left;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 40px;
+  color: black;
+  list-style: none;
+  min-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 29px;
+  text-align: left;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 .nice-select .option:hover,
 .nice-select .option.focus,
 .nice-select .option.selected.focus {
-    background-color: #f6f6f6;
+  background-color: #f6f6f6;
 }
 
 .nice-select .option.selected {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .nice-select .option.disabled {
-    background-color: transparent;
-    color: #999;
-    cursor: default;
+  background-color: transparent;
+  color: #999;
+  cursor: default;
 }
 
 .no-csspointerevents .nice-select .list {
-    display: none;
+  display: none;
 }
 
 .no-csspointerevents .nice-select.open .list {
-    display: block;
+  display: block;
 }
 
 .custom-antd-table .ant-table {
-    background-color: #032055; /* Màu nền của bảng */
+  background-color: #032055; /* Màu nền của bảng */
 }
 
 .custom-antd-table .ant-table-thead > tr > th {
-    background-color: #032055; /* Màu nền của tiêu đề cột */
-    color: white; /* Màu chữ của tiêu đề cột */
+  background-color: #032055; /* Màu nền của tiêu đề cột */
+  color: white; /* Màu chữ của tiêu đề cột */
 }
 
 .custom-antd-table .ant-table-tbody > tr > td {
-    color: white; /* Màu chữ của nội dung bảng */
-    border-color: #032055; /* Màu viền các ô trong bảng */
+  color: white; /* Màu chữ của nội dung bảng */
+  border-color: #032055; /* Màu viền các ô trong bảng */
 }
 
 .custom-antd-table .ant-table-tbody > tr:hover > td {
-    background-color: #032055 !important; /* Màu nền khi hover vào hàng trong bảng */
+  background-color: #032055 !important; /* Màu nền khi hover vào hàng trong bảng */
 }
 .custom-antd-table .ant-pagination {
-    background-color: #032055; /* Màu nền cho phân trang */
+  background-color: #032055; /* Màu nền cho phân trang */
 }
 
-.custom-antd-table .ant-pagination-item, 
+.custom-antd-table .ant-pagination-item,
 .custom-antd-table .ant-pagination-options,
-.custom-antd-table .ant-pagination-prev, 
+.custom-antd-table .ant-pagination-prev,
 .custom-antd-table .ant-pagination-next {
-    background-color: #032055; 
-    color: white; 
-    border-color: #032055; 
+  background-color: #032055;
+  color: white;
+  border-color: #032055;
 }
 
 .custom-antd-table .ant-pagination-item:hover,
-.custom-antd-table .ant-pagination-prev:hover, 
+.custom-antd-table .ant-pagination-prev:hover,
 .custom-antd-table .ant-pagination-next:hover,
 .custom-antd-table .ant-pagination-item-active {
-    background-color: #032055; 
-    border-color: white; 
+  background-color: #032055;
+  border-color: white;
+}
+
+.custom-showtime-early {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  font-weight: bold;
 }

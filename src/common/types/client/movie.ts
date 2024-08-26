@@ -12,4 +12,5 @@ export interface Movie {
     duration: number;
     status: string;
     description: string;
+    is_early_showtime: 0 | 1
 }
