@@ -71,7 +71,7 @@ const FormSignUp = ({ register, handleSubmit, errors, onSubmit }: Required<TForm
                 }
                 )}
                 <div className="form-group text-center mt-5">
-                    <input type="submit" value="Register" />
+                    <input type="submit" value="Đăng kí" />
                 </div>
             </form>
         </>

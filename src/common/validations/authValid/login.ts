@@ -12,3 +12,11 @@ export const LoginSchema = Joi.object({
         "string.min": "Mật khẩu phải lớn hơn {#limit} kí tự!"
     })
 })
+
+export const ForgotPasswordSchema = Joi.object({
+    email: Joi.string().email({ tlds: { allow: false } }).required().messages({
+        "string.email": "Email không hợp lệ!",
+        "string.empty": "Mời bạn nhập email!",
+        "any.required": "Mời bạn nhập email!",
+    }),
+})

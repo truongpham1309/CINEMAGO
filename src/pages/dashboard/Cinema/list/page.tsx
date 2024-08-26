@@ -27,6 +27,11 @@ const CinemaListPage = () => {
             dataIndex: "city",
         },
         {
+            title: "Số lượng phòng",
+            key: 'quantity',
+            dataIndex: "quantity",
+        },
+        {
             title: "",
             key: "action",
             render: (record) => <>
@@ -34,13 +39,6 @@ const CinemaListPage = () => {
                 <Button onClick={() => onDeleteCinema(record.id)} className="btn-danger" icon={<DeleteFilled />}></Button>
             </>
         },
-        {
-            title: "",
-            key: "detail",
-            render: (record) => <>
-                <Link className="mx-2" to={`/dashboard/room-cinema/detail/${record.id}`}>Chi tiết</Link>
-            </>
-        }
     ];
     const { mutate, isPending } = useMutation({
         mutationFn: async (id: number) => {

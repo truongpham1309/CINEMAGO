@@ -36,7 +36,6 @@ const CountDown = () => {
             const elapsedSeconds = Math.floor((_temp_time.getTime() - _startTime.getTime()) / 1000);
 
             if (elapsedSeconds >= 300) {
-                // Nếu thời gian đã hết, reset lại đếm ngược
                 resetCountdown();
             } else {
                 setCountDownStart(_startTime);
@@ -71,7 +70,7 @@ const CountDown = () => {
                 clearInterval(intervalId);
                 resetCountdown();
                 console.log(countDownStart)
-                navigate('/');
+                navigate('/movie');
             } else {
                 setCountDown(newCountDown);
             }

@@ -18,12 +18,12 @@ const FormSignIn = ({ register, handleSubmit, errors, onSubmit }: Required<TForm
             <div className="form-group checkgroup">
                 <input type="checkbox" id="bal2" />
                 <label htmlFor="bal2">remember password</label>
-                <Link to="#" className="forget-pass">
-                    Forget Password
+                <Link to="/forgot-password" className="forget-pass">
+                    Quên mật khẩu
                 </Link>
             </div>
             <div className="form-group text-center">
-                <input type="submit" value="Login" />
+                <input type="submit" value="Đăng nhập" />
             </div>
         </form>
     )

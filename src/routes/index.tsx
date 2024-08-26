@@ -54,6 +54,8 @@ import TicketsPage from "@/pages/website/TicketList/page"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ProfilePage from './../pages/website/Profile/page'
 import PrivateRouterLogin, { PrivateRouterBooking, PrivateRouterDashBoard } from "./PrivateRouterLogin"
+import ForgotPassWordPage from "@/pages/auth/ForgotPassword/page"
+import EmailSentScreen from "@/pages/auth/ForgotPassword/SentMailSuccess"
 
 const Router = () => {
   return (
@@ -63,6 +65,8 @@ const Router = () => {
         <Routes>
           <Route path="/signup" element={<PrivateRouterLogin><SignUpUserPage /></PrivateRouterLogin>} />
           <Route path="/login" element={<PrivateRouterLogin><SignInPage /></PrivateRouterLogin>} />
+          <Route path="/forgot-password" element={<PrivateRouterLogin><ForgotPassWordPage /></PrivateRouterLogin>} />
+          <Route path="/send-email" element={<PrivateRouterLogin><EmailSentScreen /></PrivateRouterLogin>} />
 
           <Route path="/" element={<LayoutClient />}>
             {/* Các router website */}

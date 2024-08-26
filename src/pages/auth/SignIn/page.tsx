@@ -9,6 +9,7 @@ import { loginUser } from "@/services/auth/authService"
 import { joiResolver } from '@hookform/resolvers/joi';
 import { LoginSchema } from "@/common/validations/authValid/login"
 import LoadingComponent from "@/components/ui/LoadingComponent"
+import { logo } from "@assets/images/logo";
 
 const SignInPage = () => {
 
@@ -44,18 +45,25 @@ const SignInPage = () => {
   const handleOnLogin: SubmitHandler<TInputDataLogin> = (data) => {
     login(data);
   }
-  if(isPending) return <LoadingComponent />;
+  if (isPending) return <LoadingComponent />;
   return (
     <section
       className="account-section bg_img"
+      style={{ backgroundImage: "url('/src/assets/images/account/account-bg.jpg')", height: "100vh" }}
       data-background={backgroundAccount}
     >
       <div className="container">
+
         <div className="padding-top padding-bottom">
           <div className="account-area">
             <div className="section-header-3">
-              <span className="cate">hello</span>
-              <h2 className="title">welcome back</h2>
+              <div className="logo">
+                <Link to="/">
+                  <img width={100} className="my-3" src={logo} alt="logo" />
+                </Link>
+              </div>
+              <span style={{ fontWeight: '700' }} className="cate font-bold">chào mừng bạn trở lại</span>
+              <h2 className="title"></h2>
             </div>
             <FormSignIn
               register={register}
