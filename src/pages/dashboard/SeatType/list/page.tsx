@@ -28,7 +28,7 @@ const SeatTypeListPage = () => {
             dataIndex: "price",
         },
         {
-            title: "Giá ưu đãi",
+            title: "Giá ngày lễ",
             key: "promotion_price",
             dataIndex: "promotion_price",
         },
@@ -54,21 +54,6 @@ const SeatTypeListPage = () => {
             toast.error("Không thể xóa loại ghế!")
         }
     });
-
-    const onDelete = (id: number) => {
-        confirm({
-            title: "Bạn có chắc chắn muốn xóa loại ghế này?",
-            icon: <InfoCircleTwoTone />,
-            content: "Nhấn OK để xóa",
-            okText: 'Yes',
-            okType: 'primary',
-            okCancel: true,
-            cancelText: 'Hủy',
-            onOk() {
-                deleteSeatType(id);
-            },
-        })
-    }
 
     const { data, isLoading, isError } = useQuery({
         queryKey: ['SEAT-TYPE'],
