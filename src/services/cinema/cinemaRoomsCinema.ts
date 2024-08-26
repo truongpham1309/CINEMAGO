@@ -7,7 +7,7 @@ export const createRoomsCinema = async (room: TRoomsCinema) => {
         return data;
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -17,7 +17,7 @@ export const getAllRooms = async () => {
         return data;
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -26,7 +26,7 @@ export const deleteRoomsByID = async (id: number) => {
         await axios.delete(`/dashboard/cinema-screen/delete/${id}`);
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -36,7 +36,7 @@ export const getDetailCinemaScreen = async (idCinemaScreen: number) => {
         return data
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }
 
@@ -46,6 +46,6 @@ export const updateCinemaScreenByID = async (cinemaScreen: any) => {
         return data
     } catch (error: any) {
         console.log(error);
-        throw new Error(error);
+        throw error;
     }
 }

@@ -1,8 +1,8 @@
 import axios from 'axios';
-const seatMap = "NNNNNNNNNN|NNNNNNNNNN|VVVVVVVVVV|VVVVVVVVVV|VVVVVVVVVV|CCCCCCCCCC";
+const seatMap = "";
 const row = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"];
 let count = 0;
-const CINEMA_SCREEN_ID = 12
+const CINEMA_SCREEN_ID = null
 const seatType = {
     nomal: 1,
     vip: 2,

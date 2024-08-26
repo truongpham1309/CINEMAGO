@@ -94,9 +94,8 @@ export const useRoomsCinemaMutation = ({ type }: { type: "CREATE" | "DELETE" | "
 
     const onMutationRooms: SubmitHandler<TRoomsCinema> = (data) => {
         mutation.mutate(data);
-        console.log(data);
     }
 
-    return { ...mutation, data, ...rest, idCinema, onMutationRooms, ...form }
+    return { ...mutation, data, ...rest, idCinema, onMutationRooms, ...form, isErrorRoom: mutation.isError, errorRoom: mutation.error }
 
 }
