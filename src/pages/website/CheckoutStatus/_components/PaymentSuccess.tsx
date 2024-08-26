@@ -77,10 +77,7 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
                             type === "SUCCESS" ?
                                 <Button onClick={handleViewDetailTicket} type="primary" key="ticketDetails">
                                     Xem chi tiết vé
-                                </Button> :
-                                <Button onClick={handleNavigateCheckout} className='btn-danger' key="ticketDetails">
-                                    Quay lại trang thanh toán
-                                </Button>,
+                                </Button> : null,
                             <Button onClick={handleNavigateHome} className='btn-success' key="home">
                                 Quay về trang chủ
                             </Button>,

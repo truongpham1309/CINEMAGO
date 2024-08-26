@@ -56,13 +56,19 @@ const SeatTypeEditPage = () => {
     return (
         <>
             {isErrorMutation && (
-                <Alert
-                    type="error"
-                    icon={<WarningFilled />}
-                    className="mb-3"
-                    message="Có lỗi xảy ra khi cập nhật loại ghế."
-                    description={(error as any)?.response?.data?.message.name.map((_m: any) => _m)}
-                />
+                (<Alert type="warning" message={"Bạn không thể cập nhật phim"} description={typeof ((error as any)?.response?.data?.message) === "string" ? (error as any)?.response?.data?.message :
+                    <>
+                        <ul>
+                            {
+                                (error as any)?.response?.data?.message.map((err: any, index: number) => (
+                                    <li key={index}>
+                                        {err}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </>
+                } />)
             )}
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
