@@ -158,7 +158,7 @@ const BookingSeatPage = () => {
 
                                     return (
                                         <li key={i} className="seat-line">
-                                            <span>{s[0].type?.includes("thường") ? "N" : (s[0].type?.includes("vip") ? "V" : "C")}</span>
+                                            <span>{items[count - 1]}</span>
                                             <ul className="seat--area">
                                                 <li className="front-seat">
                                                     <ul className="justify">
@@ -230,7 +230,7 @@ const BookingSeatPage = () => {
                                     </li>
                                     <li className="single-seat">
                                         <div className="my-3"><img src={SeatNomal} alt="seat" /> : Ghế thường( <span className="text-white">{formatCurrencyVND((seatPrice?.normal.includes(".00") ? seatPrice?.normal?.slice(0, -3) : seatPrice?.normal) || 0) || "Đang cập nhật"} </span>)</div>
-                                        <div className="my-3"><img src={SeatVIP} alt="seat" /> : Ghế VIP(<span className="text-white"> {formatCurrencyVND((seatPrice?.vip.includes(".00") ? seatPrice?.normal?.slice(0, -3) : seatPrice?.vip) || 0) || "Đang cập nhật"} </span>)</div>
+                                        <div className="my-3"><img src={SeatVIP} alt="seat" /> : Ghế VIP(<span className="text-white"> {formatCurrencyVND((seatPrice?.vip.includes(".00") ? seatPrice?.vip?.slice(0, -3) : seatPrice?.vip) || 0) || "Đang cập nhật"} </span>)</div>
                                         <div className="my-3"><img src={SeatCoppleUI} alt="seat" /> : Ghế đôi( <span className="text-white">{formatCurrencyVND((+(seatPrice?.double.includes(".00") ? seatPrice?.double?.slice(0, -3) : seatPrice?.double) * 2) || 0) || "Đang cập nhật"} </span>)</div>
                                     </li>
                                 </ul>

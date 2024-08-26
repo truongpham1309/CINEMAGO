@@ -30,7 +30,7 @@ const RoomsListDashBoardCinema = () => {
             </>
         }
     ];
-    const { mutate, isPending } = useRoomsCinemaMutation({ type: "DELETE" });
+    const { mutate, isPending, isErrorRoom, errorRoom } = useRoomsCinemaMutation({ type: "DELETE" });
     const onDelete = (record: any) => {
         confirm({
             title: "Bạn có chắc chắn muốn xóa phòng chiếu này?",
@@ -45,6 +45,7 @@ const RoomsListDashBoardCinema = () => {
             }
         })
     }
+    console.log(isErrorRoom)
     const { data, isLoading, isError } = useRoomCinemaQuery();
     if (isLoading || isPending) return <LoadingComponent />;
     if (isError) return <ServerError />
@@ -61,6 +62,19 @@ const RoomsListDashBoardCinema = () => {
                     <div className="card-header py-3">
                         <h6 className="m-0 font-weight-bold text-primary text-uppercase">Danh sách phòng chiếu</h6>
                     </div>
+                    {isErrorRoom && (<Alert type="warning" message={"Bạn không thể xóa rạp!"} description={typeof ((errorRoom as any)?.response?.data?.message) === "string" ? (errorRoom as any)?.response?.data?.message :
+                    <>
+                        <ul>
+                            {
+                                (errorRoom as any)?.response?.data?.message.map((err: any, index: number) => (
+                                    <li key={index}>
+                                        {err}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </>
+                } />)}
                     <div className="card-body">
                         <Table columns={tableRooms} rowKey={record => record.id} dataSource={data.data.cinemaScreens} pagination={false} />
                     </div>
