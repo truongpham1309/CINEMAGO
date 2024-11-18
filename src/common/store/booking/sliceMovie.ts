@@ -8,10 +8,10 @@ export const sliceMovie = createSlice({
     initialState: movie,
     reducers: {
         add_info_movie: (state, action: PayloadAction<any>) => {
-            return state = action.payload;
+            state = action.payload;
         },
         delete_info_movie: (state) => {
-            return state = null;
+            state = null;
         }
     }
 });

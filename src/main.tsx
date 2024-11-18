@@ -7,11 +7,9 @@ import { storeBooking } from './common/store/booking/store.ts'
 const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  // <React.StrictMode>
     <Provider store={storeBooking}>
       <QueryClientProvider client={client}>
         <App />
       </QueryClientProvider>
     </Provider>
-  // </React.StrictMode>,
 )

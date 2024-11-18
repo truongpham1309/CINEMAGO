@@ -4,7 +4,7 @@ import InputForm from "../../_components/InputForm";
 import SelectComponent from "./SelectComponent";
 
 const FormSignUp = ({ register, handleSubmit, errors, onSubmit }: Required<TFormSignUpMethodProps>) => {
-    
+
     const items: Array<TInputFormRegister | TInputChildren> = [
         { id: 1, lable: "Email", typeInput: "email", keysub: "email", hasRequired: true },
         {
@@ -27,7 +27,7 @@ const FormSignUp = ({ register, handleSubmit, errors, onSubmit }: Required<TForm
         { id: 6, lable: "Password", typeInput: "password", keysub: "password", hasRequired: true },
         { id: 7, lable: "Confirm Password", typeInput: "password", keysub: "password_confirmation", hasRequired: true },
     ];
-    
+
     return (
         <>
             <form className="account-form" onSubmit={handleSubmit(onSubmit)}>
@@ -66,7 +66,6 @@ const FormSignUp = ({ register, handleSubmit, errors, onSubmit }: Required<TForm
                                 form={{ register, errors, handleSubmit }}
                             />
                         </div>
-
                     )
                 }
                 )}
