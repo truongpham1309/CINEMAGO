@@ -132,7 +132,7 @@ export const sliceBooking: any = createSlice({
         },
         clear_services: (state) => {
             let _priceServices = state?.services?.reduce((sum: any, current: any) => sum + current.subtotal, 0);
-            state.subtotal = state.subtotal -  _priceServices;
+            state.subtotal = state.subtotal - _priceServices;
             return state;
         }
     }

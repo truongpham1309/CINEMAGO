@@ -82,7 +82,6 @@ const BookingDetailDashBoardPage = () => {
         />}
         <Card className="text-uppercase" title="Chi tiết vé" bordered={false} style={{ width: '100%' }}>
           <Descriptions bordered column={{ xxl: 4, xl: 3, lg: 3, md: 2, sm: 1, }}>
-            {/* <Descriptions.Item label="Booking ID">{ResponseAPI.booking.id}</Descriptions.Item> */}
             <Descriptions.Item label="Tên phim">{ResponseAPI.booking.movie}</Descriptions.Item>
             <Descriptions.Item label="Khách hàng">{ResponseAPI.booking.user}</Descriptions.Item>
             <Descriptions.Item label="Ngày đặt">{ResponseAPI.booking.show_date}</Descriptions.Item>
@@ -90,7 +89,7 @@ const BookingDetailDashBoardPage = () => {
             <Descriptions.Item label="Số lượng ghế">{ResponseAPI.booking.quantity}</Descriptions.Item>
             <Descriptions.Item label="Tên ghế">{ResponseAPI.seats[0].seat_type}
               <br />
-              {ResponseAPI.seats.map(_s => _s.seat_number).join(', ')}</Descriptions.Item>
+              {ResponseAPI.seats.map((_s: any) => _s.seat_number).join(', ')}</Descriptions.Item>
             <Descriptions.Item label="Suất chiếu">{ResponseAPI.booking.show_time}</Descriptions.Item>
             <Descriptions.Item label="Loại màn hình">{ResponseAPI.booking.screen}</Descriptions.Item>
             <Descriptions.Item label="Trạng thái">{ResponseAPI.booking.status}</Descriptions.Item>
