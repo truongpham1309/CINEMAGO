@@ -69,7 +69,6 @@ const Router = () => {
           <Route path="/send-email" element={<PrivateRouterLogin><EmailSentScreen /></PrivateRouterLogin>} />
 
           <Route path="/" element={<LayoutClient />}>
-            {/* Các router website */}
             <Route path="/" element={<HomePage />} />
             <Route path="/movie" element={<MovieList />} />
             <Route path="/movie/detail/:id" element={<MovieDetail />} />
