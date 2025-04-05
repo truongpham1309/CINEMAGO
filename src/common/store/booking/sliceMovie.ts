@@ -7,7 +7,7 @@ export const sliceMovie = createSlice({
     name: "Movie",
     initialState: movie,
     reducers: {
-        add_info_movie: (state, action: PayloadAction<any>) => {
+        add_info_movie: (state: any, action: PayloadAction<any>) => {
             state = action.payload;
         },
         delete_info_movie: (state) => {
