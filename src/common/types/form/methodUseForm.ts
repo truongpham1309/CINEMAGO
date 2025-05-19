@@ -13,7 +13,7 @@ export type TFormInputRegister = {
 
 export type TFormSignUpMethodProps = {
     register: UseFormRegister<TFormInputRegister>;
-    handleSubmit: UseFormHandleSubmit<TFormInputRegister>;
+    handleSubmit: any;
     errors: FieldErrors<TFormInputRegister>;
     onSubmit?: (data: TFormInputRegister) => void;
 }
