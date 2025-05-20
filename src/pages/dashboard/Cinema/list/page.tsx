@@ -1,6 +1,6 @@
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { deleteCinemaByID, getAllCinemas } from "@/services/cinema/cinemaService";
-import { DeleteFilled, EditFilled, InfoCircleOutlined, InfoCircleTwoTone } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Alert, Button, Table, TableProps } from "antd";
 import { Link } from "react-router-dom";

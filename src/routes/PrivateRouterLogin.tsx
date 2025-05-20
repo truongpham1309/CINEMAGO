@@ -55,7 +55,7 @@ export const PrivateRouterBooking: React.FC<MyComponentProps> = ({ children }) =
 
 export const PrivateRouterDashBoard: React.FC<MyComponentProps> = ({ children }) => {
     const user = JSON.parse(localStorage.getItem("user")!);
-    const { data, isLoading, isError } = useQuery({
+    const { isLoading, isError } = useQuery({
         queryKey: ['CHECK-TOKEN-ADMIN'],
         queryFn: async () => {
             const data = await checkTokenExpiry();

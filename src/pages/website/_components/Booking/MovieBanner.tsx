@@ -10,13 +10,7 @@ const MovieBanner = () => {
     const navigate = useNavigate();
     const movie = useSelector(movieSelector);
     const dispatch = useDispatch();
-    // useEffect(() => {
-    //     if (!movie) {
-    //         dispatch(clean_booking());
-    //         dispatch(delete_info_movie());
-    //         navigate('/movie');
-    //     }
-    // }, [movie]);
+    console.log("movie-banner", movie)
     const handleBackPage = () => {
         dispatch(clear_services());
         navigate(-1);

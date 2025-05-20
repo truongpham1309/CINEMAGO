@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { useQuery } from "@tanstack/react-query";
 import { Table, TableProps, Input } from "antd";
-import { Link } from "react-router-dom";
 import ServerError from "../../_components/500";
 import { getAllUserList } from "@/services/auth/authService";
 

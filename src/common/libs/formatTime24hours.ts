@@ -3,7 +3,7 @@ export const convertTo24Hour = (time: string) => {
     let [timePart, modifier] = time.split(' ');
 
     // Tách giờ và phút
-    let [hours, minutes] = timePart.split(':');
+    let [hours, minutes]: any[] = timePart.split(':');
 
     // Chuyển đổi giờ từ chuỗi sang số
     hours = parseInt(hours);

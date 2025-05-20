@@ -1,5 +1,5 @@
 import { formatCurrencyVND } from "@/common/libs/fomatMoneyVND";
-import { formatDate, formatDateString } from "@/common/libs/formatDateToString";
+import { formatDateString } from "@/common/libs/formatDateToString";
 import { getAllTicketByUser } from "@/services/ticket/ticketService";
 import { InfoCircleFilled } from "@ant-design/icons";
 import { Button, Empty, Table, TableProps } from "antd";

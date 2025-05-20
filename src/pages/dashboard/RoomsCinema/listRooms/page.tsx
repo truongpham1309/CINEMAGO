@@ -1,6 +1,6 @@
 import { TRoomsCinemaData } from '@/common/types/cinema/roomsCinema';
 import LoadingComponent from '@/components/ui/LoadingComponent';
-import { DeleteFilled, EditFilled, InfoCircleTwoTone, Loading3QuartersOutlined } from '@ant-design/icons';
+import { DeleteFilled, EditFilled, InfoCircleTwoTone } from '@ant-design/icons';
 import { Alert, Button, Table, TableProps } from 'antd';
 import confirm from 'antd/es/modal/confirm';
 import { Link } from 'react-router-dom';

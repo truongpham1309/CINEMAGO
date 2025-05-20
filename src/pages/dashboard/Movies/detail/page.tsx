@@ -1,7 +1,7 @@
 import { deleteMovieByID, getDetailMovieByID } from "@/services/movie/movieService";
 import { InfoCircleTwoTone } from "@ant-design/icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Alert, Button, Card, Typography } from "antd";
+import { Alert, Button, Card } from "antd";
 import confirm from "antd/es/modal/confirm";
 import React, { useState } from "react";
 import ModalVideo from "react-modal-video";
@@ -12,7 +12,7 @@ const MovieDetailPage = () => {
   const queryClient = useQueryClient();
   const [movie, setMovie] = React.useState<any>({});
   const [visible, setVisible] = useState(false);
-  const [trailerUrl, setTrailerUrl] = useState('');
+  const [_, setTrailerUrl] = useState('');
   React.useEffect(() => {
     (async () => {
       const { data } = await getDetailMovieByID(+id!);
@@ -20,7 +20,7 @@ const MovieDetailPage = () => {
     })();
   }, [id]);
   const navigate = useNavigate();
-  const { mutate: deleteMovie, isPending: isDeleting, error, isError: isErrorDelete } = useMutation({
+  const { mutate: deleteMovie, error, isError: isErrorDelete } = useMutation({
     mutationFn: async (id: any) => {
       console.log(id);
       await deleteMovieByID(id);
