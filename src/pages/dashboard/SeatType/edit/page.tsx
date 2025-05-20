@@ -9,8 +9,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ServerError from "../../_components/500";
-import { useScreenQuery } from "../../Screen/hooks/useScreen";
-import { WarningFilled } from "@ant-design/icons";
 
 const SeatTypeEditPage = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({

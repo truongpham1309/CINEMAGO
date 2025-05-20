@@ -1,0 +1,281 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\DU Lieu 5540\\CINEMASWAY\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\services\\cinema\\cinemaRoomsCinema.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\services\\cinema\\cinemaRoomsCinema.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\services\\bookingClient\\bookingClientService.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\services\\bookingClient\\bookingClientService.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\routes\\PrivateRouterLogin.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\routes\\PrivateRouterLogin.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\routes\\index.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\routes\\index.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\App.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\App.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\main.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\TicketList\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\website\\TicketList\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\addSeats.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:addSeats.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\DetailPage\\MovieDetail.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\website\\DetailPage\\MovieDetail.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\auth\\SignIn\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\auth\\SignIn\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\auth\\SignUp\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\auth\\SignUp\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentSuccess.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\website\\CheckoutStatus\\_components\\PaymentSuccess.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusMoMo.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusMoMo.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\tsconfig.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tsconfig.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusVNPAY.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusVNPAY.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\BookingService\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\website\\BookingService\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "cinemaRoomsCinema.ts",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\services\\cinema\\cinemaRoomsCinema.ts",
+              "RelativeDocumentMoniker": "src\\services\\cinema\\cinemaRoomsCinema.ts",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\services\\cinema\\cinemaRoomsCinema.ts",
+              "RelativeToolTip": "src\\services\\cinema\\cinemaRoomsCinema.ts",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:48:58.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "bookingClientService.ts",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\services\\bookingClient\\bookingClientService.ts",
+              "RelativeDocumentMoniker": "src\\services\\bookingClient\\bookingClientService.ts",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\services\\bookingClient\\bookingClientService.ts",
+              "RelativeToolTip": "src\\services\\bookingClient\\bookingClientService.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:48:44.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PrivateRouterLogin.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\routes\\PrivateRouterLogin.tsx",
+              "RelativeDocumentMoniker": "src\\routes\\PrivateRouterLogin.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\routes\\PrivateRouterLogin.tsx",
+              "RelativeToolTip": "src\\routes\\PrivateRouterLogin.tsx",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAADoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:46:57.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "index.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\routes\\index.tsx",
+              "RelativeDocumentMoniker": "src\\routes\\index.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\routes\\index.tsx",
+              "RelativeToolTip": "src\\routes\\index.tsx",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:46:45.399Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\App.tsx",
+              "RelativeDocumentMoniker": "src\\App.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\App.tsx",
+              "RelativeToolTip": "src\\App.tsx",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:46:37.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "main.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\main.tsx",
+              "RelativeDocumentMoniker": "src\\main.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\main.tsx",
+              "RelativeToolTip": "src\\main.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:46:33.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "page.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\TicketList\\page.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\website\\TicketList\\page.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\TicketList\\page.tsx",
+              "RelativeToolTip": "src\\pages\\website\\TicketList\\page.tsx",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:45:57.628Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "addSeats.js",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\addSeats.js",
+              "RelativeDocumentMoniker": "addSeats.js",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\addSeats.js",
+              "RelativeToolTip": "addSeats.js",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAD8AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-03-06T12:45:15.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MovieDetail.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\DetailPage\\MovieDetail.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\website\\DetailPage\\MovieDetail.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\DetailPage\\MovieDetail.tsx",
+              "RelativeToolTip": "src\\pages\\website\\DetailPage\\MovieDetail.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T12:00:29.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "page.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\auth\\SignIn\\page.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\auth\\SignIn\\page.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\auth\\SignIn\\page.tsx",
+              "RelativeToolTip": "src\\pages\\auth\\SignIn\\page.tsx",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAAAA0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T11:59:57.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "page.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\auth\\SignUp\\page.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\auth\\SignUp\\page.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\auth\\SignUp\\page.tsx",
+              "RelativeToolTip": "src\\pages\\auth\\SignUp\\page.tsx",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-06T11:59:48.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "tsconfig.json",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\tsconfig.json",
+              "RelativeDocumentMoniker": "tsconfig.json",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\tsconfig.json",
+              "RelativeToolTip": "tsconfig.json",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-05T23:38:16.88Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PaymentStatusVNPAY.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusVNPAY.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusVNPAY.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusVNPAY.tsx",
+              "RelativeToolTip": "src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusVNPAY.tsx",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAE4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-05T11:02:50.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PaymentStatusMoMo.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusMoMo.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusMoMo.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusMoMo.tsx",
+              "RelativeToolTip": "src\\pages\\website\\CheckoutStatus\\_components\\PaymentStatusMoMo.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-04T13:12:04.86Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PaymentSuccess.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentSuccess.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\website\\CheckoutStatus\\_components\\PaymentSuccess.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\CheckoutStatus\\_components\\PaymentSuccess.tsx",
+              "RelativeToolTip": "src\\pages\\website\\CheckoutStatus\\_components\\PaymentSuccess.tsx",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-04T13:11:26.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "page.tsx",
+              "DocumentMoniker": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\BookingService\\page.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\website\\BookingService\\page.tsx",
+              "ToolTip": "D:\\DU Lieu 5540\\CINEMASWAY\\src\\pages\\website\\BookingService\\page.tsx",
+              "RelativeToolTip": "src\\pages\\website\\BookingService\\page.tsx",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAKkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-04T13:06:39.252Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-import { Button, Result } from 'antd';
 import '@styles/PaymentSuccess.css';
+import { Button, Result } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -28,11 +28,6 @@ const PaymentSuccess = ({ type }: { type: 'SUCCESS' | 'FAILD' | 'QUESTIONS' }) =
         dispatch(clean_booking());
         dispatch(delete_info_movie());
         navigate('/');
-        return;
-    }
-
-    const handleNavigateCheckout = () => {
-        navigate('/movie/booking/services');
         return;
     }
 

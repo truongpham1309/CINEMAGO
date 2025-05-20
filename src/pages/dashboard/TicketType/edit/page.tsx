@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import ServerError from "../../_components/500";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TTicketType } from "@/common/types/ticket/ticketType";
-import { createTicketType, getDetailTicketType, updateTicketTypeByID } from "@/services/ticket/ticketTypeService";
+import { getDetailTicketType, updateTicketTypeByID } from "@/services/ticket/ticketTypeService";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 

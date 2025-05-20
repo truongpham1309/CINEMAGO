@@ -13,7 +13,7 @@ export const createMovieDashBoard = async (movie: TMovieCreate) => {
 
 export const getAllMovieList = async (limit: number = 1000, page: number = 1) => {
     try {
-        const { data } = await axios.get("/dashboard/movie?limit=limit&page=page");
+        const { data } = await axios.get(`/dashboard/movie?limit=${limit}&page=${page}`);
         return data
     } catch (error: any) {
         console.log(error);
@@ -62,7 +62,7 @@ export const getDetailMovieClient = async (id: number) => {
 
 export const getAllMovieClient = async (limit: number = 1000, page: number = 1) => {
     try {
-        const { data } = await axios.get("/client/movie?limit=limit&page=page");
+        const { data } = await axios.get(`/client/movie?limit=${limit}&page=${page}`);
         return data
     } catch (error: any) {
         console.log(error);
@@ -72,7 +72,7 @@ export const getAllMovieClient = async (limit: number = 1000, page: number = 1) 
 
 export const getAllMovieHomePage = async (status: number = 0, limit: number = 12, page: number = 1) => {
     try {
-        const { data } = await axios.get(`/client/movie?status=${status}`);
+        const { data } = await axios.get(`/client/movie?status=${status}&limit=${limit}&page=${page}`);
         return data
     } catch (error: any) {
         console.log(error);

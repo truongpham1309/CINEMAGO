@@ -2,13 +2,11 @@ import { SeatTypeSchema } from "@/common/validations/seats/seatType";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { createSeatType } from "@/services/seats/seatTypeService";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Alert, Button } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ServerError from "../../_components/500";
-import { useScreenQuery } from "../../Screen/hooks/useScreen";
 
 const SeatTypeCreatePage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({

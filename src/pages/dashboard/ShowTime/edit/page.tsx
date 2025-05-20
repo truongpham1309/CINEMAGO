@@ -14,7 +14,6 @@ import { convertTo24Hour } from "@/common/libs/formatTime24hours";
 const ShowTimeEditPage = () => {
 
     const { movie, cinema, mutate, isPending } = useShowTimeMutation({ type: "UPDATE" });
-    console.log(movie);
     const { id: idShowTime } = useParams();
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: joiResolver(ShowTimeSchema),
@@ -42,8 +41,8 @@ const ShowTimeEditPage = () => {
         console.log({ ...data, show_date: format_date });
         mutate({ id, movie_id, cinema_screen_id, status, subtitle, show_date: format_date, show_time: format_time });
     }
-    if (movie.isLoadingMovie || cinema.isLoading || showtimeDetail.isLoading) return <LoadingComponent />;
-    if (movie.isErrorMovie || cinema.isError || showtimeDetail.isError) return <ServerError />
+    if (movie.isLoading || cinema.isLoading || showtimeDetail.isLoading) return <LoadingComponent />;
+    if (movie.isError || cinema.isError || showtimeDetail.isError) return <ServerError />
     return (
         <>
             <div className="card shadow mb-4">

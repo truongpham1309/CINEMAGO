@@ -42,7 +42,7 @@ const MovieCreatePage = () => {
             toast.success("Thêm phim thành công!");
             navigate("/dashboard/movie");
         },
-        onError: (err: Error) => {
+        onError: (_: Error) => {
             toast.error("Thêm phim thất bại!");
         }
     })

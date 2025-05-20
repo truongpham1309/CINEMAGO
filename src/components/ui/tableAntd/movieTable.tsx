@@ -5,7 +5,7 @@ export const tableColumns: TableProps<any>['columns'] = [
     {
         title: "#",
         dataIndex: "index",
-        render: (text, record, index) => index + 1, 
+        render: (_, __, index) => index + 1, 
     },
     {
         title: "Tên phim",
@@ -40,9 +40,9 @@ export const tableColumns: TableProps<any>['columns'] = [
     {
         title: "",
         dataIndex: "Action",
-        render: (text, record) => <>
+        render: (_, __) => <>
             <Link to={"/dashboard/movie/edit/:id"}><Button className="btn btn-success">Edit</Button></Link>
-            <Button onClick={}>Xóa</Button>
+            <Button>Xóa</Button>
         </>
     }
 ]
