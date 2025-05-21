@@ -929,7 +929,7 @@ input[type="submit"] {
   padding: 0;
 }
 
-.bg_img {
+.bg_img_header {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

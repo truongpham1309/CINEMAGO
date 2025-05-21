@@ -20,7 +20,7 @@ const HomePage = () => {
    return (
       <>
          <section className="banner-section" data-aos="zoom-in down">
-            <div className="banner-bg bg_img bg-fixed" style={{ backgroundImage: "url('/assets/images/banner/banner01.jpg')" }} />
+            <div className="banner-bg bg_img_header bg-fixed" style={{ backgroundImage: "url('/assets/images/banner/banner01.jpg')" }} />
             <div className="container">
                <div className="banner-content">
                   <h1 className="title cd-headline clip">
