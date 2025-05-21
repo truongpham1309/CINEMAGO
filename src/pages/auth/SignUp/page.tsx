@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
 import FormSignUp from "./_components/FormSignUp"
-import { backgroundAccount } from "@/assets/images/account"
 import { SubmitHandler, useForm } from "react-hook-form";
 import { registerSchema } from "@/common/validations/authValid/register";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -10,7 +9,6 @@ import { registerUser } from "@/services/auth/authService";
 import { toast } from "react-toastify";
 import { formatDateToString } from "@/common/libs/formatDateToString";
 import LoadingComponent from "@/components/ui/LoadingComponent";
-import { logo } from "@assets/images/logo";
 
 const SignUpUserPage = () => {
 
@@ -58,8 +56,8 @@ const SignUpUserPage = () => {
         <>
             <section
                 className="account-section bg_img"
-                data-background={backgroundAccount}
-                style={{ backgroundImage: "url('/src/assets/images/account/account-bg.jpg')", height: "100vh" }}
+                data-background='/assets/images/account/account-bg.jpg'
+                style={{ backgroundImage: "url('assets/images/account/account-bg.jpg')", height: "100vh" }}
             >
                 <div className="container">
                     <div className="padding-top padding-bottom">
@@ -68,7 +66,7 @@ const SignUpUserPage = () => {
                             <div className="section-header-3">
                                 <div className="logo">
                                     <Link to="/">
-                                        <img width={100} className="my-3" src={logo} alt="logo" />
+                                        <img width={100} className="my-3" src='/assets/images/logo/logo.png' alt="logo" />
                                     </Link>
                                 </div>
                                 <h2 style={{ fontWeight: '700' }} className="title">chào mừng bạn đến với CinemaGo</h2>

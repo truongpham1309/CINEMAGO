@@ -1,4 +1,3 @@
-import { VideoButton } from "@/assets/images/movie";
 import LoadingComponent from "@/components/ui/LoadingComponent";
 import { getDetailMovieClient } from "@/services/movie/movieService";
 import { useQuery } from "@tanstack/react-query";
@@ -44,13 +43,15 @@ const MovieDetail = () => {
   if (isError) return <NotFoundPage />;
   return (
     <>
-      <section className="details-banner bg_img" data-background={movies?.image}>
+      <section className="details-banner bg_img" 
+      // style={{backgroundImage: `url('${movies?.image}')`, height: "50vh"}}
+      >
         <div className="container">
           <div className="details-banner-wrapper">
             <div className="details-banner-thumb">
               <img src={movies?.image} alt="movie" />
               <span onClick={() => setShowTrailer(true)} className="video-popup">
-                <img src={VideoButton} alt="movie" />
+                <img src='/assets/images/movie.png' alt="movie" />
               </span>
             </div>
             <ModalVideo channel='youtube' isOpen={showTrailer} videoId={extractVideoId(movies?.trailer || "") || ""} onClose={() => setShowTrailer(false)} />

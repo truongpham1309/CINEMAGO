@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import { forgotPassword } from "@/services/auth/authService";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { logo } from "@/assets/images/logo";
 
 
 const ForgotPassWordPage = () => {
@@ -34,8 +33,8 @@ const ForgotPassWordPage = () => {
     return (
         <section
             className="account-section bg_img"
-            style={{ backgroundImage: "url('/src/assets/images/account/account-bg.jpg')", height: "100vh" }}
-            data-background="/src/assets/images/account/account-bg.jpg"
+            style={{ backgroundImage: "url('assets/images/account/account-bg.jpg')", height: "100vh" }}
+            data-background="assets/images/account/account-bg.jpg"
         >
             <div className="container">
                 <div className="padding-top padding-bottom">
@@ -44,7 +43,7 @@ const ForgotPassWordPage = () => {
                         <div className="section-header-3">
                             <div className="logo">
                                 <Link to="/">
-                                    <img width={100} className="my-3" src={logo} alt="logo" />
+                                    <img width={100} className="my-3" src='/assets/images/logo/logo.png' alt="logo" />
                                 </Link>
                             </div>
                             <h2 className="title">Nhập email của bạn</h2>

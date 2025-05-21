@@ -4,12 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { TInputDataLogin, TResponseLogin } from "@/common/types/auth"
 import { useMutation } from "@tanstack/react-query"
 import { toast } from "react-toastify"
-import { backgroundAccount } from "@/assets/images/account"
 import { loginUser } from "@/services/auth/authService"
 import { joiResolver } from '@hookform/resolvers/joi';
 import { LoginSchema } from "@/common/validations/authValid/login"
 import LoadingComponent from "@/components/ui/LoadingComponent"
-import { logo } from "@assets/images/logo";
 
 const SignInPage = () => {
 
@@ -49,8 +47,8 @@ const SignInPage = () => {
   return (
     <section
       className="account-section bg_img"
-      style={{ backgroundImage: "url('/src/assets/images/account/account-bg.jpg')", height: "100vh" }}
-      data-background={backgroundAccount}
+      style={{ backgroundImage: "url('assets/images/account/account-bg.jpg')", height: "100vh" }}
+      data-background='/assets/images/account/account-bg.jpg'
     >
       <div className="container">
 
@@ -59,7 +57,7 @@ const SignInPage = () => {
             <div className="section-header-3">
               <div className="logo">
                 <Link to="/">
-                  <img width={100} className="my-3" src={logo} alt="logo" />
+                  <img width={100} className="my-3" src='/assets/images/logo/logo.png' alt="logo" />
                 </Link>
               </div>
               <span style={{ fontWeight: '700' }} className="cate font-bold">chào mừng bạn trở lại</span>

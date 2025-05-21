@@ -71,7 +71,21 @@
     }
   },
   "include": [
-    "src"
+    "src",
+    "public/assets/js/js",
+    "public/assets/js/contact.js",
+    "public/assets/js/heandline.js",
+    "public/assets/js/main.js",
+    "public/assets/js/nice-select.js",
+    "public/assets/js/plugins.js",
+    "public/assets/js/viewport.jquery.js",
+    "public/assets/images/images",
+    "public/assets/images/movie",
+    "public/assets/images/newslater",
+    "public/assets/images/ticket",
+    "public/assets/images/logo",
+    "public/assets/images/banner",
+    "public/assets/images/account"
   ],
   "references": [
     {

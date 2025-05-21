@@ -1,5 +1,3 @@
-import { logo } from "@/assets/images/logo"
-import { NewsLaster } from "@/assets/images/newslater"
 import { Link, useNavigate } from "react-router-dom"
 
 const FooterClient = () => {
@@ -11,7 +9,8 @@ const FooterClient = () => {
                     <div className="container">
                         <div
                             className="newslater-container bg_img"
-                            data-background={NewsLaster}
+                            // data-background='/assets/images/newslater/newslater-bg01.jpg'
+                            style={{backgroundImage: "url('/assets/images/newslater/newslater-bg01.jpg')", height: "45vh"}}
                         >
                             <div className="newslater-wrapper">
                                 <h5 className="cate">Đăng ký ngay tại CinemaGo </h5>
@@ -29,7 +28,7 @@ const FooterClient = () => {
                     <div className="footer-top">
                         <div className="logo">
                             <Link to="/">
-                                <img width={120} src={logo} alt="footer" />
+                                <img width={120} src='/assets/images/logo/logo.png' alt="footer" />
                             </Link>
                         </div>
                         <ul className="social-icons">

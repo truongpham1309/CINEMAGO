@@ -288,13 +288,13 @@ const BookingServicePage = () => {
                         <ul className="payment-option">
                            <li onClick={() => setPaymentMethod(TPaymentMethod.VN_PAY)} className={paymentMethod === TPaymentMethod.VN_PAY ? "active" : ""}>
                               <a>
-                                 <img src="/src/assets/images/payment/Icon-VNPAY-QR.webp" alt="payment" />
+                                 <img src="/assets/images/payment/Icon-VNPAY-QR.webp" alt="payment" />
                                  <span>VNPAY</span>
                               </a>
                            </li>
                            <li onClick={() => setPaymentMethod(TPaymentMethod.MOMO)} className={paymentMethod === TPaymentMethod.MOMO ? "active" : ""}>
                               <a>
-                                 <img src="/src/assets/images/payment/icon_MOMO.png" alt="payment" />
+                                 <img src="/assets/images/payment/icon_MOMO.png" alt="payment" />
                                  <span>MOMO</span>
                               </a>
                            </li>

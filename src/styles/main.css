@@ -1459,8 +1459,8 @@ input[type="submit"] {
   right: 0;
   left: 0;
   top: 80px;
-  -webkit-mask-image: url(../images/footer/footer-shape.png);
-  mask-image: url(../images/footer/footer-shape.png);
+  -webkit-mask-image: url(/assets/images/footer/footer-shape.png);
+  mask-image: url(/assets/images/footer/footer-shape.png);
   -webkit-mask-position: top center;
   mask-position: top center;
   -webkit-mask-repeat: no-repeat;
@@ -2017,7 +2017,7 @@ input[type="submit"] {
   bottom: 0;
   right: 0;
   opacity: .3;
-  background-image: url('/src/assets/images/banner/banner01.jpg');
+  background-image: url('/assets/images/banner/banner01.jpg');
 }
 
 .banner-section .banner-content {

@@ -1,6 +1,5 @@
 import { selectorBooking } from "@/common/store/booking/selectorBooking";
 import { logoutUser } from "@/services/auth/authService";
-import { logo } from "@assets/images/logo";
 import { useMutation } from "@tanstack/react-query";
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
@@ -66,7 +65,7 @@ const HeaderClient = () => {
           <div className="header-wrapper">
             <div className="logo">
               <Link to="/">
-                <img src={logo} alt="logo" />
+                <img src='/assets/images/logo/logo.png' alt="logo" />
               </Link>
             </div>
             <ul className="menu">

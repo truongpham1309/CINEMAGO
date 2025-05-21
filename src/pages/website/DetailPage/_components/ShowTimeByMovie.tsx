@@ -1,5 +1,3 @@
-import { SeatPlan } from "@/assets/images/movie";
-import { cinema, city, date } from "@/assets/images/ticket";
 import { formatDateString } from "@/common/libs/formatDateToString";
 import { groupShowtimes } from "@/common/libs/formatObjectFillterMovie";
 import { selectorBooking } from "@/common/store/booking/selectorBooking";
@@ -152,7 +150,7 @@ const ShowTimeByMovie = ({ movieID, rate }: any) => {
             <h4 className="title">Chọn Ghế của bạn</h4>
           {rate !== 'P' ? <><span className="py-4">⚠️ Phim có giới hạn độ tuổi {rates}+. Chỉ dành cho khán giả từ {rates} tuổi trở lên.</span></> : null}
             <div className="thumb">
-              <img src={SeatPlan} alt="movie" />
+              <img src='/assets/images/movie/seat-plan.png' alt="movie" />
             </div>
             <span onClick={() => handleChooseBookingShowTimes({ type: "CHOOSE-SEATS" })} className="custom-button seatPlanButton">
               Chọn ghế
@@ -165,7 +163,7 @@ const ShowTimeByMovie = ({ movieID, rate }: any) => {
         <div className="ticket-search-form two">
           <div className="form-group">
             <div className="thumb">
-              <img src={city} alt="ticket" />
+              <img src='/assets/images/ticket/city.png' alt="ticket" />
             </div>
             <span className="type">Thành phố</span>
             <div className="nice-select" tabIndex={0}>
@@ -182,7 +180,7 @@ const ShowTimeByMovie = ({ movieID, rate }: any) => {
 
           <div className="form-group">
             <div className="thumb">
-              <img src={cinema} alt="ticket" />
+              <img src='/assets/images/ticket/cinema.png' alt="ticket" />
             </div>
             <span className="type">Rạp</span>
             <div className="nice-select" tabIndex={0}>
@@ -199,7 +197,7 @@ const ShowTimeByMovie = ({ movieID, rate }: any) => {
 
           <div className="form-group">
             <div className="thumb">
-              <img src={date} alt="ticket" />
+              <img src='/assets/images/ticket/date.png' alt="ticket" />
             </div>
             <span className="type">Ngày</span>
             <div className="nice-select" tabIndex={0}>

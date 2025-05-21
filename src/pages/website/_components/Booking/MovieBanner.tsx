@@ -1,4 +1,3 @@
-import { Banner04 } from "@/assets/images/banner"
 import { formatDate } from "@/common/libs/formatDateToString"
 import { movieSelector } from "@/common/store/booking/selectorMovie"
 import { clear_services } from "@/common/store/booking/sliceBooking"
@@ -19,7 +18,7 @@ const MovieBanner = () => {
         <>
             <section
                 className="details-banner hero-area bg_img seat-plan-banner"
-                data-background={Banner04}
+                style={{backgroundImage: "url('/assets/images/banner/banner04.jpg')", height: "60vh"}}
             >
                 <div className="container">
                     <div className="details-banner-wrapper">
