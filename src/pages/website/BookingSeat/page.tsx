@@ -29,14 +29,12 @@ import Seat_Booked from "./_image/seat01-booked.png";
 import SeatHeld from "./_image/seat03Held.png";
 import Seat from "./_image/seat01.png";
 import { getSeatPrices } from "./libs/getPriceSeat";
-import { movieSelector } from "@/common/store/booking/selectorMovie";
 
 const items = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q"];
 const BookingSeatPage = () => {
    let count = 0;
    const { id: showtime_id } = useParams();
    const dispatch = useDispatch();
-   const movieInfo = useSelector(movieSelector);
    const [seatPrice, setSeatPrice] = useState<any>();
    const { mutate } = useChooseSeatsBooking();
    const bookingMovie = useSelector(selectorBooking);
@@ -78,8 +76,6 @@ const BookingSeatPage = () => {
       setChooseSeat(_listSeatNumbers);
    }, [data]);
 
-   console.log("Movie", movieInfo);
-
    useEffect(() => {
       if (bookingMovie?.seats.length > 0) {
          mutate({
@@ -109,6 +105,7 @@ const BookingSeatPage = () => {
          {
             onSuccess: () => {
                console.log("Đã chọn ghế");
+               dispatch(add_seats({ id, price }));
             },
             onError: (err) => {
                console.log(err);
@@ -117,7 +114,6 @@ const BookingSeatPage = () => {
          }
       );
 
-      dispatch(add_seats({ id, price }));
       if (seat) {
          let _newSeats = chooseSeat.filter((_s: any) => _s !== rest.seatNumber);
          setChooseSeat([..._newSeats]);
