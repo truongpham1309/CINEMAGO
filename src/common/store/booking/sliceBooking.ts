@@ -51,7 +51,7 @@ export const sliceBooking: any = createSlice({
                 });
                 return state;
             }
-            let subtotal: number = Number(price * quantity);
+            const subtotal: number = Number(price * quantity);
             let _service = state.services.find((_s: any) => +_s.service_id === +id);
             if (_service) {
                 _service.quantity += Number(quantity);
@@ -69,7 +69,7 @@ export const sliceBooking: any = createSlice({
                 return state;
             }
 
-            let _total_quantity = state.services.reduce((total: number, service: any) => {
+            const _total_quantity = state.services.reduce((total: number, service: any) => {
                 return total + parseInt(service.quantity, 10);
             }, 0);
 
